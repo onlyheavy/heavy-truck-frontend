@@ -1,0 +1,20 @@
+/* Custom styles for the slider */
+.rc-slider-rail {
+    background-color: #ffe5d1; /* Light orange rail */
+  }
+  
+  .rc-slider-track {
+    background-color: #fa7436; /* Orange track */
+  }
+  
+  .rc-slider-handle {
+    border-color: #fa7436; /* Orange handle border */
+    background-color: #fa7436; /* Orange handle */
+    box-shadow: none; /* Remove default shadow */
+  }
+  
+  .rc-slider-handle:focus,
+  .rc-slider-handle:hover {
+    border-color: #ff5722; /* Darker orange on hover/focus */
+    background-color: #ff5722;
+  }
