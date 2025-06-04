@@ -158,7 +158,7 @@ const EngineTab = ({ truckId, onComplete }) => {
 
   const setDataFn = async () => {
     try {
-      const response = await axios.get(`http://13.127.222.190/api/spec/getSpec/${specId}`);
+      const response = await axios.get(`https://api.onlyheavy.com/api/spec/getSpec/${specId}`);
 
       if (!response || !response.data) {
         throw new Error('No data received from server');
@@ -356,14 +356,14 @@ const EngineTab = ({ truckId, onComplete }) => {
       if (specId) {
         // Update existing specification
         response = await axios.put(
-          `http://13.127.222.190/api/spec/updateSpec/${specId}`,
+          `https://api.onlyheavy.com/api/spec/updateSpec/${specId}`,
           payload
         );
         toast.success('Specifications updated successfully!');
       } else {
         // Create new specification
         response = await axios.post(
-          `http://13.127.222.190/api/spec/createSpec/${truckId}`,
+          `https://api.onlyheavy.com/api/spec/createSpec/${truckId}`,
           payload
         );
         toast.success('Specifications created successfully!');

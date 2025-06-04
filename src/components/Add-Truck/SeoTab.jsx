@@ -60,7 +60,7 @@ const SeoTab = ({ truckId, onComplete }) => {
 
   const fetchSeoData = async () => {
     try {
-      const response = await axios.get(`http://13.127.222.190/api/category/getData/${truckId}`);
+      const response = await axios.get(`https://api.onlyheavy.com/api/category/getData/${truckId}`);
       const data = response.data.data;
       setFormData({
         slug: data.slug || '',
@@ -110,7 +110,7 @@ const SeoTab = ({ truckId, onComplete }) => {
       e.preventDefault();
     }
     try {
-      await axios.put(`http://13.127.222.190/api/category/updateSeo/${truckId}`, formData);
+      await axios.put(`https://api.onlyheavy.com/api/category/updateSeo/${truckId}`, formData);
       toast.success('SEO data updated successfully!');
       await onComplete(truckId);
       // Clear the specId from localStorage when we're done with the flow

@@ -28,7 +28,7 @@ export default function TruckTable() {
   const handleTogglePublish = async (truckId, newValue) => {
 
     try {
-      await axios.put(`http://13.127.222.190/api/category/isPulished/${truckId}`, {
+      await axios.put(`https://api.onlyheavy.com/api/category/isPulished/${truckId}`, {
         isPublished: newValue,
       });
 
@@ -47,7 +47,7 @@ export default function TruckTable() {
     if (!confirmed) return
 
     try {
-      await axios.delete(`http://13.127.222.190/api/category/deleteCategory/${id}`);
+      await axios.delete(`https://api.onlyheavy.com/api/category/deleteCategory/${id}`);
       setTrucks((prev) => prev.filter((item) => item._id !== id));
     } catch (err) {
       console.error('Error deleting truck:', err);
@@ -58,7 +58,7 @@ export default function TruckTable() {
   useEffect(() => {
     const fetchTrucks = async () => {
       try {
-        const response = await axios.get('http://13.127.222.190/api/category/getCategory');
+        const response = await axios.get('https://api.onlyheavy.com/api/category/getCategory');
         if (response.data.success) {
           setTrucks(response.data.data);
           setError(null);
