@@ -39,7 +39,7 @@ const KeySpecs = () => {
             icon: '/icons/payload.svg',
         },
         {
-            title: 'No of Tyres',
+            title: 'No. of Tyres',
             value: product?.keyFeature?.[0]?.noOfTyres || 'N/A',
             icon: '/icons/tyres.svg',
         },
@@ -57,7 +57,7 @@ const KeySpecs = () => {
             <h2 className="font-bold md:text-[24px] text-[18px]">
                 Key Specs of {product?.productName || 'the Truck'}
             </h2>
-            <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-5 md:mt-8 mt-4">
+            <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-3 md:gap-5 md:mt-8 mt-4">
                 {specs.map((item, index) => (
                     <div
                         key={index}
@@ -71,7 +71,7 @@ const KeySpecs = () => {
                             />
                         </div>
                         <div className="text-center space-y-1">
-                            <p className="font-semibold text-sm text-gray-800 line-clamp-1">
+                            <p className="font-semibold text-sm text-gray-800 md:line-clamp-1 ">
                                 {item?.title}
                             </p>
                             <p className="text-xs font-medium text-[#254154] line-clamp-1">

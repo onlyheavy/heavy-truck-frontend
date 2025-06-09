@@ -40,11 +40,11 @@ export default function TruckFeatures() {
       {
         specifications.dimensions?.map((item, index) => (
           <Section title="Dimensions">
-            <SpecItem label="Length" value={`${item?.overallLength} mm`} />
-            <SpecItem label="Width" value={`${item?.overallWidthh} mm`} />
-            <SpecItem label="Height" value={`${item?.overallHeight} mm`} />
-            <SpecItem label="Wheelbase" value={`${item?.wheelBase} mm`} />
-            <SpecItem label="Ground Clearance" value={`${item?.groundClearance} mm`} />
+            <SpecItem label="Length" value={`${item?.overallLength}`} />
+            <SpecItem label="Width" value={`${item?.overallWidthh} `} />
+            <SpecItem label="Height" value={`${item?.overallHeight} `} />
+            <SpecItem label="Wheelbase" value={`${item?.wheelBase} `} />
+            <SpecItem label="Ground Clearance" value={`${item?.groundClearance} `} />
             <SpecItem label="Minimum Turning Radius" value={`${item?.turningRadius}`} />
           </Section>
         ))
@@ -183,10 +183,10 @@ function Section({ title, children }) {
 
 function SpecItem({ label, value }) {
   return (
-    <div className="flex border-b py-1 border-gray-200 border-dashed">
-      <span className="font-semibold text-[#212529] text-sm w-44">{label}</span>
-      <span className="mx-10 invisible">-</span>
-      <span className="text-sm text-[#254154] font-normal">{value}</span>
+    <div className="flex gap-8 md:gap-14 border-b py-1 border-gray-200 border-dashed">
+      <span className="font-semibold text-[#212529] text-sm w-full md:w-44">{label}</span>
+      {/* <span className="mx-2 invisible md:block">-</span> */}
+      <span className="text-sm text-[#212529] w-full  text-left font-normal ">{value}</span>
     </div>
   );
 }

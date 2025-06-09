@@ -43,7 +43,7 @@ const Fuel = () => {
                         onChange={setMileage}
                     />
 
-                    <p className="pt-3 text-[16px]">The calculations show an estimated amount and the real numbers might vary as per local fuel prices, electricity costs and other factors</p>
+                    <p className="pt-3 text-[16px]">The calculations provide an estimated amount, but actual figures may vary depending on local fuel prices, electricity rates, and other factors</p>
                 </div>
                 <div className="rounded-lg flex p-10 md:py-12 py-6 justify-between bg-[#fffcdf] md:w-[53%] w-full md:my-12 my-6">
                     <div>

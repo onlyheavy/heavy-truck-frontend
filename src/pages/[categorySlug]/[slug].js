@@ -137,7 +137,7 @@ const DynamicVehiclePage = () => {
                         }`}
                       >
                         <div className="bg-white flex items-center justify-center w-16 h-16 rounded-md">
-                          <Image src={item.icon} width={8} height={8} alt="icon" className=" object-contain" />
+                          <Image src={item.icon} width={28} height={28} alt="icon" className=" object-contain" />
                         </div>
                         <div className="flex-1">
                           <p className="text-sm font-semibold text-[#000000] mb-1 leading-snug">

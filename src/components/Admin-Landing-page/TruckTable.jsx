@@ -86,11 +86,11 @@ export default function TruckTable() {
         cell: (info) => info.getValue(),
       }),
       columnHelper.accessor('categoryName', {
-        header: 'Category Name',
+        header: 'Category',
         cell: (info) => <span className='capitalize'>{info.getValue()}</span>,
       }),
       columnHelper.accessor('brandName', {
-        header: 'Brand Name',
+        header: 'Brand',
         cell: (info) => info.getValue(),
       }),
       columnHelper.accessor('productName', {

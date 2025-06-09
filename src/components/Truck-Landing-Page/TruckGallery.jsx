@@ -100,7 +100,7 @@ const TruckGallery = () => {
         <div className='flex gap-2 items-center'>
           {features.map((feature, i) => (
             <div key={i} className='flex gap-3 items-center mb-2 bg-[#FFF0E9] rounded-full px-3 py-2'>
-              <img src={feature.img} alt={feature.title} />
+              <img src={feature.img} alt={feature.title} className='w-5 h-5'/>
               <p className='text-sm font-semibold'>{feature.title}</p>
             </div>
           ))}

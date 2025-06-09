@@ -51,14 +51,16 @@ const TruckProsAndCons = () => {
 
             {/* brochure */}
 
-            <div className='flex gap-3 bg-[#FFE8DE] p-5 pb-4 rounded-md'>
+            <div className='flex gap-3 bg-[#FFE8DE] p-5 pb-4 rounded-md '>
                 <div className='flex flex-col gap-3'>
                     <h2 className='font-bold md:text-[24px] text-[18px] capitalize'>Download {categoryData[0]?.productName} Brochure</h2>
                     <p className='text-base font-normal text-gray-700 w-[80%]'>Download {categoryData[0]?.productName} brochure online. Check out the 1412 LPT PDF brochure at Truck Junction with all features and specifications.</p>
-                    <div className="md:hidden block">
+                    <div className="md:hidden flex justify-center items-center">
                         <img src="/images/brochure.svg" alt="brochure" />
                     </div>
-                    <button className='bg-[#FA7436] w-fit text-white px-4 py-3 mt-3 text-xs rounded-md font-bold'>Download Brochure</button>
+                    <div className='flex justify-center md:justify-start items-center'>
+                        <button className='bg-[#FA7436] w-fit text-white px-4 py-3 mt-3 text-xs rounded-md font-bold '>Download Brochure</button>
+                    </div>
 
                 </div>
                 <div className="md:block hidden">
@@ -84,11 +86,6 @@ const TruckProsAndCons = () => {
                 </div>
 
             </div>
-
-
-
-
-
         </div>
     )
 }
