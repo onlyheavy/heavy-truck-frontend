@@ -23,14 +23,14 @@ export default function TruckFeatures() {
           <Section title="Performance">
             <SpecItem label="Engine" value={item?.engineType} />
             <SpecItem label="Engine Norm" value={item?.emissionNorm} />
-            <SpecItem label="Gradeability" value={item?.gradeAbility} />
+            <SpecItem label="Gradeability" value={item?.gradeability} />
             <SpecItem label="Power" value={item?.enginePower} />
-            <SpecItem label="Engine Cylinders" value={item?.engineCylinder} />
+            <SpecItem label="Engine Cylinders" value={item?.engineCylinders} />
             <SpecItem label="Max Torque" value={item?.torque} />
             <SpecItem label="Max Speed" value={item?.maxSpeed} />
             <SpecItem label="Fuel Tank" value={item?.fuelTankCapacity} />
-            <SpecItem label="GVW" value="Nill" />
-            <SpecItem label="Payload Capacity" value="Nill" />
+            <SpecItem label="GVW" value="N/A" />
+            <SpecItem label="Payload Capacity" value="N/A" />
             <SpecItem label="Mileage" value={item?.mileage
             } />
           </Section>
@@ -43,9 +43,9 @@ export default function TruckFeatures() {
             <SpecItem label="Length" value={`${item?.overallLength}`} />
             <SpecItem label="Width" value={`${item?.overallWidthh} `} />
             <SpecItem label="Height" value={`${item?.overallHeight} `} />
-            <SpecItem label="Wheelbase" value={`${item?.wheelBase} `} />
+            <SpecItem label="Wheelbase" value={`${item?.wheelbase2}  `} />
             <SpecItem label="Ground Clearance" value={`${item?.groundClearance} `} />
-            <SpecItem label="Minimum Turning Radius" value={`${item?.turningRadius}`} />
+            <SpecItem label="Minimum Turning Radius" value={`${item?.turningRadius }`} />
           </Section>
         ))
       }
@@ -57,13 +57,13 @@ export default function TruckFeatures() {
           {specifications.brakesAndSuspension?.map((item, index) => (
             <Section title="Brakes Suspension">
               <SpecItem label="Brakes" value={item?.brakeType} />
-              <SpecItem label="Parking Brakes" value={item?.parkingBrake} />
+              <SpecItem label="Parking Brakes" value={item?.parkingBrakes ? 'Yes' : 'No'} />
               <SpecItem label="Front Axle" value="N/A" />
               <SpecItem label="Rear Axle" value="N/A" />
               <SpecItem label="Front Suspension" value={item?.frontSuspension} />
               <SpecItem label="Rear Suspension" value={item?.rearSuspension} />
-              <SpecItem label="Abs" value={item?.ABS} />
-              <SpecItem label="Anti RollBar" value={item?.antiRollBar} />
+              <SpecItem label="Abs" value={item?.abs ? 'Yes' : 'No'} />
+              <SpecItem label="Anti RollBar" value={item?.antiRollBar ? 'Yes' : 'No'} />
             </Section>
           ))}
 
@@ -95,11 +95,11 @@ export default function TruckFeatures() {
           {/* interiorFeatures*/}
           {specifications.interiorFeatures?.map((item, index) => (
             <Section key={index} title="Interior Features">
-              <SpecItem label="AC" value={item.AC ? 'Yes' : 'No'} />
+              <SpecItem label="AC" value={item.ac ? 'Yes' : 'No'} />
               <SpecItem label="Adjustable Driver Seat" value={item.adjustableDriverSeat ? 'Yes' : 'No'} />
               <SpecItem label="Seat Types" value={item.seatTypes || 'N/A'} />
               <SpecItem label="Arm Rest" value={item.armRest ? 'Yes' : 'No'} />
-              <SpecItem label="Tiltable Steering" value={item.tiltableStreeing ? 'Yes' : 'No'} />
+              <SpecItem label="Tiltable Steering" value={item.tiltableSteering ? 'Yes' : 'No'} />
               <SpecItem label="Adjustable Steering" value={item.adjustableSteering ? 'Yes' : 'No'} />
               <SpecItem label="Driver Info Display" value={item.driverInfoDisplay === "true" ? 'Yes' : 'No'} />
               <SpecItem label="Mobile Charging Point" value={item.mobileChargingPoint ? 'Yes' : 'No'} />
@@ -120,8 +120,8 @@ export default function TruckFeatures() {
             <Section key={index} title="Tyre">
               <SpecItem label="Front Tyre" value={item.frontTyre || 'N/A'} />
               <SpecItem label="Rear Tyre" value={item.rearType || 'N/A'} />
-              <SpecItem label="Number of Tyres" value={item.noOfTyres || 'N/A'} />
-              <SpecItem label="Tubeless Tyre" value={item.tubelessTyre ? 'Yes' : 'No'} />
+              <SpecItem label="Number of Tyres" value={item.numberOfTyres || 'N/A'} />
+              <SpecItem label="Tubeless Tyre" value={item.tubelessTyres ? 'Yes' : 'No'} />
             </Section>
           ))}
 

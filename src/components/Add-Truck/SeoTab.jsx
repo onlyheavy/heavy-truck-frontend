@@ -58,6 +58,13 @@ const SeoTab = ({ truckId, onComplete }) => {
 
   const router = useRouter()
 
+  // Add cleanup effect
+  useEffect(() => {
+    return () => {
+      localStorage.removeItem('currentSpecId');
+    };
+  }, []);
+
   const fetchSeoData = async () => {
     try {
       const response = await axios.get(`https://api.onlyheavy.com/api/category/getData/${truckId}`);
@@ -72,10 +79,7 @@ const SeoTab = ({ truckId, onComplete }) => {
         imageIndex: data.imageIndex || false,
       });
 
-      // Store specId if it exists
-      if (data.specId) {
-        localStorage.setItem('currentSpecId', data.specId);
-      }
+
     } catch (error) {
       console.error('Error fetching SEO data:', error);
       toast.error('Error fetching SEO data: ' + error.message);
@@ -114,7 +118,7 @@ const SeoTab = ({ truckId, onComplete }) => {
       toast.success('SEO data updated successfully!');
       await onComplete(truckId);
       // Clear the specId from localStorage when we're done with the flow
-      localStorage.removeItem('currentSpecId');
+      // localStorage.removeItem('currentSpecId');
       router.push('/admin/admin-landing');
       return true;
     } catch (error) {

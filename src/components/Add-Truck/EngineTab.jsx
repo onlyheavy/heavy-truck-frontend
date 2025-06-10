@@ -79,18 +79,18 @@ const EngineTab = ({ truckId, onComplete }) => {
     battery: '',
 
     // Transmission Details
-    gearbox: '',
+    gearBox: '',
     transmissionType: '',
     axleConfiguration: '',
     frontAxle: '',
     rearAxle: '',
-    gvw: '',
+    GrossVehicleWeight: '',
     kerbWeight: '',
     payload: '',
 
     // Dimensions
     overallLength: '',
-    overallWidth: '',
+    overallWidthh: '',
     overallHeight: '',
     wheelbase: '',
     wheelbase2: '',
@@ -101,14 +101,14 @@ const EngineTab = ({ truckId, onComplete }) => {
     frontSuspension: '',
     rearSuspension: '',
     brakeType: '',
-    abs: '',
-    parkingBrakes: '',
-    antiRollBar: '',
+    abs: false,
+    parkingBrakes: false,
+    antiRollBar: false,
 
     // Cabin & Body
     chassisType: '',
     cabinType: '',
-    tiltableCabin: '',
+    tiltableCabin: false,
     bodyOption: '',
     applicationType: '',
     seatingCapacity: '',
@@ -134,7 +134,7 @@ const EngineTab = ({ truckId, onComplete }) => {
     // Tyres
     frontTyre: '',
     rearTyre: '',
-    tubelessTyres: '',
+    tubelessTyres: false,
     numberOfTyres: '',
 
     // Safety
@@ -151,7 +151,7 @@ const EngineTab = ({ truckId, onComplete }) => {
   });
 
   useEffect(() => {
-    if (specId) {
+    if (specId && id) {  // Only fetch if we have both specId and id (editing mode)
       setDataFn();
     }
   }, []);
@@ -180,16 +180,16 @@ const EngineTab = ({ truckId, onComplete }) => {
         emissionNorm: data.engine[0]?.emissionNorm || '',
         maxSpeed: data.engine[0]?.maxSpeed || '',
         battery: data.engine[0]?.battery || '',
-        gearbox: data.transmissionLoad[0]?.gearbox || '',
+        gearBox: data.transmissionLoad[0]?.gearBox || '',
         transmissionType: data.transmissionLoad[0]?.transmissionType || '',
         axleConfiguration: data.transmissionLoad[0]?.axleConfiguration || '',
         frontAxle: data.transmissionLoad[0]?.frontAxle || '',
         rearAxle: data.transmissionLoad[0]?.rearAxle || '',
-        gvw: data.transmissionLoad[0]?.gvw || '',
+        GrossVehicleWeight: data.transmissionLoad[0]?.GrossVehicleWeight || '',
         kerbWeight: data.transmissionLoad[0]?.kerbWeight || '',
         payload: data.transmissionLoad[0]?.payload || '',
         overallLength: data.dimensions[0]?.overallLength || '',
-        overallWidth: data.dimensions[0]?.overallWidth || '',
+        overallWidthh: data.dimensions[0]?.overallWidthh || '',
         overallHeight: data.dimensions[0]?.overallHeight || '',
         wheelbase: data.dimensions[0]?.wheelbase || '',
         wheelbase2: data.dimensions[0]?.wheelbase2 || '',
@@ -198,12 +198,12 @@ const EngineTab = ({ truckId, onComplete }) => {
         frontSuspension: data.brakesAndSuspension[0]?.frontSuspension || '',
         rearSuspension: data.brakesAndSuspension[0]?.rearSuspension || '',
         brakeType: data.brakesAndSuspension[0]?.brakeType || '',
-        abs: data.brakesAndSuspension[0]?.abs || '',
-        parkingBrakes: data.brakesAndSuspension[0]?.parkingBrakes || '',
-        antiRollBar: data.brakesAndSuspension[0]?.antiRollBar || '',
+        abs: data.brakesAndSuspension[0]?.abs || false,
+        parkingBrakes: data.brakesAndSuspension[0]?.parkingBrakes || false,
+        antiRollBar: data.brakesAndSuspension[0]?.antiRollBar || false,
         chassisType: data.cabinAndBody[0]?.chassisType || '',
         cabinType: data.cabinAndBody[0]?.cabinType || '',
-        tiltableCabin: data.cabinAndBody[0]?.tiltableCabin || '',
+        tiltableCabin: data.cabinAndBody[0]?.tiltableCabin || false,
         bodyOption: data.cabinAndBody[0]?.bodyOption || '',
         applicationType: data.cabinAndBody[0]?.applicationType || '',
         seatingCapacity: data.cabinAndBody[0]?.seatingCapacity || '',
@@ -225,7 +225,7 @@ const EngineTab = ({ truckId, onComplete }) => {
         telematics: data.interiorFeatures[0]?.telematics || '',
         frontTyre: data.tyre[0]?.frontTyre || '',
         rearTyre: data.tyre[0]?.rearTyre || '',
-        tubelessTyres: data.tyre[0]?.tubelessTyres || '',
+        tubelessTyres: data.tyre[0]?.tubelessTyres || false,
         numberOfTyres: data.tyre[0]?.numberOfTyres || '',
         fogLights: data.safety[0]?.fogLights || false,
         emergencyExit: data.safety[0]?.emergencyExit || false,
@@ -280,18 +280,18 @@ const EngineTab = ({ truckId, onComplete }) => {
           battery: formData.battery
         }],
         transmissionLoad: [{
-          gearbox: formData.gearbox,
+          gearBox: formData.gearBox,
           transmissionType: formData.transmissionType,
           axleConfiguration: formData.axleConfiguration,
           frontAxle: formData.frontAxle,
           rearAxle: formData.rearAxle,
-          gvw: formData.gvw,
+          GrossVehicleWeight: formData.GrossVehicleWeight,
           kerbWeight: formData.kerbWeight,
           payload: formData.payload
         }],
         dimensions: [{
           overallLength: formData.overallLength,
-          overallWidth: formData.overallWidth,
+          overallWidthh: formData.overallWidthh,
           overallHeight: formData.overallHeight,
           wheelbase: formData.wheelbase,
           wheelbase2: formData.wheelbase2,
@@ -502,11 +502,11 @@ const EngineTab = ({ truckId, onComplete }) => {
             {/* Transmission Section */}
             <Section title="Transmission & Load">
               <InputField
-                label="Gearbox"
-                name="gearbox"
-                value={formData.gearbox}
+                label="Gear Box"
+                name="gearBox"
+                value={formData.gearBox}
                 onChange={handleInputChange}
-                placeholder="Gearbox - Ex: 6 Speed Manual"
+                placeholder="gearBox - Ex: 6 Speed Manual"
               />
               <InputField
                 label="Transmission Type"
@@ -538,10 +538,10 @@ const EngineTab = ({ truckId, onComplete }) => {
               />
               <InputField
                 label="GVW"
-                name="gvw"
-                value={formData.gvw}
+                name="GrossVehicleWeight"
+                value={formData.GrossVehicleWeight}
                 onChange={handleInputChange}
-                placeholder="GVW - Ex: 25000 kg"
+                placeholder="GrossVehicleWeight - Ex: 25000 kg"
               />
               <InputField
                 label="Kerb Weight"
@@ -570,8 +570,8 @@ const EngineTab = ({ truckId, onComplete }) => {
               />
               <InputField
                 label="Overall Width"
-                name="overallWidth"
-                value={formData.overallWidth}
+                name="overallWidthh"
+                value={formData.overallWidthh}
                 onChange={handleInputChange}
                 placeholder="Overall Width - Ex: 2490 mm"
               />
@@ -635,26 +635,23 @@ const EngineTab = ({ truckId, onComplete }) => {
                 onChange={handleInputChange}
                 placeholder="Brake Type - Ex: Air Brakes with ABS"
               />
-              <InputField
+              <CheckboxField
                 label="ABS"
                 name="abs"
-                value={formData.abs}
+                checked={formData.abs}
                 onChange={handleInputChange}
-                placeholder="ABS - Ex: 4 Channel Electronic ABS"
               />
-              <InputField
+              <CheckboxField
                 label="Parking Brakes"
                 name="parkingBrakes"
-                value={formData.parkingBrakes}
+                checked={formData.parkingBrakes}
                 onChange={handleInputChange}
-                placeholder="Parking Brakes - Ex: Spring Actuated Parking"
               />
-              <InputField
+              <CheckboxField
                 label="Anti Roll Bar"
                 name="antiRollBar"
-                value={formData.antiRollBar}
+                checked={formData.antiRollBar}
                 onChange={handleInputChange}
-                placeholder="Anti Roll Bar - Ex: Front & Rear Anti-Roll Bar"
               />
             </Section>
 
@@ -674,12 +671,11 @@ const EngineTab = ({ truckId, onComplete }) => {
                 onChange={handleInputChange}
                 placeholder="Cabin Type - Ex: Day Cabin with AC"
               />
-              <InputField
+              <CheckboxField
                 label="Tiltable Cabin"
                 name="tiltableCabin"
-                value={formData.tiltableCabin}
+                checked={formData.tiltableCabin}
                 onChange={handleInputChange}
-                placeholder="Tiltable Cabin - Ex: 45° Tiltable"
               />
               <InputField
                 label="Body Option"
@@ -827,12 +823,11 @@ const EngineTab = ({ truckId, onComplete }) => {
                 onChange={handleInputChange}
                 placeholder="Rear Tyre - Ex: 295/80R22.5-16PR (Dual)"
               />
-              <InputField
+              <CheckboxField
                 label="Tubeless Tyres"
                 name="tubelessTyres"
-                value={formData.tubelessTyres}
+                checked={formData.tubelessTyres}
                 onChange={handleInputChange}
-                placeholder="Tubeless Tyres - Ex: Radial Tubeless"
               />
               <InputField
                 label="Number of Tyres"

@@ -59,17 +59,16 @@ export default function TruckTable() {
     const fetchTrucks = async () => {
       try {
         const response = await axios.get('https://api.onlyheavy.com/api/category/getCategory');
-        if (response.data.success) {
-          setTrucks(response.data.data);
-          setError(null);
-        } else {
-          setError('Failed to load truck data');
-          setTrucks([]);
-        }
+        setTrucks(response.data.success ? response.data.data : []);
+        setError(null);
       } catch (err) {
-        console.error('Error fetching truck data:', err);
         setTrucks([]);
-        setError('Something went wrong while fetching data');
+        if (err.response?.status === 404) {
+          setError('No data found');
+        } else {
+          console.error('Error fetching truck data:', err);
+          setError('Something went wrong while fetching data');
+        }
       } finally {
         setIsLoading(false);
       }
@@ -215,14 +214,6 @@ export default function TruckTable() {
     );
   }
 
-  if (error) {
-    return (
-      <div className="mt-4 flex justify-center items-center h-32">
-        <div className="text-red-500">Error: {error}</div>
-      </div>
-    );
-  }
-
   const handleAddTruck = async () => {
     try {
       await router.push('/admin/add-truck');
@@ -273,15 +264,29 @@ export default function TruckTable() {
             ))}
           </thead>
           <tbody>
-            {table.getRowModel().rows.map((row) => (
-              <tr key={row.id} className="text-center border">
-                {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id} className="p-3 text-sm">
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
-                ))}
+            {error ? (
+              <tr>
+                <td colSpan={columns.length} className="p-4 text-center text-gray-500">
+                  {error}
+                </td>
               </tr>
-            ))}
+            ) : table.getRowModel().rows.length === 0 ? (
+              <tr>
+                <td colSpan={columns.length} className="p-4 text-center text-gray-500">
+                  No data found
+                </td>
+              </tr>
+            ) : (
+              table.getRowModel().rows.map((row) => (
+                <tr key={row.id} className="text-center border">
+                  {row.getVisibleCells().map((cell) => (
+                    <td key={cell.id} className="p-3 text-sm">
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    </td>
+                  ))}
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
         <div className="flex items-center justify-between text-sm mt-5">
