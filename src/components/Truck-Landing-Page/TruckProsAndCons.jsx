@@ -90,4 +90,5 @@ const TruckProsAndCons = () => {
     )
 }
 
+
 export default TruckProsAndCons
