@@ -10,7 +10,8 @@ const ProfileTab = ({ onComplete }) => {
     categoryName: '',
     brandName: '',
     productName: '',
-    price: '',
+    minPrice: '',
+    maxPrice: '',
     starRating: '',
     engineCC: '',
     fuelType: '',
@@ -64,6 +65,13 @@ const ProfileTab = ({ onComplete }) => {
     { value: 'beverage-transport', label: 'Beverage Transport' },
     { value: 'oil-tanker', label: 'Oil/Fuel Transport' },
     { value: 'waste-management', label: 'Waste Management' }
+  ];
+
+  // Fuel type options
+  const fuelTypeOptions = [
+    { value: 'Petrol', label: 'Petrol' },
+    { value: 'Diesel', label: 'Diesel' },
+    { value: 'Cng', label: 'CNG' }
   ];
 
   // Handle input changes
@@ -387,16 +395,29 @@ const ProfileTab = ({ onComplete }) => {
               />
             </div>
 
-            <div>
-              <label className="block text-gray-700 mb-2">Price</label>
-              <input
-                type="number"
-                name="price"
-                value={formData.price}
-                onChange={handleChange}
-                placeholder="Price - Ex: 1800000"
-                className={inputFieldClass}
-              />
+            <div className='flex gap-5 items-center'>
+              <div>
+                <label className="block text-gray-700 mb-2">Min Price</label>
+                <input
+                  type="number"
+                  name="minPrice"
+                  value={formData.minPrice}
+                  onChange={handleChange}
+                  placeholder="Min-Price - Ex: 1800000"
+                  className={inputFieldClass}
+                />
+              </div>
+              <div>
+                <label className="block text-gray-700 mb-2">Max Price</label>
+                <input
+                  type="number"
+                  name="maxPrice"
+                  value={formData.maxPrice}
+                  onChange={handleChange}
+                  placeholder="Max-Price - Ex: 1800000"
+                  className={inputFieldClass}
+                />
+              </div>
             </div>
 
             <div>
@@ -453,13 +474,18 @@ const ProfileTab = ({ onComplete }) => {
 
             <div>
               <label className="block text-gray-700 mb-2">Fuel Type</label>
-              <input
-                type="text"
-                name="fuelType"
-                value={formData.fuelType}
-                onChange={handleChange}
-                placeholder="Fuel Type - Ex: Diesel"
-                className={inputFieldClass}
+              <Select
+                options={fuelTypeOptions}
+                value={fuelTypeOptions.find(option => option.value === formData.fuelType)}
+                onChange={(selectedOption) => {
+                  setFormData(prev => ({
+                    ...prev,
+                    fuelType: selectedOption ? selectedOption.value : ''
+                  }));
+                }}
+                placeholder="Select Fuel Type"
+                className="react-select-container"
+                classNamePrefix="react-select"
               />
             </div>
           </div>

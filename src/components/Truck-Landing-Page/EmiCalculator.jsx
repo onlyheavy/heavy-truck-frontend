@@ -99,7 +99,7 @@ const EmiCalculator = () => {
             <div>
               <div className='flex justify-between items-center mb-3'>
                 <p className=" text-sm font-bold ">Vehicle Price</p>
-               
+
                 <input
                   type="number"
                   className="text-sm border border-gray-300 text-[#254154] outline-none w-32 px-3 py-1"
@@ -227,12 +227,12 @@ const EmiCalculator = () => {
                   <td className="p-2 text-gray-700">
                     Interest Amount <span className="font-semibold">({interestRate} %)</span>
                   </td>
-                  <td className="p-2 text-[#FA7436] text-right">₹{interestAmount?.toFixed(2)?.toLocaleString('en-IN')}</td>
+                  <td className="p-2 text-[#FA7436] text-right">₹{Number(interestAmount?.toFixed(2))?.toLocaleString('en-IN')}</td>
                 </tr>
                 <tr className="border-b border-gray-300">
                   <td className="p-2 text-gray-700 font-bold">Total Amount Payable</td>
                   <td className="p-2 text-gray-700 text-right font-bold">
-                    ₹{totalPayment?.toFixed(2)?.toLocaleString('en-IN')}
+                    ₹{Number(totalPayment?.toFixed(2))?.toLocaleString('en-IN')}
                   </td>
                 </tr>
               </tbody>

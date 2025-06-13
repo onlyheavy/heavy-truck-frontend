@@ -94,13 +94,13 @@ const TruckGallery = () => {
 
         <div className='flex flex-col gap-2'>
           <p className='text-[#797979] text-sm font-semibold'>Ex-Showroom Price</p>
-          <p className='font-bold text-lg'>₹ 10.00 - ₹ 10.40 Lakh* </p>
+          <p className='font-bold text-lg'>₹ {Number(categoryData[0]?.minPrice).toLocaleString('en-IN')} - ₹ {Number(categoryData[0]?.maxPrice).toLocaleString('en-IN')} Lakh* </p>
         </div>
 
         <div className='flex gap-2 items-center'>
           {features.map((feature, i) => (
             <div key={i} className='flex gap-3 items-center mb-2 bg-[#FFF0E9] rounded-full px-3 py-2'>
-              <img src={feature.img} alt={feature.title} className='w-5 h-5'/>
+              <img src={feature.img} alt={feature.title} className='w-5 h-5' />
               <p className='text-sm font-semibold'>{feature.title}</p>
             </div>
           ))}
@@ -221,7 +221,7 @@ const TruckGallery = () => {
 
         <div className='flex flex-col gap-2'>
           <p className='text-[#797979] text-sm font-semibold'>Ex-Showroom Price</p>
-          <p className='font-bold text-lg'>₹ 10.00 - ₹ 10.40 Lakh* </p>
+          <p className='font-bold text-lg'>₹ {Number(categoryData[0]?.minPrice).toLocaleString('en-IN')} - ₹ {Number(categoryData[0]?.maxPrice).toLocaleString('en-IN')} Lakh* </p>
         </div>
 
         <div className='flex gap-2 items-center'>
