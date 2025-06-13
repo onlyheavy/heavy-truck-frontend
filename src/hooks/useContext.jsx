@@ -6,6 +6,7 @@ const CategoryContext = createContext();
 
 export const CategoryProvider = ({ children }) => {
   const [categoryData, setCategoryData] = useState([]);
+  const [alterNative, setAlternative] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -28,11 +29,12 @@ export const CategoryProvider = ({ children }) => {
         setLoading(true);
         console.log('Fetching data for:', { categorySlug, slug });
 
-        const response = await axios.get(`https://api.onlyheavy.com/api/category/${categorySlug}/${slug}`);
+        const response = await axios.get(`http://localhost:8000/api/category/${categorySlug}/${slug}`);
 
         if (response.data && response.data.data) {
           console.log('Received data:', response.data.data);
-          setCategoryData(response.data.data);
+          setCategoryData(response.data.data.existData);
+          setAlternative(response.data.data.alternatives);
         } else {
           throw new Error('Invalid data format received from API');
         }
@@ -55,6 +57,7 @@ export const CategoryProvider = ({ children }) => {
 
   const value = useMemo(() => ({
     categoryData,
+    alterNative,
     loading,
     error,
     categorySlug,
