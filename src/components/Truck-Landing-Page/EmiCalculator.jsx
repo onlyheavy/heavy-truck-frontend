@@ -30,15 +30,15 @@ const EmiCalculator = () => {
   const { categoryData } = useCategory();
   useEffect(() => {
     if (categoryData.length > 0) {
-      const validItem = categoryData.find(item => typeof item?.price === 'number' && item.price > 0);
+      const validItem = categoryData.find(item => typeof item?.maxPrice === 'number' && item.maxPrice > 0);
       if (validItem) {
-        setVehiclePrice(validItem.price);
+        setVehiclePrice(validItem.maxPrice);
       }
     }
   }, [categoryData]);
 
 
-  { categoryData.map((item) => (console.log(item.price, "PRooooooo"))) }
+  { categoryData.map((item) => (console.log(item.maxPrice, "PRooooooo"))) }
 
   const { emi, totalPayment, interestAmount, loanAmount } = useMemo(
     () =>

@@ -29,7 +29,7 @@ export const CategoryProvider = ({ children }) => {
         setLoading(true);
         console.log('Fetching data for:', { categorySlug, slug });
 
-        const response = await axios.get(`http://localhost:8000/api/category/${categorySlug}/${slug}`);
+        const response = await axios.get(`https://api.onlyheavy.com/api/category/${categorySlug}/${slug}`);
 
         if (response.data && response.data.data) {
           console.log('Received data:', response.data.data);

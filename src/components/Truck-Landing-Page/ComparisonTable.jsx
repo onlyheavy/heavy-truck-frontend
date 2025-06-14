@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 
+
+
 const ComparisonCard = ({ vehicleImage, vehicleName, price }) => (
   <div className="flex-1">
     <div className="flex flex-col items-center">

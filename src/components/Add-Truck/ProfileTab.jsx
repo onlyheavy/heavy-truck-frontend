@@ -190,7 +190,7 @@ const ProfileTab = ({ onComplete }) => {
   // get the data from the form
   const setdataFn = async () => {
     try {
-      const response = await axios.get(`http://localhost:8000/api/category/getData/${id}`);
+      const response = await axios.get(`https://api.onlyheavy.com/api/category/getData/${id}`);
       if (response.data.success === true) {
         console.log('API Response:', response.data.data);
 
@@ -282,7 +282,7 @@ const ProfileTab = ({ onComplete }) => {
 
     try {
       const response = await axios.post(
-        `http://localhost:8000/api/category/updateImage/${id}`,
+        `https://api.onlyheavy.com/api/category/updateImage/${id}`,
         formData,
         {
           headers: {
