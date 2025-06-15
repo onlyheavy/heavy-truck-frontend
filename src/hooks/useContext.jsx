@@ -1,6 +1,8 @@
 import { useContext, createContext, useEffect, useState, useMemo } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import API from '@/utils/api';
+
 
 const CategoryContext = createContext();
 
@@ -29,7 +31,7 @@ export const CategoryProvider = ({ children }) => {
         setLoading(true);
         console.log('Fetching data for:', { categorySlug, slug });
 
-        const response = await axios.get(`https://api.onlyheavy.com/api/category/${categorySlug}/${slug}`);
+        const response = await axios.get(`${API.HOST}/api/category/${categorySlug}/${slug}`);
 
         if (response.data && response.data.data) {
           console.log('Received data:', response.data.data);

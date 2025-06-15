@@ -2,6 +2,7 @@ import { useState, useCallback, memo, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { useSearchParams } from 'next/navigation';
+import API from '@/utils/api';
 
 // Memoized Input Component
 const InputField = memo(({ label, name, value, onChange, placeholder, type = "text" }) => {
@@ -158,7 +159,7 @@ const EngineTab = ({ truckId, onComplete }) => {
 
   const setDataFn = async () => {
     try {
-      const response = await axios.get(`https://api.onlyheavy.com/api/spec/getSpec/${specId}`);
+      const response = await axios.get(`${API.HOST}/api/spec/getSpec/${specId}`);
 
       if (!response || !response.data) {
         throw new Error('No data received from server');
@@ -356,14 +357,14 @@ const EngineTab = ({ truckId, onComplete }) => {
       if (specId) {
         // Update existing specification
         response = await axios.put(
-          `https://api.onlyheavy.com/api/spec/updateSpec/${specId}`,
+          `${API.HOST}/api/spec/updateSpec/${specId}`,
           payload
         );
         toast.success('Specifications updated successfully!');
       } else {
         // Create new specification
         response = await axios.post(
-          `https://api.onlyheavy.com/api/spec/createSpec/${truckId}`,
+          `${API.HOST}/api/spec/createSpec/${truckId}`,
           payload
         );
         toast.success('Specifications created successfully!');

@@ -1,15 +1,13 @@
-const MODE = import.meta.env.VITE_API_MODE || 'LIVE'; // LOCAL, WIFI, TEST, STAGE, LIVE
+const MODE = process.env.NEXT_PUBLIC_API_MODE || 'LIVE'; // LOCAL, STAGE, LIVE, TEST
+console.log('Current API Mode:', MODE);
+console.log('Raw env value:', process.env.NEXT_PUBLIC_API_MODE);
+const API = {};
 
-let baseURL = '';
+API.MODE = MODE;
 
-if (MODE === 'LOCAL') baseURL = 'http://localhost:8000';
-if (MODE === 'WIFI') baseURL = 'http://192.168.1.10:8000';
-if (MODE === 'TEST') baseURL = 'https://api-test.ficodo.com';
-if (MODE === 'STAGE') baseURL = 'https://api.onlyheavy.com';
-if (MODE === 'LIVE') baseURL = 'https://api.ficodo.com';
-
-const API = {
-  baseURL,
-};
+// Starting the App
+if (MODE === 'LOCAL') API.HOST = 'http://localhost:8000';
+if (MODE === 'WIFI') API.HOST = 'http://192.168.1.17:8000';
+if (MODE === 'LIVE') API.HOST = 'https://api.onlyheavy.com';
 
 export default API;

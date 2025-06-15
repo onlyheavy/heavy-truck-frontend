@@ -13,6 +13,7 @@ import { useRouter } from 'next/router';
 import { MdDeleteOutline } from "react-icons/md";
 import { FaEye, FaRegEdit } from 'react-icons/fa';
 import { showDeleteConfirm } from '@/styles/DeleteConfirm';
+import API from '@/utils/api';
 
 const columnHelper = createColumnHelper();
 
@@ -26,9 +27,8 @@ export default function TruckTable() {
   const router = useRouter();
 
   const handleTogglePublish = async (truckId, newValue) => {
-
     try {
-      await axios.put(`https://api.onlyheavy.com/api/category/isPulished/${truckId}`, {
+      await axios.put(`${API.HOST}/api/category/isPulished/${truckId}`, {
         isPublished: newValue,
       });
 
@@ -47,7 +47,7 @@ export default function TruckTable() {
     if (!confirmed) return
 
     try {
-      await axios.delete(`https://api.onlyheavy.com/api/category/deleteCategory/${id}`);
+      await axios.delete(`${API.HOST}/api/category/deleteCategory/${id}`);
       setTrucks((prev) => prev.filter((item) => item._id !== id));
     } catch (err) {
       console.error('Error deleting truck:', err);
@@ -58,7 +58,7 @@ export default function TruckTable() {
   useEffect(() => {
     const fetchTrucks = async () => {
       try {
-        const response = await axios.get('https://api.onlyheavy.com/api/category/getCategory');
+        const response = await axios.get(`${API.HOST}/api/category/getCategory`);
         setTrucks(response.data.success ? response.data.data : []);
         setError(null);
       } catch (err) {
@@ -76,6 +76,13 @@ export default function TruckTable() {
 
     fetchTrucks();
   }, []);
+
+    // Add cleanup effect
+    useEffect(() => {
+      return () => {
+        localStorage.removeItem('currentSpecId');
+      };
+    }, []);
 
   const columns = useMemo(
     () => [

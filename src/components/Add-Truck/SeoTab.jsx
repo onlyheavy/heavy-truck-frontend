@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/router';
+import API from '@/utils/api';
 
 const inputFieldClass = "w-full p-3 border border-gray-200 rounded focus:outline-none focus:border-orange-500 text-sm";
 
@@ -67,7 +68,7 @@ const SeoTab = ({ truckId, onComplete }) => {
 
   const fetchSeoData = async () => {
     try {
-      const response = await axios.get(`https://api.onlyheavy.com/api/category/getData/${truckId}`);
+      const response = await axios.get(`${API.HOST}/api/category/getData/${truckId}`);
       const data = response.data.data;
       setFormData({
         slug: data.slug || '',
@@ -114,11 +115,9 @@ const SeoTab = ({ truckId, onComplete }) => {
       e.preventDefault();
     }
     try {
-      await axios.put(`https://api.onlyheavy.com/api/category/updateSeo/${truckId}`, formData);
+      await axios.put(`${API.HOST}/api/category/updateSeo/${truckId}`, formData);
       toast.success('SEO data updated successfully!');
       await onComplete(truckId);
-      // Clear the specId from localStorage when we're done with the flow
-      // localStorage.removeItem('currentSpecId');
       router.push('/admin/admin-landing');
       return true;
     } catch (error) {

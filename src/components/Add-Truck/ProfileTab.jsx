@@ -4,6 +4,7 @@ import Select from 'react-select';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useSearchParams } from 'next/navigation';
+import API from '@/utils/api';
 
 const ProfileTab = ({ onComplete }) => {
   const [formData, setFormData] = useState({
@@ -39,7 +40,7 @@ const ProfileTab = ({ onComplete }) => {
   const [faqInput, setFaqInput] = useState({ question: '', answer: '' });
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [selectedBrand, setSelectedBrand] = useState(null);
-   const [selectedSubCategory, setSelectedSubCategory] = useState(null);
+  const [selectedSubCategory, setSelectedSubCategory] = useState(null);
   const [selectedUses, setSelectedUses] = useState([]);
   const [productImage, setImages] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -57,8 +58,8 @@ const ProfileTab = ({ onComplete }) => {
     { value: 'force', label: 'Force Motors' }
   ];
 
-    // SubCategory options
-    const subCategoryOptions = [
+  // SubCategory options
+  const subCategoryOptions = [
     { value: 'mini-trucks', label: 'Mini Trucks' },
     { value: 'medium-trucks', label: 'Medium Trucks' },
     { value: 'medium-tipper', label: 'Medium Tipper' },
@@ -116,8 +117,8 @@ const ProfileTab = ({ onComplete }) => {
     }));
   };
 
-// Handle SubCategory selection
-    const handleSubCategory = (selectedOption) => {
+  // Handle SubCategory selection
+  const handleSubCategory = (selectedOption) => {
     setSelectedSubCategory(selectedOption);
     setFormData(prev => ({
       ...prev,
@@ -214,7 +215,7 @@ const ProfileTab = ({ onComplete }) => {
   // get the data from the form
   const setdataFn = async () => {
     try {
-      const response = await axios.get(`https://api.onlyheavy.com/api/category/getData/${id}`);
+      const response = await axios.get(`${API.HOST}/api/category/getData/${id}`);
       if (response.data.success === true) {
         console.log('API Response:', response.data.data);
 
@@ -306,7 +307,7 @@ const ProfileTab = ({ onComplete }) => {
 
     try {
       const response = await axios.post(
-        `https://api.onlyheavy.com/api/category/updateImage/${id}`,
+        `${API.HOST}/api/category/updateImage/${id}`,
         formData,
         {
           headers: {
@@ -347,7 +348,7 @@ const ProfileTab = ({ onComplete }) => {
       if (id) {
         // Update existing category
         response = await axios.put(
-          `https://api.onlyheavy.com/api/category/UpdateCategory/${id}`,
+          `${API.HOST}/api/category/UpdateCategory/${id}`,
           payload,
           {
             headers: { 'Content-Type': 'application/json' },
@@ -357,7 +358,7 @@ const ProfileTab = ({ onComplete }) => {
       } else {
         // Create new category
         response = await axios.post(
-          'https://api.onlyheavy.com/api/category/createCategory',
+          `${API.HOST}/api/category/createCategory`,
           payload,
           {
             headers: { 'Content-Type': 'application/json' },
@@ -419,14 +420,14 @@ const ProfileTab = ({ onComplete }) => {
               />
             </div>
 
-                        <div>
+            <div>
               <label className="block text-gray-700 mb-2">SubCategory</label>
               <Select
                 options={subCategoryOptions}
                 value={selectedSubCategory}
                 onChange={handleSubCategory}
                 placeholder="Select Your SubCategory"
-                className="react-select-container"  
+                className="react-select-container"
                 classNamePrefix="react-select"
               />
               {selectedSubCategory && (
@@ -446,28 +447,28 @@ const ProfileTab = ({ onComplete }) => {
             </div>
 
             {/* <div className='flex gap-5 items-center'> */}
-              <div>
-                <label className="block text-gray-700 mb-2">Min Price</label>
-                <input
-                  type="number"
-                  name="minPrice"
-                  value={formData.minPrice}
-                  onChange={handleChange}
-                  placeholder="Min-Price - Ex: 1800000"
-                  className={inputFieldClass}
-                />
-              </div>
-              <div>
-                <label className="block text-gray-700 mb-2">Max Price</label>
-                <input
-                  type="number"
-                  name="maxPrice"
-                  value={formData.maxPrice}
-                  onChange={handleChange}
-                  placeholder="Max-Price - Ex: 1800000"
-                  className={inputFieldClass}
-                />
-              </div>
+            <div>
+              <label className="block text-gray-700 mb-2">Min Price</label>
+              <input
+                type="number"
+                name="minPrice"
+                value={formData.minPrice}
+                onChange={handleChange}
+                placeholder="Min-Price - Ex: 1800000"
+                className={inputFieldClass}
+              />
+            </div>
+            <div>
+              <label className="block text-gray-700 mb-2">Max Price</label>
+              <input
+                type="number"
+                name="maxPrice"
+                value={formData.maxPrice}
+                onChange={handleChange}
+                placeholder="Max-Price - Ex: 1800000"
+                className={inputFieldClass}
+              />
+            </div>
             {/* </div> */}
 
             <div>
@@ -539,20 +540,22 @@ const ProfileTab = ({ onComplete }) => {
               />
             </div>
 
-              <div className="mb-2">
-            <label className="block text-gray-700 mb-2">Star Rating</label>
-            <input
-              type="text"
-              name="starRating"
-              value={formData.starRating}
-              onChange={handleChange}
-              placeholder="Star Rating - Ex: 4.5"
-              className={inputFieldClass}
-            />
+            <div className="mb-2">
+              <label className="block text-gray-700 mb-2">Star Rating</label>
+              <input
+                type="number"
+                name="starRating"
+                value={formData.starRating}
+                onChange={handleChange}
+                placeholder="Star Rating - Ex: 4.5"
+                className={inputFieldClass}
+              />
+            </div>
           </div>
-                    <div className="mb-2">
+
+          <div className="mb-2 w-full">
             <label className="block text-gray-700 mb-2">Product Image</label>
-            <div className="flex items-center justify-center bg-gray-100 border border-dashed border-gray-300 rounded-lg h-24 relative">
+            <div className="flex items-center justify-center bg-gray-100 border border-dashed border-gray-300 rounded-lg h-36 relative">
               <input
                 type="file"
                 accept="image/*"
@@ -600,9 +603,9 @@ const ProfileTab = ({ onComplete }) => {
               </div>
             )}
           </div>
-          </div>
 
-        
+
+
 
 
 
@@ -858,13 +861,13 @@ const ProfileTab = ({ onComplete }) => {
           </div>
         </form>
 
-      </div>
+      </div >
       <div className='flex justify-center my-5'>
         <button onClick={handleSubmit} className='bg-orange-500 text-lg font-medium text-white px-8 py-2 rounded cursor-pointer'>save</button>
 
       </div>
 
-    </div>
+    </div >
   );
 };
 
