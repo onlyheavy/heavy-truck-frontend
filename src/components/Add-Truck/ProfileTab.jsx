@@ -9,6 +9,7 @@ const ProfileTab = ({ onComplete }) => {
   const [formData, setFormData] = useState({
     categoryName: '',
     brandName: '',
+    subCategoryName: '',
     productName: '',
     minPrice: '',
     maxPrice: '',
@@ -38,6 +39,7 @@ const ProfileTab = ({ onComplete }) => {
   const [faqInput, setFaqInput] = useState({ question: '', answer: '' });
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [selectedBrand, setSelectedBrand] = useState(null);
+   const [selectedSubCategory, setSelectedSubCategory] = useState(null);
   const [selectedUses, setSelectedUses] = useState([]);
   const [productImage, setImages] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -53,6 +55,19 @@ const ProfileTab = ({ onComplete }) => {
     { value: 'bharat-benz', label: 'BharatBenz' },
     { value: 'eicher', label: 'Eicher' },
     { value: 'force', label: 'Force Motors' }
+  ];
+
+    // SubCategory options
+    const subCategoryOptions = [
+    { value: 'mini-trucks', label: 'Mini Trucks' },
+    { value: 'medium-trucks', label: 'Medium Trucks' },
+    { value: 'medium-tipper', label: 'Medium Tipper' },
+    { value: 'heavy-trucks', label: 'Heavy Trucks' },
+    { value: 'heavy-tipper', label: 'Heavy Tipper' },
+    { value: 'trailers', label: 'Trailers' },
+    { value: 'mixers', label: 'Mixers' },
+    { value: 'bulkers', label: 'Bulkers' },
+
   ];
 
   // Uses options for trucks
@@ -98,6 +113,15 @@ const ProfileTab = ({ onComplete }) => {
     setFormData(prev => ({
       ...prev,
       brandName: selectedOption ? selectedOption.label : ''
+    }));
+  };
+
+// Handle SubCategory selection
+    const handleSubCategory = (selectedOption) => {
+    setSelectedSubCategory(selectedOption);
+    setFormData(prev => ({
+      ...prev,
+      subCategoryName: selectedOption ? selectedOption.label : ''
     }));
   };
 
@@ -395,7 +419,33 @@ const ProfileTab = ({ onComplete }) => {
               />
             </div>
 
-            <div className='flex gap-5 items-center'>
+                        <div>
+              <label className="block text-gray-700 mb-2">SubCategory</label>
+              <Select
+                options={subCategoryOptions}
+                value={selectedSubCategory}
+                onChange={handleSubCategory}
+                placeholder="Select Your SubCategory"
+                className="react-select-container"  
+                classNamePrefix="react-select"
+              />
+              {selectedSubCategory && (
+                <div className="mt-2">
+                  <div className="flex items-center bg-red-50 text-red-800 px-3 py-1 rounded">
+                    <span>{selectedSubCategory.label}</span>
+                    <button
+                      type="button"
+                      className="ml-auto"
+                      onClick={() => handleSubCategory(null)}
+                    >
+                      <X size={14} />
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* <div className='flex gap-5 items-center'> */}
               <div>
                 <label className="block text-gray-700 mb-2">Min Price</label>
                 <input
@@ -418,7 +468,7 @@ const ProfileTab = ({ onComplete }) => {
                   className={inputFieldClass}
                 />
               </div>
-            </div>
+            {/* </div> */}
 
             <div>
               <label className="block text-gray-700 mb-2">Product Name</label>
@@ -488,9 +538,8 @@ const ProfileTab = ({ onComplete }) => {
                 classNamePrefix="react-select"
               />
             </div>
-          </div>
 
-          <div className="mb-8">
+              <div className="mb-2">
             <label className="block text-gray-700 mb-2">Star Rating</label>
             <input
               type="text"
@@ -501,10 +550,9 @@ const ProfileTab = ({ onComplete }) => {
               className={inputFieldClass}
             />
           </div>
-
-          <div className="mb-8">
+                    <div className="mb-2">
             <label className="block text-gray-700 mb-2">Product Image</label>
-            <div className="flex items-center justify-center bg-gray-100 border border-dashed border-gray-300 rounded-lg h-32 relative">
+            <div className="flex items-center justify-center bg-gray-100 border border-dashed border-gray-300 rounded-lg h-24 relative">
               <input
                 type="file"
                 accept="image/*"
@@ -552,6 +600,11 @@ const ProfileTab = ({ onComplete }) => {
               </div>
             )}
           </div>
+          </div>
+
+        
+
+
 
           {/* Key Features */}
           <h3 className="text-2xl text-center text-orange-500 font-semibold mb-8">Key Features</h3>

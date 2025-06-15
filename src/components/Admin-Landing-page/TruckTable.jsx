@@ -96,7 +96,7 @@ export default function TruckTable() {
         header: 'Product Name',
         cell: (info) => <span className='capitalize'>{info.getValue()}</span>,
       }),
-      columnHelper.accessor('price', {
+      columnHelper.accessor('maxPrice', {
         header: 'Price',
         cell: (info) => `₹${info.getValue()}`,
       }),
