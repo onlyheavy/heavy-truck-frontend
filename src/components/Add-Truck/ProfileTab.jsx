@@ -10,7 +10,7 @@ const ProfileTab = ({ onComplete }) => {
   const [formData, setFormData] = useState({
     categoryName: '',
     brandName: '',
-    subCategoryName: '',
+    subCategory: '',
     productName: '',
     minPrice: '',
     maxPrice: '',
@@ -122,7 +122,7 @@ const ProfileTab = ({ onComplete }) => {
     setSelectedSubCategory(selectedOption);
     setFormData(prev => ({
       ...prev,
-      subCategoryName: selectedOption ? selectedOption.label : ''
+      subCategory: selectedOption ? selectedOption.label : ''
     }));
   };
 
@@ -421,7 +421,7 @@ const ProfileTab = ({ onComplete }) => {
             </div>
 
             <div>
-              <label className="block text-gray-700 mb-2">SubCategory</label>
+              <label className="block text-gray-700 mb-2">Sub Category</label>
               <Select
                 options={subCategoryOptions}
                 value={selectedSubCategory}
