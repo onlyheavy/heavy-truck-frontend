@@ -42,7 +42,7 @@ export default function TruckCards() {
 
   return (
     <section className="md:py-12 py-0">
-      <h2 className="md:text-[24px] text-[18px] font-bold text-gray-800 md:mb-10 mb-6">
+      <h2 className="md:text-[24px] text-lg font-bold text-gray-800 md:mb-10 mb-6">
         Explore {categoryData[0]?.productName} Alternatives
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-8 gap-4 md:px-4 px-0">
@@ -63,30 +63,30 @@ export default function TruckCards() {
             </div>
 
             <div className="md:p-5 p-2 flex-1 flex flex-col">
-              <h3 className="text-lg font-semibold text-gray-800 mb-1">{truck.productName}</h3>
+              <h3 className="text-sm lg:text-lg font-semibold text-gray-800 mb-1">{truck.productName}</h3>
               <p className="text-orange-600 font-bold text-sm mb-4">{truck.minPrice} - {truck.maxPrice}</p>
 
               <div className="grid grid-cols-2 gap-3 text-center text-sm text-gray-600">
-                <div className="bg-orange-50 p-3 rounded-lg">
+                <div className="bg-orange-50 p-2 lg:p-3 rounded-lg">
                   <p className="font-medium">Engine</p>
                   <p>{truck.keyFeature[0].engineDisplacement}</p>
                 </div>
-                <div className="bg-orange-50 p-3 rounded-lg">
+                <div className="bg-orange-50 p-2 lg:p-3 rounded-lg">
                   <p className="font-medium">Power</p>
                   <p>{truck.keyFeature[0].power}</p>
                 </div>
-                <div className="bg-gray-50 p-3 rounded-lg">
+                <div className="bg-gray-50 p-2 lg:p-3 rounded-lg">
                   <p className="font-medium">Mileage</p>
                   <p>{truck.keyFeature[0].mileage}</p>
                 </div>
-                <div className="bg-gray-50 p-3 rounded-lg">
+                <div className="bg-gray-50 p-2 lg:p-3 rounded-lg">
                   <p className="font-medium">Tyres</p>
                   <p>{truck.keyFeature[0].noOfTyres}</p>
                 </div>
               </div>
 
               <div className="mt-auto pt-5">
-                <button className="w-full border border-orange-500 text-orange-500  hover:text-white py-3 rounded-md font-semibold hover:bg-orange-500 transition-all">
+                <button className="w-full border border-orange-500 text-orange-500  hover:text-white py-1 md:py-3 rounded-md font-semibold hover:bg-orange-500 transition-all">
                   View Details
                 </button>
               </div>

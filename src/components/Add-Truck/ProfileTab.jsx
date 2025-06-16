@@ -60,14 +60,14 @@ const ProfileTab = ({ onComplete }) => {
 
   // SubCategory options
   const subCategoryOptions = [
-    { value: 'mini-trucks', label: 'Mini Trucks' },
-    { value: 'medium-trucks', label: 'Medium Trucks' },
-    { value: 'medium-tipper', label: 'Medium Tipper' },
-    { value: 'heavy-trucks', label: 'Heavy Trucks' },
-    { value: 'heavy-tipper', label: 'Heavy Tipper' },
-    { value: 'trailers', label: 'Trailers' },
-    { value: 'mixers', label: 'Mixers' },
-    { value: 'bulkers', label: 'Bulkers' },
+    { value: 'Mini Trucks', label: 'Mini Trucks' },
+    { value: 'Medium Trucks', label: 'Medium Trucks' },
+    { value: 'Medium Tipper', label: 'Medium Tipper' },
+    { value: 'Heavy Trucks', label: 'Heavy Trucks' },
+    { value: 'Heavy Tipper', label: 'Heavy Tipper' },
+    { value: 'Trailers', label: 'Trailers' },
+    { value: 'Mixers', label: 'Mixers' },
+    { value: 'Bulkers', label: 'Bulkers' },
 
   ];
 
@@ -87,7 +87,8 @@ const ProfileTab = ({ onComplete }) => {
   const fuelTypeOptions = [
     { value: 'Petrol', label: 'Petrol' },
     { value: 'Diesel', label: 'Diesel' },
-    { value: 'Cng', label: 'CNG' }
+    { value: 'Cng', label: 'CNG' },
+    { value: 'Electric', label: 'Electric' }
   ];
 
   // Handle input changes
@@ -446,30 +447,49 @@ const ProfileTab = ({ onComplete }) => {
               )}
             </div>
 
-            {/* <div className='flex gap-5 items-center'> */}
-            <div>
-              <label className="block text-gray-700 mb-2">Min Price</label>
+            <div className="mb-2">
+              <label className="block text-gray-700 mb-2">Minimum Price</label>
               <input
                 type="number"
                 name="minPrice"
                 value={formData.minPrice}
-                onChange={handleChange}
-                placeholder="Min-Price - Ex: 1800000"
+                onChange={(e) => {
+                  const value = e.target.value;
+                  const regex = /^\d{0,4}(\.\d{0,2})?$/;
+                  if (regex.test(value)) {
+                    setFormData(prev => ({
+                      ...prev,
+                      minPrice: value
+                    }));
+                  }
+                }}
+                step="0.01"
+                placeholder="Enter min price (max 4 digits)"
                 className={inputFieldClass}
               />
             </div>
-            <div>
-              <label className="block text-gray-700 mb-2">Max Price</label>
+
+            <div className="mb-2">
+              <label className="block text-gray-700 mb-2">Maximum Price</label>
               <input
                 type="number"
                 name="maxPrice"
                 value={formData.maxPrice}
-                onChange={handleChange}
-                placeholder="Max-Price - Ex: 1800000"
+                onChange={(e) => {
+                  const value = e.target.value;
+                  const regex = /^\d{0,4}(\.\d{0,2})?$/;
+                  if (regex.test(value)) {
+                    setFormData(prev => ({
+                      ...prev,
+                      maxPrice: value
+                    }));
+                  }
+                }}
+                step="0.01"
+                placeholder="Enter max price (max 4 digits)"
                 className={inputFieldClass}
               />
             </div>
-            {/* </div> */}
 
             <div>
               <label className="block text-gray-700 mb-2">Product Name</label>
@@ -546,9 +566,21 @@ const ProfileTab = ({ onComplete }) => {
                 type="number"
                 name="starRating"
                 value={formData.starRating}
-                onChange={handleChange}
-                placeholder="Star Rating - Ex: 4.5"
+                onChange={(e) => {
+                  const value = e.target.value;
+                  // Allow empty value or values between 1-5
+                  if (value === '' || (Number(value) >= 1 && Number(value) <= 5)) {
+                    setFormData(prev => ({
+                      ...prev,
+                      starRating: value === '' ? '' : Number(value)
+                    }));
+                  }
+                }}
+                min="1"
+                max="5"
+                step="1"
                 className={inputFieldClass}
+                placeholder="Enter rating between 1-5"
               />
             </div>
           </div>

@@ -6,7 +6,7 @@ const Loan = () => {
 
     return (
         <div>
-            <h2 className='font-bold md:text-[24px] text-[18px] capitalize'>{categoryData[0]?.productName} Loan Offers</h2>
+            <h2 className='font-bold md:text-[24px] text-lg capitalize'>{categoryData[0]?.productName} Loan Offers</h2>
             <div className='bg-[#FFE8DE] p-5 md:grid block grid-cols-4 gap-3 mt-5 rounded-md'>
 
                 <div className=' bg-white  rounded-md p-2 md:mb-0 mb-4'>

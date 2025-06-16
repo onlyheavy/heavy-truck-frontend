@@ -211,8 +211,8 @@ const TruckGallery = () => {
 
       {/* Truck Info & Features */}
       <div className='flex flex-col gap-7'>
-        <div className='flex gap-3 items-center'>
-          <h1 className='font-bold text-2xl'>{categoryData[0]?.productName}</h1>
+        <div className='flex gap-3 items-center justify-between'>
+          <h1 className='font-bold text-lg'>{categoryData[0]?.productName}</h1>
           <div className='bg-orange-500 rounded-full w-fit px-3 py-1 text-white flex items-center gap-3'>
             <img src="/icons/star.svg" alt="star" />
             <p className='text-sm'>{categoryData[0]?.starRating}</p>
@@ -221,7 +221,7 @@ const TruckGallery = () => {
 
         <div className='flex flex-col gap-2'>
           <p className='text-[#797979] text-sm font-semibold'>Ex-Showroom Price</p>
-          <p className='font-bold text-lg'>₹ {Number(categoryData[0]?.minPrice).toLocaleString('en-IN')} - ₹ {Number(categoryData[0]?.maxPrice).toLocaleString('en-IN')} Lakh* </p>
+          <p className='font-bold text-sm md:text-lg'>₹ {Number(categoryData[0]?.minPrice).toLocaleString('en-IN')} - ₹ {Number(categoryData[0]?.maxPrice).toLocaleString('en-IN')} Lakh* </p>
         </div>
 
         <div className='flex gap-2 items-center'>
@@ -234,10 +234,10 @@ const TruckGallery = () => {
         </div>
 
         <div className='flex gap-3 items-center text-sm'>
-          <button className='text-[#FA7436] border border-[#FA7436] p-3 rounded-md cursor-pointer hover:bg-[#FA7436] hover:text-white transition-all duration-200 font-bold'>
+          <button className='text-[#FA7436] border border-[#FA7436] px-2 py-2 md:px-2 md:py-3 rounded-md cursor-pointer hover:bg-[#FA7436] hover:text-white transition-all duration-200 font-bold'>
             Get on road price
           </button>
-          <button className='text-white bg-[#FA7436] p-3 rounded-md font-semibold'>
+          <button className='text-white bg-[#FA7436] px-2 py-2 md:px-2 md:py-3 rounded-md font-semibold'>
             Check Discount Offer
           </button>
         </div>

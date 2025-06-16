@@ -14,6 +14,7 @@ import { MdDeleteOutline } from "react-icons/md";
 import { FaEye, FaRegEdit } from 'react-icons/fa';
 import { showDeleteConfirm } from '@/styles/DeleteConfirm';
 import API from '@/utils/api';
+import Link from 'next/link';
 
 const columnHelper = createColumnHelper();
 
@@ -77,12 +78,12 @@ export default function TruckTable() {
     fetchTrucks();
   }, []);
 
-    // Add cleanup effect
-    useEffect(() => {
-      return () => {
-        localStorage.removeItem('currentSpecId');
-      };
-    }, []);
+  // Add cleanup effect
+  useEffect(() => {
+    return () => {
+      localStorage.removeItem('currentSpecId');
+    };
+  }, []);
 
   const columns = useMemo(
     () => [
@@ -137,17 +138,25 @@ export default function TruckTable() {
           return (
             <div className="space-x-2 flex items-center justify-center gap-2 cursor-pointer">
               {/* 👇 Preview Icon */}
-              <div
-                onClick={() => {
-                  if (truck.categorySlug && truck.slug) {
-                    router.push(`/${truck.categorySlug}/${truck.slug}`);
-                  } else {
-                    alert("Missing categorySlug or slug");
-                  }
-                }}
-                className=""
-              >
-                <FaEye className='w-5 h-5' />
+              <div>
+                <Link
+                  href={truck.categorySlug && truck.slug ? `/${truck.categorySlug}/${truck.slug}` : '#'}
+                  passHref
+                  legacyBehavior
+                >
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => {
+                      if (!truck.categorySlug || !truck.slug) {
+                        e.preventDefault();
+                        alert("Missing categorySlug or slug");
+                      }
+                    }}
+                  >
+                    <FaEye className='w-5 h-5' />
+                  </a>
+                </Link>
               </div>
 
               {/* ✏️ Edit Icon */}

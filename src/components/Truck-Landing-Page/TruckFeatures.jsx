@@ -15,7 +15,7 @@ export default function TruckFeatures() {
 
   return (
     <div className="mx-auto bg-white rounded-lg border border-gray-300 mt-10">
-      <h2 className="text-2xl font-semibold mb-4 p-5">{categoryData[0]?.productName} Specs & Features</h2>
+      <h2 className="text-lg md:text-2xl font-semibold mb-4 p-5">{categoryData[0]?.productName} Specs & Features</h2>
 
       {/* Performance */}
       {

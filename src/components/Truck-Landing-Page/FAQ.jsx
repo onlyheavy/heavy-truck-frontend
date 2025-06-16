@@ -13,7 +13,7 @@ export default function Faq() {
   };
 
   return (
-    <div className="bg-white md:py-10 py-4 md:px-4 px-0">
+    <div className="bg-white md:py-10 py-4 md:px-4 px-0 pt-10">
       <h2 className="font-bold md:text-[24px] text-[18px] leading-[20px] text-[#000000] md:mb-10 mb-6">FAQs on {categoryData[0]?.productName}</h2>
       <div className=" mx-auto flex  flex-col-reverse md:flex-row gap-6">
         
@@ -21,11 +21,11 @@ export default function Faq() {
           <div className="bg-white text-orange-500 rounded-full p-4 mb-4">
             <FiUser size={32} />
           </div>
-          <p className="font-mona font-bold text-[22px] leading-[22px] text-white mb-2">Do you have more questions?</p>
-          <p className="font-mona font-normal text-[16px] leading-[31px] text-center mb-6">
+          <p className="font-mona font-bold text-lg lg:text-[22px] leading-[22px] text-white mb-2">Do you have more questions?</p>
+          <p className="font-mona font-normal text-sm lg:text-[16px] leading-[31px] text-center mb-6">
             End-to-end payments and financial management in a single solution. Meet the right platform to help realize.
           </p>
-          <button className="flex items-center gap-2 bg-white  font-bold md:text-[20px] text-[18px] leading-[20px] text-[#F16737] py-[20px] md:px-14 px-6 rounded-md hover:bg-orange-100 transition">
+          <button className="flex items-center gap-2 bg-white  font-bold md:text-[20px] text-[18px] leading-[20px] text-[#F16737] py-2 md:py-3 md:px-14 px-6 rounded-md hover:bg-orange-100 transition">
             <FiPhoneCall className="text-lg" />
             <span>Connect Now</span>
           </button>
@@ -44,7 +44,7 @@ export default function Faq() {
                   onClick={() => toggle(faqs._id)}
                 >
                   <div className="flex justify-between items-center px-6 py-4">
-                    <h3 className="font-semibold text-[18px] text-[#254154]">{faqs.question}</h3>
+                    <h3 className="font-semibold text-sm text-[#254154]">{faqs.question}</h3>
                     <FiChevronDown
                       className={`text-orange-500 text-xl transition-transform duration-300 ${activeIndex === faqs._id ? "rotate-180" : ""
                         }`}

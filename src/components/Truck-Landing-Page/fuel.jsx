@@ -17,7 +17,7 @@ const Fuel = () => {
         <div className="mt-10">
             <h2 className="font-bold md:text-[24px] text-[18px] md:pb-8 pb-4">Calculate your Monthly Fuel Cost</h2>
             <div className="md:flex block gap-16 items-center border border-gray-300 rounded-md md:p-10 p-4 md:mb-5 mb-2">
-                <div className="md:w-[48%] w-full">
+                <div className=" md:w-[48%] w-full">
                     <SliderInput
                         label="Fuel price in your city"
                         value={fuelPrice}
@@ -49,11 +49,11 @@ const Fuel = () => {
                     <div>
                         <div className="pb-16">
                             <p className="">Fuel Consumption</p>
-                            <p><span className="text-xl font-bold">{fuelConsumption.toFixed(0)} Liters</span> Per Month</p>
+                            <p><span className="text-sm md:text-xl font-bold">{fuelConsumption.toFixed(0)} Liters</span> Per Month</p>
                         </div>
                         <div>
                             <p>Fuel Consumption</p>
-                            <p ><span className="text-xl font-bold">₹{fuelCost.toFixed(0)} Liters</span> Per Month</p>
+                            <p ><span className="text-sm md:text-xl font-bold">₹{fuelCost.toFixed(0)} Liters</span> Per Month</p>
                         </div>
                     </div>
                     <div>

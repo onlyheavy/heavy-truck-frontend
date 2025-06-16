@@ -54,7 +54,7 @@ const KeySpecs = () => {
 
     return (
         <div className="md:my-10 my-4">
-            <h2 className="font-bold md:text-[24px] text-[18px]">
+            <h2 className="font-bold md:text-[24px] text-lg">
                 Key Specs of {product?.productName || 'the Truck'}
             </h2>
             <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-3 md:gap-5 md:mt-8 mt-4">

@@ -57,6 +57,31 @@ const Section = memo(({ title, children }) => (
 
 Section.displayName = 'Section';
 
+// Memoized Select Component
+const SelectField = memo(({ label, name, value, onChange, options }) => {
+  return (
+    <div className="mb-4 md:mb-0">
+      <label className="block text-gray-900 font-medium mb-2">
+        {label}
+      </label>
+      <select
+        value={value}
+        onChange={(e) => onChange(name, e.target.value)}
+        className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm text-gray-600"
+      >
+        <option value="">Select {label}</option>
+        {options.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+});
+
+SelectField.displayName = 'SelectField';
+
 const EngineTab = ({ truckId, onComplete }) => {
   console.log(truckId, 'truckId');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -509,12 +534,12 @@ const EngineTab = ({ truckId, onComplete }) => {
                 onChange={handleInputChange}
                 placeholder="gearBox - Ex: 6 Speed Manual"
               />
-              <InputField
+              <SelectField
                 label="Transmission Type"
                 name="transmissionType"
                 value={formData.transmissionType}
                 onChange={handleInputChange}
-                placeholder="Transmission Type - Ex: Manual"
+                options={['Manual', 'Automatic']}
               />
               <InputField
                 label="Axle Configuration"

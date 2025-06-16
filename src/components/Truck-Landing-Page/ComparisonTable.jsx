@@ -11,8 +11,8 @@ const ComparisonCard = ({ vehicleImage, vehicleName, price }) => (
         alt={vehicleName}
         className="w-full max-w-[300px] h-auto mb-4"
       />
-      <h3 className="font-semibold text-[18px] text-[#254154] mb-2">{vehicleName}</h3>
-      <p className="text-[16px] font-bold text-[#254154] mb-4">{price}</p>
+      <h3 className="font-semibold text-sm text-[#254154] mb-2">{vehicleName}</h3>
+      <p className="text-sm font-bold text-[#254154] mb-4">{price}</p>
     </div>
   </div>
 );
@@ -42,7 +42,7 @@ const ComparisonSection = ({ vehicles }) => {
         ))}
 
         <div className="absolute left-1/2 top-1/3 -translate-x-1/2 -translate-y-1/2 z-10">
-          <div className="w-12 h-12 rounded-full bg-[#FA7436] text-white flex items-center justify-center font-semibold text-lg">
+          <div className="md:w-12 md:h-12 w-10 h-10 rounded-full bg-[#FA7436] text-white flex items-center justify-center font-semibold text-sm md:text-lg">
             VS
           </div>
         </div>
@@ -102,9 +102,9 @@ const ComparisonTable = () => {
   }
 
   return (
-    <div className="my-10 px-4">
-      <h2 className="text-2xl font-semibold mb-6 text-center">Compare Top Pickups</h2>
-      <div className="flex gap-6">
+    <div className="my-10 ">
+      <h2 className="text-lg md:text-2xl font-semibold mb-6 ">Compare Top Pickups</h2>
+      <div className="flex flex-col md:flex-row gap-6">
         {pairedVehicles.map((pair, index) => (
           <ComparisonSection key={index} vehicles={pair} />
         ))}

@@ -9,7 +9,7 @@ const TruckProsAndCons = () => {
         <div className='flex flex-col gap-5'>
             <div className='w-full bg-white  rounded-md md:p-5 p-3 border border-gray-300 my-5'>
                 <div className='flex flex-col gap-3'>
-                    <h2 className='font-bold md:text-[24px] text-[18px] capitalize'>{categoryData[0]?.productName} Pros and cons</h2>
+                    <h2 className='font-bold md:text-[24px] text-lg  capitalize'>{categoryData[0]?.productName} Pros and cons</h2>
                 </div>
                 <div className='grid grid-cols-1 md:grid-cols-2 md:gap-3 mt-3 '>
                     <div className='bg-[#EEFFEB] p-5 rounded-md md:mt-5'>
@@ -53,8 +53,8 @@ const TruckProsAndCons = () => {
 
             <div className='flex gap-3 bg-[#FFE8DE] p-5 pb-4 rounded-md '>
                 <div className='flex flex-col gap-3'>
-                    <h2 className='font-bold md:text-[24px] text-[18px] capitalize'>Download {categoryData[0]?.productName} Brochure</h2>
-                    <p className='text-base font-normal text-gray-700 w-[80%]'>Download {categoryData[0]?.productName} brochure online. Check out the 1412 LPT PDF brochure at Truck Junction with all features and specifications.</p>
+                    <h2 className='font-bold md:text-[24px] text-lg capitalize'>Download {categoryData[0]?.productName} Brochure</h2>
+                    <p className='text-sm md:text-base font-normal text-gray-700 w-[80%]'>Download {categoryData[0]?.productName} brochure online. Check out the 1412 LPT PDF brochure at Truck Junction with all features and specifications.</p>
                     <div className="md:hidden flex justify-center items-center">
                         <img src="/images/brochure.svg" alt="brochure" />
                     </div>
