@@ -208,13 +208,20 @@ const ProfileTab = ({ onComplete }) => {
 
   useEffect(() => {
     if (id) {
-      setdataFn()
+      console.log('ID available, fetching data...');
+      setdataFn();
+    } else {
+      console.log('No ID available');
     }
-  }, []);
+  }, [id]);
 
 
   // get the data from the form
   const setdataFn = async () => {
+    if (!id) {
+      console.error('No ID provided for fetching data');
+      return;
+    }
     try {
       const response = await axios.get(`${API.HOST}/api/category/getData/${id}`);
       if (response.data.success === true) {
@@ -271,9 +278,24 @@ const ProfileTab = ({ onComplete }) => {
           option.label === response.data.data.brandName
         );
         setSelectedBrand(matchingBrand);
+
+        // Set the subcategory
+        const matchingSubCategory = subCategoryOptions.find(option =>
+          option.label === response.data.data.subCategory
+        );
+        setSelectedSubCategory(matchingSubCategory);
+      } else {
+        console.error('API returned success: false');
+        toast.error('Failed to fetch truck data');
       }
     } catch (err) {
       console.error('Error fetching truck data:', err);
+      console.error('Error details:', {
+        message: err.message,
+        response: err.response?.data,
+        status: err.response?.status
+      });
+      toast.error('Failed to fetch truck data. Please try again.');
     }
   };
 

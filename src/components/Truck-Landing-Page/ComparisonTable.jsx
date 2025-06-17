@@ -26,7 +26,7 @@ const ComparisonSection = ({ vehicles }) => {
       v2: vehicles[1].name,
     }).toString();
 
-    router.push(`/CompareTruck?${query}`);
+    router.push(`/compare-truck`);
   };
 
   return (
