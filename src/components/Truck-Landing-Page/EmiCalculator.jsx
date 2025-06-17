@@ -32,7 +32,7 @@ const EmiCalculator = () => {
     if (categoryData.length > 0) {
       const validItem = categoryData.find(item => typeof item?.maxPrice === 'number' && item.maxPrice > 0);
       if (validItem) {
-        setVehiclePrice(validItem.maxPrice);
+        setVehiclePrice(validItem.maxPrice * 100000);
       }
     }
   }, [categoryData]);
