@@ -474,12 +474,12 @@ const EngineTab = ({ truckId, onComplete }) => {
                 onChange={handleInputChange}
                 placeholder="Torque - Ex: 500 Nm @ 1500 rpm"
               />
-              <InputField
+              <SelectField
                 label="Fuel Type"
                 name="fuelType"
                 value={formData.fuelType}
                 onChange={handleInputChange}
-                placeholder="Fuel Type - Ex: Diesel"
+                options={['Petrol', 'Diesel', 'CNG', 'Electric']}
               />
               <InputField
                 label="Fuel Tank Capacity"
