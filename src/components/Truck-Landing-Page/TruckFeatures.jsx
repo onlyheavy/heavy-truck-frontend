@@ -21,18 +21,19 @@ export default function TruckFeatures() {
       {
         specifications.engine?.map((item, index) => (
           <Section title="Performance">
-            <SpecItem label="Engine" value={item?.engineType} />
-            <SpecItem label="Engine Norm" value={item?.emissionNorm} />
-            <SpecItem label="Gradeability" value={item?.gradeability} />
-            <SpecItem label="Power" value={item?.enginePower} />
+            <SpecItem label="Engine Type" value={item?.engineType} />
             <SpecItem label="Engine Cylinders" value={item?.engineCylinders} />
-            <SpecItem label="Max Torque" value={item?.torque} />
+            <SpecItem label="Engine Displacement" value={item?.engineDisplacement} />
+            <SpecItem label="Engine Power" value={item?.enginePower} />
+            <SpecItem label="Engine RPM" value={item?.engineRPM} />
+            <SpecItem label="Torque" value={item?.torque} />
+            <SpecItem label="Fuel Type" value={item?.fuelType} />
+            <SpecItem label="Fuel Tank Capacity" value={item?.fuelTankCapacity} />
+            <SpecItem label="Mileage" value={item?.mileage} />
+            <SpecItem label="Gradeability" value={item?.gradeability} />
+            <SpecItem label="Emission Norm" value={item?.emissionNorm} />
             <SpecItem label="Max Speed" value={item?.maxSpeed} />
-            <SpecItem label="Fuel Tank" value={item?.fuelTankCapacity} />
-            <SpecItem label="GVW" value="N/A" />
-            <SpecItem label="Payload Capacity" value="N/A" />
-            <SpecItem label="Mileage" value={item?.mileage
-            } />
+            <SpecItem label="Battery" value={item?.battery} />
           </Section>
         ))
       }
@@ -40,55 +41,53 @@ export default function TruckFeatures() {
       {
         specifications.dimensions?.map((item, index) => (
           <Section title="Dimensions">
-            <SpecItem label="Length" value={`${item?.overallLength}`} />
-            <SpecItem label="Width" value={`${item?.overallWidthh} `} />
-            <SpecItem label="Height" value={`${item?.overallHeight} `} />
-            <SpecItem label="Wheelbase" value={`${item?.wheelbase2}  `} />
+            <SpecItem label="Over All Length" value={`${item?.overallLength}`} />
+            <SpecItem label="Over All Width" value={`${item?.overallWidthh} `} />
+            <SpecItem label="Over All Height" value={`${item?.overallHeight} `} />
+            <SpecItem label="Wheel Base" value={`${item?.wheelBase}  `} />
             <SpecItem label="Ground Clearance" value={`${item?.groundClearance} `} />
-            <SpecItem label="Minimum Turning Radius" value={`${item?.turningRadius }`} />
+            <SpecItem label="Turning Radius" value={`${item?.turningRadius}`} />
           </Section>
         ))
       }
-
 
       {showMore && (
         <>
           {/* Brakes Suspension */}
           {specifications.brakesAndSuspension?.map((item, index) => (
             <Section title="Brakes Suspension">
-              <SpecItem label="Brakes" value={item?.brakeType} />
-              <SpecItem label="Parking Brakes" value={item?.parkingBrakes ? 'Yes' : 'No'} />
-              <SpecItem label="Front Axle" value="N/A" />
-              <SpecItem label="Rear Axle" value="N/A" />
               <SpecItem label="Front Suspension" value={item?.frontSuspension} />
               <SpecItem label="Rear Suspension" value={item?.rearSuspension} />
-              <SpecItem label="Abs" value={item?.abs ? 'Yes' : 'No'} />
-              <SpecItem label="Anti RollBar" value={item?.antiRollBar ? 'Yes' : 'No'} />
+              <SpecItem label="Brakes Type" value={item?.brakeType} />
+              <SpecItem label="ABS" value={item?.abs ? 'Yes' : 'No'} />
+              <SpecItem label="Parking Brakes" value={item?.parkingBrakes ? 'Yes' : 'No'} />
+              <SpecItem label="Anti Roll Bar" value={item?.antiRollBar ? 'Yes' : 'No'} />
             </Section>
           ))}
 
-          {/* Clutch Transmission */}
+          {/* Transmission & Load */}
           {specifications.transmissionLoad?.map((item, index) => (
-            <Section title="Clutch Transmission">
-              <SpecItem label="Clutch" value={item?.transmissionType} />
-              <SpecItem label="Gearbox" value={item?.gearBox} />
-              <SpecItem label="AxleConfiguration" value={item?.axleConfiguration} />
-              <SpecItem label="FrontAxle" value={item?.frontAxle} />
-              <SpecItem label="GVW" value={item?.GrossVehicleWeight} />
-              <SpecItem label="kerb Weight" value={item?.kerbWeight} />
+            <Section title="Transmission & Load">
+              <SpecItem label="Gear box" value={item?.gearBox} />
+              <SpecItem label="Transmission Type" value={item?.transmissionType} />
+              <SpecItem label="Axle Configuration" value={item?.axleConfiguration} />
+              <SpecItem label="Front Axle" value={item?.frontAxle} />
+              <SpecItem label="Rear Axle" value={item?.rearAxle} />
+              <SpecItem label="Gross Vehicle Weight" value={item?.GrossVehicleWeight} />
+              <SpecItem label="Kerb Weight" value={item?.kerbWeight} />
               <SpecItem label="Payload" value={item?.payload} />
             </Section>
           ))
           }
-          {/* Body Cabin*/}
+          {/* Cabin & Body*/}
           {specifications.cabinAndBody?.map((item, index) => (
-            <Section key={index} title="Body Cabin">
-              <SpecItem label="Body Option" value={item.bodyOption || 'N/A'} />
+            <Section key={index} title="Cabin & Body">
               <SpecItem label="Chassis Type" value={item.chassisType || 'N/A'} />
-              <SpecItem label="Seating Capacity" value={item.seatingCapacity || 'N/A'} />
               <SpecItem label="Cabin Type" value={item.cabinType || 'N/A'} />
               <SpecItem label="Tiltable Cabin" value={item.tiltableCabin || 'N/A'} />
-              <SpecItem label="ApplicationType" value={item.applicationType || 'N/A'} />
+              <SpecItem label="Body Option" value={item.bodyOption || 'N/A'} />
+              <SpecItem label="Application Type" value={item.applicationType || 'N/A'} />
+              <SpecItem label="Seating Capacity" value={item.seatingCapacity || 'N/A'} />
             </Section>
           ))}
 
@@ -119,7 +118,7 @@ export default function TruckFeatures() {
           {specifications.tyre?.map((item, index) => (
             <Section key={index} title="Tyre">
               <SpecItem label="Front Tyre" value={item.frontTyre || 'N/A'} />
-              <SpecItem label="Rear Tyre" value={item.rearType || 'N/A'} />
+              <SpecItem label="Rear Tyre" value={item.rearTyre || 'N/A'} />
               <SpecItem label="Number of Tyres" value={item.numberOfTyres || 'N/A'} />
               <SpecItem label="Tubeless Tyre" value={item.tubelessTyres ? 'Yes' : 'No'} />
             </Section>

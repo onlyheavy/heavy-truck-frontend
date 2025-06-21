@@ -118,8 +118,7 @@ const EngineTab = ({ truckId, onComplete }) => {
     overallLength: '',
     overallWidthh: '',
     overallHeight: '',
-    wheelbase: '',
-    wheelbase2: '',
+    wheelBase: '',
     groundClearance: '',
     turningRadius: '',
 
@@ -217,8 +216,7 @@ const EngineTab = ({ truckId, onComplete }) => {
         overallLength: data.dimensions[0]?.overallLength || '',
         overallWidthh: data.dimensions[0]?.overallWidthh || '',
         overallHeight: data.dimensions[0]?.overallHeight || '',
-        wheelbase: data.dimensions[0]?.wheelbase || '',
-        wheelbase2: data.dimensions[0]?.wheelbase2 || '',
+        wheelBase: data.dimensions[0]?.wheelBase || '',
         groundClearance: data.dimensions[0]?.groundClearance || '',
         turningRadius: data.dimensions[0]?.turningRadius || '',
         frontSuspension: data.brakesAndSuspension[0]?.frontSuspension || '',
@@ -319,8 +317,7 @@ const EngineTab = ({ truckId, onComplete }) => {
           overallLength: formData.overallLength,
           overallWidthh: formData.overallWidthh,
           overallHeight: formData.overallHeight,
-          wheelbase: formData.wheelbase,
-          wheelbase2: formData.wheelbase2,
+          wheelBase: formData.wheelBase,
           groundClearance: formData.groundClearance,
           turningRadius: formData.turningRadius
         }],
@@ -447,28 +444,28 @@ const EngineTab = ({ truckId, onComplete }) => {
                 placeholder="Engine Cylinders - Ex: 4 Cylinders"
               />
               <InputField
-                label="Engine Displacement"
+                label="Engine Displacement (cc)"
                 name="engineDisplacement"
                 value={formData.engineDisplacement}
                 onChange={handleInputChange}
                 placeholder="Engine Displacement - Ex: 2956 cc"
               />
               <InputField
-                label="Engine Power"
+                label="Engine Power (HP)"
                 name="enginePower"
                 value={formData.enginePower}
                 onChange={handleInputChange}
                 placeholder="Engine Power - Ex: 150 HP @ 2600 rpm"
               />
               <InputField
-                label="Engine RPM"
+                label="Engine (rpm)"
                 name="engineRPM"
                 value={formData.engineRPM}
                 onChange={handleInputChange}
                 placeholder="Engine RPM - Ex: 2600 rpm"
               />
               <InputField
-                label="Torque"
+                label="Torque (Nm)"
                 name="torque"
                 value={formData.torque}
                 onChange={handleInputChange}
@@ -482,21 +479,21 @@ const EngineTab = ({ truckId, onComplete }) => {
                 options={['Petrol', 'Diesel', 'CNG', 'Electric']}
               />
               <InputField
-                label="Fuel Tank Capacity"
+                label="Fuel Tank Capacity (Liters)"
                 name="fuelTankCapacity"
                 value={formData.fuelTankCapacity}
                 onChange={handleInputChange}
                 placeholder="Fuel Tank Capacity - Ex: 200 Liters"
               />
               <InputField
-                label="Mileage"
+                label="Mileage (Ex: km/l)"
                 name="mileage"
                 value={formData.mileage}
                 onChange={handleInputChange}
                 placeholder="Mileage - Ex: 10 km/l"
               />
               <InputField
-                label="Gradeability"
+                label="Gradeability (%)"
                 name="gradeability"
                 value={formData.gradeability}
                 onChange={handleInputChange}
@@ -510,14 +507,14 @@ const EngineTab = ({ truckId, onComplete }) => {
                 placeholder="Emission Norm - Ex: BS6"
               />
               <InputField
-                label="Max Speed"
+                label="Max Speed (km/h)"
                 name="maxSpeed"
                 value={formData.maxSpeed}
                 onChange={handleInputChange}
                 placeholder="Max Speed - Ex: 80 km/h"
               />
               <InputField
-                label="Battery"
+                label="Battery (Ex: 12V, 75Ah)"
                 name="battery"
                 value={formData.battery}
                 onChange={handleInputChange}
@@ -528,7 +525,7 @@ const EngineTab = ({ truckId, onComplete }) => {
             {/* Transmission Section */}
             <Section title="Transmission & Load">
               <InputField
-                label="Gear Box"
+                label="Gear Box (Ex: 6 Speed Manual)"
                 name="gearBox"
                 value={formData.gearBox}
                 onChange={handleInputChange}
@@ -563,21 +560,21 @@ const EngineTab = ({ truckId, onComplete }) => {
                 placeholder="Rear Axle - Ex: Single Reduction"
               />
               <InputField
-                label="GVW"
+                label="GVW (kg)"
                 name="GrossVehicleWeight"
                 value={formData.GrossVehicleWeight}
                 onChange={handleInputChange}
                 placeholder="GrossVehicleWeight - Ex: 25000 kg"
               />
               <InputField
-                label="Kerb Weight"
+                label="Kerb Weight (kg)"
                 name="kerbWeight"
                 value={formData.kerbWeight}
                 onChange={handleInputChange}
                 placeholder="Kerb Weight - Ex: 6500 kg"
               />
               <InputField
-                label="Payload"
+                label="Payload (kg)"
                 name="payload"
                 value={formData.payload}
                 onChange={handleInputChange}
@@ -588,49 +585,42 @@ const EngineTab = ({ truckId, onComplete }) => {
             {/* Dimensions Section */}
             <Section title="Dimensions">
               <InputField
-                label="Overall Length"
+                label="Overall Length (mm)"
                 name="overallLength"
                 value={formData.overallLength}
                 onChange={handleInputChange}
                 placeholder="Overall Length - Ex: 9000 mm"
               />
               <InputField
-                label="Overall Width"
+                label="Overall Width (mm)"
                 name="overallWidthh"
                 value={formData.overallWidthh}
                 onChange={handleInputChange}
                 placeholder="Overall Width - Ex: 2490 mm"
               />
               <InputField
-                label="Overall Height"
+                label="Overall Height (mm)"
                 name="overallHeight"
                 value={formData.overallHeight}
                 onChange={handleInputChange}
                 placeholder="Overall Height - Ex: 3200 mm"
               />
               <InputField
-                label="Wheelbase"
-                name="wheelbase"
-                value={formData.wheelbase}
+                label="Wheel Base (mm)"
+                name="wheelBase"
+                value={formData.wheelBase}
                 onChange={handleInputChange}
-                placeholder="Enter Wheelbase"
+                placeholder="Enter Wheel Base"
               />
               <InputField
-                label="Wheelbase 2"
-                name="wheelbase2"
-                value={formData.wheelbase2}
-                onChange={handleInputChange}
-                placeholder="Enter Wheelbase 2"
-              />
-              <InputField
-                label="Ground Clearance"
+                label="Ground Clearance (mm)"
                 name="groundClearance"
                 value={formData.groundClearance}
                 onChange={handleInputChange}
                 placeholder="Ground Clearance - Ex: 250 mm"
               />
               <InputField
-                label="Turning Radius"
+                label="Turning Radius (m)"
                 name="turningRadius"
                 value={formData.turningRadius}
                 onChange={handleInputChange}
@@ -641,7 +631,7 @@ const EngineTab = ({ truckId, onComplete }) => {
             {/* Brakes Section */}
             <Section title="Brakes & Suspension">
               <InputField
-                label="Front Suspension"
+                label="Front Suspension "
                 name="frontSuspension"
                 value={formData.frontSuspension}
                 onChange={handleInputChange}

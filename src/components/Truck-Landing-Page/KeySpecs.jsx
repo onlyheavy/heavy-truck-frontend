@@ -10,32 +10,32 @@ const KeySpecs = () => {
     const specs = [
         {
             title: 'Power',
-            value: product?.keyFeature?.[0]?.power || 'N/A',
+            value: `${product?.keyFeature?.[0]?.power} RPM` || 'N/A',
             icon: '/icons/power.svg',
         },
         {
             title: 'GVW',
-            value: product?.keyFeature?.[0]?.GVW || 'N/A',
+            value: `${product?.keyFeature?.[0]?.GVW} kg` || 'N/A',
             icon: '/icons/gvw.svg',
         },
         {
             title: 'Wheelbase',
-            value: product?.keyFeature?.[0]?.wheelBase || 'N/A',
+            value: `${product?.keyFeature?.[0]?.wheelBase} mm` || 'N/A',
             icon: '/icons/Wheelbase.svg',
         },
         {
             title: 'Engine',
-            value: product?.keyFeature?.[0]?.engineDisplacement || 'N/A',
+            value: `${product?.keyFeature?.[0]?.engineDisplacement} cc` || 'N/A',
             icon: '/icons/cc.svg',
         },
         {
             title: 'Fuel Tank',
-            value: product?.keyFeature?.[0]?.fuelTankCapacity || 'N/A',
+            value: `${product?.keyFeature?.[0]?.fuelTankCapacity} L` || 'N/A',
             icon: '/icons/petrol.svg',
         },
         {
             title: 'Payload Capacity',
-            value: product?.keyFeature?.[0]?.payload || 'N/A',
+            value: `${product?.keyFeature?.[0]?.payload} kg` || 'N/A',
             icon: '/icons/payload.svg',
         },
         {
@@ -45,7 +45,7 @@ const KeySpecs = () => {
         },
         {
             title: 'Mileage',
-            value: product?.keyFeature?.[0]?.mileage || 'N/A',
+            value: `${product?.keyFeature?.[0]?.mileage} km/l` || 'N/A',
             icon: '/icons/mileage.svg',
         },
     ]

@@ -554,7 +554,7 @@ const ProfileTab = ({ onComplete }) => {
             </div>
 
             <div>
-              <label className="block text-gray-700 mb-2">Engine CC</label>
+              <label className="block text-gray-700 mb-2">Engine CC (cc)</label>
               <input
                 type="text"
                 name="engineCC"
@@ -667,7 +667,7 @@ const ProfileTab = ({ onComplete }) => {
           <h3 className="text-2xl text-center text-orange-500 font-semibold mb-8">Key Features</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <div>
-              <label className="block text-gray-700 mb-2">Power</label>
+              <label className="block text-gray-700 mb-2">Power (rpm)</label>
               <input
                 type="text"
                 name="power"
@@ -679,7 +679,7 @@ const ProfileTab = ({ onComplete }) => {
             </div>
 
             <div>
-              <label className="block text-gray-700 mb-2">Gross Vehicle Weight</label>
+              <label className="block text-gray-700 mb-2">Gross Vehicle Weight (kg)</label>
               <input
                 type="text"
                 name="GVW"
@@ -691,7 +691,7 @@ const ProfileTab = ({ onComplete }) => {
             </div>
 
             <div>
-              <label className="block text-gray-700 mb-2">Payload</label>
+              <label className="block text-gray-700 mb-2">Payload (kg)</label>
               <input
                 type="text"
                 name="payload"
@@ -703,7 +703,7 @@ const ProfileTab = ({ onComplete }) => {
             </div>
 
             <div>
-              <label className="block text-gray-700 mb-2">Engine Displacement</label>
+              <label className="block text-gray-700 mb-2">Engine Displacement (cc)</label>
               <input
                 type="text"
                 name="engineDisplacement"
@@ -715,7 +715,7 @@ const ProfileTab = ({ onComplete }) => {
             </div>
 
             <div>
-              <label className="block text-gray-700 mb-2">Mileage</label>
+              <label className="block text-gray-700 mb-2">Mileage (km/l)</label>
               <input
                 type="text"
                 name="mileage"
@@ -745,13 +745,13 @@ const ProfileTab = ({ onComplete }) => {
                 name="fuelTankCapacity"
                 value={formData.keyFeature[0].fuelTankCapacity}
                 onChange={handleKeyFeatureChange}
-                placeholder="Fuel - Ex: Diesel"
+                placeholder="Fuel - Ex: 120 L"
                 className={inputFieldClass}
               />
             </div>
 
             <div>
-              <label className="block text-gray-700 mb-2">Wheelbase</label>
+              <label className="block text-gray-700 mb-2">Wheelbase (mm)</label>
               <input
                 type="text"
                 name="wheelBase"
