@@ -88,7 +88,7 @@ export default function TruckCards() {
               <div className="mt-auto pt-5">
                 <button className="w-full border border-orange-500 text-orange-500 hover:text-white py-1 md:py-3 rounded-md font-semibold hover:bg-orange-500 transition-all">
                   <a
-                    href={`http://localhost:3000/${truck.categorySlug}/${truck.slug}`}
+                    href={`https://www.onlyheavy.com/truck${truck.categorySlug}/${truck.slug}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
