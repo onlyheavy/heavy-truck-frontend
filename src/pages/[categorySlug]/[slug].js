@@ -1,6 +1,3 @@
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { CategoryProvider } from '@/hooks/useContext';
 import EmiCalculator from '@/components/Truck-Landing-Page/EmiCalculator';
 import Faq from '@/components/Truck-Landing-Page/FAQ';
 import Fuel from '@/components/Truck-Landing-Page/fuel';
@@ -15,6 +12,9 @@ import MainLayout from '@/layouts/MainLayout';
 import React, { useRef } from 'react';
 import SpecsBar from '@/components/SpecsBar';
 import Image from 'next/image';
+import axios from 'axios';
+import API from '@/utils/api';
+import { CategoryProvider } from '@/hooks/useContext';
 
 const features = [
   {
@@ -44,14 +44,7 @@ const features = [
   },
 ];
 
-const DynamicVehiclePage = () => {
-  const router = useRouter();
-  const { categorySlug, slug } = router.query;
-
-  useEffect(() => {
-    console.log('Route parameters:', { categorySlug, slug });
-  }, [categorySlug, slug]);
-
+const TruckLandingPage = ({ categoryData, alterNative, error, categorySlug, slug }) => {
   const truckGalleryRef = useRef(null);
   const truckFeaturesRef = useRef(null);
   const truckFuelRef = useRef(null);
@@ -59,37 +52,27 @@ const DynamicVehiclePage = () => {
   const truckBrochure = useRef(null);
   const truckLoan = useRef(null);
 
-  // Show loading state while the route parameters are being resolved
-  if (!categorySlug || !slug) {
-    return (
-      <MainLayout>
-        <div className="flex justify-center items-center h-screen">
-          <div className="animate-pulse text-gray-500">Loading...</div>
-        </div>
-      </MainLayout>
-    );
+  if (error) {
+    return <div>Error: {error}</div>;
   }
 
-  // If the page is not yet generated, this will be displayed
-  if (router.isFallback) {
-    return (
-      <MainLayout>
-        <div className="flex justify-center items-center h-screen">
-          <div className="animate-pulse text-gray-500">Loading...</div>
-        </div>
-      </MainLayout>
-    );
-  }
+  const initialData = {
+    categoryData,
+    alterNative,
+    error,
+    categorySlug,
+    slug
+  };
 
   return (
-    <CategoryProvider>
+    <CategoryProvider initialData={initialData}>
       <MainLayout>
         <div className="md:flex block gap-10">
           <div className="md:w-[80%] w-full">
             <div ref={truckGalleryRef}>
               <TruckGallery />
             </div>
-            <div className="sticky top-0 z-10 bg-white">
+            <div className='sticky top-0 z-10 bg-white'>
               <SpecsBar
                 truckFeaturesRef={truckFeaturesRef}
                 truckGalleryRef={truckGalleryRef}
@@ -137,7 +120,7 @@ const DynamicVehiclePage = () => {
                         }`}
                       >
                         <div className="bg-white flex items-center justify-center w-16 h-16 rounded-md">
-                          <Image src={item.icon} width={28} height={28} alt="icon" className=" object-contain" />
+                          <Image width={8} height={8} src={item.icon} alt="icon" className=" object-contain" />
                         </div>
                         <div className="flex-1">
                           <p className="text-sm font-semibold text-[#000000] mb-1 leading-snug">
@@ -163,4 +146,58 @@ const DynamicVehiclePage = () => {
   );
 };
 
-export default DynamicVehiclePage;
+export async function getServerSideProps(context) {
+  const { categorySlug, slug } = context.params; // Changed from context.query to context.params
+
+  if (!categorySlug || !slug) {
+    return {
+      props: {
+        categoryData: null,
+        alterNative: [],
+        error: 'Missing required parameters',
+        categorySlug: null,
+        slug: null
+      }
+    };
+  }
+
+  try {
+    console.log('Fetching data for:', { categorySlug, slug }); // Debug log
+    const response = await axios.get(`${API.HOST}/api/category/${categorySlug}/${slug}`);
+
+    if (response.data && response.data.data) {
+      console.log('Received data:', response.data.data); // Debug log
+      return {
+        props: {
+          categoryData: response.data.data.existData,
+          alterNative: response.data.data.alternatives,
+          error: null,
+          categorySlug,
+          slug
+        }
+      };
+    } else {
+      throw new Error('Invalid data format received from API');
+    }
+  } catch (error) {
+    console.error('Error fetching category data:', error);
+    
+    if (error.response && error.response.status === 404) {
+      return {
+        notFound: true
+      };
+    }
+
+    return {
+      props: {
+        categoryData: null,
+        alterNative: [],
+        error: error.message || 'Failed to fetch data',
+        categorySlug,
+        slug
+      }
+    };
+  }
+}
+
+export default TruckLandingPage;
