@@ -1,7 +1,12 @@
-import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
+import { useCategory } from '@/hooks/useContext';
 
-
+// Utility function to create a slug from a product name
+const slugify = (str) =>
+  str
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-') // replace non-alphanumeric with hyphen
+    .replace(/(^-|-$)+/g, '');   // remove starting or ending hyphens
 
 const ComparisonCard = ({ vehicleImage, vehicleName, price }) => (
   <div className="flex-1">
@@ -21,12 +26,10 @@ const ComparisonSection = ({ vehicles }) => {
   const router = useRouter();
 
   const handleCompare = () => {
-    const query = new URLSearchParams({
-      v1: vehicles[0].name,
-      v2: vehicles[1].name,
-    }).toString();
+    const slug1 = slugify(vehicles[0].name);
+    const slug2 = slugify(vehicles[1].name);
 
-    router.push(`/compare-truck`);
+    router.push(`/compare-truck/${slug1}-vs-${slug2}`);
   };
 
   return (
@@ -61,44 +64,26 @@ const ComparisonSection = ({ vehicles }) => {
 };
 
 const ComparisonTable = () => {
-  // Define two arrays (group 1 and group 2)
-  const group1 = [
-    {
-      image: "/images/jeep.webp",
-      name: "Tata Yodha 2.0",
-      price: "₹ 18 - ₹ 20 Lakh*",
-    },
-    {
-      image: "/images/jeep.webp",
-      name: "Ashok Leyland Bada Dost",
-      price: "₹ 12 - ₹ 14 Lakh*",
-    },
-    {
-      image: "/images/jeep.webp",
-      name: "Isuzu D-Max",
-      price: "₹ 15 - ₹ 18 Lakh*",
-    },
-  ];
+  const { categoryData, alterNative } = useCategory();
 
-  const group2 = [
-    {
-      image: "/images/jeep.webp",
-      name: "Tata Yodha 1700 BS6",
-      price: "₹ 18 - ₹ 20 Lakh*",
-    },
-    {
-      image: "/images/jeep.webp",
-      name: "Mahindra Bolero Pickup",
-      price: "₹ 10 - ₹ 12 Lakh*",
-    },
-    {
-      image: "/images/jeep.webp",
-      name: "Force Kargo King",
-      price: "₹ 9 - ₹ 11 Lakh*",
-    },
-  ];
+  const baseGroup1 = categoryData.length > 0 ? categoryData[0] : null;
 
-  // Combine into pairs
+  const group1 = baseGroup1
+    ? Array(3).fill(baseGroup1).map((item) => ({
+      image: `https://only-heavy.s3.eu-north-1.amazonaws.com/${item.productImage[0]}`,
+      name: item.productName,
+      price: `₹ ${item.minPrice} - ₹ ${item.maxPrice} Lakh*`,
+    }))
+    : [];
+
+
+  const group2 = alterNative.slice(0, 3).map((item) => ({
+    image: `https://only-heavy.s3.eu-north-1.amazonaws.com/${item.image}`,
+    name: item.productName,
+    price: `₹ ${item.minPrice} - ₹ ${item.maxPrice} Lakh*`,
+  }));
+
+
   const pairedVehicles = group1.map((vehicle, index) => [vehicle, group2[index]]);
 
   return (
@@ -112,6 +97,5 @@ const ComparisonTable = () => {
     </div>
   );
 };
-
 
 export default ComparisonTable;

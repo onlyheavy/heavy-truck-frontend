@@ -86,16 +86,17 @@ export default function TruckCards() {
               </div>
 
               <div className="mt-auto pt-5">
-                <button className="w-full border border-orange-500 text-orange-500 hover:text-white py-1 md:py-3 rounded-md font-semibold hover:bg-orange-500 transition-all">
-                  <a
-                    href={`https://www.onlyheavy.com/truck${truck.categorySlug}/${truck.slug}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    View Details
-                  </a>
-                </button>
+                <a
+                  href={`https://www.onlyheavy.com/${truck.categorySlug}/${truck.slug}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <button className="w-full border border-orange-500 text-orange-500 hover:text-white py-1 md:py-3 rounded-md font-semibold hover:bg-orange-500 transition-all">
 
+                    View Details
+
+                  </button>
+                </a>
               </div>
             </div>
           </div>
