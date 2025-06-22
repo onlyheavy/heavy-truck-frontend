@@ -9,6 +9,7 @@ import TruckGallery from '@/components/Truck-Landing-Page/TruckGallery';
 import TruckProsAndCons from '@/components/Truck-Landing-Page/TruckProsAndCons';
 import ComparisonTable from '@/components/Truck-Landing-Page/ComparisonTable';
 import MainLayout from '@/layouts/MainLayout';
+import TalkDelar from '@/components/Truck-Landing-Page/TalkDelar';
 import React, { useRef } from 'react';
 import SpecsBar from '@/components/SpecsBar';
 import Image from 'next/image';
@@ -99,6 +100,7 @@ const TruckLandingPage = ({ categoryData, alterNative, error, categorySlug, slug
               <Fuel />
             </div>
             <ComparisonTable />
+                        <TalkDelar />
             <TruckCards />
           </div>
 

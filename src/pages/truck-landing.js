@@ -100,7 +100,6 @@ const TruckLandingPage = ({ categoryData, alterNative, error, categorySlug, slug
               <Fuel />
             </div>
             <ComparisonTable />
-
             <TruckCards />
           </div>
 

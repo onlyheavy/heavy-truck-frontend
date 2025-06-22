@@ -30,7 +30,7 @@ const ComparisonSection = ({ vehicles }) => {
   };
 
   return (
-    <div className="border border-[#E0E8ED] rounded-lg p-2 relative w-full max-w-md">
+    <div className="border border-[#E0E8ED] rounded-lg p-2 relative w-[33%] max-w-[33%]">
       <div className="flex relative gap-2">
         {vehicles.map((vehicle, index) => (
           <ComparisonCard
@@ -60,17 +60,12 @@ const ComparisonSection = ({ vehicles }) => {
   );
 };
 
-
 const ComparisonTable = () => {
-  const allVehicles = [
+  // Define two arrays (group 1 and group 2)
+  const group1 = [
     {
       image: "/images/jeep.webp",
       name: "Tata Yodha 2.0",
-      price: "₹ 18 - ₹ 20 Lakh*",
-    },
-    {
-      image: "/images/jeep.webp",
-      name: "Tata Yodha 1700 BS6",
       price: "₹ 18 - ₹ 20 Lakh*",
     },
     {
@@ -80,13 +75,21 @@ const ComparisonTable = () => {
     },
     {
       image: "/images/jeep.webp",
-      name: "Mahindra Bolero Pickup",
-      price: "₹ 10 - ₹ 12 Lakh*",
+      name: "Isuzu D-Max",
+      price: "₹ 15 - ₹ 18 Lakh*",
+    },
+  ];
+
+  const group2 = [
+    {
+      image: "/images/jeep.webp",
+      name: "Tata Yodha 1700 BS6",
+      price: "₹ 18 - ₹ 20 Lakh*",
     },
     {
       image: "/images/jeep.webp",
-      name: "Isuzu D-Max",
-      price: "₹ 15 - ₹ 18 Lakh*",
+      name: "Mahindra Bolero Pickup",
+      price: "₹ 10 - ₹ 12 Lakh*",
     },
     {
       image: "/images/jeep.webp",
@@ -95,15 +98,12 @@ const ComparisonTable = () => {
     },
   ];
 
-  // Group into pairs
-  const pairedVehicles = [];
-  for (let i = 0; i < allVehicles.length; i += 2) {
-    pairedVehicles.push(allVehicles.slice(i, i + 2));
-  }
+  // Combine into pairs
+  const pairedVehicles = group1.map((vehicle, index) => [vehicle, group2[index]]);
 
   return (
-    <div className="my-10 ">
-      <h2 className="text-lg md:text-2xl font-semibold mb-6 ">Compare Top Pickups</h2>
+    <div className="my-10">
+      <h2 className="text-lg md:text-2xl font-semibold mb-6">Compare Top Pickups</h2>
       <div className="flex flex-col md:flex-row gap-6">
         {pairedVehicles.map((pair, index) => (
           <ComparisonSection key={index} vehicles={pair} />
@@ -112,5 +112,6 @@ const ComparisonTable = () => {
     </div>
   );
 };
+
 
 export default ComparisonTable;
