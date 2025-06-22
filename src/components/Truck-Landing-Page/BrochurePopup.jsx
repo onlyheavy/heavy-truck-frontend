@@ -3,7 +3,7 @@ import React from "react";
 
 const BrochurePopup = ({ onClose }) => {
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
       <div className="bg-white rounded-lg p-6 max-w-4xl w-full relative flex flex-col md:flex-row gap-4">
         {/* Close Button */}
         <button
@@ -15,7 +15,7 @@ const BrochurePopup = ({ onClose }) => {
 
         {/* Left Section */}
         <div className="flex-1">
-               <img
+          <img
             src="/images/starvector.svg"
             alt="Truck"
             className="rounded-lg object-cover w-[20px] mb-4"

@@ -59,7 +59,7 @@ const TruckProsAndCons = () => {
                         <img src="/images/brochure.svg" alt="brochure" />
                     </div>
                     <div className='flex justify-center md:justify-start items-center'>
-                        <button className='bg-[#FA7436] w-fit text-white px-4 py-3 mt-3 text-xs rounded-md font-bold '>Download Brochure</button>
+                        <button className='bg-[#FA7436] w-fit text-white px-4 py-3 mt-3 text-xs rounded-md font-bold cursor-pointer '>Download Brochure</button>
                     </div>
 
                 </div>

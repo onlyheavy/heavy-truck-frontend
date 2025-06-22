@@ -12,7 +12,7 @@ function TalkDelar() {
                 <p className='text-sm md:text-base font-normal text-gray-700 w-[80%]'>Find nearest dealer in your area with us and fulfil your dreams by buying the best
                     Truck matching your needs.</p>
                 <div className="flex justify-center md:justify-start items-center">
-                    <button onClick={() => setShowPopup(true)} className="bg-[#FA7436] w-fit text-white px-6 py-4 mt-3 text-sm rounded-md font-bold flex items-center gap-2">
+                    <button onClick={() => setShowPopup(true)} className="bg-[#FA7436] w-fit text-white px-6 py-4 mt-3 text-sm rounded-md font-bold flex items-center gap-2 cursor-pointer">
                         <FiPhoneCall className="text-lg" />
                         <span>Connect Now</span>
                     </button>

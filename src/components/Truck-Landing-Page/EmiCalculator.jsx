@@ -23,8 +23,8 @@ const calculateEmi = ({ price, downPayment, tenure, interestRate }) => {
 const EmiCalculator = () => {
   // const initialVehiclePrice = 1000000;
 
-  const [vehiclePrice, setVehiclePrice] = useState(null);
-  const [downPayment, setDownPayment] = useState(vehiclePrice * 0.1);
+  const [vehiclePrice, setVehiclePrice] = useState(100000);
+  const [downPayment, setDownPayment] = useState(0);
   const [tenure, setTenure] = useState(60);
   const [interestRate, setInterestRate] = useState(12);
   const { categoryData } = useCategory();
@@ -32,11 +32,19 @@ const EmiCalculator = () => {
     if (categoryData.length > 0) {
       const validItem = categoryData.find(item => typeof item?.maxPrice === 'number' && item.maxPrice > 0);
       if (validItem) {
-        setVehiclePrice(validItem.maxPrice * 100000);
+        setVehiclePrice(100000);
+        setTimeout(() => {
+          setVehiclePrice(3000000);
+        }, 500);
       }
     }
   }, [categoryData]);
 
+  useEffect(() => {
+    if (vehiclePrice) {
+      setDownPayment(vehiclePrice / 10);
+    }
+  }, [vehiclePrice]);
 
   { categoryData.map((item) => (console.log(item.maxPrice, "PRooooooo"))) }
 
@@ -130,14 +138,14 @@ const EmiCalculator = () => {
                   className="text-sm border border-gray-300 text-[#254154] outline-none w-32 px-3 py-1"
                   value={downPayment}
                   onChange={(e) => {
-                    const value = Math.min(Math.max(Number(e.target.value), vehiclePrice * 0.1), vehiclePrice); // Clamp value
+                    const value = Math.min(Math.max(Number(e.target.value), vehiclePrice ? vehiclePrice / 10 : 0), vehiclePrice || 0); // Clamp value
                     setDownPayment(value);
                   }}
                 />
               </div>
               <Slider
-                min={vehiclePrice * 0.1}
-                max={vehiclePrice}
+                min={vehiclePrice ? vehiclePrice / 10 : 0}
+                max={vehiclePrice || 0}
                 step={1000}
                 value={downPayment}
                 onChange={(value) => setDownPayment(value)}

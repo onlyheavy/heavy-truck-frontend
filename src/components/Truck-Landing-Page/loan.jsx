@@ -20,7 +20,7 @@ const Loan = () => {
                     <input type="text" placeholder='Enter Your City or District' className=' outline-none' />
                 </div>
                 <div className='flex justify-center items-center'>
-                    <button className='bg-[#FA7436] text-white text-sm font-medium px-4 py-3 rounded-md'>Apply Loan</button>
+                    <button className='bg-[#FA7436] text-white text-sm font-medium px-4 py-3 rounded-md cursor-pointer'>Apply Loan</button>
                 </div>
             </div>
 

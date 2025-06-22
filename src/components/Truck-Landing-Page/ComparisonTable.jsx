@@ -14,9 +14,9 @@ const ComparisonCard = ({ vehicleImage, vehicleName, price }) => (
       <img
         src={vehicleImage}
         alt={vehicleName}
-        className="w-full max-w-[300px] h-auto mb-4"
+        className="w-full h-40 object-cover mb-4 rounded"
       />
-      <h3 className="font-semibold text-sm text-[#254154] mb-2">{vehicleName}</h3>
+      <h3 className="font-semibold text-sm text-[#254154] mb-2 capitalize">{vehicleName}</h3>
       <p className="text-sm font-bold text-[#254154] mb-4">{price}</p>
     </div>
   </div>
@@ -33,7 +33,7 @@ const ComparisonSection = ({ vehicles }) => {
   };
 
   return (
-    <div className="border border-[#E0E8ED] rounded-lg p-2 relative w-[33%] max-w-[33%]">
+    <div className="border border-[#E0E8ED] rounded-lg p-2 relative w-full ">
       <div className="flex relative gap-2">
         {vehicles.map((vehicle, index) => (
           <ComparisonCard
@@ -54,7 +54,7 @@ const ComparisonSection = ({ vehicles }) => {
       <div className="flex justify-center mt-4">
         <button
           onClick={handleCompare}
-          className="px-6 py-2 bg-white rounded text-[#FA7436] hover:bg-[#FA7436] hover:text-white border border-[#FA7436] font-semibold text-[16px] transition-colors"
+          className="px-6 py-2 bg-white rounded text-[#FA7436] hover:bg-[#FA7436] hover:text-white border border-[#FA7436] font-semibold text-[16px] transition-colors cursor-pointer"
         >
           Compare Now
         </button>
@@ -89,8 +89,8 @@ const ComparisonTable = () => {
   return (
     <div className="my-10">
       <h2 className="text-lg md:text-2xl font-semibold mb-6">Compare Top Pickups</h2>
-      <div className="flex flex-col md:flex-row gap-6">
-        {pairedVehicles.map((pair, index) => (
+      <div className="flex flex-col md:flex-row gap-6 w-full  ">
+        {pairedVehicles?.slice(0, 2)?.map((pair, index) => (
           <ComparisonSection key={index} vehicles={pair} />
         ))}
       </div>

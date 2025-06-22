@@ -42,11 +42,11 @@ export default function TruckCards() {
 
   return (
     <section className="md:py-12 py-0">
-      <h2 className="md:text-[24px] text-lg font-bold text-gray-800 md:mb-10 mb-6">
+      <h2 className="md:text-[24px] text-lg font-bold text-gray-800 md:mb-10 mb-6 capitalize">
         Explore {categoryData[0]?.productName} Alternatives
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-8 gap-4 md:px-4 px-0">
-        {alterNative.map((truck, idx) => (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-8 gap-4 md:px-4 px-0 ">
+        {alterNative?.slice(0, 3)?.map((truck, idx) => (
           <div
             key={idx}
             className="bg-white rounded-md shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col p-2"
@@ -55,16 +55,16 @@ export default function TruckCards() {
               <img
                 src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${truck.image}`}
                 alt={truck.productName}
-                className="w-full h-52 object-cover transition-transform duration-300 hover:scale-95"
+                className="w-full h-52 object-cover transition-transform duration-300 rounded-md hover:scale-95"
               />
               <span className="absolute top-3 right-3 bg-orange-100 text-orange-600 text-xs font-semibold px-3 py-1 rounded-full shadow">
                 New
               </span>
             </div>
 
-            <div className="md:p-5 p-2 flex-1 flex flex-col">
+            <div className="md:p-5 p-2 flex-1 flex flex-col ">
               <h3 className="text-sm lg:text-lg font-semibold text-gray-800 mb-1">{truck.productName}</h3>
-              <p className="text-orange-600 font-bold text-sm mb-4">{truck.minPrice} - {truck.maxPrice}</p>
+              <p className="text-orange-600 font-bold text-sm mb-4">{truck.minPrice} - {truck.maxPrice} Lakhs</p>
 
               <div className="grid grid-cols-2 gap-3 text-center text-sm text-gray-600">
                 <div className="bg-orange-50 p-2 lg:p-3 rounded-lg">
