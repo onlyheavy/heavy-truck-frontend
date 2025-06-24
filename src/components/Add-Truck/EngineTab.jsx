@@ -1,8 +1,9 @@
 import { useState, useCallback, memo, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import API from '@/utils/api';
+import { ArrowLeft } from 'lucide-react';
 
 // Memoized Input Component
 const InputField = memo(({ label, name, value, onChange, placeholder, type = "text" }) => {
@@ -82,8 +83,9 @@ const SelectField = memo(({ label, name, value, onChange, options }) => {
 
 SelectField.displayName = 'SelectField';
 
-const EngineTab = ({ truckId, onComplete }) => {
+const EngineTab = ({ truckId, onComplete, onBack }) => {
   console.log(truckId, 'truckId');
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const searchParams = useSearchParams();
   const id = searchParams.get('id');
@@ -174,6 +176,8 @@ const EngineTab = ({ truckId, onComplete }) => {
     accessories: false,
     warranty: false,
   });
+
+  const router = useRouter();
 
   useEffect(() => {
     if (specId && id) {  // Only fetch if we have both specId and id (editing mode)
@@ -422,9 +426,27 @@ const EngineTab = ({ truckId, onComplete }) => {
     };
   }, []);
 
+  const handleBack = () => {
+    if (onBack) onBack();
+    if (truckId) {
+      router.replace({
+        pathname: router.pathname,
+        query: { id: truckId }
+      }, undefined, { shallow: true });
+    }
+  };
+
   return (
     <div className='max-w-7xl mx-auto'>
       <div className=" md:p-6 p-4 bg-white rounded-lg shadow">
+        <button
+          type="button"
+          className="font-bold cursor-pointer border rounded-full p-3 border-black mb-4 flex items-center"
+          onClick={handleBack}
+        >
+          <ArrowLeft strokeWidth={1.25} size={28} />
+          <span className="ml-2">Back</span>
+        </button>
         <form className="space-y-8">
           <div>
             {/* Engine Section */}

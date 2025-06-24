@@ -3,6 +3,7 @@ import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import API from '@/utils/api';
+import { ArrowLeft } from 'lucide-react';
 
 const inputFieldClass = "w-full p-3 border border-gray-200 rounded focus:outline-none focus:border-orange-500 text-sm";
 
@@ -46,7 +47,7 @@ const CheckboxField = ({ label, name, checked, onChange }) => (
   </div>
 );
 
-const SeoTab = ({ truckId, onComplete }) => {
+const SeoTab = ({ truckId, onComplete, onBack }) => {
   const [formData, setFormData] = useState({
     slug: '',
     metaTitle: '',
@@ -58,6 +59,7 @@ const SeoTab = ({ truckId, onComplete }) => {
   });
 
   const router = useRouter()
+
 
   // Add cleanup effect
   useEffect(() => {
@@ -127,9 +129,28 @@ const SeoTab = ({ truckId, onComplete }) => {
     }
   };
 
+  const handleBack = () => {
+    if (onBack) onBack();
+    if (truckId) {
+      router.replace({
+        pathname: router.pathname,
+        query: { id: truckId }
+      }, undefined, { shallow: true });
+    }
+  };
+
   return (
     <div className='max-w-7xl mx-auto'>
       <div className=' md:p-8 p-4 bg-white rounded-lg shadow'>
+        {/* Back Button */}
+        <button
+          type="button"
+          className="font-bold cursor-pointer border rounded-full p-3 border-black mb-4 flex items-center"
+          onClick={handleBack}
+        >
+          <ArrowLeft strokeWidth={1.25} size={28} />
+          <span className="ml-2">Back</span>
+        </button>
         <div>
           <h2 className='text-2xl font-bold text-center text-orange-500 border-b-2 border-dashed border-gray-300 pb-6 mb-8'>
             SEO Details

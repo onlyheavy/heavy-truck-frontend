@@ -34,6 +34,13 @@ const AddTruck = () => {
   const handlePrevStep = () => {
     if (currentStep > 1) {
       setCurrentStep((prev) => prev - 1);
+      // Ensure the URL always has the id as a query param
+      if (truckId) {
+        router.replace({
+          pathname: router.pathname,
+          query: { id: truckId }
+        }, undefined, { shallow: true });
+      }
     }
   };
 
@@ -69,7 +76,7 @@ const AddTruck = () => {
         return <ProfileTab onComplete={handleStepComplete} />;
       case 2:
         return truckId ? (
-          <EngineTab truckId={truckId} onComplete={handleStepComplete} />
+          <EngineTab truckId={truckId} onComplete={handleStepComplete} onBack={handlePrevStep} />
         ) : (
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-red-500">
@@ -79,7 +86,7 @@ const AddTruck = () => {
         );
       case 3:
         return truckId ? (
-          <SeoTab truckId={truckId} onComplete={handleStepComplete} />
+          <SeoTab truckId={truckId} onComplete={handleStepComplete} onBack={handlePrevStep} />
         ) : (
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-red-500">
