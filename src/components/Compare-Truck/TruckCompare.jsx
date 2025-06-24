@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import API from "@/utils/api";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 const TruckCompare = () => {
   const [truck1Data, setTruck1Data] = useState(null);
@@ -11,34 +12,40 @@ const TruckCompare = () => {
   const [dimensionSpecs, setDimensionSpecs] = useState([]);
   const [selectedBrand, setSelectedBrand] = useState("");
   const [selectedTruck, setSelectedTruck] = useState("");
+  const [selectedTruckId, setSelectedTruckId] = useState("");
+  const [selectedTruckData, setSelectedTruckData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  const brands = ["Tata", "Mahindra", "Ashok Leyland", "Eicher"];
-  const trucksByBrand = {
+  const [trucksByBrand, setTrucksByBrand] = useState({
     Tata: ["Tata Ace", "Tata Intra", "Tata Yodha"],
     Mahindra: ["Mahindra Jeeto", "Mahindra Bolero", "Mahindra Supro"],
-    "Ashok Leyland": ["Dost+", "Bada Dost", "Partner"],
+    "Ashok Leyland": [], // Will be fetched from API
     Eicher: ["Eicher Pro 2049", "Eicher Pro 2059XP", "Eicher Pro 3015"],
-  };
+  });
 
-  const availableTrucks = selectedBrand ? trucksByBrand[selectedBrand] : [];
+  const brands = ["Tata", "Mahindra", "Ashok Leyland", "Eicher"];
+  const [availableTrucks, setAvailableTrucks] = useState([]);
+
+  const router = useRouter();
+  const { slug } = router.query;
+
+  console.log('slug:', slug);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`${API.HOST}/api/category/truck/mahindra-jeeto`); 
+        const response = await axios.get(`${API.HOST}/api/category/truck/mahindra-jeeto`);
         const apiResponse = response.data;
 
         if (apiResponse.success) {
           const truck1 = apiResponse.data.existData[0];
-          const truck2 = apiResponse.data.alternatives[1]; 
+          const truck2 = apiResponse.data.alternatives[1];
 
           setTruck1Data(truck1);
           setTruck2Data(truck2);
 
-          
+
           const truck2Performance = {
             engine: "4 Cylinder, 1496 cc DI",
             norm: "BS-6 Phase 2",
@@ -96,6 +103,67 @@ const TruckCompare = () => {
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    // Fetch trucks when a brand is selected
+    const fetchTrucksByBrand = async () => {
+      if (selectedBrand) {
+        try {
+          const response = await axios.get(`${API.HOST}/api/category/getProductName/${encodeURIComponent(selectedBrand)}`);
+          if (response.data.success) {
+            const trucks = response.data.data.map(item => item.productName);
+            setTrucksByBrand(prev => ({ ...prev, [selectedBrand]: trucks }));
+          }
+        } catch (err) {
+          // Optionally handle error
+        }
+      }
+    };
+    fetchTrucksByBrand();
+  }, [selectedBrand]);
+
+  useEffect(() => {
+    // Fetch trucks for the selected brand
+    const fetchTrucksForBrand = async () => {
+      if (selectedBrand) {
+        try {
+          const response = await axios.get(`${API.HOST}/api/category/getProductName/${encodeURIComponent(selectedBrand)}`);
+          if (response.data.success) {
+            // Store the full truck objects
+            setAvailableTrucks(response.data.data);
+          } else {
+            setAvailableTrucks([]);
+          }
+        } catch (err) {
+          setAvailableTrucks([]);
+        }
+      } else {
+        setAvailableTrucks([]);
+      }
+    };
+    fetchTrucksForBrand();
+  }, [selectedBrand]);
+
+  useEffect(() => {
+    // Fetch truck data when selectedTruckId changes
+    const fetchTruckData = async () => {
+      if (selectedTruckId) {
+        try {
+          const response = await axios.get(`${API.HOST}/api/category/getData/${selectedTruckId}`);
+          if (response.data.success) {
+            setSelectedTruckData(response.data.data);
+          } else {
+            setSelectedTruckData(null);
+          }
+        } catch (err) {
+          setSelectedTruckData(null);
+        }
+      } else {
+        setSelectedTruckData(null);
+      }
+    };
+    fetchTruckData();
+  }, [selectedTruckId]);
 
   if (loading) return <div className="text-center p-8">Loading...</div>;
   if (error) return <div className="text-center p-8 text-red-500">Error: {error.message}</div>;
@@ -194,11 +262,20 @@ const TruckCompare = () => {
             <select
               className="w-full p-3 border rounded bg-gray-50 text-left text-gray-500"
               value={selectedTruck}
-              onChange={e => setSelectedTruck(e.target.value)}
+              onChange={e => {
+                setSelectedTruck(e.target.value);
+                // Find the selected truck object
+                const truckObj = availableTrucks.find(truck => truck.productName === e.target.value);
+                if (truckObj) {
+                  setSelectedTruckId(truckObj._id);
+                } else {
+                  setSelectedTruckId("");
+                }
+              }}
               disabled={!selectedBrand}
             >
               <option value="">Select Truck</option>
-              {availableTrucks.map(truck => <option key={truck} value={truck}>{truck}</option>)}
+              {availableTrucks.map(truck => <option key={truck._id} value={truck.productName}>{truck.productName}</option>)}
             </select>
           </div>
         </div>
@@ -280,7 +357,7 @@ const TruckCompare = () => {
               </ul>
             </div>
           )}
-        
+
         </div>
       </div>
     </div>
