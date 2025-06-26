@@ -62,11 +62,11 @@ const SeoTab = ({ truckId, onComplete, onBack }) => {
 
 
   // Add cleanup effect
-  useEffect(() => {
-    return () => {
-      localStorage.removeItem('currentSpecId');
-    };
-  }, []);
+  // useEffect(() => {
+  //   return () => {
+  //     localStorage.removeItem('currentSpecId');
+  //   };
+  // }, []);
 
   const fetchSeoData = async () => {
     try {
@@ -131,12 +131,6 @@ const SeoTab = ({ truckId, onComplete, onBack }) => {
 
   const handleBack = () => {
     if (onBack) onBack();
-    if (truckId) {
-      router.replace({
-        pathname: router.pathname,
-        query: { id: truckId }
-      }, undefined, { shallow: true });
-    }
   };
 
   return (

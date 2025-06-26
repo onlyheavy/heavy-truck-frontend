@@ -179,6 +179,10 @@ const EngineTab = ({ truckId, onComplete, onBack }) => {
 
   const router = useRouter();
 
+  useEffect(()=>{
+    localStorage.getItem('currentSpecId')
+  })
+
   useEffect(() => {
     if (specId && id) {  // Only fetch if we have both specId and id (editing mode)
       setDataFn();
@@ -393,6 +397,13 @@ const EngineTab = ({ truckId, onComplete, onBack }) => {
           `${API.HOST}/api/spec/createSpec/${truckId}`,
           payload
         );
+
+        console.log(response?.data?.data?.saveSpec?._id, 'handle submit')
+        // Set the new spec _id in localStorage
+        const newSpecId = response?.data?.data?.saveSpec?._id;
+        if (newSpecId) {
+          localStorage.setItem('currentSpecId', newSpecId);
+        }
         toast.success('Specifications created successfully!');
       }
 
