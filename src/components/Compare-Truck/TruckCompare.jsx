@@ -4,12 +4,21 @@ import { Button } from "@/components/ui/button";
 import API from "@/utils/api";
 import axios from "axios";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 const TruckCompare = () => {
   const [truck1Data, setTruck1Data] = useState(null);
   const [truck2Data, setTruck2Data] = useState(null);
+  const [rankData, setRankData] = useState(null);
   const [performanceSpecs, setPerformanceSpecs] = useState([]);
   const [dimensionSpecs, setDimensionSpecs] = useState([]);
+  const [brakesSuspensionSpec, setBrakesSuspensionSpec] = useState([]);
+  const [transmissionLoadSpec, setTransmissionLoadSpec] = useState([]);
+  const [cabinAndBodySpec, setCabinAndBodySpec] = useState([]);
+  const [interiorFeaturesSpec, setInteriorFeaturesSpec] = useState([]);
+  const [tyreSpec, setTyreSpec] = useState([]);
+  const [safetyFeaturesSpec, setSafetyFeaturesSpec] = useState([]);
+  const [othersSpec, setOthersSpec] = useState([]);
   const [selectedBrand, setSelectedBrand] = useState("");
   const [selectedTruck, setSelectedTruck] = useState("");
   const [selectedTruckId, setSelectedTruckId] = useState("");
@@ -35,62 +44,120 @@ const TruckCompare = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`${API.HOST}/api/category/truck/mahindra-jeeto`);
+        const response = await axios.get(`${API.HOST}/api/compare/mahindra-jeeto-vs-tata-intra-v50`);
         const apiResponse = response.data;
 
         if (apiResponse.success) {
-          const truck1 = apiResponse.data.existData[0];
-          const truck2 = apiResponse.data.alternatives[1];
-
+          const truck1 = apiResponse.data.left;
+          const truck2 = apiResponse.data.right;
+          const datas = apiResponse.data.existData
+          console.log(truck1)
           setTruck1Data(truck1);
           setTruck2Data(truck2);
+          setRankData(datas);
 
 
-          const truck2Performance = {
-            engine: "4 Cylinder, 1496 cc DI",
-            norm: "BS-6 Phase 2",
-            power: "70 HP",
-            cylinders: "4",
-            torque: "140 NM",
-            speed: "80 KMPH",
-            tyres: "4",
-            tank: "35 Ltr.",
-            gvw: "2565 KG",
-            payload: "1300 KG",
-            kerb: "N/A",
-          };
 
-          const truck2Dimensions = {
-            length: "4460 MM",
-            width: "1692 MM",
-            height: "1945 MM",
-            wheelbase: "2450 MM",
-            clearance: "175 MM",
-            radius: "5250 MM",
-          };
 
           setPerformanceSpecs([
-            { label: "Engine", truck1: truck1.specInfo.engine[0]?.engineDisplacement, truck2: truck2Performance.engine },
-            { label: "Engine Norm", truck1: truck1.specInfo.engine[0]?.emissionNorm, truck2: truck2Performance.norm },
-            { label: "Power", truck1: truck1.specInfo.engine[0]?.enginePower, truck2: truck2Performance.power },
-            { label: "Engine Cylinders", truck1: truck1.specInfo.engine[0]?.engineCylinders, truck2: truck2Performance.cylinders },
-            { label: "Max Torque", truck1: truck1.specInfo.engine[0]?.torque, truck2: truck2Performance.torque },
-            { label: "Max Speed", truck1: truck1.specInfo.engine[0]?.maxSpeed, truck2: truck2Performance.speed },
-            { label: "No. of Tyres", truck1: truck1.specInfo.tyre[0]?.numberOfTyres, truck2: truck2Performance.tyres },
-            { label: "Fuel Tank", truck1: truck1.specInfo.engine[0]?.fuelTankCapacity, truck2: truck2Performance.tank },
-            { label: "GVW", truck1: truck1.specInfo.transmissionLoad[0]?.GrossVehicleWeight, truck2: truck2Performance.gvw },
-            { label: "Payload Capacity", truck1: truck1.specInfo.transmissionLoad[0]?.payload, truck2: truck2Performance.payload },
-            { label: "Kerb Weight", truck1: truck1.specInfo.transmissionLoad[0]?.kerbWeight, truck2: truck2Performance.kerb },
+            { label: "Engine Type", truck1: `${truck1.spec.engine[0]?.engineType} `, truck2: `${truck2.spec.engine[0]?.engineType} `, truck3: selectedTruckData ? selectedTruckData.spec.engine[0]?.engineType : "-" },
+            { label: "Engine Cylinders", truck1: truck1.spec.engine[0]?.engineCylinders, truck2: truck2.spec.engine[0]?.engineCylinders, truck3: selectedTruckData ? selectedTruckData.spec.engine[0]?.engineCylinders : "-" },
+            { label: "Engine Displacement", truck1: `${truck1.spec.engine[0]?.engineDisplacement} cc`, truck2: `${truck2.spec.engine[0]?.engineDisplacement} cc`, truck3: selectedTruckData ? `${selectedTruckData.spec.engine[0]?.engineDisplacement} cc` : "-" },
+            { label: "Engine Power", truck1: `${truck1.spec.engine[0]?.enginePower} HP`, truck2: `${truck2.spec.engine[0]?.enginePower} HP`, truck3: selectedTruckData ? `${selectedTruckData.spec.engine[0]?.enginePower} HP` : "-" },
+            { label: "Engine RPM", truck1: `${truck1.spec.engine[0]?.engineRPM} RPM`, truck2: `${truck2.spec.engine[0]?.engineRPM} RPM`, truck3: selectedTruckData ? `${selectedTruckData.spec.engine[0]?.engineRPM} RPM` : "-" },
+            { label: "Torque", truck1: `${truck1.spec.engine[0]?.torque} Nm`, truck2: `${truck2.spec.engine[0]?.torque} Nm`, truck3: selectedTruckData ? `${selectedTruckData.spec.engine[0]?.torque} Nm` : "-" },
+            { label: "Fuel Type", truck1: `${truck1.spec.engine[0]?.fuelType}`, truck2: `${truck2.spec.engine[0]?.fuelType}`, truck3: selectedTruckData ? `${selectedTruckData.spec.engine[0]?.fuelType}` : "-" },
+            { label: "Fuel Tank Capacity", truck1: `${truck1.spec.engine[0]?.fuelTankCapacity} litres`, truck2: `${truck2.spec.engine[0]?.fuelTankCapacity} litres`, truck3: selectedTruckData ? `${selectedTruckData.spec.engine[0]?.fuelTankCapacity} litres` : "" },
+            { label: "Mileage", truck1: `${truck1.spec.engine[0]?.mileage} km/l`, truck2: `${truck2.spec.engine[0]?.mileage} km/l`, truck3: selectedTruckData ? `${selectedTruckData.spec.engine[0]?.mileage} km/l` : "-" },
+            { label: "Gradeability", truck1: `${truck1.spec.engine[0]?.gradeability} %`, truck2: `${truck2.spec.engine[0]?.gradeability} %`, truck3: selectedTruckData ? `${selectedTruckData.spec.engine[0]?.gradeability} %` : "-" },
+            { label: "Emission Norm", truck1: `${truck1.spec.engine[0]?.emissionNorm} `, truck2: `${truck2.spec.engine[0]?.emissionNorm} `, truck3: selectedTruckData ? `${selectedTruckData.spec.engine[0]?.emissionNorm} ` : "-" },
+            { label: "Max Speed", truck1: `${truck1.spec.engine[0]?.maxSpeed} km/h`, truck2: `${truck2.spec.engine[0]?.maxSpeed} km/h`, truck3: selectedTruckData ? `${selectedTruckData.spec.engine[0]?.maxSpeed} km/h` : "-" },
+            { label: "Battery", truck1: `${truck1.spec.engine[0]?.battery} `, truck2: `${truck2.spec.engine[0]?.battery} `, truck3: selectedTruckData ? `${selectedTruckData.spec.engine[0]?.battery} ` : "-" },
           ]);
 
           setDimensionSpecs([
-            { label: "Length", truck1: truck1.specInfo.dimensions[0]?.overallLength, truck2: truck2Dimensions.length },
-            { label: "Width", truck1: truck1.specInfo.dimensions[0]?.overallWidthh, truck2: truck2Dimensions.width },
-            { label: "Height", truck1: truck1.specInfo.dimensions[0]?.overallHeight, truck2: truck2Dimensions.height },
-            { label: "Wheelbase", truck1: truck1.specInfo.dimensions[0]?.wheelBase, truck2: truck2Dimensions.wheelbase },
-            { label: "Ground Clearance", truck1: truck1.specInfo.dimensions[0]?.groundClearance, truck2: truck2Dimensions.clearance },
-            { label: "Minimum Turning Radius", truck1: truck1.specInfo.dimensions[0]?.turningRadius, truck2: truck2Dimensions.radius },
+            { label: "Over All Length", truck1: `${truck1.spec.dimensions[0]?.overallLength} mm `, truck2: `${truck2.spec.dimensions[0]?.overallLength} mm`, truck3: selectedTruckData ? `${selectedTruckData.spec.dimensions[0]?.overallLength} mm` : "-" },
+            { label: "Over All Width", truck1: `${truck1.spec.dimensions[0]?.overallWidthh} mm`, truck2: `${truck2.spec.dimensions[0]?.overallWidthh} mm`, truck3: selectedTruckData ? `${selectedTruckData.spec.dimensions[0]?.overallWidthh} mm` : "-" },
+            { label: "Over All Height", truck1: `${truck1.spec.dimensions[0]?.overallHeight} mm`, truck2: `${truck2.spec.dimensions[0]?.overallHeight} mm`, truck3: selectedTruckData ? `${selectedTruckData.spec.dimensions[0]?.overallHeight} mm` : "-" },
+            { label: "Wheelbase", truck1: `${truck1.spec.dimensions[0]?.wheelBase} mm`, truck2: `${truck2.spec.dimensions[0]?.wheelBase} mm`, truck3: selectedTruckData ? `${selectedTruckData.spec.dimensions[0]?.wheelBase} mm` : "-" },
+            { label: "Ground Clearance", truck1: `${truck1.spec.dimensions[0]?.groundClearance} mm`, truck2: `${truck2.spec.dimensions[0]?.groundClearance} mm`, truck3: selectedTruckData ? `${selectedTruckData.spec.dimensions[0]?.groundClearance} mm` : "-" },
+            { label: "Minimum Turning Radius", truck1: `${truck1.spec.dimensions[0]?.turningRadius} m`, truck2: `${truck2.spec.dimensions[0]?.turningRadius} m`, truck3: selectedTruckData ? `${selectedTruckData.spec.dimensions[0]?.turningRadius} m` : "-" },
           ]);
+
+          setBrakesSuspensionSpec([
+            { label: "Front Suspension", truck1: `${truck1.spec.brakesAndSuspension[0]?.frontSuspension} `, truck2: `${truck2.spec.brakesAndSuspension[0]?.frontSuspension} `, truck3: selectedTruckData ? `${selectedTruckData.spec.brakesAndSuspension[0]?.frontSuspension} ` : "-" },
+            { label: "Rear Suspension", truck1: `${truck1.spec.brakesAndSuspension[0]?.rearSuspension} `, truck2: `${truck2.spec.brakesAndSuspension[0]?.rearSuspension} `, truck3: selectedTruckData ? `${selectedTruckData.spec.brakesAndSuspension[0]?.rearSuspension} ` : "-" },
+            { label: "Brakes Type", truck1: `${truck1.spec.brakesAndSuspension[0]?.brakeType} `, truck2: `${truck2.spec.brakesAndSuspension[0]?.brakeType} `, truck3: selectedTruckData ? `${selectedTruckData.spec.brakesAndSuspension[0]?.brakeType} ` : "-" },
+            { label: "ABS", truck1: truck1.spec.brakesAndSuspension[0]?.abs === 'true' ? 'Yes' : 'No', truck2: truck2.spec.brakesAndSuspension[0]?.abs === 'true' ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.brakesAndSuspension[0]?.abs === 'true' ? 'Yes' : 'No' : "-" },
+            { label: "Parking Brakes", truck1: truck1.spec.brakesAndSuspension[0]?.parkingBrakes === 'true' ? 'Yes' : 'No', truck2: truck2.spec.brakesAndSuspension[0]?.parkingBrakes === 'true' ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.brakesAndSuspension[0]?.parkingBrakes === 'true' ? 'Yes' : 'No' : "-" },
+            {
+              label: "Anti Roll Bar", truck1: truck1.spec.brakesAndSuspension[0]?.antiRollBar === 'true' ? 'Yes' : 'No', truck2: truck2.spec.brakesAndSuspension[0]?.antiRollBar === 'true' ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.brakesAndSuspension[0]?.antiRollBar === 'true' ? 'Yes' : 'No' : "-"
+            },
+          ]);
+
+          setTransmissionLoadSpec([
+            { label: "Gear box", truck1: `${truck1.spec.transmissionLoad[0]?.gearBox}  `, truck2: `${truck2.spec.transmissionLoad[0]?.gearBox} `, truck3: selectedTruckData ? `${selectedTruckData.spec.transmissionLoad[0]?.gearBox} ` : "-" },
+            { label: "Transmission Type", truck1: `${truck1.spec.transmissionLoad[0]?.transmissionType} `, truck2: `${truck2.spec.transmissionLoad[0]?.transmissionType} `, truck3: selectedTruckData ? `${selectedTruckData.spec.transmissionLoad[0]?.transmissionType} ` : "-" },
+            { label: "Axle Configuration", truck1: `${truck1.spec.transmissionLoad[0]?.axleConfiguration} `, truck2: `${truck2.spec.transmissionLoad[0]?.axleConfiguration} `, truck3: selectedTruckData ? `${selectedTruckData.spec.transmissionLoad[0]?.axleConfiguration} ` : "-" },
+            { label: "Front Axle", truck1: `${truck1.spec.transmissionLoad[0]?.frontAxle} `, truck2: `${truck2.spec.transmissionLoad[0]?.frontAxle} `, truck3: selectedTruckData ? `${selectedTruckData.spec.transmissionLoad[0]?.frontAxle} ` : "-" },
+            { label: "Gross Vehicle Weight", truck1: `${truck1.spec.transmissionLoad[0]?.GrossVehicleWeight} kg `, truck2: `${truck2.spec.transmissionLoad[0]?.GrossVehicleWeight} kg `, truck3: selectedTruckData ? `${selectedTruckData.spec.transmissionLoad[0]?.GrossVehicleWeight} kg ` : "-" },
+            { label: "Kerb Weight", truck1: `${truck1.spec.transmissionLoad[0]?.kerbWeight} kg `, truck2: `${truck2.spec.transmissionLoad[0]?.kerbWeight} kg `, truck3: selectedTruckData ? `${selectedTruckData.spec.transmissionLoad[0]?.kerbWeight} kg ` : "-" },
+            { label: "Payload", truck1: `${truck1.spec.transmissionLoad[0]?.payload} kg `, truck2: `${truck2.spec.transmissionLoad[0]?.payload} kg `, truck3: selectedTruckData ? `${selectedTruckData.spec.transmissionLoad[0]?.payload} kg ` : "-" },
+          ]);
+
+          setCabinAndBodySpec([
+            { label: "Chassis Type", truck1: `${truck1.spec.cabinAndBody[0]?.chassisType || "-"}`, truck2: `${truck2.spec.cabinAndBody[0]?.chassisType || "-"}`, truck3: selectedTruckData ? `${selectedTruckData.spec.cabinAndBody[0]?.chassisType || "-"}` : "-" },
+            { label: "Cabin Type", truck1: `${truck1.spec.cabinAndBody[0]?.cabinType || "-"}`, truck2: `${truck2.spec.cabinAndBody[0]?.cabinType || "-"}`, truck3: selectedTruckData ? `${selectedTruckData.spec.cabinAndBody[0]?.cabinType || "-"}` : "-" },
+            { label: "Tiltable Cabin", truck1: truck1.spec.cabinAndBody[0]?.tiltableCabin === 'true' ? 'Yes' : 'No', truck2: truck2.spec.cabinAndBody[0]?.tiltableCabin === 'true' ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.cabinAndBody[0]?.tiltableCabin === 'true' ? 'Yes' : 'No' : "-" },
+            { label: "Body Option", truck1: `${truck1.spec.cabinAndBody[0]?.bodyOption || "-"}`, truck2: `${truck2.spec.cabinAndBody[0]?.bodyOption || "-"}`, truck3: selectedTruckData ? `${selectedTruckData.spec.cabinAndBody[0]?.bodyOption || "-"}` : "-" },
+            { label: "Application Type", truck1: `${truck1.spec.cabinAndBody[0]?.applicationType || "-"}`, truck2: `${truck2.spec.cabinAndBody[0]?.applicationType || "-"}`, truck3: selectedTruckData ? `${selectedTruckData.spec.cabinAndBody[0]?.applicationType || "-"}` : "-" },
+            { label: "Seating Capacity", truck1: `${truck1.spec.cabinAndBody[0]?.seatingCapacity || "-"}`, truck2: `${truck2.spec.cabinAndBody[0]?.seatingCapacity || "-"}`, truck3: selectedTruckData ? `${selectedTruckData.spec.cabinAndBody[0]?.seatingCapacity || "-"}` : "-" }
+          ]);
+
+
+          setInteriorFeaturesSpec([
+            { label: "AC", truck1: truck1.spec.interiorFeatures[0]?.ac ? 'Yes' : 'No', truck2: truck2.spec.interiorFeatures[0]?.ac ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.interiorFeatures[0]?.ac ? 'Yes' : 'No' : "-" },
+            { label: "Adjustable Driver Seat", truck1: truck1.spec.interiorFeatures[0]?.adjustableDriverSeat ? 'Yes' : 'No', truck2: truck2.spec.interiorFeatures[0]?.adjustableDriverSeat ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.interiorFeatures[0]?.adjustableDriverSeat ? 'Yes' : 'No' : "-" },
+            { label: "Seat Types", truck1: `${truck1.spec.interiorFeatures[0]?.seatTypes} `, truck2: `${truck2.spec.interiorFeatures[0]?.seatTypes} `, truck3: selectedTruckData ? `${selectedTruckData.spec.interiorFeatures[0]?.seatTypes} ` : "-" },
+            { label: "Arm Rest", truck1: truck1.spec.interiorFeatures[0]?.armRest ? 'Yes' : 'No', truck2: truck2.spec.interiorFeatures[0]?.armRest ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.interiorFeatures[0]?.armRest ? 'Yes' : 'No' : "-" },
+            { label: "Tiltable Steering", truck1: truck1.spec.interiorFeatures[0]?.tiltableSteering ? 'Yes' : 'No', truck2: truck2.spec.interiorFeatures[0]?.tiltableSteering ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.interiorFeatures[0]?.tiltableSteering ? 'Yes' : 'No' : "-" },
+            { label: "Adjustable Steering", truck1: truck1.spec.interiorFeatures[0]?.adjustableSteering ? 'Yes' : 'No', truck2: truck2.spec.interiorFeatures[0]?.adjustableSteering ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.interiorFeatures[0]?.adjustableSteering ? 'Yes' : 'No' : "-" },
+            { label: "Driver Info Display", truck1: truck1.spec.interiorFeatures[0]?.driverInfoDisplay ? 'Yes' : 'No', truck2: truck2.spec.interiorFeatures[0]?.driverInfoDisplay ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.interiorFeatures[0]?.driverInfoDisplay ? 'Yes' : 'No' : "-" },
+            { label: "Mobile Charging Point", truck1: truck1.spec.interiorFeatures[0]?.mobileChargingPoint ? 'Yes' : 'No', truck2: truck2.spec.interiorFeatures[0]?.mobileChargingPoint ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.interiorFeatures[0]?.mobileChargingPoint ? 'Yes' : 'No' : "-" },
+            { label: "Seat Belts", truck1: truck1.spec.interiorFeatures[0]?.seatBelts ? 'Yes' : 'No', truck2: truck2.spec.interiorFeatures[0]?.seatBelts ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.interiorFeatures[0]?.seatBelts ? 'Yes' : 'No' : "-" },
+            { label: "Hill Hold", truck1: truck1.spec.interiorFeatures[0]?.hillHold ? 'Yes' : 'No', truck2: truck2.spec.interiorFeatures[0]?.hillHold ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.interiorFeatures[0]?.hillHold ? 'Yes' : 'No' : "-" },
+            { label: "Cruise Control", truck1: truck1.spec.interiorFeatures[0]?.cruiseControl ? 'Yes' : 'No', truck2: truck2.spec.interiorFeatures[0]?.cruiseControl ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.interiorFeatures[0]?.cruiseControl ? 'Yes' : 'No' : "-" },
+            { label: " Navigation System", truck1: `${truck1.spec.interiorFeatures[0]?.navigationSystem} `, truck2: `${truck2.spec.interiorFeatures[0]?.navigationSystem} `, truck3: selectedTruckData ? `${selectedTruckData.spec.interiorFeatures[0]?.navigationSystem} ` : "-" },
+            { label: "Telematics", truck1: `${truck1.spec.interiorFeatures[0]?.telematics} `, truck2: `${truck2.spec.interiorFeatures[0]?.telematics} `, truck3: selectedTruckData ? `${selectedTruckData.spec.interiorFeatures[0]?.telematics} ` : "-" },
+            { label: "Steering Type", truck1: `${truck1.spec.interiorFeatures[0]?.steeringType} `, truck2: `${truck2.spec.interiorFeatures[0]?.steeringType} `, truck3: selectedTruckData ? `${selectedTruckData.spec.interiorFeatures[0]?.steeringType} ` : "-" },
+            { label: "Entertainment Pack", truck1: truck1.spec.interiorFeatures[0]?.entertainPack ? 'Yes' : 'No', truck2: truck2.spec.interiorFeatures[0]?.entertainPack ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.interiorFeatures[0]?.entertainPack ? 'Yes' : 'No' : "-" },
+            { label: "Emergency Start", truck1: truck1.spec.interiorFeatures[0]?.emergencyStart ? 'Yes' : 'No', truck2: truck2.spec.interiorFeatures[0]?.emergencyStart ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.interiorFeatures[0]?.emergencyStart ? 'Yes' : 'No' : "-" }
+          ]);
+
+          setTyreSpec([
+            { label: "Front Tyre", truck1: `${truck1.spec.tyre[0]?.frontTyre}  `, truck2: `${truck2.spec.tyre[0]?.frontTyre} `, truck3: selectedTruckData ? `${selectedTruckData.spec.tyre[0]?.frontTyre} ` : "-" },
+            { label: "Rear Tyre", truck1: `${truck1.spec.tyre[0]?.rearTyre} `, truck2: `${truck2.spec.tyre[0]?.rearTyre} `, truck3: selectedTruckData ? `${selectedTruckData.spec.tyre[0]?.rearTyre} ` : "-" },
+            { label: "Number of Tyres", truck1: `${truck1.spec.tyre[0]?.numberOfTyres} `, truck2: `${truck2.spec.tyre[0]?.numberOfTyres} `, truck3: selectedTruckData ? `${selectedTruckData.spec.tyre[0]?.numberOfTyres} ` : "-" },
+            { label: "Tubeless Tyre", truck1: truck1.spec.tyre[0]?.tubelessTyres ? 'Yes' : 'No', truck2: truck2.spec.tyre[0]?.tubelessTyres ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.tyre[0]?.tubelessTyres ? 'Yes' : 'No' : "-" }
+          ]);
+
+
+          setSafetyFeaturesSpec([
+            { label: "Fog Light", truck1: truck1.spec.safety[0]?.fogLights ? 'Yes' : 'No', truck2: truck2.spec.safety[0]?.fogLights ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.safety[0]?.fogLights ? 'Yes' : 'No' : "-" },
+            { label: "Emergency Exit", truck1: truck1.spec.safety[0]?.emergencyExit ? 'Yes' : 'No', truck2: truck2.spec.safety[0]?.emergencyExit ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.safety[0]?.emergencyExit ? 'Yes' : 'No' : "-" },
+            { label: "Side Window", truck1: truck1.spec.safety[0]?.sideWindow ? 'Yes' : 'No', truck2: truck2.spec.safety[0]?.sideWindow ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.safety[0]?.sideWindow ? 'Yes' : 'No' : "-" },
+            { label: "Luggage Boot", truck1: truck1.spec.safety[0]?.luggageBoot ? 'Yes' : 'No', truck2: truck2.spec.safety[0]?.luggageBoot ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.safety[0]?.luggageBoot ? 'Yes' : 'No' : "-" },
+            { label: "Hat Rack", truck1: truck1.spec.safety[0]?.hornack ? 'Yes' : 'No', truck2: truck2.spec.safety[0]?.hornack ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.safety[0]?.hornack ? 'Yes' : 'No' : "-" },
+            { label: "First Aid Kit", truck1: truck1.spec.safety[0]?.firstAidKit ? 'Yes' : 'No', truck2: truck2.spec.safety[0]?.firstAidKit ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.safety[0]?.firstAidKit ? 'Yes' : 'No' : "-" }
+          ]);
+
+
+          setOthersSpec([
+            { label: "Accessories", truck1: truck1.spec.others[0]?.accessories ? 'Yes' : 'No', truck2: truck2.spec.others[0]?.accessories ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.others[0]?.accessories ? 'Yes' : 'No' : "-" },
+            { label: "Warranty", truck1: truck1.spec.others[0]?.warranty ? 'Yes' : 'No', truck2: truck2.spec.others[0]?.warranty ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.others[0]?.warranty ? 'Yes' : 'No' : "-" },
+
+          ]);
+
         } else {
           setError(new Error(apiResponse.message || 'API request failed'));
         }
@@ -102,7 +169,7 @@ const TruckCompare = () => {
     };
 
     fetchData();
-  }, []);
+  }, [selectedTruckData]);
 
   useEffect(() => {
     // Fetch trucks when a brand is selected
@@ -149,9 +216,10 @@ const TruckCompare = () => {
     const fetchTruckData = async () => {
       if (selectedTruckId) {
         try {
-          const response = await axios.get(`${API.HOST}/api/category/getData/${selectedTruckId}`);
+          const response = await axios.get(`${API.HOST}/api/category/thirdCompare/${selectedTruckId}`);
           if (response.data.success) {
-            setSelectedTruckData(response.data.data);
+            setSelectedTruckData(response.data.data[0]);
+
           } else {
             setSelectedTruckData(null);
           }
@@ -169,198 +237,505 @@ const TruckCompare = () => {
   if (error) return <div className="text-center p-8 text-red-500">Error: {error.message}</div>;
 
   return (
-    <div className="">
+    <>
+      <Head>
+        {/* <title>{rankData?.metaTitle}</title> */}
+        {/* {rankData?.metaDescription && (
+          <meta name="description" content={rankData?.metaDescription} />
+        )} */}
+        {/* <meta
+          name="robots"
+          content={`${rankData?.searchIndex ? 'index, follow' : 'noindex, nofollow'}, ${rankData?.imageIndex ? 'max-image-preview:large' : 'noimageindex'}`}
+        /> */}
+        {/* <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {rankData?.canonicalUrl ? (
+          <link rel="canonical" href={`https://onlyheavy.com/compare/${rankData.canonicalUrl}`} />
+        ) : (
+          <link
+            rel="canonical"
+            href={`https://onlyheavy.com/compare${rankData.slug}`}
+          />
+        )} */}
+        {/* {rankData?.metaTitle && (
+          <meta property="og:title" content={rankData?.metaTitle} />
+        )}
+        {rankData?.metaDescription && (
+          <meta property="og:description" content={rankData?.metaDescription} />
+        )} */}
+        {/* <meta property="og:image" content="https://only-heavy.s3.eu-north-1.amazonaws.com/favicons.png" />
+        <meta
+          property="og:url"
+          content={
+            rankData?.canonicalUrl || `https://onlyheavy.com/compare/${rankData?.slug}`
+          }
+        /> */}
+        {/* Twitter Meta Tag */}
+        {/* <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content={rankData?.metaTitle}
+        /> */}
+        {/* <meta
+          name="twitter:description"
+          content={
+            rankData?.metaDescription}
+        /> */}
+        {/* <meta name="twitter:image" content="https://only-heavy.s3.eu-north-1.amazonaws.com/favicons.png" /> */}
+      </Head>
       <div className="">
         <div className="">
-          <Image
-            src="/images/truck-header.png"
-            alt="Truck Banner"
-            width={1200}
-            height={200}
-            className="w-full h-28 rounded-lg"
-          />
-        </div>
-
-        <h1 className="text-2xl md:text-3xl font-bold my-8 text-center">
-          {truck1Data?.productName} vs {truck2Data?.productName}{" "}
-          <span className="text-orange-500">Comparison</span>
-        </h1>
-
-        <div className="flex flex-wrap justify-center items-stretch gap-4 my-8">
-          <div className="w-full md:w-auto md:flex-1 md:max-w-sm bg-white border border-gray-200 rounded-lg shadow-md text-center flex flex-col">
-            <div className="relative">
-              <Image
-                src="/images/demo1.jpg"
-                alt={truck1Data?.productName || "Truck 1"}
-                width={350}
-                height={320}
-                className="rounded-t-lg object-cover w-full"
-              />
-            </div>
-            <div className="p-4 flex-grow flex flex-col">
-              <h3 className="font-semibold text-base">
-                {truck1Data?.productName}
-              </h3>
-              <p className="font-bold text-lg mt-1">
-                ₹ {truck1Data?.minPrice} - {truck1Data?.maxPrice} Lakh*
-              </p>
-            </div>
+          <div className="">
+            <Image
+              src="/images/truck-header.png"
+              alt="Truck Banner"
+              width={1200}
+              height={200}
+              className="w-full h-28 rounded-lg"
+            />
           </div>
 
-          <div className="flex items-center">
-            <div className="p-3 rounded-full bg-white border-2 border-orange-500 text-orange-500 font-bold text-xl">
-              VS
-            </div>
-          </div>
+          <h1 className="text-2xl md:text-3xl font-bold my-8 text-center">
+            {truck1Data?.productName} vs {truck2Data?.productName}{" "}
+            <span className="text-orange-500">Comparison</span>
+          </h1>
 
-          <div className="w-full md:w-auto md:flex-1 md:max-w-sm bg-white border border-gray-200 rounded-lg shadow-md text-center flex flex-col">
-            <div className="relative">
-              <Image
-                src="/images/demo4.jpg"
-                alt={truck2Data?.productName || "Truck 2"}
-                width={350}
-                height={320}
-                className="rounded-t-lg object-cover w-full"
-              />
-            </div>
-            <div className="p-4 flex-grow flex flex-col">
-              <h3 className="font-semibold text-base">
-                {truck2Data?.productName}
-              </h3>
-              <p className="font-bold text-lg mt-1">
-                ₹ {truck2Data?.minPrice} - {truck2Data?.maxPrice} Lakh*
-              </p>
-            </div>
-          </div>
-
-          <div className="hidden xl:flex items-center">
-            <div className="p-3 rounded-full bg-white border-2 border-orange-500 text-orange-500 font-bold text-xl">
-              VS
-            </div>
-          </div>
-
-          <div className="w-full md:w-auto md:flex-1 md:max-w-sm bg-white border-2 border-dashed border-gray-300 rounded-lg text-center p-4 flex flex-col items-center justify-center">
-            <div className="bg-gray-100 rounded-full p-4 mb-4">
-              <Image
-                src="/icons/truck.svg"
-                alt="truck icon"
-                width={50}
-                height={50}
-              />
-            </div>
-            <select
-              className="w-full mb-4 p-3 border rounded bg-gray-50 text-left text-gray-500"
-              value={selectedBrand}
-              onChange={(e) => {
-                setSelectedBrand(e.target.value);
-                setSelectedTruck('');
-              }}
-            >
-              <option value="">Select Brand</option>
-              {brands.map(brand => <option key={brand} value={brand}>{brand}</option>)}
-            </select>
-            <select
-              className="w-full p-3 border rounded bg-gray-50 text-left text-gray-500"
-              value={selectedTruck}
-              onChange={e => {
-                setSelectedTruck(e.target.value);
-                // Find the selected truck object
-                const truckObj = availableTrucks.find(truck => truck.productName === e.target.value);
-                if (truckObj) {
-                  setSelectedTruckId(truckObj._id);
-                } else {
-                  setSelectedTruckId("");
-                }
-              }}
-              disabled={!selectedBrand}
-            >
-              <option value="">Select Truck</option>
-              {availableTrucks.map(truck => <option key={truck._id} value={truck.productName}>{truck.productName}</option>)}
-            </select>
-          </div>
-        </div>
-
-        <div className="bg-white rounded-lg shadow-md my-8">
-          <div className="bg-[#FFE8DE] p-4 rounded-t-lg grid grid-cols-4 text-[#FA7436]">
-            <h2 className="text-xl font-bold ">
-              Performance
-            </h2>
-            <div className="font-semibold text-start">{truck1Data?.productName}</div>
-            <div className="font-semibold text-start">{truck2Data?.productName}</div>
-            <div className="font-semibold text-start"></div>
-          </div>
-          <div>
-            {performanceSpecs.map((spec, index) => (
-              <div
-                key={index}
-                className={`grid grid-cols-4 gap-4 items-center ${index % 2 === 0 ? "bg-white" : "bg-gray-50"
-                  }`}
-              >
-                <div className="p-4 font-semibold">{spec.label}</div>
-                <div className="p-4 text-start">{spec.truck1}</div>
-                <div className="p-4 text-start">{spec.truck2}</div>
-                <div className="p-4 text-start">-</div>
+          <div className="flex flex-wrap justify-center items-stretch gap-4 my-8">
+            <div className="w-full md:w-auto md:flex-1 md:max-w-sm bg-white border border-gray-200 rounded-lg shadow-md text-center flex flex-col">
+              <div className="relative">
+                <img
+                  src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${truck1Data.productImage}`}
+                  alt={truck1Data?.productName || "Truck 1"}
+                  width={350}
+                  height={320}
+                  className="rounded-t-lg object-cover w-full"
+                />
               </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="bg-white rounded-lg shadow-md my-8">
-          <div className="bg-[#FFE8DE] p-4 rounded-t-lg grid grid-cols-4 text-[#FA7436]">
-            <h2 className="text-xl font-bold t">Dimensions</h2>
-            <div className="font-semibold text-start">{truck1Data?.productName}</div>
-            <div className="font-semibold text-start">{truck2Data?.productName}</div>
-            <div className="font-semibold text-start"></div>
-          </div>
-          <div>
-            {dimensionSpecs.map((spec, index) => (
-              <div
-                key={index}
-                className={`grid grid-cols-4 gap-4 items-center ${index % 2 === 0 ? "bg-white" : "bg-gray-50"
-                  }`}
-              >
-                <div className="p-4 font-semibold">{spec.label}</div>
-                <div className="p-4 text-start">{spec.truck1}</div>
-                <div className="p-4 text-start">{spec.truck2}</div>
-                <div className="p-4 text-start">-</div>
+              <div className="p-4 flex-grow flex flex-col">
+                <h3 className="font-semibold text-base">
+                  {truck1Data?.productName}
+                </h3>
+                <p className="font-bold text-lg mt-1">
+                  ₹ {truck1Data?.minPrice} - {truck1Data?.maxPrice} Lakh*
+                </p>
               </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 my-8">
-          {truck1Data && (
-            <div className="bg-[#E4F5E9] p-6 rounded-lg">
-              <h3 className="text-xl font-bold mb-4">{truck1Data.productName}</h3>
-              <div className='flex items-center gap-2 mb-5'>
-                <img src="/icons/like.svg" alt="like" />
-                <p className='font-bold text-base'>Pros</p>
-              </div>
-              <ul className="list-disc list-inside text-gray-700 space-y-2 pl-2">
-                {truck1Data.pros.map((pro, index) => <li key={index}>{pro}</li>)}
-              </ul>
             </div>
-          )}
-          {truck2Data && (
-            <div className="bg-[#E4F5E9] p-6 rounded-lg">
-              <h3 className="text-xl font-bold mb-4">{truck2Data.productName}</h3>
-              <div className='flex items-center gap-2 mb-5'>
-                <img src="/icons/like.svg" alt="like" />
-                <p className='font-bold text-base'>Pros</p>
-              </div>
-              <ul className="list-disc list-inside text-gray-700 space-y-2 pl-2">
-                {/* Placeholder pros for truck 2 */}
-                <li>Easier Handling</li>
-                <li>Smart Compact Pickup</li>
-                <li>Higher Revenue</li>
-                <li>Low Maintenance Cost</li>
-              </ul>
-            </div>
-          )}
 
+            <div className="flex items-center">
+              <div className="p-3 rounded-full bg-white border-2 border-orange-500 text-orange-500 font-bold text-xl">
+                VS
+              </div>
+            </div>
+
+            <div className="w-full md:w-auto md:flex-1 md:max-w-sm bg-white border border-gray-200 rounded-lg shadow-md text-center flex flex-col">
+              <div className="relative">
+                <img
+                  src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${truck2Data.productImage}`}
+                  alt={truck2Data?.productName || "Truck 2"}
+                  width={350}
+                  height={320}
+                  className="rounded-t-lg object-cover w-full"
+                />
+              </div>
+              <div className="p-4 flex-grow flex flex-col">
+                <h3 className="font-semibold text-base">
+                  {truck2Data?.productName}
+                </h3>
+                <p className="font-bold text-lg mt-1">
+                  ₹ {truck2Data?.minPrice} - {truck2Data?.maxPrice} Lakh*
+                </p>
+              </div>
+            </div>
+
+            <div className="hidden xl:flex items-center">
+              <div className="p-3 rounded-full bg-white border-2 border-orange-500 text-orange-500 font-bold text-xl">
+                VS
+              </div>
+            </div>
+            {selectedTruckData ? (
+              <div className="w-full md:w-auto md:flex-1 md:max-w-sm bg-white border border-gray-200 rounded-lg shadow-md text-center flex flex-col">
+                <div className="relative">
+                  <img
+                    src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${selectedTruckData?.productImage}`}
+                    alt={selectedTruckData?.productName || "Truck 2"}
+                    width={350}
+                    height={320}
+                    className="rounded-t-lg object-cover w-full"
+                  />
+                </div>
+                <div className="p-4 flex-grow flex flex-col">
+                  <h3 className="font-semibold text-base">
+                    {truck2Data?.productName}
+                  </h3>
+                  <p className="font-bold text-lg mt-1">
+                    ₹ {selectedTruckData?.minPrice} - {selectedTruckData?.maxPrice} Lakh*
+                  </p>
+                </div>
+              </div>) :
+              (<div className="w-full md:w-auto md:flex-1 md:max-w-sm bg-white border-2 border-dashed border-gray-300 rounded-lg text-center p-4 flex flex-col items-center justify-center">
+                <div className="bg-gray-100 rounded-full p-4 mb-4">
+                  <Image
+                    src="/icons/truck.svg"
+                    alt="truck icon"
+                    width={50}
+                    height={50}
+                  />
+                </div>
+                <select
+                  className="w-full mb-4 p-3 border rounded bg-gray-50 text-left text-gray-500"
+                  value={selectedBrand}
+                  onChange={(e) => {
+                    setSelectedBrand(e.target.value);
+                    setSelectedTruck('');
+                  }}
+                >
+                  <option value="">Select Brand</option>
+                  {brands.map(brand => <option key={brand} value={brand}>{brand}</option>)}
+                </select>
+                <select
+                  className="w-full p-3 border rounded bg-gray-50 text-left text-gray-500"
+                  value={selectedTruck}
+                  onChange={e => {
+                    setSelectedTruck(e.target.value);
+                    // Find the selected truck object
+                    const truckObj = availableTrucks.find(truck => truck.productName === e.target.value);
+                    if (truckObj) {
+                      setSelectedTruckId(truckObj._id);
+                    } else {
+                      setSelectedTruckId("");
+                    }
+                  }}
+                  disabled={!selectedBrand}
+                >
+                  <option value="">Select Truck</option>
+                  {availableTrucks.map(truck => <option key={truck._id} value={truck.productName}>{truck.productName}</option>)}
+                </select>
+              </div>)}
+          </div>
+
+          <div className="sticky top-0 z-50 bg-gray-50 w-full border border-gray-200 rounded-md p-4 shadow-sm">
+            <div className="flex items-center justify-between gap-4">
+              {/* Left Description */}
+              <div className="min-w-[450px] flex-grow">
+                <p className="font-semibold text-sm md:text-base text-gray-800">
+                  Compare trucks helps you make an informed purchase decision.
+                </p>
+              </div>
+
+              {/* Truck 1 */}
+              {truck1Data && (
+                <div className="flex items-center bg-white border rounded-lg shadow p-3 w-full ">
+                  <img
+                    src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${truck1Data.productImage}`}
+                    alt={truck1Data?.productName}
+                    className="w-16 h-12 object-contain mr-3"
+                  />
+                  <div>
+                    <h4 className="text-sm font-semibold whitespace-nowrap">
+                      {truck1Data?.productName}
+                    </h4>
+                    <p className="text-sm text-gray-600">
+                      From ₹ {truck1Data?.minPrice} Lakh
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {/* Truck 2 */}
+              {truck2Data && (
+                <div className="flex items-center bg-white border rounded-lg shadow p-3 w-full ">
+                  <img
+                    src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${truck2Data.productImage}`}
+                    alt={truck2Data?.productName}
+                    className="w-16 h-12 object-contain mr-3"
+                  />
+                  <div>
+                    <h4 className="text-sm font-semibold whitespace-nowrap">
+                      {truck2Data?.productName}
+                    </h4>
+                    <p className="text-sm text-gray-600">
+                      From ₹ {truck2Data?.minPrice} Lakh
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {/* Truck 3 - Only if selected */}
+              {selectedTruckData && (
+                <div className="flex items-center bg-white border rounded-lg shadow p-3 w-full ">
+                  <img
+                    src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${selectedTruckData.productImage}`}
+                    alt={selectedTruckData?.productName}
+                    className="w-16 h-12 object-contain mr-3"
+                  />
+                  <div>
+                    <h4 className="text-sm font-semibold whitespace-nowrap">
+                      {selectedTruckData?.productName}
+                    </h4>
+                    <p className="text-sm text-gray-600">
+                      From ₹ {selectedTruckData?.minPrice || '—'} Lakh
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+
+
+
+
+
+          <div className="bg-white rounded-lg shadow-md my-8">
+            <div className="bg-[#FFE8DE] p-4 rounded-t-lg grid grid-cols-4 text-[#FA7436]">
+              <h2 className="text-xl font-bold ">
+                Performance
+              </h2>
+              <div className="font-semibold text-start">{truck1Data?.productName}</div>
+              <div className="font-semibold text-start">{truck2Data?.productName}</div>
+              <div className="font-semibold text-start">{selectedTruckData?.productName}</div>
+            </div>
+            <div>
+              {performanceSpecs.map((spec, index) => (
+                <div
+                  key={index}
+                  className={`grid grid-cols-4 gap-4 items-center ${index % 2 === 0 ? "bg-white" : "bg-gray-50"
+                    }`}
+                >
+                  <div className="p-4 font-semibold">{spec.label}</div>
+                  <div className="p-4 text-start">{spec.truck1}</div>
+                  <div className="p-4 text-start">{spec.truck2}</div>
+                  <div className="p-4 text-start">{spec.truck3}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="bg-white rounded-lg shadow-md my-8">
+            <div className="bg-[#FFE8DE] p-4 rounded-t-lg grid grid-cols-4 text-[#FA7436]">
+              <h2 className="text-xl font-bold t">Dimensions</h2>
+              <div className="font-semibold text-start">{truck1Data?.productName}</div>
+              <div className="font-semibold text-start">{truck2Data?.productName}</div>
+              <div className="font-semibold text-start">{selectedTruckData?.productName}</div>
+            </div>
+            <div>
+              {dimensionSpecs.map((spec, index) => (
+                <div
+                  key={index}
+                  className={`grid grid-cols-4 gap-4 items-center ${index % 2 === 0 ? "bg-white" : "bg-gray-50"
+                    }`}
+                >
+                  <div className="p-4 font-semibold">{spec.label}</div>
+                  <div className="p-4 text-start">{spec.truck1}</div>
+                  <div className="p-4 text-start">{spec.truck2}</div>
+                  <div className="p-4 text-start">{spec.truck3}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="bg-white rounded-lg shadow-md my-8">
+            <div className="bg-[#FFE8DE] p-4 rounded-t-lg grid grid-cols-4 text-[#FA7436]">
+              <h2 className="text-xl font-bold t">Brakes Suspension</h2>
+              <div className="font-semibold text-start">{truck1Data?.productName}</div>
+              <div className="font-semibold text-start">{truck2Data?.productName}</div>
+              <div className="font-semibold text-start">{selectedTruckData?.productName}</div>
+            </div>
+            <div>
+              {brakesSuspensionSpec.map((spec, index) => (
+                <div
+                  key={index}
+                  className={`grid grid-cols-4 gap-4 items-center ${index % 2 === 0 ? "bg-white" : "bg-gray-50"
+                    }`}
+                >
+                  <div className="p-4 font-semibold">{spec.label}</div>
+                  <div className="p-4 text-start">{spec.truck1}</div>
+                  <div className="p-4 text-start">{spec.truck2}</div>
+                  <div className="p-4 text-start">{spec.truck3}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="bg-white rounded-lg shadow-md my-8">
+            <div className="bg-[#FFE8DE] p-4 rounded-t-lg grid grid-cols-4 text-[#FA7436]">
+              <h2 className="text-xl font-bold t">Transmission & Load</h2>
+              <div className="font-semibold text-start">{truck1Data?.productName}</div>
+              <div className="font-semibold text-start">{truck2Data?.productName}</div>
+              <div className="font-semibold text-start">{selectedTruckData?.productName}</div>
+            </div>
+            <div>
+              {transmissionLoadSpec.map((spec, index) => (
+                <div
+                  key={index}
+                  className={`grid grid-cols-4 gap-4 items-center ${index % 2 === 0 ? "bg-white" : "bg-gray-50"
+                    }`}
+                >
+                  <div className="p-4 font-semibold">{spec.label}</div>
+                  <div className="p-4 text-start">{spec.truck1}</div>
+                  <div className="p-4 text-start">{spec.truck2}</div>
+                  <div className="p-4 text-start">{spec.truck3}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="bg-white rounded-lg shadow-md my-8">
+            <div className="bg-[#FFE8DE] p-4 rounded-t-lg grid grid-cols-4 text-[#FA7436]">
+              <h2 className="text-xl font-bold t">Cabin & Body</h2>
+              <div className="font-semibold text-start">{truck1Data?.productName}</div>
+              <div className="font-semibold text-start">{truck2Data?.productName}</div>
+              <div className="font-semibold text-start">{selectedTruckData?.productName}</div>
+            </div>
+            <div>
+              {cabinAndBodySpec.map((spec, index) => (
+                <div
+                  key={index}
+                  className={`grid grid-cols-4 gap-4 items-center ${index % 2 === 0 ? "bg-white" : "bg-gray-50"
+                    }`}
+                >
+                  <div className="p-4 font-semibold">{spec.label}</div>
+                  <div className="p-4 text-start">{spec.truck1}</div>
+                  <div className="p-4 text-start">{spec.truck2}</div>
+                  <div className="p-4 text-start">{spec.truck3}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="bg-white rounded-lg shadow-md my-8">
+            <div className="bg-[#FFE8DE] p-4 rounded-t-lg grid grid-cols-4 text-[#FA7436]">
+              <h2 className="text-xl font-bold t">Interior Features</h2>
+              <div className="font-semibold text-start">{truck1Data?.productName}</div>
+              <div className="font-semibold text-start">{truck2Data?.productName}</div>
+              <div className="font-semibold text-start">{selectedTruckData?.productName}</div>
+            </div>
+            <div>
+              {interiorFeaturesSpec.map((spec, index) => (
+                <div
+                  key={index}
+                  className={`grid grid-cols-4 gap-4 items-center ${index % 2 === 0 ? "bg-white" : "bg-gray-50"
+                    }`}
+                >
+                  <div className="p-4 font-semibold">{spec.label}</div>
+                  <div className="p-4 text-start">{spec.truck1}</div>
+                  <div className="p-4 text-start">{spec.truck2}</div>
+                  <div className="p-4 text-start">{spec.truck3}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="bg-white rounded-lg shadow-md my-8">
+            <div className="bg-[#FFE8DE] p-4 rounded-t-lg grid grid-cols-4 text-[#FA7436]">
+              <h2 className="text-xl font-bold t">Tyre</h2>
+              <div className="font-semibold text-start">{truck1Data?.productName}</div>
+              <div className="font-semibold text-start">{truck2Data?.productName}</div>
+              <div className="font-semibold text-start">{selectedTruckData?.productName}</div>
+            </div>
+            <div>
+              {tyreSpec.map((spec, index) => (
+                <div
+                  key={index}
+                  className={`grid grid-cols-4 gap-4 items-center ${index % 2 === 0 ? "bg-white" : "bg-gray-50"
+                    }`}
+                >
+                  <div className="p-4 font-semibold">{spec.label}</div>
+                  <div className="p-4 text-start">{spec.truck1}</div>
+                  <div className="p-4 text-start">{spec.truck2}</div>
+                  <div className="p-4 text-start">{spec.truck3}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="bg-white rounded-lg shadow-md my-8">
+            <div className="bg-[#FFE8DE] p-4 rounded-t-lg grid grid-cols-4 text-[#FA7436]">
+              <h2 className="text-xl font-bold t">Safety Features</h2>
+              <div className="font-semibold text-start">{truck1Data?.productName}</div>
+              <div className="font-semibold text-start">{truck2Data?.productName}</div>
+              <div className="font-semibold text-start">{selectedTruckData?.productName}</div>
+            </div>
+            <div>
+              {safetyFeaturesSpec.map((spec, index) => (
+                <div
+                  key={index}
+                  className={`grid grid-cols-4 gap-4 items-center ${index % 2 === 0 ? "bg-white" : "bg-gray-50"
+                    }`}
+                >
+                  <div className="p-4 font-semibold">{spec.label}</div>
+                  <div className="p-4 text-start">{spec.truck1}</div>
+                  <div className="p-4 text-start">{spec.truck2}</div>
+                  <div className="p-4 text-start">{spec.truck3}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="bg-white rounded-lg shadow-md my-8">
+            <div className="bg-[#FFE8DE] p-4 rounded-t-lg grid grid-cols-4 text-[#FA7436]">
+              <h2 className="text-xl font-bold t">Others</h2>
+              <div className="font-semibold text-start">{truck1Data?.productName}</div>
+              <div className="font-semibold text-start">{truck2Data?.productName}</div>
+              <div className="font-semibold text-start">{selectedTruckData?.productName}</div>
+            </div>
+            <div>
+              {othersSpec.map((spec, index) => (
+                <div
+                  key={index}
+                  className={`grid grid-cols-4 gap-4 items-center ${index % 2 === 0 ? "bg-white" : "bg-gray-50"
+                    }`}
+                >
+                  <div className="p-4 font-semibold">{spec.label}</div>
+                  <div className="p-4 text-start">{spec.truck1}</div>
+                  <div className="p-4 text-start">{spec.truck2}</div>
+                  <div className="p-4 text-start">{spec.truck3}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 my-8">
+            {truck1Data && (
+              <div className="bg-[#E4F5E9] p-6 rounded-lg">
+                <h3 className="text-xl font-bold mb-4">{truck1Data.productName}</h3>
+                <div className='flex items-center gap-2 mb-5'>
+                  <img src="/icons/like.svg" alt="like" />
+                  <p className='font-bold text-base'>Pros</p>
+                </div>
+                <ul className="list-disc list-inside text-gray-700 space-y-2 pl-2">
+                  {truck1Data.pros.map((pro, index) => <li key={index}>{pro}</li>)}
+                </ul>
+              </div>
+            )}
+            {truck2Data && (
+              <div className="bg-[#E4F5E9] p-6 rounded-lg">
+                <h3 className="text-xl font-bold mb-4">{truck2Data.productName}</h3>
+                <div className='flex items-center gap-2 mb-5'>
+                  <img src="/icons/like.svg" alt="like" />
+                  <p className='font-bold text-base'>Pros</p>
+                </div>
+                <ul className="list-disc list-inside text-gray-700 space-y-2 pl-2">
+                  {truck2Data.pros.map((pro, index) => <li key={index}>{pro}</li>)}
+                </ul>
+              </div>
+            )}
+
+            {selectedTruckData ? (
+              <div className="bg-[#E4F5E9] p-6 rounded-lg">
+                <h3 className="text-xl font-bold mb-4">{selectedTruckData?.productName}</h3>
+                <div className='flex items-center gap-2 mb-5'>
+                  <img src="/icons/like.svg" alt="like" />
+                  <p className='font-bold text-base'>Pros</p>
+                </div>
+                <ul className="list-disc list-inside text-gray-700 space-y-2 pl-2">
+                  {selectedTruckData?.pros.map((pro, index) => <li key={index}>{pro}</li>)}
+                </ul>
+              </div>
+            ) : ""}
+
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

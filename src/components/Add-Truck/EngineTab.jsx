@@ -151,7 +151,7 @@ const EngineTab = ({ truckId, onComplete, onBack }) => {
     hillHold: false,
     cruiseControl: false,
     armRest: false,
-    adjustableDriverSeat2: false,
+    adjustableSteering: false,
     tiltableSteering: false,
     steeringType: '',
     driverInfoDisplay: '',
@@ -179,7 +179,7 @@ const EngineTab = ({ truckId, onComplete, onBack }) => {
 
   const router = useRouter();
 
-  useEffect(()=>{
+  useEffect(() => {
     localStorage.getItem('currentSpecId')
   })
 
@@ -249,7 +249,7 @@ const EngineTab = ({ truckId, onComplete, onBack }) => {
         hillHold: data.interiorFeatures[0]?.hillHold || false,
         cruiseControl: data.interiorFeatures[0]?.cruiseControl || false,
         armRest: data.interiorFeatures[0]?.armRest || false,
-        adjustableDriverSeat2: data.interiorFeatures[0]?.adjustableDriverSeat2 || false,
+        adjustableSteering: data.interiorFeatures[0]?.adjustableSteering || false,
         tiltableSteering: data.interiorFeatures[0]?.tiltableSteering || false,
         steeringType: data.interiorFeatures[0]?.steeringType || '',
         driverInfoDisplay: data.interiorFeatures[0]?.driverInfoDisplay || '',
@@ -356,7 +356,7 @@ const EngineTab = ({ truckId, onComplete, onBack }) => {
           hillHold: formData.hillHold,
           cruiseControl: formData.cruiseControl,
           armRest: formData.armRest,
-          adjustableDriverSeat2: formData.adjustableDriverSeat2,
+          adjustableSteering: formData.adjustableSteering,
           tiltableSteering: formData.tiltableSteering,
           steeringType: formData.steeringType,
           driverInfoDisplay: formData.driverInfoDisplay,
@@ -808,8 +808,8 @@ const EngineTab = ({ truckId, onComplete, onBack }) => {
                 />
                 <CheckboxField
                   label="Adjustable Driver Seat 2"
-                  name="adjustableDriverSeat2"
-                  checked={formData.adjustableDriverSeat2}
+                  name="adjustableSteering"
+                  checked={formData.adjustableSteering}
                   onChange={handleInputChange}
                 />
                 <CheckboxField
