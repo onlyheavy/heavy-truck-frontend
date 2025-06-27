@@ -48,9 +48,9 @@ const TruckCompare = () => {
         const apiResponse = response.data;
 
         if (apiResponse.success) {
-          const truck1 = apiResponse.data.left;
-          const truck2 = apiResponse.data.right;
-          const datas = apiResponse.data.existData
+          const truck1 = apiResponse.message.left;
+          const truck2 = apiResponse.message.right;
+          const datas = apiResponse.message.existData
           console.log(truck1)
           setTruck1Data(truck1);
           setTruck2Data(truck2);
@@ -60,101 +60,101 @@ const TruckCompare = () => {
 
 
           setPerformanceSpecs([
-            { label: "Engine Type", truck1: `${truck1.spec.engine[0]?.engineType} `, truck2: `${truck2.spec.engine[0]?.engineType} `, truck3: selectedTruckData ? selectedTruckData.spec.engine[0]?.engineType : "-" },
-            { label: "Engine Cylinders", truck1: truck1.spec.engine[0]?.engineCylinders, truck2: truck2.spec.engine[0]?.engineCylinders, truck3: selectedTruckData ? selectedTruckData.spec.engine[0]?.engineCylinders : "-" },
-            { label: "Engine Displacement", truck1: `${truck1.spec.engine[0]?.engineDisplacement} cc`, truck2: `${truck2.spec.engine[0]?.engineDisplacement} cc`, truck3: selectedTruckData ? `${selectedTruckData.spec.engine[0]?.engineDisplacement} cc` : "-" },
-            { label: "Engine Power", truck1: `${truck1.spec.engine[0]?.enginePower} HP`, truck2: `${truck2.spec.engine[0]?.enginePower} HP`, truck3: selectedTruckData ? `${selectedTruckData.spec.engine[0]?.enginePower} HP` : "-" },
-            { label: "Engine RPM", truck1: `${truck1.spec.engine[0]?.engineRPM} RPM`, truck2: `${truck2.spec.engine[0]?.engineRPM} RPM`, truck3: selectedTruckData ? `${selectedTruckData.spec.engine[0]?.engineRPM} RPM` : "-" },
-            { label: "Torque", truck1: `${truck1.spec.engine[0]?.torque} Nm`, truck2: `${truck2.spec.engine[0]?.torque} Nm`, truck3: selectedTruckData ? `${selectedTruckData.spec.engine[0]?.torque} Nm` : "-" },
-            { label: "Fuel Type", truck1: `${truck1.spec.engine[0]?.fuelType}`, truck2: `${truck2.spec.engine[0]?.fuelType}`, truck3: selectedTruckData ? `${selectedTruckData.spec.engine[0]?.fuelType}` : "-" },
-            { label: "Fuel Tank Capacity", truck1: `${truck1.spec.engine[0]?.fuelTankCapacity} litres`, truck2: `${truck2.spec.engine[0]?.fuelTankCapacity} litres`, truck3: selectedTruckData ? `${selectedTruckData.spec.engine[0]?.fuelTankCapacity} litres` : "" },
-            { label: "Mileage", truck1: `${truck1.spec.engine[0]?.mileage} km/l`, truck2: `${truck2.spec.engine[0]?.mileage} km/l`, truck3: selectedTruckData ? `${selectedTruckData.spec.engine[0]?.mileage} km/l` : "-" },
-            { label: "Gradeability", truck1: `${truck1.spec.engine[0]?.gradeability} %`, truck2: `${truck2.spec.engine[0]?.gradeability} %`, truck3: selectedTruckData ? `${selectedTruckData.spec.engine[0]?.gradeability} %` : "-" },
-            { label: "Emission Norm", truck1: `${truck1.spec.engine[0]?.emissionNorm} `, truck2: `${truck2.spec.engine[0]?.emissionNorm} `, truck3: selectedTruckData ? `${selectedTruckData.spec.engine[0]?.emissionNorm} ` : "-" },
-            { label: "Max Speed", truck1: `${truck1.spec.engine[0]?.maxSpeed} km/h`, truck2: `${truck2.spec.engine[0]?.maxSpeed} km/h`, truck3: selectedTruckData ? `${selectedTruckData.spec.engine[0]?.maxSpeed} km/h` : "-" },
-            { label: "Battery", truck1: `${truck1.spec.engine[0]?.battery} `, truck2: `${truck2.spec.engine[0]?.battery} `, truck3: selectedTruckData ? `${selectedTruckData.spec.engine[0]?.battery} ` : "-" },
+            { label: "Engine Type", truck1: `${truck1?.spec?.engine[0]?.engineType} `, truck2: `${truck2.spec.engine[0]?.engineType} `, truck3: selectedTruckData ? selectedTruckData.spec.engine[0]?.engineType : "-" },
+            { label: "Engine Cylinders", truck1: truck1?.spec?.engine[0]?.engineCylinders, truck2: truck2?.spec?.engine[0]?.engineCylinders, truck3: selectedTruckData ? selectedTruckData?.spec?.engine[0]?.engineCylinders : "-" },
+            { label: "Engine Displacement", truck1: `${truck1?.spec?.engine[0]?.engineDisplacement} cc`, truck2: `${truck2?.spec?.engine[0]?.engineDisplacement} cc`, truck3: selectedTruckData ? `${selectedTruckData?.spec?.engine[0]?.engineDisplacement} cc` : "-" },
+            { label: "Engine Power", truck1: `${truck1?.spec?.engine[0]?.enginePower} HP`, truck2: `${truck2?.spec?.engine[0]?.enginePower} HP`, truck3: selectedTruckData ? `${selectedTruckData?.spec?.engine[0]?.enginePower} HP` : "-" },
+            { label: "Engine RPM", truck1: `${truck1?.spec?.engine[0]?.engineRPM} RPM`, truck2: `${truck2?.spec?.engine[0]?.engineRPM} RPM`, truck3: selectedTruckData ? `${selectedTruckData?.spec?.engine[0]?.engineRPM} RPM` : "-" },
+            { label: "Torque", truck1: `${truck1?.spec?.engine[0]?.torque} Nm`, truck2: `${truck2?.spec?.engine[0]?.torque} Nm`, truck3: selectedTruckData ? `${selectedTruckData?.spec?.engine[0]?.torque} Nm` : "-" },
+            { label: "Fuel Type", truck1: `${truck1?.spec?.engine[0]?.fuelType}`, truck2: `${truck2?.spec?.engine[0]?.fuelType}`, truck3: selectedTruckData ? `${selectedTruckData?.spec?.engine[0]?.fuelType}` : "-" },
+            { label: "Fuel Tank Capacity", truck1: `${truck1?.spec?.engine[0]?.fuelTankCapacity} litres`, truck2: `${truck2?.spec?.engine[0]?.fuelTankCapacity} litres`, truck3: selectedTruckData ? `${selectedTruckData?.spec?.engine[0]?.fuelTankCapacity} litres` : "" },
+            { label: "Mileage", truck1: `${truck1?.spec?.engine[0]?.mileage} km/l`, truck2: `${truck2?.spec?.engine[0]?.mileage} km/l`, truck3: selectedTruckData ? `${selectedTruckData?.spec?.engine[0]?.mileage} km/l` : "-" },
+            { label: "Gradeability", truck1: `${truck1?.spec?.engine[0]?.gradeability} %`, truck2: `${truck2?.spec?.engine[0]?.gradeability} %`, truck3: selectedTruckData ? `${selectedTruckData?.spec?.engine[0]?.gradeability} %` : "-" },
+            { label: "Emission Norm", truck1: `${truck1?.spec?.engine[0]?.emissionNorm} `, truck2: `${truck2?.spec?.engine[0]?.emissionNorm} `, truck3: selectedTruckData ? `${selectedTruckData?.spec?.engine[0]?.emissionNorm} ` : "-" },
+            { label: "Max Speed", truck1: `${truck1?.spec?.engine[0]?.maxSpeed} km/h`, truck2: `${truck2?.spec?.engine[0]?.maxSpeed} km/h`, truck3: selectedTruckData ? `${selectedTruckData?.spec?.engine[0]?.maxSpeed} km/h` : "-" },
+            { label: "Battery", truck1: `${truck1?.spec?.engine[0]?.battery} `, truck2: `${truck2?.spec?.engine[0]?.battery} `, truck3: selectedTruckData ? `${selectedTruckData?.spec?.engine[0]?.battery} ` : "-" },
           ]);
 
           setDimensionSpecs([
-            { label: "Over All Length", truck1: `${truck1.spec.dimensions[0]?.overallLength} mm `, truck2: `${truck2.spec.dimensions[0]?.overallLength} mm`, truck3: selectedTruckData ? `${selectedTruckData.spec.dimensions[0]?.overallLength} mm` : "-" },
-            { label: "Over All Width", truck1: `${truck1.spec.dimensions[0]?.overallWidthh} mm`, truck2: `${truck2.spec.dimensions[0]?.overallWidthh} mm`, truck3: selectedTruckData ? `${selectedTruckData.spec.dimensions[0]?.overallWidthh} mm` : "-" },
-            { label: "Over All Height", truck1: `${truck1.spec.dimensions[0]?.overallHeight} mm`, truck2: `${truck2.spec.dimensions[0]?.overallHeight} mm`, truck3: selectedTruckData ? `${selectedTruckData.spec.dimensions[0]?.overallHeight} mm` : "-" },
-            { label: "Wheelbase", truck1: `${truck1.spec.dimensions[0]?.wheelBase} mm`, truck2: `${truck2.spec.dimensions[0]?.wheelBase} mm`, truck3: selectedTruckData ? `${selectedTruckData.spec.dimensions[0]?.wheelBase} mm` : "-" },
-            { label: "Ground Clearance", truck1: `${truck1.spec.dimensions[0]?.groundClearance} mm`, truck2: `${truck2.spec.dimensions[0]?.groundClearance} mm`, truck3: selectedTruckData ? `${selectedTruckData.spec.dimensions[0]?.groundClearance} mm` : "-" },
-            { label: "Minimum Turning Radius", truck1: `${truck1.spec.dimensions[0]?.turningRadius} m`, truck2: `${truck2.spec.dimensions[0]?.turningRadius} m`, truck3: selectedTruckData ? `${selectedTruckData.spec.dimensions[0]?.turningRadius} m` : "-" },
+            { label: "Over All Length", truck1: `${truck1?.spec?.dimensions[0]?.overallLength} mm `, truck2: `${truck2?.spec?.dimensions[0]?.overallLength} mm`, truck3: selectedTruckData ? `${selectedTruckData?.spec?.dimensions[0]?.overallLength} mm` : "-" },
+            { label: "Over All Width", truck1: `${truck1?.spec?.dimensions[0]?.overallWidthh} mm`, truck2: `${truck2?.spec?.dimensions[0]?.overallWidthh} mm`, truck3: selectedTruckData ? `${selectedTruckData?.spec?.dimensions[0]?.overallWidthh} mm` : "-" },
+            { label: "Over All Height", truck1: `${truck1?.spec?.dimensions[0]?.overallHeight} mm`, truck2: `${truck2?.spec?.dimensions[0]?.overallHeight} mm`, truck3: selectedTruckData ? `${selectedTruckData?.spec?.dimensions[0]?.overallHeight} mm` : "-" },
+            { label: "Wheelbase", truck1: `${truck1?.spec?.dimensions[0]?.wheelBase} mm`, truck2: `${truck2?.spec?.dimensions[0]?.wheelBase} mm`, truck3: selectedTruckData ? `${selectedTruckData?.spec?.dimensions[0]?.wheelBase} mm` : "-" },
+            { label: "Ground Clearance", truck1: `${truck1?.spec?.dimensions[0]?.groundClearance} mm`, truck2: `${truck2?.spec?.dimensions[0]?.groundClearance} mm`, truck3: selectedTruckData ? `${selectedTruckData?.spec?.dimensions[0]?.groundClearance} mm` : "-" },
+            { label: "Minimum Turning Radius", truck1: `${truck1?.spec?.dimensions[0]?.turningRadius} m`, truck2: `${truck2?.spec?.dimensions[0]?.turningRadius} m`, truck3: selectedTruckData ? `${selectedTruckData?.spec?.dimensions[0]?.turningRadius} m` : "-" },
           ]);
 
           setBrakesSuspensionSpec([
-            { label: "Front Suspension", truck1: `${truck1.spec.brakesAndSuspension[0]?.frontSuspension} `, truck2: `${truck2.spec.brakesAndSuspension[0]?.frontSuspension} `, truck3: selectedTruckData ? `${selectedTruckData.spec.brakesAndSuspension[0]?.frontSuspension} ` : "-" },
-            { label: "Rear Suspension", truck1: `${truck1.spec.brakesAndSuspension[0]?.rearSuspension} `, truck2: `${truck2.spec.brakesAndSuspension[0]?.rearSuspension} `, truck3: selectedTruckData ? `${selectedTruckData.spec.brakesAndSuspension[0]?.rearSuspension} ` : "-" },
-            { label: "Brakes Type", truck1: `${truck1.spec.brakesAndSuspension[0]?.brakeType} `, truck2: `${truck2.spec.brakesAndSuspension[0]?.brakeType} `, truck3: selectedTruckData ? `${selectedTruckData.spec.brakesAndSuspension[0]?.brakeType} ` : "-" },
-            { label: "ABS", truck1: truck1.spec.brakesAndSuspension[0]?.abs === 'true' ? 'Yes' : 'No', truck2: truck2.spec.brakesAndSuspension[0]?.abs === 'true' ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.brakesAndSuspension[0]?.abs === 'true' ? 'Yes' : 'No' : "-" },
-            { label: "Parking Brakes", truck1: truck1.spec.brakesAndSuspension[0]?.parkingBrakes === 'true' ? 'Yes' : 'No', truck2: truck2.spec.brakesAndSuspension[0]?.parkingBrakes === 'true' ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.brakesAndSuspension[0]?.parkingBrakes === 'true' ? 'Yes' : 'No' : "-" },
+            { label: "Front Suspension", truck1: `${truck1?.spec?.brakesAndSuspension[0]?.frontSuspension} `, truck2: `${truck2?.spec?.brakesAndSuspension[0]?.frontSuspension} `, truck3: selectedTruckData ? `${selectedTruckData?.spec?.brakesAndSuspension[0]?.frontSuspension} ` : "-" },
+            { label: "Rear Suspension", truck1: `${truck1?.spec?.brakesAndSuspension[0]?.rearSuspension} `, truck2: `${truck2?.spec?.brakesAndSuspension[0]?.rearSuspension} `, truck3: selectedTruckData ? `${selectedTruckData?.spec?.brakesAndSuspension[0]?.rearSuspension} ` : "-" },
+            { label: "Brakes Type", truck1: `${truck1?.spec?.brakesAndSuspension[0]?.brakeType} `, truck2: `${truck2?.spec?.brakesAndSuspension[0]?.brakeType} `, truck3: selectedTruckData ? `${selectedTruckData?.spec?.brakesAndSuspension[0]?.brakeType} ` : "-" },
+            { label: "ABS", truck1: truck1?.spec?.brakesAndSuspension[0]?.abs === 'true' ? 'Yes' : 'No', truck2: truck2?.spec?.brakesAndSuspension[0]?.abs === 'true' ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData?.spec?.brakesAndSuspension[0]?.abs === 'true' ? 'Yes' : 'No' : "-" },
+            { label: "Parking Brakes", truck1: truck1?.spec?.brakesAndSuspension[0]?.parkingBrakes === 'true' ? 'Yes' : 'No', truck2: truck2?.spec?.brakesAndSuspension[0]?.parkingBrakes === 'true' ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData?.spec?.brakesAndSuspension[0]?.parkingBrakes === 'true' ? 'Yes' : 'No' : "-" },
             {
-              label: "Anti Roll Bar", truck1: truck1.spec.brakesAndSuspension[0]?.antiRollBar === 'true' ? 'Yes' : 'No', truck2: truck2.spec.brakesAndSuspension[0]?.antiRollBar === 'true' ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.brakesAndSuspension[0]?.antiRollBar === 'true' ? 'Yes' : 'No' : "-"
+              label: "Anti Roll Bar", truck1: truck1?.spec?.brakesAndSuspension[0]?.antiRollBar === 'true' ? 'Yes' : 'No', truck2: truck2?.spec?.brakesAndSuspension[0]?.antiRollBar === 'true' ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData?.spec?.brakesAndSuspension[0]?.antiRollBar === 'true' ? 'Yes' : 'No' : "-"
             },
           ]);
 
           setTransmissionLoadSpec([
-            { label: "Gear box", truck1: `${truck1.spec.transmissionLoad[0]?.gearBox}  `, truck2: `${truck2.spec.transmissionLoad[0]?.gearBox} `, truck3: selectedTruckData ? `${selectedTruckData.spec.transmissionLoad[0]?.gearBox} ` : "-" },
-            { label: "Transmission Type", truck1: `${truck1.spec.transmissionLoad[0]?.transmissionType} `, truck2: `${truck2.spec.transmissionLoad[0]?.transmissionType} `, truck3: selectedTruckData ? `${selectedTruckData.spec.transmissionLoad[0]?.transmissionType} ` : "-" },
-            { label: "Axle Configuration", truck1: `${truck1.spec.transmissionLoad[0]?.axleConfiguration} `, truck2: `${truck2.spec.transmissionLoad[0]?.axleConfiguration} `, truck3: selectedTruckData ? `${selectedTruckData.spec.transmissionLoad[0]?.axleConfiguration} ` : "-" },
-            { label: "Front Axle", truck1: `${truck1.spec.transmissionLoad[0]?.frontAxle} `, truck2: `${truck2.spec.transmissionLoad[0]?.frontAxle} `, truck3: selectedTruckData ? `${selectedTruckData.spec.transmissionLoad[0]?.frontAxle} ` : "-" },
-            { label: "Gross Vehicle Weight", truck1: `${truck1.spec.transmissionLoad[0]?.GrossVehicleWeight} kg `, truck2: `${truck2.spec.transmissionLoad[0]?.GrossVehicleWeight} kg `, truck3: selectedTruckData ? `${selectedTruckData.spec.transmissionLoad[0]?.GrossVehicleWeight} kg ` : "-" },
-            { label: "Kerb Weight", truck1: `${truck1.spec.transmissionLoad[0]?.kerbWeight} kg `, truck2: `${truck2.spec.transmissionLoad[0]?.kerbWeight} kg `, truck3: selectedTruckData ? `${selectedTruckData.spec.transmissionLoad[0]?.kerbWeight} kg ` : "-" },
-            { label: "Payload", truck1: `${truck1.spec.transmissionLoad[0]?.payload} kg `, truck2: `${truck2.spec.transmissionLoad[0]?.payload} kg `, truck3: selectedTruckData ? `${selectedTruckData.spec.transmissionLoad[0]?.payload} kg ` : "-" },
+            { label: "Gear box", truck1: `${truck1?.spec?.transmissionLoad[0]?.gearBox}  `, truck2: `${truck2?.spec?.transmissionLoad[0]?.gearBox} `, truck3: selectedTruckData ? `${selectedTruckData?.spec?.transmissionLoad[0]?.gearBox} ` : "-" },
+            { label: "Transmission Type", truck1: `${truck1?.spec?.transmissionLoad[0]?.transmissionType} `, truck2: `${truck2?.spec?.transmissionLoad[0]?.transmissionType} `, truck3: selectedTruckData ? `${selectedTruckData?.spec?.transmissionLoad[0]?.transmissionType} ` : "-" },
+            { label: "Axle Configuration", truck1: `${truck1?.spec?.transmissionLoad[0]?.axleConfiguration} `, truck2: `${truck2?.spec?.transmissionLoad[0]?.axleConfiguration} `, truck3: selectedTruckData ? `${selectedTruckData?.spec?.transmissionLoad[0]?.axleConfiguration} ` : "-" },
+            { label: "Front Axle", truck1: `${truck1?.spec?.transmissionLoad[0]?.frontAxle} `, truck2: `${truck2?.spec?.transmissionLoad[0]?.frontAxle} `, truck3: selectedTruckData ? `${selectedTruckData?.spec?.transmissionLoad[0]?.frontAxle} ` : "-" },
+            { label: "Gross Vehicle Weight", truck1: `${truck1?.spec?.transmissionLoad[0]?.GrossVehicleWeight} kg `, truck2: `${truck2?.spec?.transmissionLoad[0]?.GrossVehicleWeight} kg `, truck3: selectedTruckData ? `${selectedTruckData?.spec?.transmissionLoad[0]?.GrossVehicleWeight} kg ` : "-" },
+            { label: "Kerb Weight", truck1: `${truck1?.spec?.transmissionLoad[0]?.kerbWeight} kg `, truck2: `${truck2?.spec?.transmissionLoad[0]?.kerbWeight} kg `, truck3: selectedTruckData ? `${selectedTruckData?.spec?.transmissionLoad[0]?.kerbWeight} kg ` : "-" },
+            { label: "Payload", truck1: `${truck1?.spec?.transmissionLoad[0]?.payload} kg `, truck2: `${truck2?.spec?.transmissionLoad[0]?.payload} kg `, truck3: selectedTruckData ? `${selectedTruckData?.spec?.transmissionLoad[0]?.payload} kg ` : "-" },
           ]);
 
           setCabinAndBodySpec([
-            { label: "Chassis Type", truck1: `${truck1.spec.cabinAndBody[0]?.chassisType || "-"}`, truck2: `${truck2.spec.cabinAndBody[0]?.chassisType || "-"}`, truck3: selectedTruckData ? `${selectedTruckData.spec.cabinAndBody[0]?.chassisType || "-"}` : "-" },
-            { label: "Cabin Type", truck1: `${truck1.spec.cabinAndBody[0]?.cabinType || "-"}`, truck2: `${truck2.spec.cabinAndBody[0]?.cabinType || "-"}`, truck3: selectedTruckData ? `${selectedTruckData.spec.cabinAndBody[0]?.cabinType || "-"}` : "-" },
-            { label: "Tiltable Cabin", truck1: truck1.spec.cabinAndBody[0]?.tiltableCabin === 'true' ? 'Yes' : 'No', truck2: truck2.spec.cabinAndBody[0]?.tiltableCabin === 'true' ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.cabinAndBody[0]?.tiltableCabin === 'true' ? 'Yes' : 'No' : "-" },
-            { label: "Body Option", truck1: `${truck1.spec.cabinAndBody[0]?.bodyOption || "-"}`, truck2: `${truck2.spec.cabinAndBody[0]?.bodyOption || "-"}`, truck3: selectedTruckData ? `${selectedTruckData.spec.cabinAndBody[0]?.bodyOption || "-"}` : "-" },
-            { label: "Application Type", truck1: `${truck1.spec.cabinAndBody[0]?.applicationType || "-"}`, truck2: `${truck2.spec.cabinAndBody[0]?.applicationType || "-"}`, truck3: selectedTruckData ? `${selectedTruckData.spec.cabinAndBody[0]?.applicationType || "-"}` : "-" },
-            { label: "Seating Capacity", truck1: `${truck1.spec.cabinAndBody[0]?.seatingCapacity || "-"}`, truck2: `${truck2.spec.cabinAndBody[0]?.seatingCapacity || "-"}`, truck3: selectedTruckData ? `${selectedTruckData.spec.cabinAndBody[0]?.seatingCapacity || "-"}` : "-" }
+            { label: "Chassis Type", truck1: `${truck1?.spec?.cabinAndBody[0]?.chassisType || "-"}`, truck2: `${truck2?.spec?.cabinAndBody[0]?.chassisType || "-"}`, truck3: selectedTruckData ? `${selectedTruckData?.spec?.cabinAndBody[0]?.chassisType || "-"}` : "-" },
+            { label: "Cabin Type", truck1: `${truck1?.spec?.cabinAndBody[0]?.cabinType || "-"}`, truck2: `${truck2?.spec?.cabinAndBody[0]?.cabinType || "-"}`, truck3: selectedTruckData ? `${selectedTruckData?.spec?.cabinAndBody[0]?.cabinType || "-"}` : "-" },
+            { label: "Tiltable Cabin", truck1: truck1?.spec?.cabinAndBody[0]?.tiltableCabin === 'true' ? 'Yes' : 'No', truck2: truck2?.spec?.cabinAndBody[0]?.tiltableCabin === 'true' ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData?.spec?.cabinAndBody[0]?.tiltableCabin === 'true' ? 'Yes' : 'No' : "-" },
+            { label: "Body Option", truck1: `${truck1?.spec?.cabinAndBody[0]?.bodyOption || "-"}`, truck2: `${truck2?.spec?.cabinAndBody[0]?.bodyOption || "-"}`, truck3: selectedTruckData ? `${selectedTruckData?.spec?.cabinAndBody[0]?.bodyOption || "-"}` : "-" },
+            { label: "Application Type", truck1: `${truck1?.spec?.cabinAndBody[0]?.applicationType || "-"}`, truck2: `${truck2?.spec?.cabinAndBody[0]?.applicationType || "-"}`, truck3: selectedTruckData ? `${selectedTruckData?.spec?.cabinAndBody[0]?.applicationType || "-"}` : "-" },
+            { label: "Seating Capacity", truck1: `${truck1?.spec?.cabinAndBody[0]?.seatingCapacity || "-"}`, truck2: `${truck2?.spec?.cabinAndBody[0]?.seatingCapacity || "-"}`, truck3: selectedTruckData ? `${selectedTruckData?.spec?.cabinAndBody[0]?.seatingCapacity || "-"}` : "-" }
           ]);
 
 
           setInteriorFeaturesSpec([
-            { label: "AC", truck1: truck1.spec.interiorFeatures[0]?.ac ? 'Yes' : 'No', truck2: truck2.spec.interiorFeatures[0]?.ac ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.interiorFeatures[0]?.ac ? 'Yes' : 'No' : "-" },
-            { label: "Adjustable Driver Seat", truck1: truck1.spec.interiorFeatures[0]?.adjustableDriverSeat ? 'Yes' : 'No', truck2: truck2.spec.interiorFeatures[0]?.adjustableDriverSeat ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.interiorFeatures[0]?.adjustableDriverSeat ? 'Yes' : 'No' : "-" },
-            { label: "Seat Types", truck1: `${truck1.spec.interiorFeatures[0]?.seatTypes} `, truck2: `${truck2.spec.interiorFeatures[0]?.seatTypes} `, truck3: selectedTruckData ? `${selectedTruckData.spec.interiorFeatures[0]?.seatTypes} ` : "-" },
-            { label: "Arm Rest", truck1: truck1.spec.interiorFeatures[0]?.armRest ? 'Yes' : 'No', truck2: truck2.spec.interiorFeatures[0]?.armRest ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.interiorFeatures[0]?.armRest ? 'Yes' : 'No' : "-" },
-            { label: "Tiltable Steering", truck1: truck1.spec.interiorFeatures[0]?.tiltableSteering ? 'Yes' : 'No', truck2: truck2.spec.interiorFeatures[0]?.tiltableSteering ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.interiorFeatures[0]?.tiltableSteering ? 'Yes' : 'No' : "-" },
-            { label: "Adjustable Steering", truck1: truck1.spec.interiorFeatures[0]?.adjustableSteering ? 'Yes' : 'No', truck2: truck2.spec.interiorFeatures[0]?.adjustableSteering ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.interiorFeatures[0]?.adjustableSteering ? 'Yes' : 'No' : "-" },
-            { label: "Driver Info Display", truck1: truck1.spec.interiorFeatures[0]?.driverInfoDisplay ? 'Yes' : 'No', truck2: truck2.spec.interiorFeatures[0]?.driverInfoDisplay ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.interiorFeatures[0]?.driverInfoDisplay ? 'Yes' : 'No' : "-" },
-            { label: "Mobile Charging Point", truck1: truck1.spec.interiorFeatures[0]?.mobileChargingPoint ? 'Yes' : 'No', truck2: truck2.spec.interiorFeatures[0]?.mobileChargingPoint ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.interiorFeatures[0]?.mobileChargingPoint ? 'Yes' : 'No' : "-" },
-            { label: "Seat Belts", truck1: truck1.spec.interiorFeatures[0]?.seatBelts ? 'Yes' : 'No', truck2: truck2.spec.interiorFeatures[0]?.seatBelts ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.interiorFeatures[0]?.seatBelts ? 'Yes' : 'No' : "-" },
-            { label: "Hill Hold", truck1: truck1.spec.interiorFeatures[0]?.hillHold ? 'Yes' : 'No', truck2: truck2.spec.interiorFeatures[0]?.hillHold ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.interiorFeatures[0]?.hillHold ? 'Yes' : 'No' : "-" },
-            { label: "Cruise Control", truck1: truck1.spec.interiorFeatures[0]?.cruiseControl ? 'Yes' : 'No', truck2: truck2.spec.interiorFeatures[0]?.cruiseControl ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.interiorFeatures[0]?.cruiseControl ? 'Yes' : 'No' : "-" },
-            { label: " Navigation System", truck1: `${truck1.spec.interiorFeatures[0]?.navigationSystem} `, truck2: `${truck2.spec.interiorFeatures[0]?.navigationSystem} `, truck3: selectedTruckData ? `${selectedTruckData.spec.interiorFeatures[0]?.navigationSystem} ` : "-" },
-            { label: "Telematics", truck1: `${truck1.spec.interiorFeatures[0]?.telematics} `, truck2: `${truck2.spec.interiorFeatures[0]?.telematics} `, truck3: selectedTruckData ? `${selectedTruckData.spec.interiorFeatures[0]?.telematics} ` : "-" },
-            { label: "Steering Type", truck1: `${truck1.spec.interiorFeatures[0]?.steeringType} `, truck2: `${truck2.spec.interiorFeatures[0]?.steeringType} `, truck3: selectedTruckData ? `${selectedTruckData.spec.interiorFeatures[0]?.steeringType} ` : "-" },
-            { label: "Entertainment Pack", truck1: truck1.spec.interiorFeatures[0]?.entertainPack ? 'Yes' : 'No', truck2: truck2.spec.interiorFeatures[0]?.entertainPack ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.interiorFeatures[0]?.entertainPack ? 'Yes' : 'No' : "-" },
-            { label: "Emergency Start", truck1: truck1.spec.interiorFeatures[0]?.emergencyStart ? 'Yes' : 'No', truck2: truck2.spec.interiorFeatures[0]?.emergencyStart ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.interiorFeatures[0]?.emergencyStart ? 'Yes' : 'No' : "-" }
+            { label: "AC", truck1: truck1?.spec?.interiorFeatures[0]?.ac ? 'Yes' : 'No', truck2: truck2?.spec?.interiorFeatures[0]?.ac ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData?.spec?.interiorFeatures[0]?.ac ? 'Yes' : 'No' : "-" },
+            { label: "Adjustable Driver Seat", truck1: truck1?.spec?.interiorFeatures[0]?.adjustableDriverSeat ? 'Yes' : 'No', truck2: truck2?.spec?.interiorFeatures[0]?.adjustableDriverSeat ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData?.spec?.interiorFeatures[0]?.adjustableDriverSeat ? 'Yes' : 'No' : "-" },
+            { label: "Seat Types", truck1: `${truck1?.spec?.interiorFeatures[0]?.seatTypes} `, truck2: `${truck2?.spec?.interiorFeatures[0]?.seatTypes} `, truck3: selectedTruckData ? `${selectedTruckData?.spec?.interiorFeatures[0]?.seatTypes} ` : "-" },
+            { label: "Arm Rest", truck1: truck1?.spec?.interiorFeatures[0]?.armRest ? 'Yes' : 'No', truck2: truck2?.spec?.interiorFeatures[0]?.armRest ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData?.spec?.interiorFeatures[0]?.armRest ? 'Yes' : 'No' : "-" },
+            { label: "Tiltable Steering", truck1: truck1?.spec?.interiorFeatures[0]?.tiltableSteering ? 'Yes' : 'No', truck2: truck2?.spec?.interiorFeatures[0]?.tiltableSteering ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData?.spec?.interiorFeatures[0]?.tiltableSteering ? 'Yes' : 'No' : "-" },
+            { label: "Adjustable Steering", truck1: truck1?.spec?.interiorFeatures[0]?.adjustableSteering ? 'Yes' : 'No', truck2: truck2?.spec?.interiorFeatures[0]?.adjustableSteering ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData?.spec?.interiorFeatures[0]?.adjustableSteering ? 'Yes' : 'No' : "-" },
+            { label: "Driver Info Display", truck1: truck1?.spec?.interiorFeatures[0]?.driverInfoDisplay ? 'Yes' : 'No', truck2: truck2?.spec?.interiorFeatures[0]?.driverInfoDisplay ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData?.spec?.interiorFeatures[0]?.driverInfoDisplay ? 'Yes' : 'No' : "-" },
+            { label: "Mobile Charging Point", truck1: truck1?.spec?.interiorFeatures[0]?.mobileChargingPoint ? 'Yes' : 'No', truck2: truck2?.spec?.interiorFeatures[0]?.mobileChargingPoint ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData?.spec?.interiorFeatures[0]?.mobileChargingPoint ? 'Yes' : 'No' : "-" },
+            { label: "Seat Belts", truck1: truck1?.spec?.interiorFeatures[0]?.seatBelts ? 'Yes' : 'No', truck2: truck2?.spec?.interiorFeatures[0]?.seatBelts ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData?.spec?.interiorFeatures[0]?.seatBelts ? 'Yes' : 'No' : "-" },
+            { label: "Hill Hold", truck1: truck1?.spec?.interiorFeatures[0]?.hillHold ? 'Yes' : 'No', truck2: truck2?.spec?.interiorFeatures[0]?.hillHold ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData?.spec?.interiorFeatures[0]?.hillHold ? 'Yes' : 'No' : "-" },
+            { label: "Cruise Control", truck1: truck1?.spec?.interiorFeatures[0]?.cruiseControl ? 'Yes' : 'No', truck2: truck2?.spec?.interiorFeatures[0]?.cruiseControl ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData?.spec?.interiorFeatures[0]?.cruiseControl ? 'Yes' : 'No' : "-" },
+            { label: " Navigation System", truck1: `${truck1?.spec?.interiorFeatures[0]?.navigationSystem} `, truck2: `${truck2?.spec?.interiorFeatures[0]?.navigationSystem} `, truck3: selectedTruckData ? `${selectedTruckData?.spec?.interiorFeatures[0]?.navigationSystem} ` : "-" },
+            { label: "Telematics", truck1: `${truck1?.spec?.interiorFeatures[0]?.telematics} `, truck2: `${truck2?.spec?.interiorFeatures[0]?.telematics} `, truck3: selectedTruckData ? `${selectedTruckData?.spec?.interiorFeatures[0]?.telematics} ` : "-" },
+            { label: "Steering Type", truck1: `${truck1?.spec?.interiorFeatures[0]?.steeringType} `, truck2: `${truck2?.spec?.interiorFeatures[0]?.steeringType} `, truck3: selectedTruckData ? `${selectedTruckData?.spec?.interiorFeatures[0]?.steeringType} ` : "-" },
+            { label: "Entertainment Pack", truck1: truck1?.spec?.interiorFeatures[0]?.entertainPack ? 'Yes' : 'No', truck2: truck2?.spec?.interiorFeatures[0]?.entertainPack ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData?.spec?.interiorFeatures[0]?.entertainPack ? 'Yes' : 'No' : "-" },
+            { label: "Emergency Start", truck1: truck1?.spec?.interiorFeatures[0]?.emergencyStart ? 'Yes' : 'No', truck2: truck2?.spec?.interiorFeatures[0]?.emergencyStart ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData?.spec?.interiorFeatures[0]?.emergencyStart ? 'Yes' : 'No' : "-" }
           ]);
 
           setTyreSpec([
-            { label: "Front Tyre", truck1: `${truck1.spec.tyre[0]?.frontTyre}  `, truck2: `${truck2.spec.tyre[0]?.frontTyre} `, truck3: selectedTruckData ? `${selectedTruckData.spec.tyre[0]?.frontTyre} ` : "-" },
-            { label: "Rear Tyre", truck1: `${truck1.spec.tyre[0]?.rearTyre} `, truck2: `${truck2.spec.tyre[0]?.rearTyre} `, truck3: selectedTruckData ? `${selectedTruckData.spec.tyre[0]?.rearTyre} ` : "-" },
-            { label: "Number of Tyres", truck1: `${truck1.spec.tyre[0]?.numberOfTyres} `, truck2: `${truck2.spec.tyre[0]?.numberOfTyres} `, truck3: selectedTruckData ? `${selectedTruckData.spec.tyre[0]?.numberOfTyres} ` : "-" },
-            { label: "Tubeless Tyre", truck1: truck1.spec.tyre[0]?.tubelessTyres ? 'Yes' : 'No', truck2: truck2.spec.tyre[0]?.tubelessTyres ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.tyre[0]?.tubelessTyres ? 'Yes' : 'No' : "-" }
+            { label: "Front Tyre", truck1: `${truck1?.spec?.tyre[0]?.frontTyre}  `, truck2: `${truck2?.spec?.tyre[0]?.frontTyre} `, truck3: selectedTruckData ? `${selectedTruckData?.spec?.tyre[0]?.frontTyre} ` : "-" },
+            { label: "Rear Tyre", truck1: `${truck1?.spec?.tyre[0]?.rearTyre} `, truck2: `${truck2?.spec?.tyre[0]?.rearTyre} `, truck3: selectedTruckData ? `${selectedTruckData?.spec?.tyre[0]?.rearTyre} ` : "-" },
+            { label: "Number of Tyres", truck1: `${truck1?.spec?.tyre[0]?.numberOfTyres} `, truck2: `${truck2?.spec?.tyre[0]?.numberOfTyres} `, truck3: selectedTruckData ? `${selectedTruckData?.spec?.tyre[0]?.numberOfTyres} ` : "-" },
+            { label: "Tubeless Tyre", truck1: truck1?.spec?.tyre[0]?.tubelessTyres ? 'Yes' : 'No', truck2: truck2?.spec?.tyre[0]?.tubelessTyres ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData?.spec?.tyre[0]?.tubelessTyres ? 'Yes' : 'No' : "-" }
           ]);
 
 
           setSafetyFeaturesSpec([
-            { label: "Fog Light", truck1: truck1.spec.safety[0]?.fogLights ? 'Yes' : 'No', truck2: truck2.spec.safety[0]?.fogLights ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.safety[0]?.fogLights ? 'Yes' : 'No' : "-" },
-            { label: "Emergency Exit", truck1: truck1.spec.safety[0]?.emergencyExit ? 'Yes' : 'No', truck2: truck2.spec.safety[0]?.emergencyExit ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.safety[0]?.emergencyExit ? 'Yes' : 'No' : "-" },
-            { label: "Side Window", truck1: truck1.spec.safety[0]?.sideWindow ? 'Yes' : 'No', truck2: truck2.spec.safety[0]?.sideWindow ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.safety[0]?.sideWindow ? 'Yes' : 'No' : "-" },
-            { label: "Luggage Boot", truck1: truck1.spec.safety[0]?.luggageBoot ? 'Yes' : 'No', truck2: truck2.spec.safety[0]?.luggageBoot ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.safety[0]?.luggageBoot ? 'Yes' : 'No' : "-" },
-            { label: "Hat Rack", truck1: truck1.spec.safety[0]?.hornack ? 'Yes' : 'No', truck2: truck2.spec.safety[0]?.hornack ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.safety[0]?.hornack ? 'Yes' : 'No' : "-" },
-            { label: "First Aid Kit", truck1: truck1.spec.safety[0]?.firstAidKit ? 'Yes' : 'No', truck2: truck2.spec.safety[0]?.firstAidKit ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.safety[0]?.firstAidKit ? 'Yes' : 'No' : "-" }
+            { label: "Fog Light", truck1: truck1?.spec?.safety[0]?.fogLights ? 'Yes' : 'No', truck2: truck2?.spec?.safety[0]?.fogLights ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData?.spec?.safety[0]?.fogLights ? 'Yes' : 'No' : "-" },
+            { label: "Emergency Exit", truck1: truck1?.spec?.safety[0]?.emergencyExit ? 'Yes' : 'No', truck2: truck2?.spec?.safety[0]?.emergencyExit ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData?.spec?.safety[0]?.emergencyExit ? 'Yes' : 'No' : "-" },
+            { label: "Side Window", truck1: truck1?.spec?.safety[0]?.sideWindow ? 'Yes' : 'No', truck2: truck2?.spec?.safety[0]?.sideWindow ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData?.spec?.safety[0]?.sideWindow ? 'Yes' : 'No' : "-" },
+            { label: "Luggage Boot", truck1: truck1?.spec?.safety[0]?.luggageBoot ? 'Yes' : 'No', truck2: truck2?.spec?.safety[0]?.luggageBoot ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData?.spec?.safety[0]?.luggageBoot ? 'Yes' : 'No' : "-" },
+            { label: "Hat Rack", truck1: truck1?.spec?.safety[0]?.hornack ? 'Yes' : 'No', truck2: truck2?.spec?.safety[0]?.hornack ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData?.spec?.safety[0]?.hornack ? 'Yes' : 'No' : "-" },
+            { label: "First Aid Kit", truck1: truck1?.spec?.safety[0]?.firstAidKit ? 'Yes' : 'No', truck2: truck2?.spec?.safety[0]?.firstAidKit ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData?.spec?.safety[0]?.firstAidKit ? 'Yes' : 'No' : "-" }
           ]);
 
 
           setOthersSpec([
-            { label: "Accessories", truck1: truck1.spec.others[0]?.accessories ? 'Yes' : 'No', truck2: truck2.spec.others[0]?.accessories ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.others[0]?.accessories ? 'Yes' : 'No' : "-" },
-            { label: "Warranty", truck1: truck1.spec.others[0]?.warranty ? 'Yes' : 'No', truck2: truck2.spec.others[0]?.warranty ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData.spec.others[0]?.warranty ? 'Yes' : 'No' : "-" },
+            { label: "Accessories", truck1: truck1?.spec?.others[0]?.accessories ? 'Yes' : 'No', truck2: truck2?.spec?.others[0]?.accessories ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData?.spec?.others[0]?.accessories ? 'Yes' : 'No' : "-" },
+            { label: "Warranty", truck1: truck1?.spec?.others[0]?.warranty ? 'Yes' : 'No', truck2: truck2?.spec?.others[0]?.warranty ? 'Yes' : 'No', truck3: selectedTruckData ? selectedTruckData?.spec?.others[0]?.warranty ? 'Yes' : 'No' : "-" },
 
           ]);
 
@@ -212,14 +212,12 @@ const TruckCompare = () => {
   }, [selectedBrand]);
 
   useEffect(() => {
-    // Fetch truck data when selectedTruckId changes
     const fetchTruckData = async () => {
       if (selectedTruckId) {
         try {
           const response = await axios.get(`${API.HOST}/api/category/thirdCompare/${selectedTruckId}`);
           if (response.data.success) {
             setSelectedTruckData(response.data.data[0]);
-
           } else {
             setSelectedTruckData(null);
           }
@@ -294,7 +292,7 @@ const TruckCompare = () => {
             />
           </div>
 
-          <h1 className="text-2xl md:text-3xl font-bold my-8 text-center">
+          <h1 className="text-2xl md:text-3xl font-bold my-8 text-center capitalize">
             {truck1Data?.productName} vs {truck2Data?.productName}{" "}
             <span className="text-orange-500">Comparison</span>
           </h1>
@@ -311,7 +309,7 @@ const TruckCompare = () => {
                 />
               </div>
               <div className="p-4 flex-grow flex flex-col">
-                <h3 className="font-semibold text-base">
+                <h3 className="font-semibold text-base capitalize">
                   {truck1Data?.productName}
                 </h3>
                 <p className="font-bold text-lg mt-1">
@@ -337,7 +335,7 @@ const TruckCompare = () => {
                 />
               </div>
               <div className="p-4 flex-grow flex flex-col">
-                <h3 className="font-semibold text-base">
+                <h3 className="font-semibold text-base capitalize">
                   {truck2Data?.productName}
                 </h3>
                 <p className="font-bold text-lg mt-1">
@@ -363,15 +361,16 @@ const TruckCompare = () => {
                   />
                 </div>
                 <div className="p-4 flex-grow flex flex-col">
-                  <h3 className="font-semibold text-base">
-                    {truck2Data?.productName}
+                  <h3 className="font-semibold text-base capitalize ">
+                    {selectedTruckData?.productName}
                   </h3>
                   <p className="font-bold text-lg mt-1">
                     ₹ {selectedTruckData?.minPrice} - {selectedTruckData?.maxPrice} Lakh*
                   </p>
                 </div>
-              </div>) :
-              (<div className="w-full md:w-auto md:flex-1 md:max-w-sm bg-white border-2 border-dashed border-gray-300 rounded-lg text-center p-4 flex flex-col items-center justify-center">
+              </div>
+            ) : (
+              <div className="w-full md:w-auto md:flex-1 md:max-w-sm bg-white border-2 border-dashed border-gray-300 rounded-lg text-center p-4 flex flex-col items-center justify-center">
                 <div className="bg-gray-100 rounded-full p-4 mb-4">
                   <Image
                     src="/icons/truck.svg"
@@ -409,13 +408,14 @@ const TruckCompare = () => {
                   <option value="">Select Truck</option>
                   {availableTrucks.map(truck => <option key={truck._id} value={truck.productName}>{truck.productName}</option>)}
                 </select>
-              </div>)}
+              </div>
+            )}
           </div>
 
           <div className="sticky top-0 z-50 bg-gray-50 w-full border border-gray-200 rounded-md p-4 shadow-sm">
-            <div className="flex items-center justify-between gap-4">
+            <div className="grid grid-cols-4 gap-5">
               {/* Left Description */}
-              <div className="min-w-[450px] flex-grow">
+              <div className="">
                 <p className="font-semibold text-sm md:text-base text-gray-800">
                   Compare trucks helps you make an informed purchase decision.
                 </p>
@@ -489,9 +489,9 @@ const TruckCompare = () => {
               <h2 className="text-xl font-bold ">
                 Performance
               </h2>
-              <div className="font-semibold text-start">{truck1Data?.productName}</div>
-              <div className="font-semibold text-start">{truck2Data?.productName}</div>
-              <div className="font-semibold text-start">{selectedTruckData?.productName}</div>
+              <div className="font-semibold capitalize text-start">{truck1Data?.productName}</div>
+              <div className="font-semibold capitalize text-start">{truck2Data?.productName}</div>
+              <div className="font-semibold capitalize text-start">{selectedTruckData?.productName}</div>
             </div>
             <div>
               {performanceSpecs.map((spec, index) => (
@@ -500,10 +500,10 @@ const TruckCompare = () => {
                   className={`grid grid-cols-4 gap-4 items-center ${index % 2 === 0 ? "bg-white" : "bg-gray-50"
                     }`}
                 >
-                  <div className="p-4 font-semibold">{spec.label}</div>
-                  <div className="p-4 text-start">{spec.truck1}</div>
-                  <div className="p-4 text-start">{spec.truck2}</div>
-                  <div className="p-4 text-start">{spec.truck3}</div>
+                  <div className="p-4 font-semibold">{spec?.label}</div>
+                  <div className="p-4 text-start">{spec?.truck1}</div>
+                  <div className="p-4 text-start">{spec?.truck2}</div>
+                  <div className="p-4 text-start">{spec?.truck3}</div>
                 </div>
               ))}
             </div>
@@ -523,10 +523,10 @@ const TruckCompare = () => {
                   className={`grid grid-cols-4 gap-4 items-center ${index % 2 === 0 ? "bg-white" : "bg-gray-50"
                     }`}
                 >
-                  <div className="p-4 font-semibold">{spec.label}</div>
-                  <div className="p-4 text-start">{spec.truck1}</div>
-                  <div className="p-4 text-start">{spec.truck2}</div>
-                  <div className="p-4 text-start">{spec.truck3}</div>
+                  <div className="p-4 font-semibold">{spec?.label}</div>
+                  <div className="p-4 text-start">{spec?.truck1}</div>
+                  <div className="p-4 text-start">{spec?.truck2}</div>
+                  <div className="p-4 text-start">{spec?.truck3}</div>
                 </div>
               ))}
             </div>
@@ -535,9 +535,9 @@ const TruckCompare = () => {
           <div className="bg-white rounded-lg shadow-md my-8">
             <div className="bg-[#FFE8DE] p-4 rounded-t-lg grid grid-cols-4 text-[#FA7436]">
               <h2 className="text-xl font-bold t">Brakes Suspension</h2>
-              <div className="font-semibold text-start">{truck1Data?.productName}</div>
+              {/* <div className="font-semibold text-start">{truck1Data?.productName}</div>
               <div className="font-semibold text-start">{truck2Data?.productName}</div>
-              <div className="font-semibold text-start">{selectedTruckData?.productName}</div>
+              <div className="font-semibold text-start">{selectedTruckData?.productName}</div> */}
             </div>
             <div>
               {brakesSuspensionSpec.map((spec, index) => (
@@ -546,10 +546,10 @@ const TruckCompare = () => {
                   className={`grid grid-cols-4 gap-4 items-center ${index % 2 === 0 ? "bg-white" : "bg-gray-50"
                     }`}
                 >
-                  <div className="p-4 font-semibold">{spec.label}</div>
-                  <div className="p-4 text-start">{spec.truck1}</div>
-                  <div className="p-4 text-start">{spec.truck2}</div>
-                  <div className="p-4 text-start">{spec.truck3}</div>
+                  <div className="p-4 font-semibold">{spec?.label}</div>
+                  <div className="p-4 text-start">{spec?.truck1}</div>
+                  <div className="p-4 text-start">{spec?.truck2}</div>
+                  <div className="p-4 text-start">{spec?.truck3}</div>
                 </div>
               ))}
             </div>
@@ -558,9 +558,9 @@ const TruckCompare = () => {
           <div className="bg-white rounded-lg shadow-md my-8">
             <div className="bg-[#FFE8DE] p-4 rounded-t-lg grid grid-cols-4 text-[#FA7436]">
               <h2 className="text-xl font-bold t">Transmission & Load</h2>
-              <div className="font-semibold text-start">{truck1Data?.productName}</div>
+              {/* <div className="font-semibold text-start">{truck1Data?.productName}</div>
               <div className="font-semibold text-start">{truck2Data?.productName}</div>
-              <div className="font-semibold text-start">{selectedTruckData?.productName}</div>
+              <div className="font-semibold text-start">{selectedTruckData?.productName}</div> */}
             </div>
             <div>
               {transmissionLoadSpec.map((spec, index) => (
@@ -569,10 +569,10 @@ const TruckCompare = () => {
                   className={`grid grid-cols-4 gap-4 items-center ${index % 2 === 0 ? "bg-white" : "bg-gray-50"
                     }`}
                 >
-                  <div className="p-4 font-semibold">{spec.label}</div>
-                  <div className="p-4 text-start">{spec.truck1}</div>
-                  <div className="p-4 text-start">{spec.truck2}</div>
-                  <div className="p-4 text-start">{spec.truck3}</div>
+                  <div className="p-4 font-semibold">{spec?.label}</div>
+                  <div className="p-4 text-start">{spec?.truck1}</div>
+                  <div className="p-4 text-start">{spec?.truck2}</div>
+                  <div className="p-4 text-start">{spec?.truck3}</div>
                 </div>
               ))}
             </div>
@@ -581,9 +581,9 @@ const TruckCompare = () => {
           <div className="bg-white rounded-lg shadow-md my-8">
             <div className="bg-[#FFE8DE] p-4 rounded-t-lg grid grid-cols-4 text-[#FA7436]">
               <h2 className="text-xl font-bold t">Cabin & Body</h2>
-              <div className="font-semibold text-start">{truck1Data?.productName}</div>
+              {/* <div className="font-semibold text-start">{truck1Data?.productName}</div>
               <div className="font-semibold text-start">{truck2Data?.productName}</div>
-              <div className="font-semibold text-start">{selectedTruckData?.productName}</div>
+              <div className="font-semibold text-start">{selectedTruckData?.productName}</div> */}
             </div>
             <div>
               {cabinAndBodySpec.map((spec, index) => (
@@ -592,10 +592,10 @@ const TruckCompare = () => {
                   className={`grid grid-cols-4 gap-4 items-center ${index % 2 === 0 ? "bg-white" : "bg-gray-50"
                     }`}
                 >
-                  <div className="p-4 font-semibold">{spec.label}</div>
-                  <div className="p-4 text-start">{spec.truck1}</div>
-                  <div className="p-4 text-start">{spec.truck2}</div>
-                  <div className="p-4 text-start">{spec.truck3}</div>
+                  <div className="p-4 font-semibold">{spec?.label}</div>
+                  <div className="p-4 text-start">{spec?.truck1}</div>
+                  <div className="p-4 text-start">{spec?.truck2}</div>
+                  <div className="p-4 text-start">{spec?.truck3}</div>
                 </div>
               ))}
             </div>
@@ -604,9 +604,9 @@ const TruckCompare = () => {
           <div className="bg-white rounded-lg shadow-md my-8">
             <div className="bg-[#FFE8DE] p-4 rounded-t-lg grid grid-cols-4 text-[#FA7436]">
               <h2 className="text-xl font-bold t">Interior Features</h2>
-              <div className="font-semibold text-start">{truck1Data?.productName}</div>
+              {/* <div className="font-semibold text-start">{truck1Data?.productName}</div>
               <div className="font-semibold text-start">{truck2Data?.productName}</div>
-              <div className="font-semibold text-start">{selectedTruckData?.productName}</div>
+              <div className="font-semibold text-start">{selectedTruckData?.productName}</div> */}
             </div>
             <div>
               {interiorFeaturesSpec.map((spec, index) => (
@@ -615,10 +615,10 @@ const TruckCompare = () => {
                   className={`grid grid-cols-4 gap-4 items-center ${index % 2 === 0 ? "bg-white" : "bg-gray-50"
                     }`}
                 >
-                  <div className="p-4 font-semibold">{spec.label}</div>
-                  <div className="p-4 text-start">{spec.truck1}</div>
-                  <div className="p-4 text-start">{spec.truck2}</div>
-                  <div className="p-4 text-start">{spec.truck3}</div>
+                  <div className="p-4 font-semibold">{spec?.label}</div>
+                  <div className="p-4 text-start">{spec?.truck1}</div>
+                  <div className="p-4 text-start">{spec?.truck2}</div>
+                  <div className="p-4 text-start">{spec?.truck3}</div>
                 </div>
               ))}
             </div>
@@ -627,9 +627,9 @@ const TruckCompare = () => {
           <div className="bg-white rounded-lg shadow-md my-8">
             <div className="bg-[#FFE8DE] p-4 rounded-t-lg grid grid-cols-4 text-[#FA7436]">
               <h2 className="text-xl font-bold t">Tyre</h2>
-              <div className="font-semibold text-start">{truck1Data?.productName}</div>
+              {/* <div className="font-semibold text-start">{truck1Data?.productName}</div>
               <div className="font-semibold text-start">{truck2Data?.productName}</div>
-              <div className="font-semibold text-start">{selectedTruckData?.productName}</div>
+              <div className="font-semibold text-start">{selectedTruckData?.productName}</div> */}
             </div>
             <div>
               {tyreSpec.map((spec, index) => (
@@ -638,10 +638,10 @@ const TruckCompare = () => {
                   className={`grid grid-cols-4 gap-4 items-center ${index % 2 === 0 ? "bg-white" : "bg-gray-50"
                     }`}
                 >
-                  <div className="p-4 font-semibold">{spec.label}</div>
-                  <div className="p-4 text-start">{spec.truck1}</div>
-                  <div className="p-4 text-start">{spec.truck2}</div>
-                  <div className="p-4 text-start">{spec.truck3}</div>
+                  <div className="p-4 font-semibold">{spec?.label}</div>
+                  <div className="p-4 text-start">{spec?.truck1}</div>
+                  <div className="p-4 text-start">{spec?.truck2}</div>
+                  <div className="p-4 text-start">{spec?.truck3}</div>
                 </div>
               ))}
             </div>
@@ -650,9 +650,9 @@ const TruckCompare = () => {
           <div className="bg-white rounded-lg shadow-md my-8">
             <div className="bg-[#FFE8DE] p-4 rounded-t-lg grid grid-cols-4 text-[#FA7436]">
               <h2 className="text-xl font-bold t">Safety Features</h2>
-              <div className="font-semibold text-start">{truck1Data?.productName}</div>
+              {/* <div className="font-semibold text-start">{truck1Data?.productName}</div>
               <div className="font-semibold text-start">{truck2Data?.productName}</div>
-              <div className="font-semibold text-start">{selectedTruckData?.productName}</div>
+              <div className="font-semibold text-start">{selectedTruckData?.productName}</div> */}
             </div>
             <div>
               {safetyFeaturesSpec.map((spec, index) => (
@@ -661,10 +661,10 @@ const TruckCompare = () => {
                   className={`grid grid-cols-4 gap-4 items-center ${index % 2 === 0 ? "bg-white" : "bg-gray-50"
                     }`}
                 >
-                  <div className="p-4 font-semibold">{spec.label}</div>
-                  <div className="p-4 text-start">{spec.truck1}</div>
-                  <div className="p-4 text-start">{spec.truck2}</div>
-                  <div className="p-4 text-start">{spec.truck3}</div>
+                  <div className="p-4 font-semibold">{spec?.label}</div>
+                  <div className="p-4 text-start">{spec?.truck1}</div>
+                  <div className="p-4 text-start">{spec?.truck2}</div>
+                  <div className="p-4 text-start">{spec?.truck3}</div>
                 </div>
               ))}
             </div>
@@ -673,9 +673,9 @@ const TruckCompare = () => {
           <div className="bg-white rounded-lg shadow-md my-8">
             <div className="bg-[#FFE8DE] p-4 rounded-t-lg grid grid-cols-4 text-[#FA7436]">
               <h2 className="text-xl font-bold t">Others</h2>
-              <div className="font-semibold text-start">{truck1Data?.productName}</div>
+              {/* <div className="font-semibold text-start">{truck1Data?.productName}</div>
               <div className="font-semibold text-start">{truck2Data?.productName}</div>
-              <div className="font-semibold text-start">{selectedTruckData?.productName}</div>
+              <div className="font-semibold text-start">{selectedTruckData?.productName}</div> */}
             </div>
             <div>
               {othersSpec.map((spec, index) => (
@@ -684,10 +684,10 @@ const TruckCompare = () => {
                   className={`grid grid-cols-4 gap-4 items-center ${index % 2 === 0 ? "bg-white" : "bg-gray-50"
                     }`}
                 >
-                  <div className="p-4 font-semibold">{spec.label}</div>
-                  <div className="p-4 text-start">{spec.truck1}</div>
-                  <div className="p-4 text-start">{spec.truck2}</div>
-                  <div className="p-4 text-start">{spec.truck3}</div>
+                  <div className="p-4 font-semibold">{spec?.label}</div>
+                  <div className="p-4 text-start">{spec?.truck1}</div>
+                  <div className="p-4 text-start">{spec?.truck2}</div>
+                  <div className="p-4 text-start">{spec?.truck3}</div>
                 </div>
               ))}
             </div>
