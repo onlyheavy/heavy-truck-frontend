@@ -288,83 +288,105 @@ const TruckCompare = () => {
               alt="Truck Banner"
               width={1200}
               height={200}
-              className="w-full h-28 rounded-lg"
+              className="w-full h-16 md:h-28 rounded-lg"
             />
           </div>
 
-          <h1 className="text-2xl md:text-3xl font-bold my-8 text-center capitalize">
+          <h1 className="text-lg md:text-2xl font-bold my-8 text-center capitalize">
             {truck1Data?.productName} vs {truck2Data?.productName}{" "}
             <span className="text-orange-500">Comparison</span>
           </h1>
 
-          <div className="flex flex-wrap justify-center items-stretch gap-4 my-8">
+          <div className="flex flex-col md:flex-row flex-wrap justify-center items-stretch gap-4 my-8">
+            {/* Truck 1 */}
             <div className="w-full md:w-auto md:flex-1 md:max-w-sm bg-white border border-gray-200 rounded-lg shadow-md text-center flex flex-col">
               <div className="relative">
                 <img
                   src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${truck1Data.productImage}`}
                   alt={truck1Data?.productName || "Truck 1"}
                   width={350}
-                  height={320}
-                  className="rounded-t-lg object-cover w-full"
+                  height={250}
+                  className="rounded-t-lg object-cover w-full h-36 md:h-52"
                 />
               </div>
               <div className="p-4 flex-grow flex flex-col">
-                <h3 className="font-semibold text-base capitalize">
+                <h3 className="font-semibold text-sm md:text-base capitalize">
                   {truck1Data?.productName}
                 </h3>
-                <p className="font-bold text-lg mt-1">
+                <p className="font-bold text-sm md:text-lg mt-1">
                   ₹ {truck1Data?.minPrice} - {truck1Data?.maxPrice} Lakh*
                 </p>
               </div>
             </div>
 
-            <div className="flex items-center">
+            {/* VS indicator for mobile */}
+            <div className="flex md:hidden items-center w-full justify-center my-2">
+              <div className="p-2 rounded-full bg-white border-2 border-orange-500 text-orange-500 font-bold text-lg">
+                VS
+              </div>
+            </div>
+
+            {/* VS indicator for desktop */}
+            <div className="hidden md:flex items-center">
               <div className="p-3 rounded-full bg-white border-2 border-orange-500 text-orange-500 font-bold text-xl">
                 VS
               </div>
             </div>
 
+            {/* Truck 2 */}
             <div className="w-full md:w-auto md:flex-1 md:max-w-sm bg-white border border-gray-200 rounded-lg shadow-md text-center flex flex-col">
               <div className="relative">
                 <img
                   src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${truck2Data.productImage}`}
                   alt={truck2Data?.productName || "Truck 2"}
                   width={350}
-                  height={320}
-                  className="rounded-t-lg object-cover w-full"
+                  height={250}
+                  className="rounded-t-lg object-cover w-full h-36 md:h-52"
                 />
               </div>
               <div className="p-4 flex-grow flex flex-col">
-                <h3 className="font-semibold text-base capitalize">
+                <h3 className="font-semibold text-sm md:text-base capitalize">
                   {truck2Data?.productName}
                 </h3>
-                <p className="font-bold text-lg mt-1">
+                <p className="font-bold text-sm md:text-lg mt-1">
                   ₹ {truck2Data?.minPrice} - {truck2Data?.maxPrice} Lakh*
                 </p>
               </div>
             </div>
 
+            {/* VS indicator for mobile between truck 2 and 3 */}
+            {selectedTruckData && (
+              <div className="flex md:hidden items-center w-full justify-center my-2">
+                <div className="p-2 rounded-full bg-white border-2 border-orange-500 text-orange-500 font-bold text-lg">
+                  VS
+                </div>
+              </div>
+            )}
+
+            {/* VS indicator for desktop */}
             <div className="hidden xl:flex items-center">
               <div className="p-3 rounded-full bg-white border-2 border-orange-500 text-orange-500 font-bold text-xl">
                 VS
               </div>
             </div>
+
+            {/* Truck 3 */}
             {selectedTruckData ? (
               <div className="w-full md:w-auto md:flex-1 md:max-w-sm bg-white border border-gray-200 rounded-lg shadow-md text-center flex flex-col">
                 <div className="relative">
                   <img
                     src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${selectedTruckData?.productImage}`}
-                    alt={selectedTruckData?.productName || "Truck 2"}
+                    alt={selectedTruckData?.productName || "Truck 3"}
                     width={350}
-                    height={320}
-                    className="rounded-t-lg object-cover w-full"
+                  height={250}
+                    className="rounded-t-lg object-cover w-full h-36 md:h-52"
                   />
                 </div>
                 <div className="p-4 flex-grow flex flex-col">
-                  <h3 className="font-semibold text-base capitalize ">
+                  <h3 className="font-semibold text-sm md:text-base capitalize ">
                     {selectedTruckData?.productName}
                   </h3>
-                  <p className="font-bold text-lg mt-1">
+                  <p className="font-bold text-sm md:text-lg mt-1">
                     ₹ {selectedTruckData?.minPrice} - {selectedTruckData?.maxPrice} Lakh*
                   </p>
                 </div>
@@ -380,7 +402,7 @@ const TruckCompare = () => {
                   />
                 </div>
                 <select
-                  className="w-full mb-4 p-3 border rounded bg-gray-50 text-left text-gray-500"
+                  className="w-full mb-4 p-3 border rounded bg-gray-50 text-left text-gray-500 text-sm"
                   value={selectedBrand}
                   onChange={(e) => {
                     setSelectedBrand(e.target.value);
@@ -391,7 +413,7 @@ const TruckCompare = () => {
                   {brands.map(brand => <option key={brand} value={brand}>{brand}</option>)}
                 </select>
                 <select
-                  className="w-full p-3 border rounded bg-gray-50 text-left text-gray-500"
+                  className="w-full p-3 border rounded bg-gray-50 text-left text-gray-500 text-sm"
                   value={selectedTruck}
                   onChange={e => {
                     setSelectedTruck(e.target.value);
@@ -412,7 +434,64 @@ const TruckCompare = () => {
             )}
           </div>
 
-          <div className="sticky top-0 z-50 bg-gray-50 w-full border border-gray-200 rounded-md p-4 shadow-sm">
+          {/* Mobile Sticky Header */}
+          <div className="md:hidden sticky top-0 z-50 bg-gray-50 w-full border border-gray-200 rounded-md p-3 shadow-sm mb-4">
+            <div className="grid grid-cols-3 gap-2">
+              {/* Truck 1 */}
+              {truck1Data && (
+                <div className="flex flex-col items-center bg-white border rounded-lg shadow p-2">
+                  <img
+                    src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${truck1Data.productImage}`}
+                    alt={truck1Data?.productName}
+                    className="w-12 h-8 object-contain mb-1"
+                  />
+                  <h4 className="text-xs font-semibold text-center leading-tight">
+                    {truck1Data?.productName}
+                  </h4>
+                  <p className="text-xs text-gray-600">
+                    ₹{truck1Data?.minPrice}L
+                  </p>
+                </div>
+              )}
+
+              {/* Truck 2 */}
+              {truck2Data && (
+                <div className="flex flex-col items-center bg-white border rounded-lg shadow p-2">
+                  <img
+                    src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${truck2Data.productImage}`}
+                    alt={truck2Data?.productName}
+                    className="w-12 h-8 object-contain mb-1"
+                  />
+                  <h4 className="text-xs font-semibold text-center leading-tight">
+                    {truck2Data?.productName}
+                  </h4>
+                  <p className="text-xs text-gray-600">
+                    ₹{truck2Data?.minPrice}L
+                  </p>
+                </div>
+              )}  
+
+              {/* Truck 3 - Only if selected */}
+              {selectedTruckData && (
+                <div className="flex flex-col items-center bg-white border rounded-lg shadow p-2">
+                  <img
+                    src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${selectedTruckData.productImage}`}
+                    alt={selectedTruckData?.productName}
+                    className="w-12 h-8 object-contain mb-1"
+                  />
+                  <h4 className="text-xs font-semibold text-center leading-tight">
+                    {selectedTruckData?.productName}
+                  </h4>
+                  <p className="text-xs text-gray-600">
+                    ₹{selectedTruckData?.minPrice || '—'}L
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Desktop Sticky Header */}
+          <div className="hidden md:block sticky top-0 z-50 bg-gray-50 w-full border border-gray-200 rounded-md p-4 shadow-sm">
             <div className="grid grid-cols-4 gap-5">
               {/* Left Description */}
               <div className="">
@@ -480,214 +559,300 @@ const TruckCompare = () => {
             </div>
           </div>
 
-
-
-
-
           <div className="bg-white rounded-lg shadow-md my-8">
-            <div className="bg-[#FFE8DE] p-4 rounded-t-lg grid grid-cols-4 text-[#FA7436]">
-              <h2 className="text-xl font-bold ">
+            <div className="bg-[#FFE8DE] p-4 rounded-t-lg text-[#FA7436]">
+              <h2 className="text-xl font-bold mb-2 md:mb-0">
                 Performance
               </h2>
-              <div className="font-semibold capitalize text-start">{truck1Data?.productName}</div>
-              <div className="font-semibold capitalize text-start">{truck2Data?.productName}</div>
-              <div className="font-semibold capitalize text-start">{selectedTruckData?.productName}</div>
             </div>
             <div>
               {performanceSpecs.map((spec, index) => (
-                <div
-                  key={index}
-                  className={`grid grid-cols-4 gap-4 items-center ${index % 2 === 0 ? "bg-white" : "bg-gray-50"
-                    }`}
-                >
-                  <div className="p-4 font-semibold">{spec?.label}</div>
-                  <div className="p-4 text-start">{spec?.truck1}</div>
-                  <div className="p-4 text-start">{spec?.truck2}</div>
-                  <div className="p-4 text-start">{spec?.truck3}</div>
+                <div key={index} className={`${index % 2 === 0 ? "bg-white" : "bg-gray-50"}`}>
+                  {/* Mobile/Tablet Layout: Two-row structure */}
+                  <div className="lg:hidden">
+                    {/* Spec Name Header */}
+                    <div className="p-3 md:p-4 font-semibold text-sm md:text-base border-b border-gray-200 bg-gray-100">
+                      {spec?.label}
+                    </div>
+                    {/* Truck Values Row */}
+                    <div className="grid grid-cols-3 gap-2 md:gap-4 p-3 md:p-4">
+                      <div className="text-start text-sm md:text-base break-words">{spec?.truck1}</div>
+                      <div className="text-start text-sm md:text-base break-words">{spec?.truck2}</div>
+                      <div className="text-start text-sm md:text-base break-words">{spec?.truck3}</div>
+                    </div>
+                  </div>
+
+                  {/* Desktop Layout: Side-by-side structure */}
+                  <div className="hidden lg:grid lg:grid-cols-4 gap-4 items-center p-4">
+                    <div className="font-semibold text-base break-words">{spec?.label}</div>
+                    <div className="text-start text-base break-words">{spec?.truck1}</div>
+                    <div className="text-start text-base break-words">{spec?.truck2}</div>
+                    <div className="text-start text-base break-words">{spec?.truck3}</div>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
 
           <div className="bg-white rounded-lg shadow-md my-8">
-            <div className="bg-[#FFE8DE] p-4 rounded-t-lg grid grid-cols-4 text-[#FA7436]">
-              <h2 className="text-xl font-bold t">Dimensions</h2>
-              <div className="font-semibold text-start">{truck1Data?.productName}</div>
-              <div className="font-semibold text-start">{truck2Data?.productName}</div>
-              <div className="font-semibold text-start">{selectedTruckData?.productName}</div>
+            <div className="bg-[#FFE8DE] p-4 rounded-t-lg text-[#FA7436]">
+              <h2 className="text-xl font-bold mb-2 md:mb-0">Dimensions</h2>
             </div>
             <div>
               {dimensionSpecs.map((spec, index) => (
-                <div
-                  key={index}
-                  className={`grid grid-cols-4 gap-4 items-center ${index % 2 === 0 ? "bg-white" : "bg-gray-50"
-                    }`}
-                >
-                  <div className="p-4 font-semibold">{spec?.label}</div>
-                  <div className="p-4 text-start">{spec?.truck1}</div>
-                  <div className="p-4 text-start">{spec?.truck2}</div>
-                  <div className="p-4 text-start">{spec?.truck3}</div>
+                <div key={index} className={`${index % 2 === 0 ? "bg-white" : "bg-gray-50"}`}>
+                  {/* Mobile/Tablet Layout: Two-row structure */}
+                  <div className="lg:hidden">
+                    {/* Spec Name Header */}
+                    <div className="p-3 md:p-4 font-semibold text-sm md:text-base border-b border-gray-200 bg-gray-100">
+                      {spec?.label}
+                    </div>
+                    {/* Truck Values Row */}
+                    <div className="grid grid-cols-3 gap-2 md:gap-4 p-3 md:p-4">
+                      <div className="text-start text-sm md:text-base break-words">{spec?.truck1}</div>
+                      <div className="text-start text-sm md:text-base break-words">{spec?.truck2}</div>
+                      <div className="text-start text-sm md:text-base break-words">{spec?.truck3}</div>
+                    </div>
+                  </div>
+
+                  {/* Desktop Layout: Side-by-side structure */}
+                  <div className="hidden lg:grid lg:grid-cols-4 gap-4 items-center p-4">
+                    <div className="font-semibold text-base break-words">{spec?.label}</div>
+                    <div className="text-start text-base break-words">{spec?.truck1}</div>
+                    <div className="text-start text-base break-words">{spec?.truck2}</div>
+                    <div className="text-start text-base break-words">{spec?.truck3}</div>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
 
           <div className="bg-white rounded-lg shadow-md my-8">
-            <div className="bg-[#FFE8DE] p-4 rounded-t-lg grid grid-cols-4 text-[#FA7436]">
-              <h2 className="text-xl font-bold t">Brakes Suspension</h2>
-              {/* <div className="font-semibold text-start">{truck1Data?.productName}</div>
-              <div className="font-semibold text-start">{truck2Data?.productName}</div>
-              <div className="font-semibold text-start">{selectedTruckData?.productName}</div> */}
+            <div className="bg-[#FFE8DE] p-4 rounded-t-lg text-[#FA7436]">
+              <h2 className="text-xl font-bold mb-2 md:mb-0">Brakes Suspension</h2>
             </div>
             <div>
               {brakesSuspensionSpec.map((spec, index) => (
-                <div
-                  key={index}
-                  className={`grid grid-cols-4 gap-4 items-center ${index % 2 === 0 ? "bg-white" : "bg-gray-50"
-                    }`}
-                >
-                  <div className="p-4 font-semibold">{spec?.label}</div>
-                  <div className="p-4 text-start">{spec?.truck1}</div>
-                  <div className="p-4 text-start">{spec?.truck2}</div>
-                  <div className="p-4 text-start">{spec?.truck3}</div>
+                <div key={index} className={`${index % 2 === 0 ? "bg-white" : "bg-gray-50"}`}>
+                  {/* Mobile/Tablet Layout: Two-row structure */}
+                  <div className="lg:hidden">
+                    {/* Spec Name Header */}
+                    <div className="p-3 md:p-4 font-semibold text-sm md:text-base border-b border-gray-200 bg-gray-100">
+                      {spec?.label}
+                    </div>
+                    {/* Truck Values Row */}
+                    <div className="grid grid-cols-3 gap-2 md:gap-4 p-3 md:p-4">
+                      <div className="text-start text-sm md:text-base break-words">{spec?.truck1}</div>
+                      <div className="text-start text-sm md:text-base break-words">{spec?.truck2}</div>
+                      <div className="text-start text-sm md:text-base break-words">{spec?.truck3}</div>
+                    </div>
+                  </div>
+
+                  {/* Desktop Layout: Side-by-side structure */}
+                  <div className="hidden lg:grid lg:grid-cols-4 gap-4 items-center p-4">
+                    <div className="font-semibold text-base break-words">{spec?.label}</div>
+                    <div className="text-start text-base break-words">{spec?.truck1}</div>
+                    <div className="text-start text-base break-words">{spec?.truck2}</div>
+                    <div className="text-start text-base break-words">{spec?.truck3}</div>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
 
           <div className="bg-white rounded-lg shadow-md my-8">
-            <div className="bg-[#FFE8DE] p-4 rounded-t-lg grid grid-cols-4 text-[#FA7436]">
-              <h2 className="text-xl font-bold t">Transmission & Load</h2>
-              {/* <div className="font-semibold text-start">{truck1Data?.productName}</div>
-              <div className="font-semibold text-start">{truck2Data?.productName}</div>
-              <div className="font-semibold text-start">{selectedTruckData?.productName}</div> */}
+            <div className="bg-[#FFE8DE] p-4 rounded-t-lg text-[#FA7436]">
+              <h2 className="text-xl font-bold mb-2 md:mb-0">Transmission & Load</h2>
             </div>
             <div>
               {transmissionLoadSpec.map((spec, index) => (
-                <div
-                  key={index}
-                  className={`grid grid-cols-4 gap-4 items-center ${index % 2 === 0 ? "bg-white" : "bg-gray-50"
-                    }`}
-                >
-                  <div className="p-4 font-semibold">{spec?.label}</div>
-                  <div className="p-4 text-start">{spec?.truck1}</div>
-                  <div className="p-4 text-start">{spec?.truck2}</div>
-                  <div className="p-4 text-start">{spec?.truck3}</div>
+                <div key={index} className={`${index % 2 === 0 ? "bg-white" : "bg-gray-50"}`}>
+                  {/* Mobile/Tablet Layout: Two-row structure */}
+                  <div className="lg:hidden">
+                    {/* Spec Name Header */}
+                    <div className="p-3 md:p-4 font-semibold text-sm md:text-base border-b border-gray-200 bg-gray-100">
+                      {spec?.label}
+                    </div>
+                    {/* Truck Values Row */}
+                    <div className="grid grid-cols-3 gap-2 md:gap-4 p-3 md:p-4">
+                      <div className="text-start text-sm md:text-base break-words">{spec?.truck1}</div>
+                      <div className="text-start text-sm md:text-base break-words">{spec?.truck2}</div>
+                      <div className="text-start text-sm md:text-base break-words">{spec?.truck3}</div>
+                    </div>
+                  </div>
+
+                  {/* Desktop Layout: Side-by-side structure */}
+                  <div className="hidden lg:grid lg:grid-cols-4 gap-4 items-center p-4">
+                    <div className="font-semibold text-base break-words">{spec?.label}</div>
+                    <div className="text-start text-base break-words">{spec?.truck1}</div>
+                    <div className="text-start text-base break-words">{spec?.truck2}</div>
+                    <div className="text-start text-base break-words">{spec?.truck3}</div>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
 
           <div className="bg-white rounded-lg shadow-md my-8">
-            <div className="bg-[#FFE8DE] p-4 rounded-t-lg grid grid-cols-4 text-[#FA7436]">
-              <h2 className="text-xl font-bold t">Cabin & Body</h2>
-              {/* <div className="font-semibold text-start">{truck1Data?.productName}</div>
-              <div className="font-semibold text-start">{truck2Data?.productName}</div>
-              <div className="font-semibold text-start">{selectedTruckData?.productName}</div> */}
+            <div className="bg-[#FFE8DE] p-4 rounded-t-lg text-[#FA7436]">
+              <h2 className="text-xl font-bold mb-2 md:mb-0">Cabin & Body</h2>
             </div>
             <div>
               {cabinAndBodySpec.map((spec, index) => (
-                <div
-                  key={index}
-                  className={`grid grid-cols-4 gap-4 items-center ${index % 2 === 0 ? "bg-white" : "bg-gray-50"
-                    }`}
-                >
-                  <div className="p-4 font-semibold">{spec?.label}</div>
-                  <div className="p-4 text-start">{spec?.truck1}</div>
-                  <div className="p-4 text-start">{spec?.truck2}</div>
-                  <div className="p-4 text-start">{spec?.truck3}</div>
+                <div key={index} className={`${index % 2 === 0 ? "bg-white" : "bg-gray-50"}`}>
+                  {/* Mobile/Tablet Layout: Two-row structure */}
+                  <div className="lg:hidden">
+                    {/* Spec Name Header */}
+                    <div className="p-3 md:p-4 font-semibold text-sm md:text-base border-b border-gray-200 bg-gray-100">
+                      {spec?.label}
+                    </div>
+                    {/* Truck Values Row */}
+                    <div className="grid grid-cols-3 gap-2 md:gap-4 p-3 md:p-4">
+                      <div className="text-start text-sm md:text-base break-words">{spec?.truck1}</div>
+                      <div className="text-start text-sm md:text-base break-words">{spec?.truck2}</div>
+                      <div className="text-start text-sm md:text-base break-words">{spec?.truck3}</div>
+                    </div>
+                  </div>
+
+                  {/* Desktop Layout: Side-by-side structure */}
+                  <div className="hidden lg:grid lg:grid-cols-4 gap-4 items-center p-4">
+                    <div className="font-semibold text-base break-words">{spec?.label}</div>
+                    <div className="text-start text-base break-words">{spec?.truck1}</div>
+                    <div className="text-start text-base break-words">{spec?.truck2}</div>
+                    <div className="text-start text-base break-words">{spec?.truck3}</div>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
 
           <div className="bg-white rounded-lg shadow-md my-8">
-            <div className="bg-[#FFE8DE] p-4 rounded-t-lg grid grid-cols-4 text-[#FA7436]">
-              <h2 className="text-xl font-bold t">Interior Features</h2>
-              {/* <div className="font-semibold text-start">{truck1Data?.productName}</div>
-              <div className="font-semibold text-start">{truck2Data?.productName}</div>
-              <div className="font-semibold text-start">{selectedTruckData?.productName}</div> */}
+            <div className="bg-[#FFE8DE] p-4 rounded-t-lg text-[#FA7436]">
+              <h2 className="text-xl font-bold mb-2 md:mb-0">Interior Features</h2>
             </div>
             <div>
               {interiorFeaturesSpec.map((spec, index) => (
-                <div
-                  key={index}
-                  className={`grid grid-cols-4 gap-4 items-center ${index % 2 === 0 ? "bg-white" : "bg-gray-50"
-                    }`}
-                >
-                  <div className="p-4 font-semibold">{spec?.label}</div>
-                  <div className="p-4 text-start">{spec?.truck1}</div>
-                  <div className="p-4 text-start">{spec?.truck2}</div>
-                  <div className="p-4 text-start">{spec?.truck3}</div>
+                <div key={index} className={`${index % 2 === 0 ? "bg-white" : "bg-gray-50"}`}>
+                  {/* Mobile/Tablet Layout: Two-row structure */}
+                  <div className="lg:hidden">
+                    {/* Spec Name Header */}
+                    <div className="p-3 md:p-4 font-semibold text-sm md:text-base border-b border-gray-200 bg-gray-100">
+                      {spec?.label}
+                    </div>
+                    {/* Truck Values Row */}
+                    <div className="grid grid-cols-3 gap-2 md:gap-4 p-3 md:p-4">
+                      <div className="text-start text-sm md:text-base break-words">{spec?.truck1}</div>
+                      <div className="text-start text-sm md:text-base break-words">{spec?.truck2}</div>
+                      <div className="text-start text-sm md:text-base break-words">{spec?.truck3}</div>
+                    </div>
+                  </div>
+
+                  {/* Desktop Layout: Side-by-side structure */}
+                  <div className="hidden lg:grid lg:grid-cols-4 gap-4 items-center p-4">
+                    <div className="font-semibold text-base break-words">{spec?.label}</div>
+                    <div className="text-start text-base break-words">{spec?.truck1}</div>
+                    <div className="text-start text-base break-words">{spec?.truck2}</div>
+                    <div className="text-start text-base break-words">{spec?.truck3}</div>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
 
           <div className="bg-white rounded-lg shadow-md my-8">
-            <div className="bg-[#FFE8DE] p-4 rounded-t-lg grid grid-cols-4 text-[#FA7436]">
-              <h2 className="text-xl font-bold t">Tyre</h2>
-              {/* <div className="font-semibold text-start">{truck1Data?.productName}</div>
-              <div className="font-semibold text-start">{truck2Data?.productName}</div>
-              <div className="font-semibold text-start">{selectedTruckData?.productName}</div> */}
+            <div className="bg-[#FFE8DE] p-4 rounded-t-lg text-[#FA7436]">
+              <h2 className="text-xl font-bold mb-2 md:mb-0">Tyre</h2>
             </div>
             <div>
               {tyreSpec.map((spec, index) => (
-                <div
-                  key={index}
-                  className={`grid grid-cols-4 gap-4 items-center ${index % 2 === 0 ? "bg-white" : "bg-gray-50"
-                    }`}
-                >
-                  <div className="p-4 font-semibold">{spec?.label}</div>
-                  <div className="p-4 text-start">{spec?.truck1}</div>
-                  <div className="p-4 text-start">{spec?.truck2}</div>
-                  <div className="p-4 text-start">{spec?.truck3}</div>
+                <div key={index} className={`${index % 2 === 0 ? "bg-white" : "bg-gray-50"}`}>
+                  {/* Mobile/Tablet Layout: Two-row structure */}
+                  <div className="lg:hidden">
+                    {/* Spec Name Header */}
+                    <div className="p-3 md:p-4 font-semibold text-sm md:text-base border-b border-gray-200 bg-gray-100">
+                      {spec?.label}
+                    </div>
+                    {/* Truck Values Row */}
+                    <div className="grid grid-cols-3 gap-2 md:gap-4 p-3 md:p-4">
+                      <div className="text-start text-sm md:text-base break-words">{spec?.truck1}</div>
+                      <div className="text-start text-sm md:text-base break-words">{spec?.truck2}</div>
+                      <div className="text-start text-sm md:text-base break-words">{spec?.truck3}</div>
+                    </div>
+                  </div>
+
+                  {/* Desktop Layout: Side-by-side structure */}
+                  <div className="hidden lg:grid lg:grid-cols-4 gap-4 items-center p-4">
+                    <div className="font-semibold text-base break-words">{spec?.label}</div>
+                    <div className="text-start text-base break-words">{spec?.truck1}</div>
+                    <div className="text-start text-base break-words">{spec?.truck2}</div>
+                    <div className="text-start text-base break-words">{spec?.truck3}</div>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
 
           <div className="bg-white rounded-lg shadow-md my-8">
-            <div className="bg-[#FFE8DE] p-4 rounded-t-lg grid grid-cols-4 text-[#FA7436]">
-              <h2 className="text-xl font-bold t">Safety Features</h2>
-              {/* <div className="font-semibold text-start">{truck1Data?.productName}</div>
-              <div className="font-semibold text-start">{truck2Data?.productName}</div>
-              <div className="font-semibold text-start">{selectedTruckData?.productName}</div> */}
+            <div className="bg-[#FFE8DE] p-4 rounded-t-lg text-[#FA7436]">
+              <h2 className="text-xl font-bold mb-2 md:mb-0">Safety Features</h2>
             </div>
             <div>
               {safetyFeaturesSpec.map((spec, index) => (
-                <div
-                  key={index}
-                  className={`grid grid-cols-4 gap-4 items-center ${index % 2 === 0 ? "bg-white" : "bg-gray-50"
-                    }`}
-                >
-                  <div className="p-4 font-semibold">{spec?.label}</div>
-                  <div className="p-4 text-start">{spec?.truck1}</div>
-                  <div className="p-4 text-start">{spec?.truck2}</div>
-                  <div className="p-4 text-start">{spec?.truck3}</div>
+                <div key={index} className={`${index % 2 === 0 ? "bg-white" : "bg-gray-50"}`}>
+                  {/* Mobile/Tablet Layout: Two-row structure */}
+                  <div className="lg:hidden">
+                    {/* Spec Name Header */}
+                    <div className="p-3 md:p-4 font-semibold text-sm md:text-base border-b border-gray-200 bg-gray-100">
+                      {spec?.label}
+                    </div>
+                    {/* Truck Values Row */}
+                    <div className="grid grid-cols-3 gap-2 md:gap-4 p-3 md:p-4">
+                      <div className="text-start text-sm md:text-base break-words">{spec?.truck1}</div>
+                      <div className="text-start text-sm md:text-base break-words">{spec?.truck2}</div>
+                      <div className="text-start text-sm md:text-base break-words">{spec?.truck3}</div>
+                    </div>
+                  </div>
+
+                  {/* Desktop Layout: Side-by-side structure */}
+                  <div className="hidden lg:grid lg:grid-cols-4 gap-4 items-center p-4">
+                    <div className="font-semibold text-base break-words">{spec?.label}</div>
+                    <div className="text-start text-base break-words">{spec?.truck1}</div>
+                    <div className="text-start text-base break-words">{spec?.truck2}</div>
+                    <div className="text-start text-base break-words">{spec?.truck3}</div>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
 
           <div className="bg-white rounded-lg shadow-md my-8">
-            <div className="bg-[#FFE8DE] p-4 rounded-t-lg grid grid-cols-4 text-[#FA7436]">
-              <h2 className="text-xl font-bold t">Others</h2>
-              {/* <div className="font-semibold text-start">{truck1Data?.productName}</div>
-              <div className="font-semibold text-start">{truck2Data?.productName}</div>
-              <div className="font-semibold text-start">{selectedTruckData?.productName}</div> */}
+            <div className="bg-[#FFE8DE] p-4 rounded-t-lg text-[#FA7436]">
+              <h2 className="text-xl font-bold mb-2 md:mb-0">Others</h2>
             </div>
             <div>
               {othersSpec.map((spec, index) => (
-                <div
-                  key={index}
-                  className={`grid grid-cols-4 gap-4 items-center ${index % 2 === 0 ? "bg-white" : "bg-gray-50"
-                    }`}
-                >
-                  <div className="p-4 font-semibold">{spec?.label}</div>
-                  <div className="p-4 text-start">{spec?.truck1}</div>
-                  <div className="p-4 text-start">{spec?.truck2}</div>
-                  <div className="p-4 text-start">{spec?.truck3}</div>
+                <div key={index} className={`${index % 2 === 0 ? "bg-white" : "bg-gray-50"}`}>
+                  {/* Mobile/Tablet Layout: Two-row structure */}
+                  <div className="lg:hidden">
+                    {/* Spec Name Header */}
+                    <div className="p-3 md:p-4 font-semibold text-sm md:text-base border-b border-gray-200 bg-gray-100">
+                      {spec?.label}
+                    </div>
+                    {/* Truck Values Row */}
+                    <div className="grid grid-cols-3 gap-2 md:gap-4 p-3 md:p-4">
+                      <div className="text-start text-sm md:text-base break-words">{spec?.truck1}</div>
+                      <div className="text-start text-sm md:text-base break-words">{spec?.truck2}</div>
+                      <div className="text-start text-sm md:text-base break-words">{spec?.truck3}</div>
+                    </div>
+                  </div>
+
+                  {/* Desktop Layout: Side-by-side structure */}
+                  <div className="hidden lg:grid lg:grid-cols-4 gap-4 items-center p-4">
+                    <div className="font-semibold text-base break-words">{spec?.label}</div>
+                    <div className="text-start text-base break-words">{spec?.truck1}</div>
+                    <div className="text-start text-base break-words">{spec?.truck2}</div>
+                    <div className="text-start text-base break-words">{spec?.truck3}</div>
+                  </div>
                 </div>
               ))}
             </div>

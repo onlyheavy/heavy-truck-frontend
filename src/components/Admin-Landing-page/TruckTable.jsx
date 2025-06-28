@@ -60,7 +60,7 @@ export default function TruckTable() {
     const fetchTrucks = async () => {
       try {
         const response = await axios.get(`${API.HOST}/api/category/getCategory`);
-        setTrucks(response.data.success ? response.data.data : []);
+        setTrucks(response?.data?.success ? response?.data?.data : []);
         setError(null);
       } catch (err) {
         setTrucks([]);
