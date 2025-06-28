@@ -48,9 +48,9 @@ const TruckCompare = () => {
         const apiResponse = response.data;
 
         if (apiResponse.success) {
-          const truck1 = apiResponse.message.left;
-          const truck2 = apiResponse.message.right;
-          const datas = apiResponse.message.existData
+          const truck1 = apiResponse?.data?.left;
+          const truck2 = apiResponse?.data?.right;
+          const datas = apiResponse?.data?.existData
           console.log(truck1)
           setTruck1Data(truck1);
           setTruck2Data(truck2);
