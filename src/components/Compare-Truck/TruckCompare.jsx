@@ -136,8 +136,8 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
       if (selectedBrand) {
         try {
           const response = await axios.get(`${API.HOST}/api/category/getProductName/${encodeURIComponent(selectedBrand)}`);
-          if (response.data.success) {
-            const trucks = response.data.data.map(item => item.productName);
+          if (response?.data?.success) {
+            const trucks = response?.data?.data?.map(item => item?.productName);
             setTrucksByBrand(prev => ({ ...prev, [selectedBrand]: trucks }));
           }
         } catch (err) {
@@ -154,9 +154,9 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
       if (selectedBrand) {
         try {
           const response = await axios.get(`${API.HOST}/api/category/getProductName/${encodeURIComponent(selectedBrand)}`);
-          if (response.data.success) {
+          if (response?.data?.success) {
             // Store the full truck objects
-            setAvailableTrucks(response.data.data);
+            setAvailableTrucks(response?.data?.data);
           } else {
             setAvailableTrucks([]);
           }
@@ -175,8 +175,8 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
       if (selectedTruckId) {
         try {
           const response = await axios.get(`${API.HOST}/api/category/thirdCompare/${selectedTruckId}`);
-          if (response.data.success) {
-            setSelectedTruckData(response.data.data[0]);
+          if (response?.data?.success) {
+            setSelectedTruckData(response?.data?.data[0]);
           } else {
             setSelectedTruckData(null);
           }
@@ -262,7 +262,7 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
             <div className="w-full md:w-auto md:flex-1 md:max-w-sm bg-white border border-gray-200 rounded-lg shadow-md text-center flex flex-col">
               <div className="relative">
                 <img
-                  src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${truck1Data.productImage}`}
+                  src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${truck1Data?.productImage}`}
                   alt={truck1Data?.productName || "Truck 1"}
                   width={350}
                   height={250}
@@ -297,7 +297,7 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
             <div className="w-full md:w-auto md:flex-1 md:max-w-sm bg-white border border-gray-200 rounded-lg shadow-md text-center flex flex-col">
               <div className="relative">
                 <img
-                  src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${truck2Data.productImage}`}
+                  src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${truck2Data?.productImage}`}
                   alt={truck2Data?.productName || "Truck 2"}
                   width={350}
                   height={250}
@@ -370,7 +370,7 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
                   }}
                 >
                   <option value="">Select Brand</option>
-                  {brands.map(brand => <option key={brand} value={brand}>{brand}</option>)}
+                  {brands?.map(brand => <option key={brand} value={brand}>{brand}</option>)}
                 </select>
                 <select
                   className="w-full p-3 border rounded bg-gray-50 text-left text-gray-500 text-sm"
@@ -378,7 +378,7 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
                   onChange={e => {
                     setSelectedTruck(e.target.value);
                     // Find the selected truck object
-                    const truckObj = availableTrucks.find(truck => truck.productName === e.target.value);
+                    const truckObj = availableTrucks.find(truck => truck?.productName === e.target.value);
                     if (truckObj) {
                       setSelectedTruckId(truckObj._id);
                     } else {
@@ -388,7 +388,7 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
                   disabled={!selectedBrand}
                 >
                   <option value="">Select Truck</option>
-                  {availableTrucks.map(truck => <option key={truck._id} value={truck.productName}>{truck.productName}</option>)}
+                  {availableTrucks?.map(truck => <option key={truck._id} value={truck?.productName}>{truck?.productName}</option>)}
                 </select>
               </div>
             )}
@@ -401,7 +401,7 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
               {truck1Data && (
                 <div className="flex flex-col items-center bg-white border rounded-lg shadow p-2">
                   <img
-                    src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${truck1Data.productImage}`}
+                    src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${truck1Data?.productImage}`}
                     alt={truck1Data?.productName}
                     className="w-12 h-8 object-contain mb-1"
                   />
@@ -418,7 +418,7 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
               {truck2Data && (
                 <div className="flex flex-col items-center bg-white border rounded-lg shadow p-2">
                   <img
-                    src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${truck2Data.productImage}`}
+                    src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${truck2Data?.productImage}`}
                     alt={truck2Data?.productName}
                     className="w-12 h-8 object-contain mb-1"
                   />
@@ -435,7 +435,7 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
               {selectedTruckData && (
                 <div className="flex flex-col items-center bg-white border rounded-lg shadow p-2">
                   <img
-                    src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${selectedTruckData.productImage}`}
+                    src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${selectedTruckData?.productImage}`}
                     alt={selectedTruckData?.productName}
                     className="w-12 h-8 object-contain mb-1"
                   />
@@ -464,7 +464,7 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
               {truck1Data && (
                 <div className="flex items-center bg-white border rounded-lg shadow p-3 w-full ">
                   <img
-                    src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${truck1Data.productImage}`}
+                    src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${truck1Data?.productImage}`}
                     alt={truck1Data?.productName}
                     className="w-16 h-12 object-contain mr-3"
                   />
@@ -483,7 +483,7 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
               {truck2Data && (
                 <div className="flex items-center bg-white border rounded-lg shadow p-3 w-full ">
                   <img
-                    src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${truck2Data.productImage}`}
+                    src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${truck2Data?.productImage}`}
                     alt={truck2Data?.productName}
                     className="w-16 h-12 object-contain mr-3"
                   />
@@ -502,7 +502,7 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
               {selectedTruckData && (
                 <div className="flex items-center bg-white border rounded-lg shadow p-3 w-full ">
                   <img
-                    src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${selectedTruckData.productImage}`}
+                    src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${selectedTruckData?.productImage}`}
                     alt={selectedTruckData?.productName}
                     className="w-16 h-12 object-contain mr-3"
                   />

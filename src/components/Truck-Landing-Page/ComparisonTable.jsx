@@ -26,8 +26,8 @@ const ComparisonSection = ({ vehicles }) => {
   const router = useRouter();
 
   const handleCompare = () => {
-    const slug1 = slugify(vehicles[0].name);
-    const slug2 = slugify(vehicles[1].name);
+    const slug1 = slugify(vehicles[0]?.name);
+    const slug2 = slugify(vehicles[1]?.name);
 
     router.push(`/compare/${slug1}-vs-${slug2}`);
   };
@@ -35,12 +35,12 @@ const ComparisonSection = ({ vehicles }) => {
   return (
     <div className="border border-[#E0E8ED] rounded-lg p-2 relative w-full ">
       <div className="flex relative gap-2">
-        {vehicles.map((vehicle, index) => (
+        {vehicles?.map((vehicle, index) => (
           <ComparisonCard
             key={index}
-            vehicleImage={vehicle.image}
-            vehicleName={vehicle.name}
-            price={vehicle.price}
+            vehicleImage={vehicle?.image}
+            vehicleName={vehicle?.name}
+            price={vehicle?.price}
           />
         ))}
 
@@ -66,21 +66,21 @@ const ComparisonSection = ({ vehicles }) => {
 const ComparisonTable = () => {
   const { categoryData, alterNative } = useCategory();
 
-  const baseGroup1 = categoryData.length > 0 ? categoryData[0] : null;
+  const baseGroup1 = categoryData?.length > 0 ? categoryData[0] : null;
 
   const group1 = baseGroup1
     ? Array(3).fill(baseGroup1).map((item) => ({
-      image: `https://only-heavy.s3.eu-north-1.amazonaws.com/${item.productImage[0]}`,
-      name: item.productName,
-      price: `₹ ${item.minPrice} - ₹ ${item.maxPrice} Lakh*`,
+      image: `https://only-heavy.s3.eu-north-1.amazonaws.com/${item?.productImage[0]}`,
+      name: item?.productName,
+      price: `₹ ${item?.minPrice} - ₹ ${item?.maxPrice} Lakh*`,
     }))
     : [];
 
 
   const group2 = alterNative.slice(0, 3).map((item) => ({
-    image: `https://only-heavy.s3.eu-north-1.amazonaws.com/${item.image}`,
-    name: item.productName,
-    price: `₹ ${item.minPrice} - ₹ ${item.maxPrice} Lakh*`,
+    image: `https://only-heavy.s3.eu-north-1.amazonaws.com/${item?.image}`,
+    name: item?.productName,
+    price: `₹ ${item?.minPrice} - ₹ ${item?.maxPrice} Lakh*`,
   }));
 
 
