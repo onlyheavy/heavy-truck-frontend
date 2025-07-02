@@ -106,7 +106,7 @@ export default function TruckTable() {
       }),
       columnHelper.accessor('maxPrice', {
         header: 'Price',
-        cell: (info) => `₹${info.getValue()}`,
+        cell: (info) => `₹${info.getValue()} L`,
       }),
       columnHelper.accessor('fuelType', {
         header: 'Fuel Type',
