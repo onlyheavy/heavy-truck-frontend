@@ -43,7 +43,7 @@ const Navbar = () => {
       {/* Desktop Navbar */}
       <div className='hidden md:flex justify-between px-12 items-center py-4'>
         <div className='flex items-center gap-12'>
-          <img src="/logo.png" alt="logo" className='w-20 cursor-pointer' onClick={() => router.push('/admin/admin-landing')}/>
+          <img src="/logo.svg" alt="logo" className='w-20 cursor-pointer' onClick={() => router.push('/admin/admin-landing')}/>
           <div className="relative">
             <IoSearchOutline size={32} className="absolute right-1.5 top-1 text-hlg font-bold rounded-full bg-orange-500 text-white p-2" />
             <input
@@ -61,7 +61,7 @@ const Navbar = () => {
       </div>
 
       <div className='flex md:hidden justify-between items-center px-4 py-3'>
-        <img src="./logo.png" alt="logo" className='w-16 cursor-pointer'  />
+        <img src="./logo.svg" alt="logo" className='w-16 cursor-pointer'  />
         <button onClick={() => setShowMobileMenu(true)}>
           <BiMenuAltRight size={30} className='text-orange-500 cursor-pointer'/>
         </button>
