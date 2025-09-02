@@ -17,7 +17,7 @@ const Loan = () => {
                 </div>
                 <div className='flex gap-3 items-center bg-white  rounded-md p-2 md:mb-0 mb-4'>
                     <img src="/icons/location.svg" alt="location" />
-                    <input type="text" placeholder='Enter Your City or District' className=' outline-none' />
+                    <input type="text" placeholder='Enter Your City ' className=' outline-none' />
                 </div>
                 <div className='flex justify-center items-center'>
                     <button className='bg-[#FA7436] text-white text-sm font-medium px-4 py-3 rounded-md cursor-pointer'>Apply Loan</button>

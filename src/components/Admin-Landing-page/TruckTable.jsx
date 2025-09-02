@@ -25,8 +25,11 @@ export default function TruckTable() {
   const [pageSize, setPageSize] = useState(10);
   const [pageIndex, setPageIndex] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedOption, setSelectedOption] = useState('');
+  const [productData, setProductData] = useState([])
+  const [selectedProduct, setSelectedProduct] = useState("")
   const router = useRouter();
-
+  console.log(selectedProduct)
   const handleTogglePublish = async (truckId, newValue) => {
     try {
       await axios.put(`${API.HOST}/api/category/isPulished/${truckId}`, {
@@ -42,7 +45,7 @@ export default function TruckTable() {
       console.error('Error updating publish state:', error);
     }
   };
-
+  // 
   const handleDelete = async (id) => {
     const confirmed = await showDeleteConfirm()
     if (!confirmed) return
@@ -78,6 +81,78 @@ export default function TruckTable() {
     fetchTrucks();
   }, []);
 
+  const productNameFilter = async () => {
+    try {
+      const response = await axios.get(`${API.HOST}/api/category/getProductNamesByAdmin/${selectedOption}`);
+      setProductData(response?.data?.success ? response?.data?.data : []);
+
+      setError(null);
+    } catch (err) {
+      setTrucks([]);
+      if (err.response?.status === 404) {
+        setError('No data found');
+      } else {
+        console.error('Error fetching truck data:', err);
+        setError('Something went wrong while fetching data');
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+
+  const brancdFilter = async () => {
+    try {
+      const response = await axios.get(`${API.HOST}/api/category/getBrandFilterData/${selectedOption}`);
+      setTrucks(response?.data?.success ? response?.data?.data : []);
+      setError(null);
+    } catch (err) {
+      setTrucks([]);
+      setProductData([])
+      if (err.response?.status === 404) {
+        setError('No data found');
+      } else {
+        console.error('Error fetching truck data:', err);
+        setError('Something went wrong while fetching data');
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const productFilterData = async () => {
+    try {
+      const response = await axios.get(`${API.HOST}/api/category/getDataByIdByAdmin/${selectedProduct}`);
+      setTrucks(response?.data?.success ? response?.data?.data : []);
+      setError(null);
+    } catch (err) {
+      setTrucks([]);
+      setProductData([])
+      if (err.response?.status === 404) {
+        setError('No data found');
+      } else {
+        console.error('Error fetching truck data:', err);
+        setError('Something went wrong while fetching data');
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (selectedOption) {
+      brancdFilter();
+      productNameFilter();
+    }
+
+  }, [selectedOption]);
+
+  useEffect(() => {
+    if (selectedProduct) {
+      productFilterData();
+    }
+
+  }, [selectedProduct]);
   // Add cleanup effect
   useEffect(() => {
     return () => {
@@ -85,103 +160,135 @@ export default function TruckTable() {
     };
   }, []);
 
-  const columns = useMemo(
-    () => [
-      columnHelper.accessor((_, index) => index + 1, {
-        id: 'sno',
-        header: 'S.No',
-        cell: (info) => info.getValue(),
-      }),
-      columnHelper.accessor('categoryName', {
-        header: 'Category',
-        cell: (info) => <span className='capitalize'>{info.getValue()}</span>,
-      }),
-      columnHelper.accessor('brandName', {
-        header: 'Brand',
-        cell: (info) => info.getValue(),
-      }),
-      columnHelper.accessor('productName', {
-        header: 'Product Name',
-        cell: (info) => <span className='capitalize'>{info.getValue()}</span>,
-      }),
-      columnHelper.accessor('maxPrice', {
-        header: 'Price',
-        cell: (info) => `₹${info.getValue()} L`,
-      }),
-      columnHelper.accessor('fuelType', {
-        header: 'Fuel Type',
-        cell: (info) => <span className='capitalize'>{info.getValue()}</span>,
-      }),
-      columnHelper.accessor('engineCC', {
-        header: 'Engine (CC)',
-        cell: (info) => info.getValue(),
-      }),
-      columnHelper.accessor('isPublished', {
-        header: 'Publish',
-        cell: (info) => {
-          const truck = info.row.original;
-          const currentValue = info.getValue();
+  const productOptions = [
+    { value: "", label: "Product Name" },
+    ...productData.map((item) => ({
+      value: item._id,
+      label: item.productName,
+    })),
 
-          return (
-            <Switch
-              checked={currentValue}
-              onCheckedChange={(newValue) => handleTogglePublish(truck._id, newValue)}
-            />
-          );
-        },
-      }),
-      columnHelper.display({
-        id: 'actions',
-        header: 'Actions',
-        cell: (info) => {
-          const truck = info.row.original;
-          return (
-            <div className="space-x-2 flex items-center justify-center gap-2 cursor-pointer">
-              {/* 👇 Preview Icon */}
-              <div>
-                <Link
-                  href={truck.categorySlug && truck.slug ? `/${truck.categorySlug}/${truck.slug}` : '#'}
-                  passHref
-                  legacyBehavior
+  ];
+
+  const columns = [
+    columnHelper.accessor((_, index) => index + 1, {
+      id: 'sno',
+      header: 'S.No',
+      cell: (info) => info.getValue(),
+    }),
+    columnHelper.accessor('categoryName', {
+      header: 'Category',
+      cell: (info) => <span className='capitalize'>{info.getValue()}</span>,
+    }),
+    columnHelper.accessor('subCategory', {
+      header: 'Sub Category',
+      cell: (info) => <span className='capitalize'>{info.getValue()}</span>,
+    }),
+    columnHelper.accessor('brandName', {
+      header: <div className="">
+        <select
+          className="rounded px-1 py-0.5 text-sm outline-none"
+          value={selectedOption}
+          onChange={(e) => setSelectedOption(e.target.value)}
+        >
+          <option value="">Brand</option>
+          <option value="Tata Motors">Tata Motors</option>
+          <option value="Mahindra">Mahindra</option>
+          <option value="Ashok Leyland">Ashok Leyland</option>
+          <option value="BharatBenz">BharatBenz</option>
+          <option value="Eicher">Eicher</option>
+          <option value="Force Motors">Force Motors</option>
+        </select>
+      </div>,
+      cell: (info) => info.getValue(),
+    }),
+    columnHelper.accessor("productName", {
+      header: () => (
+        <select
+          className="rounded px-1 py-0.5 text-sm outline-none"
+          value={selectedProduct}
+          onChange={(e) => setSelectedProduct(e.target.value)}
+        >
+          {productOptions.map((opt) => (
+            <option key={opt.value} value={opt.value}>
+              {opt.label}
+            </option>
+          ))}
+        </select>
+      ),
+      cell: (info) => <span className="capitalize">{info.getValue()}</span>,
+    }),
+    columnHelper.accessor('fuelType', {
+      header: 'Fuel Type',
+      cell: (info) => <span className='capitalize'>{info.getValue()}</span>,
+    }),
+    columnHelper.accessor('country', {
+      header: 'Country',
+      cell: (info) => `${info.getValue()} `,
+    }),
+    columnHelper.accessor('isPublished', {
+      header: 'Publish',
+      cell: (info) => {
+        const truck = info.row.original;
+        const currentValue = info.getValue();
+
+        return (
+          <Switch
+            checked={currentValue}
+            onCheckedChange={(newValue) => handleTogglePublish(truck._id, newValue)}
+          />
+        );
+      },
+    }),
+    columnHelper.display({
+      id: 'actions',
+      header: 'Actions',
+      cell: (info) => {
+        const truck = info.row.original;
+        return (
+          <div className="space-x-2 flex items-center justify-center gap-2 cursor-pointer">
+            {/* 👇 Preview Icon */}
+            <div>
+              <Link
+                href={truck.categorySlug && truck.slug ? `/${truck.categorySlug}/${truck.slug}` : '#'}
+                passHref
+                legacyBehavior
+              >
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => {
+                    if (!truck.categorySlug || !truck.slug) {
+                      e.preventDefault();
+                      alert("Missing categorySlug or slug");
+                    }
+                  }}
                 >
-                  <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => {
-                      if (!truck.categorySlug || !truck.slug) {
-                        e.preventDefault();
-                        alert("Missing categorySlug or slug");
-                      }
-                    }}
-                  >
-                    <FaEye className='w-5 h-5' />
-                  </a>
-                </Link>
-              </div>
-
-              {/* ✏️ Edit Icon */}
-              <div
-                onClick={() => router.push(`/admin/add-truck?id=${truck._id}`)}
-                className="text-blue-600 hover:underline"
-              >
-                <FaRegEdit className='w-5 h-5' />
-              </div>
-
-              {/* 🗑️ Delete Icon */}
-              <div
-                onClick={() => handleDelete(truck._id)}
-                className="text-red-600 hover:underline"
-              >
-                <MdDeleteOutline className='w-5 h-5' />
-              </div>
+                  <FaEye className='w-5 h-5' />
+                </a>
+              </Link>
             </div>
-          );
-        },
-      }),
 
-    ],
-    []
-  );
+            {/* ✏️ Edit Icon */}
+            <div
+              onClick={() => router.push(`/admin/add-truck?id=${truck._id}`)}
+              className="text-blue-600 hover:underline"
+            >
+              <FaRegEdit className='w-5 h-5' />
+            </div>
+
+            {/* 🗑️ Delete Icon */}
+            <div
+              onClick={() => handleDelete(truck._id)}
+              className="text-red-600 hover:underline"
+            >
+              <MdDeleteOutline className='w-5 h-5' />
+            </div>
+          </div>
+        );
+      },
+    }),
+
+  ]
 
   const table = useReactTable({
     data: trucks,

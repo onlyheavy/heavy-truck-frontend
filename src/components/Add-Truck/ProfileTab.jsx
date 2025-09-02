@@ -28,6 +28,7 @@ const ProfileTab = ({ onComplete }) => {
       fuelTankCapacity: '',
       wheelBase: ''
     }],
+    country: '',
     pros: [],
     cons: [],
     uses: [],
@@ -50,12 +51,12 @@ const ProfileTab = ({ onComplete }) => {
 
   // Brand options
   const brandOptions = [
-    { value: 'tata', label: 'Tata Motors' },
-    { value: 'mahindra', label: 'Mahindra' },
-    { value: 'ashok-leyland', label: 'Ashok Leyland' },
-    { value: 'bharat-benz', label: 'BharatBenz' },
-    { value: 'eicher', label: 'Eicher' },
-    { value: 'force', label: 'Force Motors' }
+    { value: 'Tata Motors', label: 'Tata Motors' },
+    { value: 'Mahindra', label: 'Mahindra' },
+    { value: 'Ashok Leyland', label: 'Ashok Leyland' },
+    { value: 'BharatBenz', label: 'BharatBenz' },
+    { value: 'Eicher', label: 'Eicher' },
+    { value: 'Force Motors', label: 'Force Motors' }
   ];
 
   // SubCategory options
@@ -605,7 +606,21 @@ const ProfileTab = ({ onComplete }) => {
                 placeholder="Enter rating between 1-5"
               />
             </div>
+
+            <div>
+              <label className="block text-gray-700 mb-2">Country </label>
+              <input
+                type="text"
+                name="country"
+                value={formData.country}
+                onChange={handleChange}
+                placeholder="Enter the country"
+                className={inputFieldClass}
+              />
+            </div>
           </div>
+
+
 
           <div className="mb-2 w-full">
             <label className="block text-gray-700 mb-2">Product Image</label>

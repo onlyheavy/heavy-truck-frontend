@@ -26,7 +26,7 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
     Eicher: ["Eicher Pro 2049", "Eicher Pro 2059XP", "Eicher Pro 3015"],
   });
 
-  const brands = ["Tata", "Mahindra", "Ashok Leyland", "Eicher"];
+  const brands = ["Tata Motors", "Mahindra", "Ashok Leyland", "BharatBenz", "Eicher", "Force Motors"];
   const [availableTrucks, setAvailableTrucks] = useState([]);
 
   useEffect(() => {

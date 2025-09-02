@@ -4,7 +4,7 @@ import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { useCategory } from "@/hooks/useContext";
 import { useEffect } from 'react';
-
+// Ex-showroom price can not be less than down payment
 // Register Chart.js components
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -22,31 +22,32 @@ const calculateEmi = ({ price, downPayment, tenure, interestRate }) => {
 
 const EmiCalculator = () => {
   // const initialVehiclePrice = 1000000;
-
-  const [vehiclePrice, setVehiclePrice] = useState(100000);
+  const { categoryData } = useCategory();
+  const [vehiclePrice, setVehiclePrice] = useState(categoryData[0].minPrice * 100000 - 100000);
   const [downPayment, setDownPayment] = useState(0);
   const [tenure, setTenure] = useState(60);
   const [interestRate, setInterestRate] = useState(12);
-  const { categoryData } = useCategory();
+
   useEffect(() => {
+    console.log(categoryData)
     if (categoryData.length > 0) {
       const validItem = categoryData.find(item => typeof item?.maxPrice === 'number' && item.maxPrice > 0);
       if (validItem) {
-        setVehiclePrice(100000);
-        setTimeout(() => {
-          setVehiclePrice(3000000);
-        }, 500);
+        setVehiclePrice(categoryData.map((item) => (item.minPrice * 100000)));
+        // setTimeout(() => {
+        //   setVehiclePrice(3000000);
+        // }, 500);
       }
     }
   }, [categoryData]);
 
   useEffect(() => {
     if (vehiclePrice) {
-      setDownPayment(vehiclePrice / 10);
+      setDownPayment(vehiclePrice / 5);
     }
   }, [vehiclePrice]);
 
-  { categoryData.map((item) => (console.log(item.maxPrice, "PRooooooo"))) }
+  { categoryData.map((item) => (console.log(item.minPrice * 100000, "PRooooooo"))) }
 
   const { emi, totalPayment, interestAmount, loanAmount } = useMemo(
     () =>
@@ -113,15 +114,20 @@ const EmiCalculator = () => {
                   className="text-sm border border-gray-300 text-[#254154] outline-none w-32 px-3 py-1"
                   value={vehiclePrice || 0} // Fallback to 0 to avoid uncontrolled input
                   onChange={(e) => {
-                    const value = Math.min(Math.max(Number(e.target.value), 100000), 3000000);
+                    const value = Math.min(Math.max(Number(e.target.value), categoryData[0].minPrice * 100000 - 100000), categoryData[0].minPrice * 200000);
                     setVehiclePrice(value);
                   }}
                 />
-              </div>
 
+              </div>
+              {vehiclePrice < categoryData[0].minPrice * 100000 && (
+                <p className="text-red-400 text-[12px] text-end pb-2">
+                  Ex-showroom price can not be less than down payment
+                </p>
+              )}
               <Slider
-                min={100000}
-                max={3000000}
+                min={categoryData[0].minPrice * 100000 - 100000}
+                max={categoryData[0].minPrice * 200000}
                 step={1000}
                 value={vehiclePrice || 0}
                 onChange={(value) => setVehiclePrice(value)} // Update the state when slider changes
@@ -138,13 +144,13 @@ const EmiCalculator = () => {
                   className="text-sm border border-gray-300 text-[#254154] outline-none w-32 px-3 py-1"
                   value={downPayment}
                   onChange={(e) => {
-                    const value = Math.min(Math.max(Number(e.target.value), vehiclePrice ? vehiclePrice / 10 : 0), vehiclePrice || 0); // Clamp value
+                    const value = Math.min(Math.max(Number(e.target.value), vehiclePrice ? vehiclePrice / 5 : 0), vehiclePrice || 0); // Clamp value
                     setDownPayment(value);
                   }}
                 />
               </div>
               <Slider
-                min={vehiclePrice ? vehiclePrice / 10 : 0}
+                min={vehiclePrice ? vehiclePrice / 5 : 0}
                 max={vehiclePrice || 0}
                 step={1000}
                 value={downPayment}

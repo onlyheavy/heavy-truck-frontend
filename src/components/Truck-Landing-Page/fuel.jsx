@@ -5,7 +5,7 @@ import SliderInput from "../sliderInput";
 const Fuel = () => {
     const [fuelPrice, setfuelPrice] = useState(5);
     const [kiloMeter, setkiloMeter] = useState(50);
-    const [mileage, setMileage] = useState(5);
+    const [mileage, setMileage] = useState(1);
     console.log(fuelPrice, kiloMeter, mileage)
     const { fuelConsumption, fuelCost } = calculateMonthlyFuelUsage(
         fuelPrice,
@@ -37,7 +37,7 @@ const Fuel = () => {
                     <SliderInput
                         label="Average mileage per litre"
                         value={mileage}
-                        min={5}
+                        min={1}
                         max={100}
                         step={1}
                         onChange={setMileage}

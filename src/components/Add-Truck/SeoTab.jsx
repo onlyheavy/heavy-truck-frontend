@@ -192,7 +192,7 @@ const SeoTab = ({ truckId, onComplete, onBack }) => {
               <div className='w-full'>
                 <InputField
                   label="Brochure URL"
-                  name="brochure url"
+                  name="brochureUrl"
                   value={formData.brochureUrl}
                   onChange={handleChange}
                   placeholder="Enter Canonical URL"

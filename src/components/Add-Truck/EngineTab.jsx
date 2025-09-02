@@ -807,7 +807,7 @@ const EngineTab = ({ truckId, onComplete, onBack }) => {
                   onChange={handleInputChange}
                 />
                 <CheckboxField
-                  label="Adjustable Driver Seat 2"
+                  label="Adjustable Steering"
                   name="adjustableSteering"
                   checked={formData.adjustableSteering}
                   onChange={handleInputChange}
