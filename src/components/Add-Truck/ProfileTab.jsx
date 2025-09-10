@@ -24,7 +24,7 @@ const ProfileTab = ({ onComplete }) => {
       mileage: '',
       noOfTyres: '',
       fuelTankCapacity: '',
-      wheelBase: ''
+      engineDisplacement: ''
     }],
     country: '',
     pros: [],
@@ -256,7 +256,7 @@ const ProfileTab = ({ onComplete }) => {
             mileage: '',
             noOfTyres: '',
             fuelTankCapacity: '',
-            wheelBase: ''
+            engineDisplacement: ''
           }],
           pros: response.data.data.pros || [],
           cons: response.data.data.cons || [],
@@ -738,13 +738,13 @@ const ProfileTab = ({ onComplete }) => {
             </div>
 
             <div>
-              <label className="block text-gray-700 mb-2">Wheelbase (mm)</label>
+              <label className="block text-gray-700 mb-2">Engine Displacement (cc)</label>
               <input
                 type="text"
-                name="wheelBase"
-                value={formData.keyFeature[0].wheelBase}
+                name="engineDisplacement"
+                value={formData.keyFeature[0].engineDisplacement}
                 onChange={handleKeyFeatureChange}
-                placeholder="Wheelbase - Ex: 3335 mm"
+                placeholder="engine - Ex: 3900 cc"
                 className={inputFieldClass}
               />
             </div>
