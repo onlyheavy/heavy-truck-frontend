@@ -19,10 +19,8 @@ const ProfileTab = ({ onComplete }) => {
     fuelType: '',
     productImage: [],
     keyFeature: [{
-      power: '',
       GVW: '',
       payload: '',
-      engineDisplacement: '',
       mileage: '',
       noOfTyres: '',
       fuelTankCapacity: '',
@@ -253,10 +251,8 @@ const ProfileTab = ({ onComplete }) => {
         setFormData({
           ...response.data.data,
           keyFeature: response.data.data.keyFeature || [{
-            power: '',
             GVW: '',
             payload: '',
-            engineDisplacement: '',
             mileage: '',
             noOfTyres: '',
             fuelTankCapacity: '',
@@ -682,18 +678,6 @@ const ProfileTab = ({ onComplete }) => {
           <h3 className="text-2xl text-center text-orange-500 font-semibold mb-8">Key Features</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <div>
-              <label className="block text-gray-700 mb-2">Power (HP)</label>
-              <input
-                type="text"
-                name="power"
-                value={formData.keyFeature[0].power}
-                onChange={handleKeyFeatureChange}
-                placeholder="Power - Ex: 100 HP @ 3500 rpm"
-                className={inputFieldClass}
-              />
-            </div>
-
-            <div>
               <label className="block text-gray-700 mb-2">Gross Vehicle Weight (kg)</label>
               <input
                 type="text"
@@ -713,18 +697,6 @@ const ProfileTab = ({ onComplete }) => {
                 value={formData.keyFeature[0].payload}
                 onChange={handleKeyFeatureChange}
                 placeholder="Payload - Ex: 1500 kg"
-                className={inputFieldClass}
-              />
-            </div>
-
-            <div>
-              <label className="block text-gray-700 mb-2">Engine Displacement (cc)</label>
-              <input
-                type="text"
-                name="engineDisplacement"
-                value={formData.keyFeature[0].engineDisplacement}
-                onChange={handleKeyFeatureChange}
-                placeholder="Engine Displacement - Ex: 2956 cc"
                 className={inputFieldClass}
               />
             </div>
