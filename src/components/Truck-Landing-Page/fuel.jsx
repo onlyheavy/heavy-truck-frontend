@@ -47,13 +47,13 @@ const Fuel = () => {
                 </div>
                 <div className="rounded-lg flex p-10 md:py-12 py-6 justify-between bg-[#fffcdf] md:w-[53%] w-full md:my-12 my-6">
                     <div>
-                        <div className="pb-16">
+                        <div className="pb-12 pt-4">
                             <p className="">Fuel Consumption</p>
-                            <p><span className="text-sm md:text-xl font-bold">{fuelConsumption.toFixed(0)} Liters</span> Per Month</p>
+                            <p><span className="text-sm md:text-xl font-bold">{fuelConsumption.toFixed(0)} Litres</span> Per Month</p>
                         </div>
                         <div>
-                            <p>Fuel Consumption</p>
-                            <p ><span className="text-sm md:text-xl font-bold">₹{fuelCost.toFixed(0)} Liters</span> Per Month</p>
+                            <p>Fuel Price</p>
+                            <p ><span className="text-sm md:text-xl font-bold">₹{fuelCost.toFixed(0)}</span> Per Month</p>
                         </div>
                     </div>
                     <div>

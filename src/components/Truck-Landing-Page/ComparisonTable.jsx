@@ -88,7 +88,7 @@ const ComparisonTable = () => {
 
   return (
     <div className="my-10">
-      <h2 className="text-lg md:text-2xl font-semibold mb-6">Compare Top Pickups</h2>
+      <h2 className="text-lg md:text-2xl font-semibold mb-6">Compare Top Trucks</h2>
       <div className="flex flex-col md:flex-row gap-6 w-full  ">
         {pairedVehicles?.slice(0, 2)?.map((pair, index) => (
           <ComparisonSection key={index} vehicles={pair} />
