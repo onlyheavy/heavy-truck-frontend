@@ -532,12 +532,12 @@ const EngineTab = ({ truckId, onComplete, onBack }) => {
                 onChange={handleInputChange}
                 placeholder="Gradeability - Ex: 30%"
               />
-              <InputField
+              <SelectField
                 label="Emission Norm"
                 name="emissionNorm"
                 value={formData.emissionNorm}
                 onChange={handleInputChange}
-                placeholder="Emission Norm - Ex: BS6"
+                options={['BS III', 'BS IV', 'BS VI-II', 'BS VI', 'Electric']}
               />
               <InputField
                 label="Max Speed (km/h)"
