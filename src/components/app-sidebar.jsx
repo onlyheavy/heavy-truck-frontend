@@ -69,7 +69,7 @@ export function AppSidebar({
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <Link href="/admin/admin-landing">
+              <Link href="/">
                 <div>
                   <img src="/logo.svg" alt="logo" className="w-20" />
                 </div>

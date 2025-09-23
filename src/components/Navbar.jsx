@@ -39,81 +39,118 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div className='bg-[#fff9f5] overflow-visible relative'>
+    <div className="bg-white border-b border-gray-200 relative">
       {/* Desktop Navbar */}
-      <div className='hidden md:flex justify-between px-12 items-center py-4'>
-        <div className='flex items-center gap-12'>
-          <img src="/logo.svg" alt="logo" className='w-20 cursor-pointer' onClick={() => router.push('/admin/admin-landing')}/>
-          <div className="relative">
-            <IoSearchOutline size={32} className="absolute right-1.5 top-1 text-hlg font-bold rounded-full bg-orange-500 text-white p-2" />
+      <div className="hidden md:flex justify-between px-10 items-center py-4">
+        {/* Logo + Search */}
+        <div className="flex items-center gap-12">
+          <img
+            src="/logo.svg"
+            alt="logo"
+            className="w-28 cursor-pointer"
+            onClick={() => router.push('/')}
+          />
+
+          {/* Search Bar */}
+          <div className="relative w-[600px]">
             <input
               type="text"
-              className="border border-[#e3dfdf] w-[600px] bg-white rounded-full pl-5 p-2 focus-visible:outline-none"
               placeholder="Search"
+              className="w-full border border-gray-300 rounded-md py-2 pl-4 pr-12 text-gray-700 focus:outline-none"
+            />
+            <IoSearchOutline
+              size={22}
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-orange-500 cursor-pointer"
             />
           </div>
         </div>
-        <div>
-          <button onClick={() => router.push('/admin/admin-landing')} className='border cursor-pointer border-orange-500 text-sm py-2 px-4 text-white font-medium rounded-full bg-orange-500'>
+
+        {/* Right Side */}
+        <div className="flex items-center gap-6">
+          {/* Language Dropdown (static for now) */}
+          <button className="flex items-center text-gray-600 hover:text-gray-800">
+            English <IoMdArrowDropdown size={20} className="ml-1" />
+          </button>
+
+          {/* Login Button */}
+          <button
+            onClick={() => router.push('/admin/admin-landing')}
+            className="bg-orange-500 text-white px-6 py-2 rounded-md font-medium hover:bg-orange-600 transition"
+          >
             Login & Sign Up
           </button>
         </div>
       </div>
 
-      <div className='flex md:hidden justify-between items-center px-4 py-3'>
-        <img src="./logo.svg" alt="logo" className='w-16 cursor-pointer'  />
-        <button onClick={() => setShowMobileMenu(true)}>
-          <BiMenuAltRight size={30} className='text-orange-500 cursor-pointer'/>
-        </button>
-      </div>
-
-      <div className='hidden md:flex gap-3 mx-12 border-b pt-4 pb-2 border-gray-200 relative'>
+      {/* Desktop Bottom Nav */}
+      <div className="hidden md:flex gap-8 px-10 py-2 text-gray-700 text-sm border-t">
         <button
-          className='flex items-center gap-1 cursor-pointer relative'
+          className="flex items-center hover:text-orange-500"
           onClick={() => setShowTruckDropdown(!showTruckDropdown)}
         >
-          New Truck <IoMdArrowDropdown size={23} className='text-orange-500' />
+          New Truck <IoMdArrowDropdown size={18} className="ml-1" />
         </button>
+        <button className="flex items-center hover:text-orange-500">
+          Used Truck <IoMdArrowDropdown size={18} className="ml-1" />
+        </button>
+        <button className="hover:text-orange-500">Fuel Cost Calculator</button>
+        <button className="hover:text-orange-500">EMI Calculator</button>
+        <button className="hover:text-orange-500">Electric Truck</button>
+      </div>
 
-        {showTruckDropdown && (
-          <div
-            ref={dropdownRef}
-            className="absolute left-0 top-full shadow-md rounded-lg flex z-50"
-          >
-            <div className="w-48 bg-white p-4">
-              <h4 className="text-sm font-semibold mb-2 text-gray-600">All Brands</h4>
+      {/* Dropdown Content */}
+      {showTruckDropdown && (
+        <div
+          ref={dropdownRef}
+          className="absolute left-10 top-[120px] shadow-md rounded-lg flex z-50 bg-white"
+        >
+          <div className="w-48 p-4 border-r">
+            <h4 className="text-sm font-semibold mb-2 text-gray-600">All Brands</h4>
+            <ul>
+              {truckBrands.map((brand) => (
+                <li
+                  key={brand}
+                  className={`cursor-pointer p-1 rounded hover:bg-orange-100 ${
+                    selectedBrand === brand ? "font-semibold text-orange-600" : ""
+                  }`}
+                  onMouseEnter={() => setSelectedBrand(brand)}
+                  onClick={() => setSelectedBrand(brand)}
+                >
+                  {brand}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {selectedBrand && (
+            <div className="w-60 p-4">
+              <h4 className="text-sm font-semibold mb-2 text-gray-600">
+                Popular {selectedBrand} Trucks
+              </h4>
               <ul>
-                {truckBrands.map((brand) => (
+                {popularTrucks[selectedBrand]?.map((truck, index) => (
                   <li
-                    key={brand}
-                    className={`cursor-pointer p-1 rounded hover:bg-orange-100 ${selectedBrand === brand ? 'font-semibold text-orange-600' : ''}`}
-                    onMouseEnter={() => setSelectedBrand(brand)}
-                    onClick={() => setSelectedBrand(brand)}
+                    key={index}
+                    className="cursor-pointer p-1 hover:bg-orange-100 rounded"
                   >
-                    {brand}
+                    {truck}
                   </li>
                 ))}
               </ul>
             </div>
+          )}
+        </div>
+      )}
 
-            {selectedBrand && (
-              <div className="w-60 bg-white mt-4">
-                <h4 className="text-sm font-semibold mb-2 text-gray-600">
-                  Popular {selectedBrand} Trucks
-                </h4>
-                <ul>
-                  {popularTrucks[selectedBrand]?.map((truck, index) => (
-                    <li key={index} className="cursor-pointer p-1 hover:bg-orange-100 rounded">
-                      {truck}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
-        )}
+      {/* Mobile Topbar */}
+      <div className="flex md:hidden justify-between items-center px-4 py-3 border-b">
+        <img src="/logo.svg" alt="logo" className="w-20 cursor-pointer" />
+        <button onClick={() => setShowMobileMenu(true)}>
+          <BiMenuAltRight size={30} className="text-orange-500 cursor-pointer" />
+        </button>
       </div>
 
+      {/* Mobile Overlay */}
       {showMobileMenu && (
         <div
           className="fixed inset-0 bg-black/30 bg-opacity-40 z-40"
@@ -123,14 +160,25 @@ const Navbar = () => {
 
       {/* Mobile Sidebar */}
       <div
-        className={`fixed top-0 left-0 h-full w-72 bg-white z-50 shadow-lg transform transition-transform duration-700 ease-in-out ${showMobileMenu ? 'translate-x-0' : '-translate-x-full'
-          }`}
+        className={`fixed top-0 left-0 h-full w-72 bg-white z-50 shadow-lg transform transition-transform duration-500 ease-in-out ${
+          showMobileMenu ? "translate-x-0" : "-translate-x-full"
+        }`}
       >
         <div className="p-4 flex justify-between items-center border-b">
           <span className="font-semibold text-lg">Menu</span>
           <button onClick={() => setShowMobileMenu(false)}>
-            <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            <svg
+              className="w-6 h-6 text-gray-600"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
             </svg>
           </button>
         </div>
@@ -138,8 +186,9 @@ const Navbar = () => {
         <ul className="p-4 space-y-4">
           <li className="text-gray-700">New Truck</li>
           <li className="text-gray-700">Used Truck</li>
-          <li className="text-gray-700">Compare</li>
-          <li className="text-gray-700">Sell Truck</li>
+          <li className="text-gray-700">Fuel Cost Calculator</li>
+          <li className="text-gray-700">EMI Calculator</li>
+          <li className="text-gray-700">Electric Truck</li>
           <li className="text-gray-700">Login & Sign Up</li>
         </ul>
       </div>
