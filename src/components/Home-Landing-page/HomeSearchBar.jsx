@@ -26,7 +26,7 @@ const HomeSearchBar = () => {
     <div>
       <section className="bg-gradient-to-b from-[#FFF0E5] to-[#FFF9F5] py-16 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-0">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-1 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 items-center">
             <div className="">
               <h2 className="text-4xl lg:text-5xl font-bold  mb-6 text-balance 
                bg-gradient-to-b from-[#E9C3A2] to-[#2F2717] bg-clip-text text-transparent">
@@ -87,9 +87,22 @@ const HomeSearchBar = () => {
               </div>
 
             </div>
-            <div className="relative">
-              <img src="/images/home-truck.png?height=400&width=600" alt="Commercial Truck" className="w-full h-auto" />
+            <div className="relative w-full h-full">
+              {/* Ring in the back */}
+              <img
+                src="/images/ring.svg"
+                alt="ring"
+                className="absolute inset-0 w-full h-full z-0"
+              />
+
+              {/* Truck on top */}
+              <img
+                src="/images/home-truck.svg?height=400&width=600"
+                alt="Commercial Truck"
+                className="relative w-full h-auto z-10"
+              />
             </div>
+
           </div>
         </div>
       </section>

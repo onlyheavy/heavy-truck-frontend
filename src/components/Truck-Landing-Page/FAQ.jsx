@@ -16,8 +16,13 @@ export default function Faq() {
     <div className="bg-white md:py-10 py-4 md:px-4 px-0 pt-10">
       <h2 className="font-bold md:text-[24px] text-[18px] leading-[20px] text-[#000000] md:mb-10 mb-6">FAQs on {categoryData[0]?.productName}</h2>
       <div className=" mx-auto flex  flex-col-reverse md:flex-row gap-6">
-        
-        <div className="bg-gradient-to-b from-[#FF7A45] to-[#FF7033] md:w-[30%] w-full text-white rounded-xl md:p-6 p-2 flex flex-col items-center text-center justify-center">
+
+        <div
+          className="md:w-[30%] w-full text-white rounded-xl md:p-6 p-2 flex flex-col items-center text-center justify-center"
+          style={{
+            background: `url('/faq-bg.svg') center/cover no-repeat`
+          }}
+        >
           <div className="bg-white text-orange-500 rounded-full p-4 mb-4">
             <FiUser size={32} />
           </div>

@@ -16,6 +16,7 @@ import TrucksByEmissionNorm from "@/components/Home-Landing-page/TrucksByEmissio
 import HomeCompareTruck from "@/components/Home-Landing-page/HomeCompareTruck";
 import LandingPageLayout from "@/layouts/LandingPageLayout";
 import API from "@/utils/api";
+import LatestNews from "@/components/Home-Landing-page/LatestNews";
 
 export default function Home() {
   const [priceData, setPriceData] = useState([]);
@@ -101,6 +102,7 @@ export default function Home() {
         />
 
         <HomeCompareTruck />
+        <LatestNews />
       </LandingPageLayout>
     </div>
   );

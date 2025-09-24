@@ -8,91 +8,109 @@ const Footer = () => {
       {/* Footer */}
       <footer className="  py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="flex  gap-8">
             <div>
-              <img className="h-8 w-auto mb-4" src="/logo.svg" alt="Logo" />
-              <p className=" text-sm mb-4">
-                Only Heay is a one-stop research and information platform for all your new truck-buying needs in India.
-              </p>
-              {/* <div className="flex space-x-4">
-                <Phone className="h-5 w-5 " />
-                <span className="text-sm ">+91 98765 43210</span>
-              </div> */}
+              <div>
+                <img className="h-8 w-auto mb-4" src="/logo.svg" alt="Logo" />
+                <p className=" text-sm mb-4">
+                  Only Heay is a one-stop research and information platform for all your new truck-buying needs in India.
+                </p>
+
+              </div>
             </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">QUICK LINKS</h3>
-              <ul className="space-y-2 text-sm ">
-                <li>
-                  <a href="#" className="hover:text-white">
-                    New Trucks
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white">
-                    Used Trucks
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white">
-                    Compare Trucks
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white">
-                    Truck News
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white">
-                    Reviews
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">POLICY LINKS</h3>
-              <ul className="space-y-2 text-sm ">
-                <li>
-                  <a href="#" className="hover:text-white">
-                    Privacy Policy
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white">
-                    Terms of Service
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white">
-                    Cookie Policy
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white">
-                    Disclaimer
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white">
-                    Sitemap
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">CONTACT US</h3>
-              <div className="space-y-2 text-sm ">
-                <div className="flex items-center space-x-2">
-                  <MapPin className="h-4 w-4" />
-                  <span>123 Business District, Mumbai, India</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Phone className="h-4 w-4" />
-                  <span>+91 98765 43210</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <span>📧</span>
-                  <span>info@truckmarket.com</span>
+            <div className='grid grid-cols-4 gap-5'>
+              <div>
+                <h3 className="text-lg font-semibold mb-4 text-[#FA7436]">QUICK LINKS</h3>
+                <ul className="space-y-2 text-sm ">
+                  <li>
+                    <a href="#" className="hover:text-white">
+                      New Trucks
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="hover:text-white">
+                      Used Trucks
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="hover:text-white">
+                      Compare Trucks
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="hover:text-white">
+                      Truck News
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="hover:text-white">
+                      Reviews
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold mb-4 text-[#FA7436]">Pages</h3>
+                <ul className="space-y-2 text-sm ">
+                  <li>
+                    <a href="#" className="hover:text-white">
+                      Truck Brochure
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="hover:text-white">
+                      Compare Trucks
+                    </a>
+                  </li>
+
+
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold mb-4 text-[#FA7436]">Policy Links</h3>
+                <ul className="space-y-2 text-sm ">
+                  <li>
+                    <a href="#" className="hover:text-white">
+                      Privacy Policy
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="hover:text-white">
+                      Terms of Service
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="hover:text-white">
+                      Cookie Policy
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="hover:text-white">
+                      Disclaimer
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="hover:text-white">
+                      Sitemap
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold mb-4 text-[#FA7436]">Contact Us</h3>
+                <div className="space-y-2 text-sm ">
+                  <div className="flex items-center space-x-2">
+                    <MapPin className="h-4 w-4" />
+                    <span>123 Business District, Mumbai, India</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Phone className="h-4 w-4" />
+                    <span>+91 98765 43210</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <span>📧</span>
+                    <span>info@truckmarket.com</span>
+                  </div>
                 </div>
               </div>
             </div>
