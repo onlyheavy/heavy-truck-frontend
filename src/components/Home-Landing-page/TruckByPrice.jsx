@@ -1,10 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 
 const TruckByPrice = ({ data, onFilterChange, loading }) => {
     const [selected, setSelected] = useState("<10 lakh");
+    const router = useRouter()
 
     const options = ["<10 lakh", "10-20 lakh", "20-30 lakh", "30-40 lakh", "40-50 lakh", ">50 lakh"];
 
@@ -16,17 +18,23 @@ const TruckByPrice = ({ data, onFilterChange, loading }) => {
     return (
         <section className="py-10 bg-white">
             <div className="max-w-7xl mx-auto ">
-                <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
-                    Trucks By Price range
-                </h2>
+
+                <div className="flex items-center justify-center mx-10 my-6">
+                    <div className="w-60 border-t border-gray-300"></div>
+                    <span className="mx-4 text-3xl font-bold text-gray-900">
+                        Trucks By Price range
+                    </span>
+                    <div className="w-60 border-t border-gray-300"></div>
+                </div>
+
 
                 {/* Filter Buttons */}
-                <div className="flex justify-center mb-5 gap-3">
+                <div className="flex justify-center mt-8 mb-10 gap-3">
                     {options.map((option) => (
                         <button
                             key={option}
                             onClick={() => handleFilterClick(option)}
-                            className={`px-5 py-2 rounded-md border cursor-pointer transition ${selected === option
+                            className={`px-5 py-2 rounded-sm border cursor-pointer transition ${selected === option
                                 ? "bg-[#FFF5F2] border-orange-400 text-gray-900 font-semibold"
                                 : "bg-white border-gray-200 text-gray-600 hover:border-orange-300"
                                 }`}
@@ -68,13 +76,13 @@ const TruckByPrice = ({ data, onFilterChange, loading }) => {
                                                 }
                                             }}
                                         >
-                                            <Button
-                                                variant="outline"
-                                                size="sm"
-                                                className="w-full mt-3 text-orange-500 hover:text-orange-500 cursor-pointer border-orange-500 hover:bg-orange-50 bg-transparent"
-                                            >
-                                                View Details
-                                            </Button>
+                                            <div className='flex justify-center mt-2'>
+                                                <button
+                                                    className="px-4 py-1 mt-3 cursor-pointer rounded-xs font-bold text-sm border text-orange-500 border-orange-500 hover:text-orange-500 hover:bg-orange-50 bg-transparent "
+                                                >
+                                                    View Details
+                                                </button>
+                                            </div>
                                         </Link>
                                     </CardContent>
 
@@ -90,7 +98,7 @@ const TruckByPrice = ({ data, onFilterChange, loading }) => {
                 )}
 
                 <div className='flex justify-center items-center my-5'>
-                    <Button className='cursor-pointer bg-[#FA7436] hover:bg-[#FA7436]/90'>View All</Button>
+                    <Button className='cursor-pointer bg-[#FA7436] hover:bg-[#FA7436]/90' onClick={()=>router.push('/view')}>View All</Button>
                 </div>
             </div>
         </section>

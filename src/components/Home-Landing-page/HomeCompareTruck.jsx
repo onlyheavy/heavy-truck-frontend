@@ -4,11 +4,13 @@ import API from '@/utils/api'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 const S3_BASE = 'https://only-heavy.s3.eu-north-1.amazonaws.com/'
 
 const HomeCompareTruck = () => {
     const [compareTruck, setCompareTruck] = useState([])
+    const router = useRouter()
 
     const getCompareTruckDetails = async () => {
         try {
@@ -29,7 +31,13 @@ const HomeCompareTruck = () => {
         <div>
             <section className="py-10 bg-[#FDF8F4]">
                 <div className="max-w-7xl mx-auto ">
-                    <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">Compare Truck</h2>
+                    <div className="flex items-center justify-center mx-10  mb-10">
+                        <div className="w-60 border-t border-gray-300"></div>
+                        <span className="mx-4 text-3xl font-bold text-gray-900">
+                            Compare Truck
+                        </span>
+                        <div className="w-60 border-t border-gray-300"></div>
+                    </div>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         {compareTruck?.map((item, index) => {
                             const left = item?.leftProduct
@@ -59,8 +67,16 @@ const HomeCompareTruck = () => {
                                             <span className="text-orange-500 font-bold">₹ {right?.minPrice}{right?.maxPrice ? ` – ${right?.maxPrice}` : ''} Lakh*</span>
                                         </div>
                                         <Link href={`/compare/${item?.slug || ''}`}>
-                                            <Button className="w-full bg-orange-500 hover:bg-orange-600 text-white cursor-pointer">Compare Now</Button>
+                                            <div className='flex justify-center items-center'>
+                                                <button
+                                                    className="px-4 py-2 mt-3 cursor-pointer rounded-xs font-bold text-sm border text-orange-500 border-orange-500 hover:text-orange-500 hover:bg-orange-50 bg-transparent "
+                                                >
+                                                    Compare Now
+                                                </button>
+                                            </div>
                                         </Link>
+
+
                                     </CardContent>
                                 </Card>
                             )
@@ -68,7 +84,7 @@ const HomeCompareTruck = () => {
                     </div>
                 </div>
                 <div className='flex justify-center items-center my-5'>
-                    <Button className='cursor-pointer bg-[#FA7436] hover:bg-[#FA7436]/90'>View All</Button>
+                    <Button className='cursor-pointer bg-[#FA7436] hover:bg-[#FA7436]/90' onclick={() => router.push('/compare')}>View All</Button>
                 </div>
             </section>
         </div>

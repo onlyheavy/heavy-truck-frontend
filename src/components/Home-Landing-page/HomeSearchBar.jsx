@@ -24,7 +24,7 @@ const HomeSearchBar = () => {
 
   return (
     <div>
-      <section className="bg-gradient-to-b from-[#FFF0E5] to-[#FFF9F5] py-16 relative">
+      <section className="bg-gradient-to-b from-[#FFF0E5] to-[#FFF9F5] py-10 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-0">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 items-center">
             <div className="">
@@ -92,14 +92,14 @@ const HomeSearchBar = () => {
               <img
                 src="/images/ring.svg"
                 alt="ring"
-                className="absolute inset-0 w-full h-full z-0"
+                className="absolute inset-1  w-full h-full z-0"
               />
 
               {/* Truck on top */}
               <img
                 src="/images/home-truck.svg?height=400&width=600"
                 alt="Commercial Truck"
-                className="relative w-full h-auto z-10"
+                className="relative w-full h-auto -right-5 z-10"
               />
             </div>
 

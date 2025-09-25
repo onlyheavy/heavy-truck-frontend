@@ -28,9 +28,15 @@ const TruckByWheels = ({ data, onFilterChange, loading }) => {
 
         <section className="py-10 bg-white">
             <div className="max-w-7xl mx-auto ">
-                <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">Truck By Wheels</h2>
+                <div className="flex items-center justify-center mx-10 my-6">
+                    <div className="w-60 border-t border-gray-300"></div>
+                    <span className="mx-4 text-3xl font-bold text-gray-900">
+                    Truck By Wheels
+                    </span>
+                    <div className="w-60 border-t border-gray-300"></div>
+                </div>
                 {/* Filter Buttons */}
-                <div className="flex justify-center mb-5 gap-3">
+                <div className="flex justify-center mb-10 mt-8 gap-3">
                     {options.map((option) => (
                         <button
                             key={option}
@@ -72,13 +78,13 @@ const TruckByWheels = ({ data, onFilterChange, loading }) => {
                                                 }
                                             }}
                                         >
-                                            <Button
-                                                variant="outline"
-                                                size="sm"
-                                                className="w-full mt-3 hover:text-orange-500 cursor-pointer text-orange-500 border-orange-500 hover:bg-orange-50 bg-transparent"
-                                            >
-                                                View Details
-                                            </Button>
+                                            <div className='flex justify-center mt-2'>
+                                                <button
+                                                    className="px-4 py-1 mt-3 cursor-pointer rounded-xs font-bold text-sm border text-orange-500 border-orange-500 hover:text-orange-500 hover:bg-orange-50 bg-transparent "
+                                                >
+                                                    View Details
+                                                </button>
+                                            </div>
                                         </Link>
                                     </CardContent>
                                 </Card>

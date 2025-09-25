@@ -1,8 +1,6 @@
-// components/TruckListing.js
 import HomeCompareTruck from "@/components/Home-Landing-page/HomeCompareTruck";
 import PopularTruck from "@/components/Home-Landing-page/PopularTruck";
 import Faq from "@/components/Truck-Landing-Page/FAQ";
-import Image from "next/image";
 import { useState } from "react";
 
 const filterOptions = {
@@ -131,51 +129,46 @@ export default function TruckListing() {
                                 key={i}
                                 className="border border-gray-300 rounded-md p-3 overflow-hidden bg-white"
                             >
-                                {/* Image */}
-                                <div className="relative w-full h-44 ">
-                                    <Image
-                                        src={truck.img}
-                                        alt={truck.name}
-                                        layout="fill"
-                                    />
-                                </div>
 
+
+                                <img src={truck?.img} alt="truck-img" />
                                 {/* Details */}
-                                <div className="p-4">
+                                <div className=" my-5">
                                     <h3 className="text-sm font-semibold text-[#254154]">
                                         {truck.name}
                                     </h3>
                                     <p className="text-red-500 text-sm font-medium mt-1">
                                         {truck.price}
                                     </p>
+                                    <hr className="my-3" />
 
                                     {/* Specs */}
                                     <div className=" text-xs text-[#254154] mt-3">
-                                        <div className="flex flex-col gap-2">
-                                            <div className="grid grid-cols-3 gap-3">
-                                                <div>
+                                        <div className="flex flex-col gap-5">
+                                            <div className="grid grid-cols-3 gap-5">
+                                                <div className="flex flex-col gap-1">
                                                     <p>Engine Disp </p>
                                                     <p className="text-black">{truck.specs.engine}</p>
                                                 </div>
-                                                <div>
+                                                <div className="flex flex-col gap-1">
                                                     <p>Mileage </p>
                                                     <p className="text-black">{truck.specs.mileage}</p>
                                                 </div>
-                                                <div>
+                                                <div className="flex flex-col gap-1">
                                                     <p>GVW</p>
                                                     <p className="text-black">{truck.specs.gvw}</p>
                                                 </div>
                                             </div>
                                             <div className="grid grid-cols-3 gap-3">
-                                                <div>
+                                                <div className="flex flex-col gap-1">
                                                     <p>No. Of Tyres </p>
                                                     <p className="text-black">{truck.specs.tyres}</p>
                                                 </div>
-                                                <div>
+                                                <div className="flex flex-col gap-1">
                                                     <p>Payload </p>
                                                     <p className="text-black">{truck.specs.payload}</p>
                                                 </div>
-                                                <div>
+                                                <div className="flex flex-col gap-1">
                                                     <p>Fuel Type</p>
                                                     <p className="text-black">{truck.specs.fuel}</p>
                                                 </div>
@@ -186,7 +179,7 @@ export default function TruckListing() {
                                     </div>
 
                                     {/* Button */}
-                                    <button className="w-full cursor-pointer mt-4 py-2 border border-red-500 text-red-500 text-sm font-medium rounded-md hover:bg-red-50 transition">
+                                    <button className="w-full cursor-pointer mt-4 py-2 border border-red-500 text-red-500 text-sm font-medium rounded-sm hover:bg-red-50 transition">
                                         View Details
                                     </button>
                                 </div>

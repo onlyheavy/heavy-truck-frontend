@@ -3,6 +3,8 @@ import MainLayout from '@/layouts/MainLayout'
 import React from 'react'
 import API from "@/utils/api";
 import axios from "axios";
+import HomeCompareTruck from '@/components/Home-Landing-page/HomeCompareTruck';
+import Faq from '@/components/Truck-Landing-Page/FAQ';
 
 const CompareTruck = ({ truck1Data, truck2Data, rankData, slug }) => {
   return (
@@ -13,6 +15,8 @@ const CompareTruck = ({ truck1Data, truck2Data, rankData, slug }) => {
           rankData={rankData}
           slug={slug}
         />
+        <HomeCompareTruck />
+        <Faq />
     </MainLayout>
   )
 }

@@ -18,7 +18,15 @@ const TruckBrands = () => {
         <div>
             <section className=" py-10 bg-[#FFF8F4]">
                 <div className="max-w-7xl mx-auto  ">
-                    <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">List of Trucks Brands in India</h2>
+
+                    <div className="flex items-center justify-center mx-10 my-6">
+                        <div className="w-60 border-t border-orange-500"></div>
+                        <span className="mx-4 text-3xl font-bold text-gray-900">
+                            List of Trucks Brands in India
+                        </span>
+                        <div className="w-60 border-t border-orange-500"></div>
+                    </div>
+
                     <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-9 gap-5">
                         {truckBrands.map((brand, index) => (
                             <div key={index} className="text-center">

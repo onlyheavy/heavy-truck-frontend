@@ -1,5 +1,3 @@
-// components/TruckCards.tsx
-import Image from "next/image";
 
 const cards = [
   {
@@ -22,25 +20,17 @@ const cards = [
 export default function LatestNews() {
   return (
     <section className="py-12 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {cards.map((card, i) => (
             <div
               key={i}
-              className="bg-white rounded-md p-2  overflow-hidden border border-gray-300 hover:shadow-lg "
+              className="bg-white rounded-md p-3  overflow-hidden border border-gray-300 hover:shadow-lg "
             >
-              {/* Image */}
-              <div className="relative w-full h-48 ">
-                <Image
-                  src={card.img}
-                  alt={card.title}
-                  layout="fill"
-                  objectFit="cover"
-                />
-              </div>
+              <img src={card?.img} alt="latest news" />
 
               {/* Content */}
-              <div className="p-5">
+              <div className=" mt-3">
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
                   {card.title}
                 </h3>
