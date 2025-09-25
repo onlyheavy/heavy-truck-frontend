@@ -31,21 +31,30 @@ export default function Home() {
   const apiUrl = `${API.HOST}/api/category/filter/truck`;
 
   // 🔹 Generic API fetcher
-  const fetchData = async (filterKey, filterValue, setter) => {
-    try {
-      setLoading(true);
-      const res = await axios.post(apiUrl, {
-        filter: { [filterKey]: filterValue },
-        sortBy: "rating",
-        limit: 6,
-      });
-      setter(res?.data?.data || []);
-    } catch (err) {
-      console.error("Error fetching trucks:", err);
-    } finally {
-      setLoading(false);
+ // Generic API fetcher
+const fetchData = async (filterKey, filterValue, setter) => {
+  try {
+    setLoading(true);
+    const res = await axios.post(apiUrl, {
+      filter: { [filterKey]: filterValue },
+      sortBy: "rating",
+      limit: 6,
+    });
+
+    if (res.data?.success) {
+      setter(res.data.data || []);
+    } else {
+      console.warn("API returned error:", res.data);
+      setter([]); // set empty array if API failed
     }
-  };
+  } catch (err) {
+    console.error("Error fetching trucks:", err?.response?.data?.message || err.message);
+    setter([]); // fallback
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   // 🔹 Initial load
   useEffect(() => {
@@ -68,35 +77,35 @@ export default function Home() {
         <HomeBrochure />
 
         <TruckByPrice
-          data={priceData}
+          data={priceData || []}
           onFilterChange={(val) => fetchData("price_range", val, setPriceData)}
           loading={loading}
         />
         <TruckByFuel
-          data={fuelData}
+          data={fuelData || []}
           onFilterChange={(val) => fetchData("fuelType", val, setFuelData)}
           loading={loading}
         />
         <TruckByGvw
-          data={gvwData}
+          data={gvwData || []}
           onFilterChange={(val) => fetchData("GVW", val, setGvwData)}
           loading={loading}
         />
         <TruckByWheels
-          data={wheelData}
+          data={wheelData || []}
           onFilterChange={(val) => fetchData("wheel", val, setWheelData)}
           loading={loading}
         />
         
         <TrucksByEmissionNorm
-          data={emissionData}
+          data={emissionData || []}
           onFilterChange={(val) =>
             fetchData("emissionNorm", val, setEmissionData)
           }
           loading={loading}
         />
         <TruckByMileage
-          data={mileageData}
+          data={mileageData || []}
           onFilterChange={(val) => fetchData("mileage", val, setMileageData)}
           loading={loading}
         />
