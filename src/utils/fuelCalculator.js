@@ -20,7 +20,7 @@ function calculateMonthlyFuelUsage(
   const totalKmPerMonth = averageKmPerDay * daysPerMonth;
   const fuelConsumption = totalKmPerMonth / mileageKmPerLitre;
   const fuelCost = fuelConsumption * fuelPricePerLitre;
-
+  
   return {
     fuelConsumption: parseFloat(fuelConsumption.toFixed(2)),
     fuelCost: parseFloat(fuelCost.toFixed(2)),

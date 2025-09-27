@@ -24,6 +24,7 @@ const Fuel = () => {
                         min={5}
                         max={150}
                         step={1}
+                        color='bg-orange-500'
                         onChange={setfuelPrice}
                     />
                     <SliderInput
@@ -32,6 +33,7 @@ const Fuel = () => {
                         min={50}
                         max={20000}
                         step={50}
+                        color='bg-orange-500'
                         onChange={setkiloMeter}
                     />
                     <SliderInput
@@ -40,6 +42,7 @@ const Fuel = () => {
                         min={1}
                         max={100}
                         step={1}
+                        color='bg-orange-500'
                         onChange={setMileage}
                     />
 

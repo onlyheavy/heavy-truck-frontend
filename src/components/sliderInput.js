@@ -1,12 +1,12 @@
 import React from 'react';
 import { Range } from 'react-range';
 
-const SliderInput = ({ label, value, min, max, step, onChange }) => {
+const SliderInput = ({ label, value, min, max, step, onChange, color }) => {
   return (
     <div className="mb-7">
       <label className="flex justify-between gap-5 items-center mb-4">
         <span className="font-medium ">{label}</span>{' '}
-        <span className="border border-gray-300 w-18 md:w-44 p-2 rounded-sm">{value}</span>
+        <span className="border border-gray-300 w-14 md:w-32 p-2 rounded-sm">{value}</span>
       </label>
       <Range
         step={step}
@@ -20,7 +20,7 @@ const SliderInput = ({ label, value, min, max, step, onChange }) => {
           </div>
         )}
         renderThumb={({ props }) => (
-          <div {...props} className="h-5 w-5 bg-orange-500 rounded-full shadow" />
+          <div {...props} className={`h-5 w-5 rounded-full shadow ${color}`} />
         )}
       />
     </div>

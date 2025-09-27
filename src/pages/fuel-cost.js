@@ -6,6 +6,7 @@ import LandingPageLayout from '@/layouts/LandingPageLayout'
 import API from '@/utils/api'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import FuelCalculate from '@/components/fuel-cost/fuelCalculate'
 
 const FuelCost = () => {
     const [priceData, setPriceData] = useState([]);
@@ -41,7 +42,7 @@ const FuelCost = () => {
     <div className='min-h-screen bg-white'>
          <LandingPageLayout>
             <Banner/>
-
+            <FuelCalculate/>
             <TruckByPrice
               data={priceData}
               onFilterChange={(val) => fetchData("price_range", val, setPriceData)}
