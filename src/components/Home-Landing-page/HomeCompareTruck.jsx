@@ -86,9 +86,10 @@ const HomeCompareTruck = () => {
                         })}
                     </div>
                 </div>
-                <div className='flex justify-center items-center my-5'>
-                    <Button className='cursor-pointer bg-[#FA7436] hover:bg-[#FA7436]/90' onclick={() => router.push('/compare')}>View All</Button>
-                </div>
+                <Link  href={`/compare`}>
+                    <div className='flex justify-center items-center my-5'>
+                        <Button className='cursor-pointer bg-[#FA7436] hover:bg-[#FA7436]/90' >View All</Button>
+                    </div></Link>
             </section>
         </div>
     )
