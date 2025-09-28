@@ -1,5 +1,4 @@
 
-import { Card, CardContent } from '@/components/ui/card'
 import API from '@/utils/api'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
@@ -38,8 +37,8 @@ const PopularTruck = () => {
                     <div className="flex gap-6 overflow-x-auto pb-4 pt-8 scrollbar-hide">
                         {Array.isArray(popularTrucks) && popularTrucks?.length > 0 ?
                             popularTrucks.map((truck, index) => (
-                                <Card key={index} className="min-w-[250px] border border-gray-300 hover:shadow-lg ">
-                                    <CardContent className="p-3">
+                                <div key={index} className="min-w-[250px] border rounded-md border-gray-300 hover:shadow-lg ">
+                                    <div className="p-3">
                                         <img
                                             src={`${process.env.NEXT_PUBLIC_S3_URL}${truck?.image}`}
                                             alt={truck.productName}
@@ -56,8 +55,8 @@ const PopularTruck = () => {
                                                 View Details
                                             </button>
                                         </div>
-                                    </CardContent>
-                                </Card>
+                                    </div>
+                                </div>
                             )) : (<p className="text-center">No trucks found</p>)}
                     </div>
                 </div>

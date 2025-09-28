@@ -58,12 +58,12 @@ const fetchData = async (filterKey, filterValue, setter) => {
 
   // 🔹 Initial load
   useEffect(() => {
-    fetchData("price_range", "20-30 lakh", setPriceData);
-    fetchData("fuelType", "Diesel", setFuelData);
-    fetchData("GVW", "5-10 ton", setGvwData);
+    fetchData("price_range", "under-10-lakh", setPriceData);
+    fetchData("fuelType", "diesel", setFuelData);
+    fetchData("GVW", "under-2.5-ton", setGvwData);
     fetchData("wheel", 4, setWheelData);
-    fetchData("mileage", "11-20 mileage", setMileageData);
-    fetchData("emissionNorm", "BS VI", setEmissionData);
+    fetchData("mileage", "1-5-mileage", setMileageData);
+    fetchData("emissionNorm", "bs-vi", setEmissionData);
   }, []);
 
   return (

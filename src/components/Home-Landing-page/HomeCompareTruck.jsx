@@ -1,5 +1,4 @@
 import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
 import API from '@/utils/api'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
@@ -46,25 +45,29 @@ const HomeCompareTruck = () => {
                             const leftImg = left?.productImage ? `${S3_BASE}${left?.productImage}` : '/placeholder.svg'
                             const rightImg = right?.productImage ? `${S3_BASE}${right?.productImage}` : '/placeholder.svg'
                             return (
-                                <Card key={item?._id || index} className="border border-gray-300 hover:shadow-lg ">
-                                    <CardContent className="p-6">
+                                <div key={item?._id || index} className="border bg-white rounded-md border-gray-300 hover:shadow-lg ">
+                                    <div className="p-3">
                                         <div className="grid grid-cols-2 gap-4 mb-4">
                                             <img
                                                 src={leftImg}
                                                 alt={left?.productName || 'Left truck'}
-                                                className="w-full h-40 object-contain rounded-lg bg-white border border-gray-300"
+                                                className="w-full h-40 object-contain rounded-lg bg-transparent border border-gray-300"
                                             />
                                             <img
                                                 src={rightImg}
                                                 alt={right?.productName || 'Right truck'}
-                                                className="w-full h-40 object-contain rounded-lg bg-white border border-gray-300"
+                                                className="w-full h-40 object-contain rounded-lg bg-transparent border border-gray-300"
                                             />
                                         </div>
                                         <h3 className="font-semibold text-gray-900 mb-4 text-center">{title}</h3>
-                                        <div className="flex justify-between items-center mb-4 text-sm">
-                                            <span className="text-orange-500 font-bold">₹ {left?.minPrice}{left?.maxPrice ? ` – ${left?.maxPrice}` : ''} Lakh*</span>
-                                            <span className="text-gray-400 ">vs</span>
-                                            <span className="text-orange-500 font-bold">₹ {right?.minPrice}{right?.maxPrice ? ` – ${right?.maxPrice}` : ''} Lakh*</span>
+                                        <div className="flex justify-center items-center gap-8 mb-4 text-sm">
+                                            <span className="text-orange-500 font-bold min-w-[110px] text-center">
+                                                ₹ {left?.minPrice}{left?.maxPrice ? ` – ${left?.maxPrice}` : ''} Lakh*
+                                            </span>
+                                            <span className="text-gray-400 font-semibold">vs</span>
+                                            <span className="text-orange-500 font-bold min-w-[110px] text-center">
+                                                ₹ {right?.minPrice}{right?.maxPrice ? ` – ${right?.maxPrice}` : ''} Lakh*
+                                            </span>
                                         </div>
                                         <Link href={`/compare/${item?.slug || ''}`}>
                                             <div className='flex justify-center items-center'>
@@ -77,8 +80,8 @@ const HomeCompareTruck = () => {
                                         </Link>
 
 
-                                    </CardContent>
-                                </Card>
+                                    </div>
+                                </div>
                             )
                         })}
                     </div>

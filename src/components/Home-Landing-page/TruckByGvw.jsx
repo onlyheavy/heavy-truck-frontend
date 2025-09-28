@@ -1,28 +1,28 @@
 import React, { useState } from 'react'
-import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-
+import { useRouter } from "next/router"
 
 const TruckByGvw = ({ data, onFilterChange, loading }) => {
-    const [selected, setSelected] = useState("<2.5 ton")
+    const router = useRouter();
     const options = [
-        "<2.5 ton",
-        "2.5-5 ton",
-        "5-10 ton",
-        "10-15 ton",
-        "15-20 ton",
-        "25-30 ton",
-        "30-35 ton",
-        "35-40 ton",
-        "40-45 ton",
-        "45-50 ton",
-        ">50 ton",
+        { id: "Under 2.5 ton", value: "under-2.5-ton" },
+        { id: "2.5-5 ton", value: "2.5-5-ton" },
+        { id: "5-10 ton", value: "5-10-ton" },
+        { id: "10-15 ton", value: "10-15-ton" },
+        { id: "15-20 ton", value: "15-20-ton" },
+        { id: "25-30 ton", value: "25-30-ton" },
+        { id: "30-35 ton", value: "30-35-ton" },
+        { id: "35-40 ton", value: "35-40-ton" },
+        { id: "40-45 ton", value: "40-45-ton" },
+        { id: "45-50 ton", value: "45-50-ton" },
+        { id: "Above 50 ton", value: "above-50-ton" },
+    ];
 
-    ]
+    const [selected, setSelected] = useState(options[0].value);
 
-    const handleFilterClick = (option) => {
-        setSelected(option);
-        onFilterChange(option); // Trigger API fetch in parent
+    const handleFilterClick = (optionValue) => {
+        setSelected(optionValue);
+        onFilterChange(optionValue);
     };
 
     return (
@@ -39,14 +39,14 @@ const TruckByGvw = ({ data, onFilterChange, loading }) => {
                     <div className="flex justify-center mb-10 gap-3">
                         {options.map((option) => (
                             <button
-                                key={option}
-                                onClick={() => handleFilterClick(option)}
-                                className={`px-5 py-2 rounded-sm border cursor-pointer transition whitespace-nowrap ${selected === option
+                                key={option.value}
+                                onClick={() => handleFilterClick(option.value)}
+                                className={`px-5 py-2 rounded-sm border cursor-pointer transition whitespace-nowrap ${selected === option.value
                                     ? "bg-[#FFF5F2] border-orange-400 text-gray-900 font-semibold"
                                     : "bg-white border-gray-200 text-gray-600 hover:border-orange-300"
                                     }`}
                             >
-                                {option}
+                                {option.id}
                             </button>
                         ))}
                     </div>
@@ -57,8 +57,8 @@ const TruckByGvw = ({ data, onFilterChange, loading }) => {
                         <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide">
                             {Array.isArray(data) && data.length > 0 ? (
                                 data.map((truck, index) => (
-                                    <Card key={index} className="min-w-[250px] border border-gray-300 hover:shadow-lg transition-shadow">
-                                        <CardContent className="p-4">
+                                    <div key={index} className="min-w-[250px] rounded-md border border-gray-300 hover:shadow-lg transition-shadow">
+                                        <div className="p-3">
                                             <img
                                                 src={`${process.env.NEXT_PUBLIC_S3_URL}${truck?.image}`}
                                                 alt={truck.productName}
@@ -66,7 +66,7 @@ const TruckByGvw = ({ data, onFilterChange, loading }) => {
                                             />
                                             <h3 className="font-semibold text-gray-900 mb-1">{truck.productName}</h3>
                                             <p className="text-orange-500 font-bold text-sm">
-                                                ₹ {truck?.minPrice} - {truck?.maxPrice}
+                                                ₹ {truck?.minPrice} - {truck?.maxPrice} Lakhs
                                             </p>
                                             <div className='flex justify-center mt-2'>
                                                 <button
@@ -75,8 +75,8 @@ const TruckByGvw = ({ data, onFilterChange, loading }) => {
                                                     View Details
                                                 </button>
                                             </div>
-                                        </CardContent>
-                                    </Card>
+                                        </div>
+                                    </div>
                                 ))
                             ) : (
                                 <p className="text-center">No trucks found</p>
@@ -84,7 +84,12 @@ const TruckByGvw = ({ data, onFilterChange, loading }) => {
                         </div>
                     )}
                     <div className='flex justify-center items-center my-5'>
-                        <Button className='cursor-pointer bg-[#FA7436] hover:bg-[#FA7436]/90'>View All</Button>
+                        <Button
+                            className='cursor-pointer bg-[#FA7436] hover:bg-[#FA7436]/90'
+                            onClick={() => router.push(`/truck/${selected}`)}
+                        >
+                            View All
+                        </Button>
                     </div>
                 </div>
             </section>

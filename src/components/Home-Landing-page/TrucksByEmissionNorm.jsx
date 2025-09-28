@@ -1,25 +1,23 @@
 import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
 import React, { useState } from 'react'
-
+import { useRouter } from "next/router"
 
 const TrucksByEmissionNorm = ({ data, onFilterChange, loading }) => {
-    const [selected, setSelected] = useState("BS III")
+    const router = useRouter();
     const options = [
-        "BS III",
-        "BS IV",
-        "BS VI - II",
-        "BS VI",
-        "Electric",
+        { id: "BS III", value: "bs-iii" },
+        { id: "BS IV", value: "bs-iv" },
+        { id: "BS VI - II", value: "bs-vi-ii" },
+        { id: "BS VI", value: "bs-vi" },
+        { id: "Electric", value: "electric" },
+    ];
 
-    ]
+    const [selected, setSelected] = useState(options[0].value);
 
-
-    const handleFilterClick = (option) => {
-        setSelected(option);
-        onFilterChange(option); // Trigger API fetch in parent
+    const handleFilterClick = (optionValue) => {
+        setSelected(optionValue);
+        onFilterChange(optionValue); // Trigger API fetch in parent
     };
-
 
     return (
         <div>
@@ -36,14 +34,14 @@ const TrucksByEmissionNorm = ({ data, onFilterChange, loading }) => {
                     <div className="flex justify-center mb-10 mt-8 gap-3">
                         {options.map((option) => (
                             <button
-                                key={option}
-                                onClick={() => handleFilterClick(option)}
-                                className={`px-5 py-2 rounded-sm border cursor-pointer transition ${selected === option
+                                key={option.value}
+                                onClick={() => handleFilterClick(option.value)}
+                                className={`px-5 py-2 rounded-sm border cursor-pointer transition ${selected === option.value
                                     ? "bg-[#FFF5F2] border-orange-400 text-gray-900 font-semibold"
                                     : "bg-white border-gray-200 text-gray-600 hover:border-orange-300"
                                     }`}
                             >
-                                {option}
+                                {option.id}
                             </button>
                         ))}
                     </div>
@@ -54,18 +52,18 @@ const TrucksByEmissionNorm = ({ data, onFilterChange, loading }) => {
                         <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide">
                             {Array.isArray(data) && data.length > 0 ? (
                                 data.map((truck, index) => (
-                                    <Card key={index} className="min-w-[250px] border border-gray-300 hover:shadow-lg">
-                                        <CardContent className="p-4">
+                                    <div key={index} className="min-w-[250px] rounded-md border border-gray-300 hover:shadow-lg">
+                                        <div className="p-3">
                                             <img
                                                 src={`${process.env.NEXT_PUBLIC_S3_URL}${truck?.image}`}
                                                 alt={truck?.productName}
                                                 className="w-full h-32 object-cover rounded-lg mb-4"
                                             />
                                             <h3 className="font-semibold text-gray-900 mb-2 text-sm">
-                                                {truck?.productName}
+                                                {truck?.productName} 
                                             </h3>
                                             <p className="text-orange-500 font-bold text-sm">
-                                                ₹ {truck?.minPrice} - {truck?.maxPrice}
+                                                ₹ {truck?.minPrice} - {truck?.maxPrice} Lakhs
                                             </p>
                                             <div className='flex justify-center mt-2'>
                                                 <button
@@ -74,8 +72,8 @@ const TrucksByEmissionNorm = ({ data, onFilterChange, loading }) => {
                                                     View Details
                                                 </button>
                                             </div>
-                                        </CardContent>
-                                    </Card>
+                                        </div>
+                                    </div>
                                 ))
                             ) : (
                                 <p className="text-center">No trucks found</p>
@@ -83,7 +81,12 @@ const TrucksByEmissionNorm = ({ data, onFilterChange, loading }) => {
                         </div>
                     )}
                     <div className='flex justify-center items-center my-5'>
-                        <Button className='cursor-pointer bg-[#FA7436] hover:bg-[#FA7436]/90'>View All</Button>
+                        <Button
+                            className='cursor-pointer bg-[#FA7436] hover:bg-[#FA7436]/90'
+                            onClick={() => router.push(`/truck/${selected}`)}
+                        >
+                            View All
+                        </Button>
                     </div>
                 </div>
             </section>
