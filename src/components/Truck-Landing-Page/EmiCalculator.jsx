@@ -1,10 +1,9 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Slider from 'rc-slider';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { useCategory } from "@/hooks/useContext";
-import { useEffect } from 'react';
-// Ex-showroom price can not be less than down payment
+
 // Register Chart.js components
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -21,33 +20,33 @@ const calculateEmi = ({ price, downPayment, tenure, interestRate }) => {
 };
 
 const EmiCalculator = () => {
-  // const initialVehiclePrice = 1000000;
   const { categoryData } = useCategory();
-  const [vehiclePrice, setVehiclePrice] = useState(categoryData[0].minPrice * 100000 - 100000);
+
+  const [vehiclePrice, setVehiclePrice] = useState(
+    Math.round(categoryData[0].minPrice * 100000 - 100000)
+  );
   const [downPayment, setDownPayment] = useState(0);
   const [tenure, setTenure] = useState(60);
   const [interestRate, setInterestRate] = useState(12);
 
   useEffect(() => {
-    console.log(categoryData)
     if (categoryData.length > 0) {
-      const validItem = categoryData.find(item => typeof item?.maxPrice === 'number' && item.maxPrice > 0);
+      const validItem = categoryData.find(
+        (item) => typeof item?.maxPrice === "number" && item.maxPrice > 0
+      );
       if (validItem) {
-        setVehiclePrice(categoryData.map((item) => (item.minPrice * 100000)));
-        // setTimeout(() => {
-        //   setVehiclePrice(3000000);
-        // }, 500);
+        setVehiclePrice(
+          Math.round(categoryData[0].minPrice * 100000)
+        );
       }
     }
   }, [categoryData]);
 
   useEffect(() => {
     if (vehiclePrice) {
-      setDownPayment(vehiclePrice / 5);
+      setDownPayment(Math.round(vehiclePrice / 5));
     }
   }, [vehiclePrice]);
-
-  { categoryData.map((item) => (console.log(item.minPrice * 100000, "PRooooooo"))) }
 
   const { emi, totalPayment, interestAmount, loanAmount } = useMemo(
     () =>
@@ -60,15 +59,15 @@ const EmiCalculator = () => {
     [vehiclePrice, downPayment, tenure, interestRate]
   );
 
-  // Dynamically update chart data to show Down Payment and Loan Amount
+  // Chart data
   const chartData = useMemo(() => {
     return {
-      labels: ['Down Payment', 'Loan Amount'],
+      labels: ["Down Payment", "Loan Amount"],
       datasets: [
         {
           data: [downPayment, loanAmount],
-          backgroundColor: ['#FA7436', '#FFF4EF'],
-          hoverBackgroundColor: ['#FF5722', '#FFE082'],
+          backgroundColor: ["#FA7436", "#FFF4EF"],
+          hoverBackgroundColor: ["#FF5722", "#FFE082"],
           borderWidth: 1,
         },
       ],
@@ -77,17 +76,17 @@ const EmiCalculator = () => {
 
   const chartOptions = {
     responsive: true,
-    cutout: '60%', // Makes it a half-circle
-    rotation: -90, // Start from the top
-    circumference: 180, // Only show the top half
+    cutout: "60%",
+    rotation: -90,
+    circumference: 180,
     plugins: {
       legend: {
         display: true,
-        position: 'bottom',
+        position: "bottom",
       },
       tooltip: {
         callbacks: {
-          label: (context) => `₹ ${context.raw.toLocaleString('en-IN')}`,
+          label: (context) => `₹ ${Math.round(context.raw).toLocaleString("en-IN")}`,
         },
       },
     },
@@ -98,29 +97,32 @@ const EmiCalculator = () => {
       <h2 className="md:text-[24px] text-[18px] font-bold mb-5">
         Calculate EMI on {categoryData[0]?.productName}
       </h2>
-      <div className='mx-auto p-5 bg-white rounded-lg border border-gray-300'>
-
-
-        <div className='md:grid block grid-cols-2  gap-8'>
+      <div className="mx-auto p-5 bg-white rounded-lg border border-gray-300">
+        <div className="md:grid block grid-cols-2 gap-8">
           {/* Sliders Section */}
           <div className="flex flex-col gap-6">
             {/* Vehicle Price Slider */}
             <div>
-              <div className='flex justify-between items-center mb-3'>
-                <p className=" text-sm font-bold ">Vehicle Price</p>
-
+              <div className="flex justify-between items-center mb-3">
+                <p className="text-sm font-bold">Vehicle Price</p>
                 <input
                   type="number"
                   className="text-sm border border-gray-300 text-[#254154] outline-none w-32 px-3 py-1"
-                  value={vehiclePrice || 0} // Fallback to 0 to avoid uncontrolled input
+                  value={vehiclePrice || 0}
                   onChange={(e) => {
-                    const value = Math.min(Math.max(Number(e.target.value), categoryData[0].minPrice * 100000 - 100000), categoryData[0].minPrice * 200000);
+                    const raw = Number(e.target.value);
+                    const value = Math.min(
+                      Math.max(
+                        Math.round(raw / 1000) * 1000,
+                        categoryData[0].minPrice * 100000 - 100000
+                      ),
+                      categoryData[0].minPrice * 200000
+                    );
                     setVehiclePrice(value);
                   }}
                 />
-
               </div>
-              {vehiclePrice < categoryData[0].minPrice * 100000 && (
+              {vehiclePrice + 1 < categoryData[0].minPrice * 100000 && (
                 <p className="text-red-400 text-[12px] text-end pb-2">
                   Ex-showroom price can not be less than down payment
                 </p>
@@ -130,44 +132,54 @@ const EmiCalculator = () => {
                 max={categoryData[0].minPrice * 200000}
                 step={1000}
                 value={vehiclePrice || 0}
-                onChange={(value) => setVehiclePrice(value)} // Update the state when slider changes
-
+                onChange={(value) =>
+                  setVehiclePrice(Math.round(value / 1000) * 1000)
+                }
               />
             </div>
 
             {/* Down Payment Slider */}
             <div>
-              <div className='flex justify-between items-center mb-3'>
-                <p className=" text-sm font-bold ">Down Payment</p>
+              <div className="flex justify-between items-center mb-3">
+                <p className="text-sm font-bold">Down Payment</p>
                 <input
                   type="number"
                   className="text-sm border border-gray-300 text-[#254154] outline-none w-32 px-3 py-1"
                   value={downPayment}
                   onChange={(e) => {
-                    const value = Math.min(Math.max(Number(e.target.value), vehiclePrice ? vehiclePrice / 5 : 0), vehiclePrice || 0); // Clamp value
+                    const raw = Number(e.target.value);
+                    const value = Math.min(
+                      Math.max(
+                        Math.round(raw / 1000) * 1000,
+                        vehiclePrice ? Math.round(vehiclePrice / 5) : 0
+                      ),
+                      vehiclePrice || 0
+                    );
                     setDownPayment(value);
                   }}
                 />
               </div>
               <Slider
-                min={vehiclePrice ? vehiclePrice / 5 : 0}
+                min={vehiclePrice ? Math.round(vehiclePrice / 5) : 0}
                 max={vehiclePrice || 0}
                 step={1000}
                 value={downPayment}
-                onChange={(value) => setDownPayment(value)}
+                onChange={(value) =>
+                  setDownPayment(Math.round(value / 1000) * 1000)
+                }
               />
             </div>
 
             {/* Interest Rate Slider */}
             <div>
-              <div className='flex justify-between items-center mb-3'>
-                <p className=" text-sm font-bold ">Interest Rate (%)</p>
+              <div className="flex justify-between items-center mb-3">
+                <p className="text-sm font-bold">Interest Rate (%)</p>
                 <input
                   type="number"
                   className="text-sm border border-gray-300 text-[#254154] outline-none w-32 px-3 py-1"
                   value={interestRate}
                   onChange={(e) => {
-                    const value = Math.min(Math.max(Number(e.target.value), 8), 25); // Clamp value
+                    const value = Math.min(Math.max(Number(e.target.value), 8), 25);
                     setInterestRate(value);
                   }}
                 />
@@ -183,14 +195,14 @@ const EmiCalculator = () => {
 
             {/* Loan Tenure Slider */}
             <div>
-              <div className='flex justify-between items-center mb-3'>
-                <p className=" text-sm font-bold ">Loan Tenure (Months)</p>
+              <div className="flex justify-between items-center mb-3">
+                <p className="text-sm font-bold">Loan Tenure (Months)</p>
                 <input
                   type="number"
                   className="text-sm border border-gray-300 text-[#254154] outline-none w-32 px-3 py-1"
                   value={tenure}
                   onChange={(e) => {
-                    const value = Math.min(Math.max(Number(e.target.value), 12), 84); // Clamp value
+                    const value = Math.min(Math.max(Number(e.target.value), 12), 84);
                     setTenure(value);
                   }}
                 />
@@ -206,16 +218,20 @@ const EmiCalculator = () => {
           </div>
 
           {/* Half-Circle Chart Section */}
-          <div className="   rounded-lg  ">
-            <div className='relative'>
-              <div className='md:w-[300px] md:h-[300px] mx-auto relative'>
-                <Doughnut data={chartData} options={chartOptions} width={300} height={300} />
-
+          <div className="rounded-lg">
+            <div className="relative">
+              <div className="md:w-[300px] md:h-[300px] mx-auto relative">
+                <Doughnut
+                  data={chartData}
+                  options={chartOptions}
+                  width={300}
+                  height={300}
+                />
               </div>
               <div className="absolute inset-0 flex flex-col items-center justify-center">
                 <p className="text-sm text-gray-500 mt-8">EMI</p>
                 <p className="text-2xl font-bold text-orange-500">
-                  ₹{emi.toFixed(0).toLocaleString('en-IN')}
+                  ₹{Math.round(emi).toLocaleString("en-IN")}
                 </p>
                 <p className="text-sm text-gray-500">per month</p>
               </div>
@@ -223,30 +239,37 @@ const EmiCalculator = () => {
           </div>
         </div>
 
-        <div className='md:grid block grid-cols-2 gap-8 mt-8'>
+        {/* Financial Details */}
+        <div className="md:grid block grid-cols-2 gap-8 mt-8">
           <div>
-            <p className='text-xs md:mb-0 mb-4'><span className='font-black'>Note: </span>The EMI amount shown is based on the ex-showroom price, with a 20% down payment,a 12% interest rate, and a 60-months tenure. You can adjust these values to calculate an EMI that fits your budget.</p>
+            <p className="text-xs md:mb-0 mb-4">
+              <span className="font-black">Note: </span>
+              The EMI amount shown is based on the ex-showroom price, with a 20% down
+              payment, a 12% interest rate, and a 60-months tenure. You can adjust
+              these values to calculate an EMI that fits your budget.
+            </p>
           </div>
-          {/* Financial Details Table */}
-          <div className=" rounded-lg">
+          <div className="rounded-lg">
             <table className="w-full text-left border border-gray-300 rounded-md">
               <tbody className="text-sm">
                 <tr className="border-b border-gray-300">
                   <td className="p-2 text-gray-700">Principal Amount</td>
                   <td className="p-2 text-gray-700 text-right">
-                    ₹{loanAmount.toLocaleString('en-IN')}
+                    ₹{Math.round(loanAmount).toLocaleString("en-IN")}
                   </td>
                 </tr>
                 <tr className="border-b border-gray-300">
                   <td className="p-2 text-gray-700">
                     Interest Amount <span className="font-semibold">({interestRate} %)</span>
                   </td>
-                  <td className="p-2 text-[#FA7436] text-right">₹{Number(interestAmount?.toFixed(2))?.toLocaleString('en-IN')}</td>
+                  <td className="p-2 text-[#FA7436] text-right">
+                    ₹{Math.round(interestAmount).toLocaleString("en-IN")}
+                  </td>
                 </tr>
                 <tr className="border-b border-gray-300">
                   <td className="p-2 text-gray-700 font-bold">Total Amount Payable</td>
                   <td className="p-2 text-gray-700 text-right font-bold">
-                    ₹{Number(totalPayment?.toFixed(2))?.toLocaleString('en-IN')}
+                    ₹{Math.round(totalPayment).toLocaleString("en-IN")}
                   </td>
                 </tr>
               </tbody>

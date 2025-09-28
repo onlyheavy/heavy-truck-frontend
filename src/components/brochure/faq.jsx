@@ -38,7 +38,7 @@ export default function Faq() {
             <div className="flex items-center justify-center mb-10 mx-10">
                 <div className="w-60 border-t border-gray-300"></div>
                 <span className="mx-4 text-3xl font-bold text-gray-900">
-                    FAQ on  Fuel Cost Calculator
+                    FAQ on  Brochure
                 </span>
                 <div className="w-60 border-t border-gray-300"></div>
             </div>

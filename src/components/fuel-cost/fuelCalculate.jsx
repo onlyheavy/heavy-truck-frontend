@@ -66,14 +66,14 @@ const FuelCalculate = () => {
                                     />
 
                                 </div>
-                                <div className='bg-[#fff9f] md:w-[40%] w-full h-60 p-4'>
+                                <div className='bg-[#f5fdff] md:w-[40%] w-full h-60 p-4'>
                                     <div className="pb-8 ">
                                         <p className="pb-1">Fuel Consumption</p>
                                         <p><span className="text-sm md:text-lg font-bold">{fuelConsumption.toFixed(0)} Litres</span><span className='pl-5 text-sm text-blue-700'>Per Month</span></p>
                                     </div>
                                     <div>
                                         <p>Fuel Price</p>
-                                        <p ><span className="text-sm md:text-lg font-bold">₹{fuelCost.toFixed(0)}</span><span className='pl-5 text-sm text-red-300'>Per Month</span> </p>
+                                        <p ><span className="text-sm md:text-lg font-bold">₹{fuelCost.toFixed(0)}</span><span className='pl-5 text-sm text-red-500'>Per Month</span> </p>
                                     </div>
                                 </div>
                             </div>
@@ -120,15 +120,25 @@ const FuelCalculate = () => {
                                         onChange={setMileage}
                                     />
 
+                                    <SliderInput
+                                        label="Battery capacity"
+                                        value={mileage}
+                                        min={1}
+                                        max={100}
+                                        step={1}
+                                        color='bg-blue-700'
+                                        onChange={setMileage}
+                                    />
+
                                 </div>
                                 <div className='bg-[#fff9f6] md:w-[40%] w-full h-60 p-4'>
                                     <div className="pb-8 ">
                                         <p className="pb-1">Fuel Consumption</p>
-                                        <p><span className="text-sm md:text-lg font-bold">{fuelConsumption.toFixed(0)} Litres</span><span className='pl-5 text-sm text-blue-700'>Per Month</span></p>
+                                        <p><span className="text-sm md:text-lg font-bold">{fuelConsumption.toFixed(0)} Litres</span><span className='pl-5 text-sm text-blue-700'>Per KM</span></p>
                                     </div>
                                     <div>
                                         <p>Fuel Price</p>
-                                        <p ><span className="text-sm md:text-lg font-bold">₹{fuelCost.toFixed(0)}</span><span className='pl-5 text-sm text-red-300'>Per Month</span> </p>
+                                        <p ><span className="text-sm md:text-lg font-bold">₹{fuelCost.toFixed(0)}</span><span className='pl-5 text-sm text-red-500'>Per Month</span> </p>
                                     </div>
                                 </div>
                             </div>
