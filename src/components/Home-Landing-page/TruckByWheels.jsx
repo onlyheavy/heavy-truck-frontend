@@ -54,19 +54,19 @@ const TruckByWheels = ({ data, onFilterChange, loading }) => {
                     <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide">
                         {Array.isArray(data) && data.length > 0 ? (
                             data.map((truck, index) => (
-                                <div key={index} className="min-w-[250px] rounded-md border border-gray-300 hover:shadow-lg ">
-                                    <div className="p-3 ">
+                                <div key={index} className="min-w-[255px] rounded-md border border-gray-300 hover:shadow-lg ">
+                                    <div className="p-2 ">
                                         <img
                                             src={`${process.env.NEXT_PUBLIC_S3_URL}${truck?.image}`}
                                             alt={truck?.productName}
-                                            className="w-full h-32 object-cover rounded-lg mb-4"
+                                            className="w-full h-40 border object-cover rounded-lg mb-4"
                                         />
-                                        <h3 className="font-semibold text-gray-900 mb-2 text-sm">{truck.productName}</h3>
+                                        <h3 className="font-semibold text-gray-900 mb-2 text-[16px]">{truck.productName}</h3>
                                         <p className="text-orange-500 font-bold text-sm">
                                             ₹ {truck?.minPrice} - {truck?.maxPrice} Lakhs
                                         </p>
                                         <Link
-                                            href={truck.slug ? `/truck/${truck.slug}` : "#"}
+                                            href={truck.slug ? `/trucks/${truck.slug}` : "#"}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             onClick={(e) => {
@@ -78,7 +78,7 @@ const TruckByWheels = ({ data, onFilterChange, loading }) => {
                                         >
                                             <div className='flex justify-center mt-2'>
                                                 <button
-                                                    className="px-4 py-1 mt-3 cursor-pointer rounded-xs font-bold text-sm border text-orange-500 border-orange-500 hover:text-orange-500 hover:bg-orange-50 bg-transparent "
+                                                    className="px-6 py-1.5 rounded-sm mt-3 cursor-pointer font-bold text-sm border text-orange-500 border-orange-500 hover:text-white hover:bg-orange-500 bg-transparent "
                                                 >
                                                     View Details
                                                 </button>

@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button'
 import React from 'react'
+import Link from 'next/link'
 
 const HomeBrochure = () => {
     return (
@@ -14,12 +15,18 @@ const HomeBrochure = () => {
                             Discover detailed specifications, features, and benefits of our trucks designed to deliver performance, efficiency, and reliability for every business need.
                         </p>
                     </div>
-                    <Button size="lg" className="bg-orange-500 hover:bg-orange-600 text-white">
-                        Download Brochure
-                    </Button>
+                    <Link
+                        href='/brochure'
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <Button size="lg" className="bg-orange-500 hover:bg-orange-600 text-white cursor-pointer">
+                            Download Brochure
+                        </Button>
+                    </Link>
                 </div>
-            </section>
-        </div>
+            </section >
+        </div >
     )
 }
 

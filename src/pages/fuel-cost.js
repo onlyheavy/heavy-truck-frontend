@@ -34,8 +34,8 @@ const FuelCost = () => {
 
     // 🔹 Initial load
     useEffect(() => {
-      fetchData("price_range", "20-30 lakh", setPriceData);
-      fetchData("mileage", "11-20 mileage", setMileageData);
+      fetchData("price_range", "20-30-lakh", setPriceData);
+      fetchData("mileage", "11-20-mileage", setMileageData);
     }, []);
   
   return (

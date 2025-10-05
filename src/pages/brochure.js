@@ -8,6 +8,7 @@ import React, { useEffect, useState } from 'react'
 
 import TruckByGvw from '@/components/Home-Landing-page/TruckByGvw'
 import Card from '@/components/brochure/card'
+import BrochureData from '@/components/brochure/brochureData'
 
 const Brochure = () => {
     const [priceData, setPriceData] = useState([]);
@@ -35,8 +36,8 @@ const Brochure = () => {
 
     // 🔹 Initial load
     useEffect(() => {
-      fetchData("price_range", "20-30 lakh", setPriceData);
-      fetchData("GVW", "5-10 ton", setGvwData);
+      fetchData("price_range", "20-30-lakh", setPriceData);
+      fetchData("GVW", "5-10-ton", setGvwData);
     }, []);
   
   return (
@@ -44,6 +45,7 @@ const Brochure = () => {
          <LandingPageLayout>
             <Banner/>
             <Card/>
+            <BrochureData/>
             <TruckByPrice
               data={priceData}
               onFilterChange={(val) => fetchData("price_range", val, setPriceData)}

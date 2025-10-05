@@ -6,11 +6,11 @@ import API from '@/utils/api';
 
 const brandOptions = [
   { id: "Tata Motors", value: "Tata Motors" },
-  { id: "Mahindra", value: "mahindra" },
-  { id: "Ashok Leyland", value: "ashok-leyland" },
-  { id: "BharatBenz", value: "bharatbenz" },
-  { id: "Eicher", value: "eicher" },
-  { id: "Force Motors", value: "force-motors" },
+  { id: "Mahindra", value: "Mahindra" },
+  { id: "Ashok Leyland", value: "Ashok Leyland" },
+  { id: "BharatBenz", value: "BharatBenz" },
+  { id: "Eicher", value: "Eicher" },
+  { id: "Force Motors", value: "Force Motors" },
 ];
 
 const HomeSearchBar = () => {
