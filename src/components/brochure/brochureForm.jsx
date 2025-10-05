@@ -3,7 +3,7 @@ import axios from "axios";
 import API from "@/utils/api"; // ✅ Ensure API.HOST is defined
 
 const BrochureForm = ({ onClose, id }) => {
-    const [form, setForm] = useState({ name: "", mobile: "", city: "" });
+    const [form, setForm] = useState({ name: "", mobileNumber: "", city: "" });
     const [loading, setLoading] = useState(false);
 
     const handleChange = (e) => {
@@ -79,9 +79,9 @@ const BrochureForm = ({ onClose, id }) => {
                             </label>
                             <input
                                 type="tel"
-                                name="mobile"
+                                name="mobileNumber"
                                 placeholder="Enter Number"
-                                value={form.mobile}
+                                value={form.mobileNumber}
                                 onChange={handleChange}
                                 required
                                 className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-400"

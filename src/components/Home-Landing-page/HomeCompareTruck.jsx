@@ -47,17 +47,21 @@ const HomeCompareTruck = () => {
                             return (
                                 <div key={item?._id || index} className="border bg-white rounded-md border-gray-300 hover:shadow-lg ">
                                     <div className="p-3">
-                                        <div className="grid grid-cols-2 gap-4 mb-4">
-                                            <img
-                                                src={leftImg}
-                                                alt={left?.productName || 'Left truck'}
-                                                className="w-full h-40 object-contain rounded-lg bg-transparent border border-gray-300"
-                                            />
-                                            <img
-                                                src={rightImg}
-                                                alt={right?.productName || 'Right truck'}
-                                                className="w-full h-40 object-contain rounded-lg bg-transparent border border-gray-300"
-                                            />
+                                        <div className='relative '>
+                                            <div className="grid grid-cols-2 gap-4 mb-4">
+                                                <img
+                                                    src={leftImg}
+                                                    alt={left?.productName || 'Left truck'}
+                                                    className="w-full h-40 object-contain rounded-lg bg-transparent border border-gray-300"
+                                                />
+                                                <img
+                                                    src={rightImg}
+                                                    alt={right?.productName || 'Right truck'}
+                                                    className="w-full h-40 object-contain rounded-lg bg-transparent border border-gray-300"
+                                                />
+
+                                            </div>
+                                            <p className='p-2 bg-orange-400 font-bold text-white border border-orange-500 rounded-full absolute top-[45%] left-[45%]'>VS</p>
                                         </div>
                                         <h3 className="font-semibold text-gray-900 mb-4 text-center">{title}</h3>
                                         <div className="flex justify-center items-center gap-8 mb-4 text-sm">
@@ -69,10 +73,10 @@ const HomeCompareTruck = () => {
                                                 ₹ {right?.minPrice}{right?.maxPrice ? ` – ${right?.maxPrice}` : ''} Lakh*
                                             </span>
                                         </div>
-                                        <Link href={`/compare/${item?.slug || ''}`}>
+                                        <Link href={`/compare/${item?.slug || ''}`} target="_blank">
                                             <div className='flex justify-center items-center'>
                                                 <button
-                                                    className="px-4 py-2 mt-3 cursor-pointer rounded-xs font-bold text-sm border text-orange-500 border-orange-500 hover:text-orange-500 hover:bg-orange-50 bg-transparent "
+                                                    className="px-6 py-2 mt-3 cursor-pointer rounded-sm font-bold text-sm border text-orange-500 border-orange-500  hover:text-white hover:bg-orange-500 bg-transparent "
                                                 >
                                                     Compare Now
                                                 </button>
@@ -86,7 +90,7 @@ const HomeCompareTruck = () => {
                         })}
                     </div>
                 </div>
-                <Link  href={`/compare`}>
+                <Link href={`/compare`}>
                     <div className='flex justify-center items-center my-5'>
                         <Button className='cursor-pointer bg-[#FA7436] hover:bg-[#FA7436]/90' >View All</Button>
                     </div></Link>

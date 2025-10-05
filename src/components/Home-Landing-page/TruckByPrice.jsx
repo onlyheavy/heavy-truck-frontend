@@ -83,7 +83,7 @@ const TruckByPrice = ({ data, onFilterChange, loading }) => {
                                                 }
                                             }}
                                         >
-                                            <div className='flex justify-center mt-2 '>
+                                            <div className='flex justify-center mt-2 pb-4 '>
                                                 <button
                                                     className="px-6 py-1.5 rounded-sm mt-3 cursor-pointer font-bold text-sm border text-orange-500 border-orange-500 hover:text-white hover:bg-orange-500 bg-transparent "
                                                 >

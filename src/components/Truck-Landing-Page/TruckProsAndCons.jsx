@@ -1,9 +1,10 @@
 import { useCategory } from '@/hooks/useContext'
-import React from 'react'
+import React, { useState } from 'react'
+import BrochureForm from '../brochure/brochureForm';
 
 const TruckProsAndCons = () => {
     const { categoryData } = useCategory()
-
+    const [showForm, setShowForm] = useState(false);
 
     return (
         <div className='flex flex-col gap-5'>
@@ -54,12 +55,12 @@ const TruckProsAndCons = () => {
             <div className='flex gap-3 bg-[#FFE8DE] p-5 pb-4 rounded-md '>
                 <div className='flex flex-col gap-3'>
                     <h2 className='font-bold md:text-[24px] text-lg capitalize'>Download {categoryData[0]?.productName} Brochure</h2>
-                    <p className='text-sm md:text-base font-normal text-gray-700 w-[80%]'>Download {categoryData[0]?.productName} brochure online. Check out the 1412 LPT PDF brochure at Truck Junction with all features and specifications.</p>
+                    <p className='text-sm md:text-base font-normal text-gray-700 w-[80%]'>Download {categoryData[0]?.productName} brochure online. Check out the {categoryData[0]?.productName} PDF brochure at Only Heavy with all features and specifications.</p>
                     <div className="md:hidden flex justify-center items-center">
                         <img src="/images/brochure.svg" alt="brochure" />
                     </div>
                     <div className='flex justify-center md:justify-start items-center'>
-                        <button className='bg-[#FA7436] w-fit text-white px-4 py-3 mt-3 text-xs rounded-md font-bold cursor-pointer '>Download Brochure</button>
+                        <button onClick={() => setShowForm(true)} className='bg-[#FA7436] w-fit text-white px-4 py-3 mt-3 text-xs rounded-md font-bold cursor-pointer '>Download Brochure</button>
                     </div>
 
                 </div>
@@ -86,6 +87,7 @@ const TruckProsAndCons = () => {
                 </div>
 
             </div>
+            {showForm && <BrochureForm onClose={() => setShowForm(false)} id={categoryData[0]._id} />}
         </div>
     )
 }
