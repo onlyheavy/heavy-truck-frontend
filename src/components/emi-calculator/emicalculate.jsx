@@ -8,19 +8,19 @@ import API from "@/utils/api";
 // ------------- Brand Gallery Component ----------------
 const BrandGallery = () => {
   const brands = [
-    { name: "Mahindra", logo: "/logos/mahindra.png" },
-    { name: "Tata", logo: "/logos/tata.png" },
-    { name: "Bajaj", logo: "/logos/bajaj.png" },
-    { name: "Ashok Leyland", logo: "/logos/ashok.png" },
-    { name: "Force", logo: "/logos/force.png" },
-    { name: "TVS", logo: "/logos/tvs.png" },
-    { name: "Saarthi", logo: "/logos/saarthi.png" },
-    { name: "Piaggio", logo: "/logos/piaggio.png" },
-    { name: "Euler", logo: "/logos/euler.png" },
+    { name: "Mahindra", logo: "/trucks/mahindra.svg" },
+    { name: "Tata", logo: "/trucks/tata.svg" },
+    { name: "Bajaj", logo: "/trucks/bajaj.svg" },
+    { name: "Ashok Leyland", logo: "/trucks/ashok-leyland.svg" },
+    { name: "Force", logo: "/trucks/force.svg" },
+    { name: "TVS", logo: "/trucks/tvs.svg" },
+    { name: "Saarthi", logo: "/trucks/saarthi.svg" },
+    { name: "Piaggio", logo: "/trucks/piaggio.svg" },
+    { name: "Euler", logo: "/trucks/euler.svg" },
   ];
 
   return (
-    <div className="bg-white p-5 rounded-xl border border-gray-200 w-60">
+    <div className="bg-white p-5 rounded-xl border border-gray-200">
       <h3 className="text-lg font-semibold mb-4 text-center">
         Popular Brands
       </h3>
@@ -91,8 +91,7 @@ const EmiCalculator = ({ showResults, onCalculateEmi, onBack }) => {
   const fetchTruckData = async () => {
     try {
       const res = await axios.get(
-        `${API.HOST}/api/category/thirdCompare/${
-          selectedModel || defaultTruckId
+        `${API.HOST}/api/category/thirdCompare/${selectedModel || defaultTruckId
         }`
       );
       if (res?.data?.success) {
@@ -123,17 +122,19 @@ const EmiCalculator = ({ showResults, onCalculateEmi, onBack }) => {
     }
   }, [vehiclePrice, downPayment, interestRate, loanPeriod]);
 
+  console.log("Reactt", selectedTruckData)
+
   // ---------- STEP 1: BEFORE CALCULATION ----------
   if (!showResults) {
     return (
-      <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 flex gap-8 justify-between">
+      <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 flex flex-row max-w-full">
         {/* Left Section */}
-        <div className="flex flex-col w-full max-w-lg">
+        <div className="flex flex-col w-[50%]">
           <h2 className="text-orange-500 font-bold text-xl mb-6 text-center">
             Calculate Your EMI
           </h2>
 
-          <div className="flex flex-col space-y-4 items-center">
+          <div className="flex flex-col space-y-8 items-center">
             <select
               value={selectedBrand}
               onChange={(e) => {
@@ -174,7 +175,7 @@ const EmiCalculator = ({ showResults, onCalculateEmi, onBack }) => {
         </div>
 
         {/* Right Section */}
-        <div className="bg-orange-50 p-6 rounded-md flex flex-col justify-center items-center w-1/2">
+        <div className="bg-orange-50 p-6 rounded-md flex flex-col  w-[50%] justify-center items-center">
           <h3 className="text-lg font-semibold mb-4">EMI</h3>
           <div className="grid grid-cols-2 gap-y-6 gap-x-8 text-sm text-center">
             <div>
@@ -201,7 +202,7 @@ const EmiCalculator = ({ showResults, onCalculateEmi, onBack }) => {
 
   // ---------- STEP 2: AFTER CALCULATION ----------
   return (
-    <div className="bg-white p-6 rounded-xl shadow-md max-w-6xl mx-auto">
+    <div className="bg-white p-4 rounded-xl border max-w-6xl mx-auto">
       {/* Top Bar */}
       <div className="flex items-center mb-6">
         <button
@@ -219,8 +220,8 @@ const EmiCalculator = ({ showResults, onCalculateEmi, onBack }) => {
 
       <div className="grid md:grid-cols-2 gap-6 items-start">
         {/* Left Side */}
-        <div className="border rounded-lg p-4 shadow-sm">
-          <div className="flex items-center gap-4">
+        <div className="rounded-lg p-4">
+          <div className="flex items-center gap-4 p-2 shadow-sm shadow-[0px_1px_6px_0px_#00000026] border rounded-[10px] border-[#E0E8ED]">
             <img
               src={
                 selectedTruckData?.images?.[0] ||
@@ -299,11 +300,10 @@ const EmiCalculator = ({ showResults, onCalculateEmi, onBack }) => {
                 <button
                   key={m}
                   onClick={() => setLoanPeriod(m)}
-                  className={`px-4 py-2 rounded-md border text-sm ${
-                    loanPeriod === m
-                      ? "bg-orange-500 text-white"
-                      : "bg-white text-gray-700"
-                  }`}
+                  className={`px-4 py-2 rounded-md border text-sm ${loanPeriod === m
+                    ? "bg-orange-500 text-white"
+                    : "bg-white text-gray-700"
+                    }`}
                 >
                   {m}
                 </button>
@@ -314,27 +314,35 @@ const EmiCalculator = ({ showResults, onCalculateEmi, onBack }) => {
 
         {/* Right Side */}
         <div className="bg-orange-50 p-6 rounded-lg flex flex-col items-center justify-center">
-          <h3 className="text-gray-700 font-semibold">EMI</h3>
-          <p className="text-3xl font-bold text-gray-900 mt-1">
-            ₹ {emi.toLocaleString()}
-          </p>
-          <p className="text-sm text-gray-500 mb-4">Per Month</p>
+          <div className="flex items-center justify-between bg-[#fff9f6] p-6 rounded-lg shadow-sm w-full mb-8 border border-gray-100">
+            {/* Left Section */}
+            <div className="flex-1 text-center border-r border-gray-300">
+              <h3 className="text-gray-700 font-semibold text-lg">EMI</h3>
+            </div>
 
-          <div className="grid grid-cols-2 gap-4 text-center text-gray-700">
+            {/* Right Section */}
+            <div className="flex-1 text-center">
+              <p className="text-3xl font-bold text-gray-900">₹ {emi.toLocaleString()}</p>
+              <p className="text-sm text-gray-500">Per Month</p>
+            </div>
+          </div>
+
+
+          <div className="grid grid-cols-2 w-full gap-6 text-center text-gray-700">
             <div>
-              <p className="font-semibold">Ex-showroom Price</p>
+              <p className="font-semibold pb-2">Ex-showroom Price</p>
               <p>₹ {vehiclePrice.toLocaleString()}</p>
             </div>
             <div>
-              <p className="font-semibold">Total Loan Amount</p>
+              <p className="font-semibold pb-2">Total Loan Amount</p>
               <p>₹ {(vehiclePrice - downPayment).toLocaleString()}</p>
             </div>
             <div>
-              <p className="font-semibold">Payable Amount</p>
+              <p className="font-semibold pb-2">Payable Amount</p>
               <p>₹ {payableAmount.toLocaleString()}</p>
             </div>
             <div>
-              <p className="font-semibold">You’ll Pay extra</p>
+              <p className="font-semibold pb-2">You’ll Pay extra</p>
               <p>₹ {extraAmount.toLocaleString()}</p>
             </div>
           </div>
@@ -344,20 +352,24 @@ const EmiCalculator = ({ showResults, onCalculateEmi, onBack }) => {
   );
 };
 
+
 // ------------- Parent Wrapper ----------------
 const CalculateEmi = () => {
   const [showResults, setShowResults] = useState(false);
 
   return (
     <div className="bg-white md:py-10 py-4 md:px-16 px-0 flex gap-6">
-      <div className="flex-1">
+      <div className="flex-1 max-w-[70%]">
         <EmiCalculator
           showResults={showResults}
           onCalculateEmi={() => setShowResults(true)}
           onBack={() => setShowResults(false)}
         />
       </div>
-      {!showResults && <BrandGallery />}
+      <div className="flex-1 max-w-[30%]">
+        <BrandGallery />
+      </div>
+
     </div>
   );
 };
