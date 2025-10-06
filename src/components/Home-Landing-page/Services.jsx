@@ -70,7 +70,6 @@ const Services = () => {
                                 </h3>
                                 <Link
                                     href={service.path}
-                                    target="_blank"
                                     rel="noopener noreferrer"
                                 >
                                     <button className="bg-orange-500 cursor-pointer text-white px-6 py-2 text-sm sm:text-base rounded-md hover:bg-orange-600 transition-colors duration-200">

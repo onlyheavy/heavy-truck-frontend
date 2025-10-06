@@ -28,13 +28,13 @@ const PopularTruck = () => {
             <section className="py-10 bg-white">
                 <div className="max-w-7xl mx-auto ">
                     <div className="flex items-center justify-center mx-10 my-6">
-                        <div className="w-60 border-t border-gray-300"></div>
-                        <span className="mx-4 text-3xl font-bold text-gray-900">
+                        <div className="hidden md:block w-60 border-t border-gray-300"></div>
+                        <span className="mx-4 text-xl md:text-3xl font-bold text-gray-900">
                             Popular Trucks in India
                         </span>
-                        <div className="w-60 border-t border-gray-300"></div>
+                        <div className="hidden md:block w-60 border-t border-gray-300"></div>
                     </div>
-                    <div className="flex gap-6 overflow-x-auto pb-4 pt-8 scrollbar-hide">
+                    <div className="flex gap-6 overflow-x-auto pb-4 pt-8 scrollbar-hide p-5">
                         {Array.isArray(popularTrucks) && popularTrucks?.length > 0 ?
                             popularTrucks.map((truck, index) => (
                                 <div key={index} className="min-w-[250px] border rounded-md border-gray-300 hover:shadow-lg ">

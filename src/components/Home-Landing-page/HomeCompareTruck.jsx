@@ -31,64 +31,130 @@ const HomeCompareTruck = () => {
             <section className="py-10 bg-[#FDF8F4]">
                 <div className="max-w-7xl mx-auto ">
                     <div className="flex items-center justify-center mx-10  mb-10">
-                        <div className="w-60 border-t border-gray-300"></div>
-                        <span className="mx-4 text-3xl font-bold text-gray-900">
+                        <div className="hidden md:block w-60 border-t border-gray-300"></div>
+                        <span className="mx-4 text-xl md:text-3xl font-bold text-gray-900">
                             Compare Truck
                         </span>
-                        <div className="w-60 border-t border-gray-300"></div>
+                        <div className="hidden md:block w-60 border-t border-gray-300"></div>
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {compareTruck?.map((item, index) => {
-                            const left = item?.leftProduct
-                            const right = item?.rightProduct
-                            const title = `${left?.productName || ''} vs ${right?.productName || ''}`
-                            const leftImg = left?.productImage ? `${S3_BASE}${left?.productImage}` : '/placeholder.svg'
-                            const rightImg = right?.productImage ? `${S3_BASE}${right?.productImage}` : '/placeholder.svg'
-                            return (
-                                <div key={item?._id || index} className="border bg-white rounded-md border-gray-300 hover:shadow-lg ">
-                                    <div className="p-3">
-                                        <div className='relative '>
-                                            <div className="grid grid-cols-2 gap-4 mb-4">
-                                                <img
-                                                    src={leftImg}
-                                                    alt={left?.productName || 'Left truck'}
-                                                    className="w-full h-40 object-contain rounded-lg bg-transparent border border-gray-300"
-                                                />
-                                                <img
-                                                    src={rightImg}
-                                                    alt={right?.productName || 'Right truck'}
-                                                    className="w-full h-40 object-contain rounded-lg bg-transparent border border-gray-300"
-                                                />
+                    <div className="mt-5">
+                        {/* Scroll wrapper for mobile */}
+                        <div className="md:hidden overflow-x-auto px-4 scrollbar-hide">
+                            <div className="flex gap-6 w-max">
+                                {compareTruck?.map((item, index) => {
+                                    const left = item?.leftProduct
+                                    const right = item?.rightProduct
+                                    const title = `${left?.productName || ''} vs ${right?.productName || ''}`
+                                    const leftImg = left?.productImage ? `${S3_BASE}${left?.productImage}` : '/placeholder.svg'
+                                    const rightImg = right?.productImage ? `${S3_BASE}${right?.productImage}` : '/placeholder.svg'
 
+                                    return (
+                                        <div
+                                            key={item?._id || index}
+                                            className="flex-shrink-0 w-96 border bg-white rounded-md border-gray-300 hover:shadow-lg"
+                                        >
+                                            <div className="p-3">
+                                                <div className="relative">
+                                                    <div className="grid grid-cols-2 gap-4 mb-4">
+                                                        <img
+                                                            src={leftImg}
+                                                            alt={left?.productName || 'Left truck'}
+                                                            className="w-full h-40 object-contain rounded-lg bg-transparent border border-gray-300"
+                                                        />
+                                                        <img
+                                                            src={rightImg}
+                                                            alt={right?.productName || 'Right truck'}
+                                                            className="w-full h-40 object-contain rounded-lg bg-transparent border border-gray-300"
+                                                        />
+                                                    </div>
+                                                    <p className="p-2 bg-orange-400 font-bold text-white border border-orange-500 rounded-full absolute top-[45%] left-[45%]">
+                                                        VS
+                                                    </p>
+                                                </div>
+                                                <h3 className="font-semibold text-gray-900 mb-4 text-center">{title}</h3>
+                                                <div className="flex justify-center items-center gap-8 mb-4 text-sm">
+                                                    <span className="text-orange-500 font-bold min-w-[110px] text-center">
+                                                        ₹ {left?.minPrice}
+                                                        {left?.maxPrice ? ` – ${left?.maxPrice}` : ''} Lakh*
+                                                    </span>
+                                                    <span className="text-gray-400 font-semibold">vs</span>
+                                                    <span className="text-orange-500 font-bold min-w-[110px] text-center">
+                                                        ₹ {right?.minPrice}
+                                                        {right?.maxPrice ? ` – ${right?.maxPrice}` : ''} Lakh*
+                                                    </span>
+                                                </div>
+                                                <Link href={`/compare/${item?.slug || ''}`} target="_blank">
+                                                    <div className="flex justify-center items-center">
+                                                        <button className="px-6 py-2 mt-3 cursor-pointer rounded-sm font-bold text-sm border text-orange-500 border-orange-500 hover:text-white hover:bg-orange-500 bg-transparent">
+                                                            Compare Now
+                                                        </button>
+                                                    </div>
+                                                </Link>
                                             </div>
-                                            <p className='p-2 bg-orange-400 font-bold text-white border border-orange-500 rounded-full absolute top-[45%] left-[45%]'>VS</p>
                                         </div>
-                                        <h3 className="font-semibold text-gray-900 mb-4 text-center">{title}</h3>
-                                        <div className="flex justify-center items-center gap-8 mb-4 text-sm">
-                                            <span className="text-orange-500 font-bold min-w-[110px] text-center">
-                                                ₹ {left?.minPrice}{left?.maxPrice ? ` – ${left?.maxPrice}` : ''} Lakh*
-                                            </span>
-                                            <span className="text-gray-400 font-semibold">vs</span>
-                                            <span className="text-orange-500 font-bold min-w-[110px] text-center">
-                                                ₹ {right?.minPrice}{right?.maxPrice ? ` – ${right?.maxPrice}` : ''} Lakh*
-                                            </span>
-                                        </div>
-                                        <Link href={`/compare/${item?.slug || ''}`} target="_blank">
-                                            <div className='flex justify-center items-center'>
-                                                <button
-                                                    className="px-6 py-2 mt-3 cursor-pointer rounded-sm font-bold text-sm border text-orange-500 border-orange-500  hover:text-white hover:bg-orange-500 bg-transparent "
-                                                >
-                                                    Compare Now
-                                                </button>
+                                    )
+                                })}
+                            </div>
+                        </div>
+
+                        {/* Desktop grid */}
+                        <div className="hidden md:grid md:grid-cols-3 gap-8">
+                            {compareTruck?.map((item, index) => {
+                                const left = item?.leftProduct
+                                const right = item?.rightProduct
+                                const title = `${left?.productName || ''} vs ${right?.productName || ''}`
+                                const leftImg = left?.productImage ? `${S3_BASE}${left?.productImage}` : '/placeholder.svg'
+                                const rightImg = right?.productImage ? `${S3_BASE}${right?.productImage}` : '/placeholder.svg'
+
+                                return (
+                                    <div
+                                        key={item?._id || index}
+                                        className="border bg-white rounded-md border-gray-300 hover:shadow-lg"
+                                    >
+                                        <div className="p-3">
+                                            <div className="relative">
+                                                <div className="grid grid-cols-2 gap-4 mb-4">
+                                                    <img
+                                                        src={leftImg}
+                                                        alt={left?.productName || 'Left truck'}
+                                                        className="w-full h-40 object-contain rounded-lg bg-transparent border border-gray-300"
+                                                    />
+                                                    <img
+                                                        src={rightImg}
+                                                        alt={right?.productName || 'Right truck'}
+                                                        className="w-full h-40 object-contain rounded-lg bg-transparent border border-gray-300"
+                                                    />
+                                                </div>
+                                                <p className="p-2 bg-orange-400 font-bold text-white border border-orange-500 rounded-full absolute top-[45%] left-[45%]">
+                                                    VS
+                                                </p>
                                             </div>
-                                        </Link>
-
-
+                                            <h3 className="font-semibold text-gray-900 mb-4 text-center">{title}</h3>
+                                            <div className="flex justify-center items-center gap-8 mb-4 text-sm">
+                                                <span className="text-orange-500 font-bold min-w-[110px] text-center">
+                                                    ₹ {left?.minPrice}
+                                                    {left?.maxPrice ? ` – ${left?.maxPrice}` : ''} Lakh*
+                                                </span>
+                                                <span className="text-gray-400 font-semibold">vs</span>
+                                                <span className="text-orange-500 font-bold min-w-[110px] text-center">
+                                                    ₹ {right?.minPrice}
+                                                    {right?.maxPrice ? ` – ${right?.maxPrice}` : ''} Lakh*
+                                                </span>
+                                            </div>
+                                            <Link href={`/compare/${item?.slug || ''}`} target="_blank">
+                                                <div className="flex justify-center items-center">
+                                                    <button className="px-6 py-2 mt-3 cursor-pointer rounded-sm font-bold text-sm border text-orange-500 border-orange-500 hover:text-white hover:bg-orange-500 bg-transparent">
+                                                        Compare Now
+                                                    </button>
+                                                </div>
+                                            </Link>
+                                        </div>
                                     </div>
-                                </div>
-                            )
-                        })}
+                                )
+                            })}
+                        </div>
                     </div>
+
                 </div>
                 <Link href={`/compare`}>
                     <div className='flex justify-center items-center my-5'>

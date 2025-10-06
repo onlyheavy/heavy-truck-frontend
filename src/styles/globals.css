@@ -143,3 +143,23 @@ body {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;     /* Firefox */
 }
+
+/* Show and style a thin right-side vertical scrollbar */
+.show-scrollbar {
+  scrollbar-width: thin;              /* Firefox */
+  scrollbar-color: #c7c7c7 transparent;
+}
+
+.show-scrollbar::-webkit-scrollbar {
+  width: 6px;                         /* Chrome, Safari, Edge (Chromium) */
+  height: 6px;                        /* for horizontal cases if any */
+}
+
+.show-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #c7c7c7;
+  border-radius: 8px;
+}
+
+.show-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}

@@ -93,8 +93,8 @@ const Navbar = () => {
         <button className="flex items-center hover:text-orange-500">
           Used Truck <IoMdArrowDropdown size={18} className="ml-1" />
         </button>
-        <button className="hover:text-orange-500">Fuel Cost Calculator</button>
-        <button className="hover:text-orange-500">EMI Calculator</button>
+        <button className="hover:text-orange-500 cursor-pointer" onClick={()=>router.push(`/compare`)}>Fuel Cost Calculator</button>
+        <button className="hover:text-orange-500 cursor-pointer" onClick={()=>router.push(`/emi-calculator`)}>EMI Calculator</button>
         <button className="hover:text-orange-500">Electric Truck</button>
       </div>
 

@@ -97,7 +97,7 @@ const HomeSearchBar = () => {
                     setSelectedBrand(e.target.value);
                     setSelectedModel(""); // reset model when brand changes
                   }}
-                  className="border border-gray-300 rounded-md px-4 py-2 text-gray-700 w-60"
+                  className="border border-gray-300 rounded-md px-4 py-2 text-gray-700 w-full md:w-60 cursor-pointer"
                 >
                   <option value="">Select Truck Brand</option>
                   {brandOptions.map((brand) => (
@@ -110,7 +110,7 @@ const HomeSearchBar = () => {
                   value={selectedModel}
                   onChange={(e) => setSelectedModel(e.target.value)}
                   disabled={!selectedBrand}
-                  className="border border-gray-300 rounded-md px-4 py-2 text-gray-700 w-60 disabled:opacity-50"
+                  className="border border-gray-300 rounded-md px-4 py-2 text-gray-700 w-full md:w-60 disabled:opacity-50 cursor-pointer"
                 >
                   <option value="">Select Truck Model</option>
                   {models.map((model) => (
@@ -121,7 +121,7 @@ const HomeSearchBar = () => {
                 </select>
                 <Button
                   size="lg"
-                  className="bg-orange-500 hover:bg-orange-600 text-white"
+                  className="bg-orange-500 hover:bg-orange-600 text-white cursor-pointer"
                   onClick={handleQuote}
                 >
                   Get Quote

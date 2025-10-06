@@ -31,18 +31,18 @@ const TruckByGvw = ({ data, onFilterChange, loading }) => {
             <section className="py-10 bg-[#FDF8F4]">
                 <div className="max-w-7xl mx-auto ">
                     <div className="flex items-center justify-center mx-10 my-6">
-                        <div className="w-60 border-t border-gray-300"></div>
-                        <span className="mx-4 text-3xl font-bold text-gray-900">
+                        <div className="hidden md:block w-60 border-t border-gray-300"></div>
+                        <span className="mx-4 text-xl md:text-3xl font-bold text-gray-900">
                             Trucks by GVW
                         </span>
-                        <div className="w-60 border-t border-gray-300"></div>
+                        <div className="hidden md:block w-60 border-t border-gray-300"></div>
                     </div>
-                    <div className="flex justify-center mb-10 gap-3">
+                    <div className="flex md:justify-center overflow-x-auto md:overflow-x-visible gap-3 px-3 scrollbar-hide mx-3 md:mx-0 mb-10">
                         {options.map((option) => (
                             <button
                                 key={option.value}
                                 onClick={() => handleFilterClick(option.value)}
-                                className={`px-5 py-2 rounded-sm border cursor-pointer transition whitespace-nowrap ${selected === option.value
+                                className={`flex-shrink-0 px-3 py-2 rounded-sm border cursor-pointer transition whitespace-nowrap ${selected === option.value
                                     ? "bg-[#FFF5F2] border-orange-400 text-gray-900 font-semibold"
                                     : "bg-white border-gray-200 text-gray-600 hover:border-orange-300"
                                     }`}
@@ -55,10 +55,10 @@ const TruckByGvw = ({ data, onFilterChange, loading }) => {
                     {loading ? (
                         <p className="text-center">Loading trucks...</p>
                     ) : (
-                        <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide">
+                        <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide p-3">
                             {Array.isArray(data) && data.length > 0 ? (
                                 data.map((truck, index) => (
-                                    <div key={index} className="min-w-[255px] rounded-md border border-gray-300 hover:shadow-lg transition-shadow">
+                                    <div key={index} className="min-w-[255px] bg-white rounded-md border border-gray-300 hover:shadow-lg transition-shadow">
                                         <div className="p-2">
                                             <img
                                                 src={`${process.env.NEXT_PUBLIC_S3_URL}${truck?.image}`}
