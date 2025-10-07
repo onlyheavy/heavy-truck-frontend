@@ -22,28 +22,21 @@ import Head from 'next/head';
 const features = [
   {
     icon: '/icons/emi.svg',
-    title: 'EMI Calculator',
-    description: 'Calculate your EMI payments',
+    title: 'EMI Calculator for Tata Yodha 2.0',
+    
   },
   {
     icon: '/icons/truck.svg',
-    title: 'Used Vehicles',
-    description: 'Get second-hand commercial vehicles within your budget',
+    title: 'Tata Used Trucks',
   },
   {
     icon: '/icons/mil.svg',
-    title: 'Mileage',
-    description: 'Find vehicle Mileage in India.',
+    title: 'Tata Yodha 2.0 Mileage',
   },
-  {
-    icon: '/icons/loan.svg',
-    title: 'Loan Offers',
-    description: 'Check out Loan Offers',
-  },
+  
   {
     icon: '/icons/explore.svg',
-    title: 'Explore More',
-    description: 'Explore other commercial vehicles in India',
+    title: 'Explore Tata',
   },
 ];
 
@@ -154,40 +147,49 @@ const TruckLandingPage = ({ categoryData, alterNative, error, categorySlug, slug
           </div>
 
           <div className="w-[20%] hidden md:block">
-            <div className="flex flex-col gap-10">
-              <div className="bg-[#D9D9D9] w-full h-[450px] rounded-md flex justify-center items-center text-4xl">
-                Ads
-              </div>
+            <div className="flex flex-col gap-10 md:sticky md:top-10 md:h-fit md:self-start">
+             
+          <img src="/images/ads.svg" alt="" />
+              <div>
+  <div>
+    <h2 className="font-bold text-xl my-3">Tools</h2>
+    <div className="bg-[#FFE8DE] rounded-sm overflow-hidden">
+      {features.map((item, index) => (
+        <div
+          key={index}
+          className={`flex items-center space-x-4 px-4 py-5 ${
+            index < features.length - 1 ? 'border-b-2 border-white' : ''
+          }`}
+        >
+          <div className="bg-white flex items-center justify-center w-14 h-14 rounded-md shrink-0">
+            <Image
+              src={item.icon}
+              alt={item.title}
+              width={32}
+              height={32}
+              className="object-contain"
+            />
+          </div>
 
-              <div className="">
-                <div className="">
-                  <h2 className="font-bold text-xl my-3">Tools</h2>
-                  <div className=" bg-[#FFE8DE] rounded-sm overflow-hidden shadow-md">
-                    {features.map((item, index) => (
-                      <div
-                        key={index}
-                        className={`flex items-start space-x-4 px-4 py-5 ${
-                          index < features.length - 1 ? 'border-b-2 border-white' : ''
-                        }`}
-                      >
-                        <div className="bg-white flex items-center justify-center w-16 h-16 rounded-md">
-                          <Image width={8} height={8} src={item.icon} alt="icon" className=" object-contain" />
-                        </div>
-                        <div className="flex-1">
-                          <p className="text-sm font-semibold text-[#000000] mb-1 leading-snug">
-                            {item.title}
-                          </p>
-                          <p className="text-sm text-[#464646] leading-tight">{item.description}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
+          <div className="flex-1">
+            <p className="text-sm font-semibold text-[#000000] mb-1 leading-snug">
+              {item.title}
+            </p>
+            <p className="text-sm text-[#464646] leading-tight">
+              {item.description}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
 
-              <div className="bg-[#D9D9D9] w-full h-[450px] rounded-md flex justify-center items-center text-4xl">
-                Ads
-              </div>
+
+<div className='sticky top-10 self-start h-fit'>
+<img src="/images/ads.svg" alt="" />
+</div>
+
             </div>
           </div>
         </div>
