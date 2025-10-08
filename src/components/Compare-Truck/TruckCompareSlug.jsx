@@ -11,6 +11,7 @@ const TruckCompareSlug = ({ rankData }) => {
         { brand: "", truck: "", truckId: "", truckData: null },
     ]);
     const [availableTrucks, setAvailableTrucks] = useState([[], [], []]);
+    const [isEditing, setIsEditing] = useState([false, false, false]);
     const brands = ["Tata Motors", "Mahindra", "Ashok Leyland", "BharatBenz", "Eicher", "Force Motors"];
 
     // Fetch trucks for each brand dropdown
@@ -297,6 +298,13 @@ const TruckCompareSlug = ({ rankData }) => {
                                                 height={250}
                                                 className="rounded-t-lg object-cover w-full h-36 md:h-52"
                                             />
+                                            <button
+                                                className="absolute top-2 right-2 px-3 py-1 text-xs md:text-sm bg-white/90 border border-orange-500 text-orange-500 cursor-pointer rounded hover:bg-white"
+                                                onClick={() => setIsEditing(prev => prev.map((v, i) => i === idx ? !v : v))}
+                                                aria-label={`Edit truck ${idx + 1}`}
+                                            >
+                                                {isEditing[idx] ? 'Close' : 'Edit'}
+                                            </button>
                                         </div>
                                         <div className="p-4 flex-grow flex flex-col">
                                             <h3 className="font-semibold text-sm md:text-base capitalize">
@@ -305,10 +313,40 @@ const TruckCompareSlug = ({ rankData }) => {
                                             <p className="font-bold text-sm md:text-lg mt-1">
                                                 ₹ {selectedTrucks[idx].truckData?.minPrice} - {selectedTrucks[idx].truckData?.maxPrice} Lakh*
                                             </p>
+                                            {isEditing[idx] && (
+                                                <div className="mt-4 text-left">
+                                                    <select
+                                                        className="w-full mb-3 p-2 border rounded bg-gray-50 text-left text-gray-700 text-sm"
+                                                        value={selectedTrucks[idx].brand}
+                                                        onChange={e => handleBrandChange(idx, e.target.value)}
+                                                    >
+                                                        <option value="">Select Brand</option>
+                                                        {brands.map(brand => <option key={brand} value={brand}>{brand}</option>)}
+                                                    </select>
+                                                    <select
+                                                        className="w-full p-2 border rounded bg-gray-50 text-left text-gray-700 text-sm"
+                                                        value={selectedTrucks[idx].truck}
+                                                        onChange={e => handleTruckChange(idx, e.target.value)}
+                                                        disabled={!selectedTrucks[idx].brand}
+                                                    >
+                                                        <option value="">Select Truck</option>
+                                                        {availableTrucks[idx]?.map(truck => (
+                                                            <option key={truck._id} value={truck.productName}>{truck.productName}</option>
+                                                        ))}
+                                                    </select>
+                                                </div>
+                                            )}
                                         </div>
                                     </>
                                 ) : (
-                                    <div className="w-full p-4 flex flex-col items-center justify-center">
+                                    <div className="w-full p-4 flex flex-col items-center justify-center relative">
+                                        <button
+                                            className="absolute top-2 right-2 px-3 py-1 text-xs md:text-sm bg-white/90 border border-orange-500 text-orange-500 cursor-pointer rounded hover:bg-white"
+                                            onClick={() => setIsEditing(prev => prev.map((v, i) => i === idx ? !v : v))}
+                                            aria-label={`Edit truck ${idx + 1}`}
+                                        >
+                                            {isEditing[idx] ? 'Close' : 'Edit'}
+                                        </button>
                                         <div className="bg-gray-100 rounded-full p-4 mb-4">
                                             <Image src="/icons/truck.svg" alt="truck icon" width={50} height={50} />
                                         </div>
