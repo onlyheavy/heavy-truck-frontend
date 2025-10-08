@@ -4,15 +4,19 @@ import EmiCard from "@/components/emi-calculator/emi-description";
 import Faq from "@/components/emi-calculator/faq";
 import { Button } from "@/components/ui/button";
 import EMIcal from "@/components/emi-calculator/emi-cal"
+import LandingPageLayout from "@/layouts/LandingPageLayout";
 
 const EmiCalculator = () => {
     return (
         <>
-            <Banner />
-            <EmiCard />
-            <CalculateEmi />
-            <Faq />
-            {/* <EMIcal /> */}
+            <LandingPageLayout>
+                <Banner />
+                <EmiCard />
+                <CalculateEmi />
+                <Faq />
+
+            </LandingPageLayout>
+
             
         </>
 

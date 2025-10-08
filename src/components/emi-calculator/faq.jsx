@@ -34,15 +34,19 @@ export default function Faq() {
     };
 
     return (
-        <div className="bg-white md:py-10 py-4 md:px-16 px-0 pt-10">
-            <h2 className="font-bold md:text-[24px] text-[18px] leading-[20px] text-[#000000] text-center md:mb-10 mb-6">
-                FAQ on  Fuel Cost Calculator
-            </h2>
-            <div className="mx-auto flex flex-col-reverse md:flex-row gap-6">
+        <div className="bg-white md:py-10 py-4 md:px-24 px-0 pt-10">
+            <div className="flex items-center justify-center mb-10 mx-10">
+                <div className="w-60 hidden md:block border-t border-gray-300"></div>
+                <span className="mx-4 text-xl md:text-3xl font-bold text-gray-900">
+                    FAQ on EMI Calculator
+                </span>
+                <div className="w-60 hidden md:block border-t border-gray-300"></div>
+            </div>
+            <div className="mx-auto flex flex-col px-5 md:flex-row gap-6">
 
-                {/* Left Side (Connect Section) */}
+
                 <div
-                    className="md:w-[30%] w-full text-white rounded-xl md:p-6 p-2 flex flex-col items-center text-center justify-center"
+                    className="md:w-[30%] w-full text-white rounded-xl p-2 md:p-6  flex flex-col items-center text-center justify-center"
                     style={{
                         background: `url('/faq-bg.svg') center/cover no-repeat`
                     }}

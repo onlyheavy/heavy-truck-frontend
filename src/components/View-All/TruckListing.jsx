@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import API from "@/utils/api";
+import Link from 'next/link'
 
 const filterOptions = {
     Brands: [
@@ -207,7 +208,7 @@ export default function TruckListing() {
                                     <img
                                         src={truck.image ? `${process.env.NEXT_PUBLIC_S3_URL}${truck.image}` : "/images/img1.svg"}
                                         alt={truck.productName}
-                                        className="w-full h-32 object-cover rounded-lg mb-4"
+                                        className="w-full h-40 object-cover rounded-lg mb-4"
                                     />
                                     <div className="my-5">
                                         <h3 className="text-sm font-semibold text-[#254154]">
@@ -217,7 +218,7 @@ export default function TruckListing() {
                                             ₹ {truck.minPrice} – {truck.maxPrice} Lakh
                                         </p>
                                         <hr className="my-3" />
-                                        <div className="text-xs text-[#254154] mt-3">
+                                        <div className="text-xs pb-3 text-[#254154] mt-3">
                                             <div className="flex flex-col gap-5">
                                                 <div className="grid grid-cols-3 gap-5">
                                                     <div className="flex flex-col gap-1">
@@ -249,9 +250,21 @@ export default function TruckListing() {
                                                 </div>
                                             </div>
                                         </div>
-                                        <button className="w-full cursor-pointer mt-4 py-2 border border-red-500 text-red-500 text-sm font-medium rounded-sm hover:bg-red-50 transition">
-                                            View Details
-                                        </button>
+                                        <Link
+                                            href={truck.slug ? `/trucks/${truck.slug}` : "#"}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            onClick={(e) => {
+                                                if (!truck.slug) {
+                                                    e.preventDefault();
+                                                    alert("Missing slug");
+                                                }
+                                            }}
+                                        >
+                                            <button className="w-full cursor-pointer mt-4 py-2 border border-red-500 text-red-500 text-sm font-medium rounded-sm hover:bg-orange-500 hover:text-white transition">
+                                                View Details
+                                            </button>
+                                        </Link>
                                     </div>
                                 </div>
                             ))
