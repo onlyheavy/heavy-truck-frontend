@@ -151,32 +151,34 @@ export default function TruckListing() {
         <section className="bg-white">
             <div className="mb-10">
                 {/* Filters */}
-                <div className="flex justify-evenly items-center bg-[#FFF8F4] p-5">
-                    {Object.entries(filterOptions).map(([filterName, options]) => (
-                        <select
-                            key={filterName}
-                            value={filters[filterName] || ""}
-                            onChange={(e) => handleFilterChange(filterName, e.target.value)}
-                            className="border bg-white cursor-pointer px-4 rounded-sm py-2 text-sm text-gray-700"
+                <div className="bg-[#FFF8F4] p-5 overflow-x-auto scrollbar-hide">
+                    <div className="flex justify-start items-center space-x-4 min-w-max">
+                        {Object.entries(filterOptions).map(([filterName, options]) => (
+                            <select
+                                key={filterName}
+                                value={filters[filterName] || ""}
+                                onChange={(e) => handleFilterChange(filterName, e.target.value)}
+                                className="border bg-white cursor-pointer px-4 rounded-sm py-2 text-sm text-gray-700 flex-shrink-0"
+                            >
+                                <option value="">{filterName}</option>
+                                {options.map((option) => (
+                                    <option key={option.value} value={option.value}>
+                                        {option.id}
+                                    </option>
+                                ))}
+                            </select>
+                        ))}
+                        <button
+                            onClick={() => setFilters({})}
+                            className="text-[#FA7436] px-4 py-1 bg-white flex-shrink-0"
                         >
-                            <option value="">{filterName}</option>
-                            {options.map((option) => (
-                                <option key={option.value} value={option.value}>
-                                    {option.id}
-                                </option>
-                            ))}
-                        </select>
-                    ))}
-                    <button
-                        onClick={() => setFilters({})}
-                        className="text-[#FA7436] px-4 py-1 bg-white"
-                    >
-                        Reset All
-                    </button>
+                            Reset All
+                        </button>
+                    </div>
                 </div>
 
                 {/* Section Heading */}
-                <div className="mx-10">
+                <div className="mx-4 md:mx-10">
                     <div className="mb-6 bg-[#FFF8F4] my-8 p-5 ">
                         <h2 className="text-xl font-semibold text-gray-900">
                             Best {headingLabel} in India

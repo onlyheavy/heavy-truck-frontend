@@ -150,22 +150,38 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
   }, [truck1Data, truck2Data, selectedTruckData, selectedTruckData1, selectedTruckData2]);
 
   useEffect(() => {
-    // Fetch trucks when a brand is selected
     const fetchTrucksByBrand = async () => {
-      if (selectedBrand) {
-        try {
-          const response = await axios.get(`${API.HOST}/api/category/getProductName/${encodeURIComponent(selectedBrand)}`);
-          if (response?.data?.success) {
-            const trucks = response?.data?.data?.map(item => item?.productName);
-            setTrucksByBrand(prev => ({ ...prev, [selectedBrand]: trucks }));
-          }
-        } catch (err) {
-          // Optionally handle error
+      if (!selectedBrand) return;
+
+      try {
+        const response = await axios.get(
+          `${API.HOST}/api/category/getProductName/${encodeURIComponent(selectedBrand)}`
+        );
+
+        if (response?.data?.success) {
+          const trucks = response?.data?.data?.map(item => item?.productName);
+          setTrucksByBrand(prev => ({ ...prev, [selectedBrand]: trucks }));
+        } else {
+          console.warn(`Failed to fetch trucks for ${selectedBrand}:`, response?.data?.message);
         }
+      } catch (error) {
+        if (axios.isAxiosError(error)) {
+          const status = error.response?.status;
+          const message = error.response?.data?.message || error.message;
+          console.warn(`Error ${status || ""}: ${message}`);
+        } else {
+          console.error("Unexpected error:", error);
+        }
+      
+        setTrucksByBrand(prev => ({ ...prev, [selectedBrand]: [] }));
+            
+
       }
     };
+
     fetchTrucksByBrand();
   }, [selectedBrand]);
+
 
   // Truck 1 brand change fetch
   useEffect(() => {
