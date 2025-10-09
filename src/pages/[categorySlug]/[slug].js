@@ -149,7 +149,7 @@ const TruckLandingPage = ({ categoryData, alterNative, error, categorySlug, slug
           <div className="w-[20%] hidden md:block">
             <div className="flex flex-col gap-10 md:sticky md:top-10 md:h-fit md:self-start">
              
-          <Image src="/images/ads.svg" alt="" />
+          <img src="/images/ads.svg" alt="" />
               <div>
   <div>
     <h2 className="font-bold text-xl my-3">Tools</h2>
@@ -187,7 +187,7 @@ const TruckLandingPage = ({ categoryData, alterNative, error, categorySlug, slug
 
 
 <div className='sticky top-10 self-start h-fit'>
-<Image src="/images/ads.svg" alt="" />
+<img src="/images/ads.svg" alt="" />
 </div>
 
             </div>

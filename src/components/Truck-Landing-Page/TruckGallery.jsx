@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Zoom from 'react-medium-image-zoom';
 import Modal from 'react-modal';
 import { useCategory } from '@/hooks/useContext';
+import LoanForm from '../brochure/loanForm';
 
 Modal.setAppElement('#__next');
 
@@ -11,6 +12,13 @@ const TruckGallery = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [showForm, setShowForm] = useState(false);
+  const [status, setStatus] = useState("");
+
+  const handleClick = (type) => {
+    setStatus(type);
+    setShowForm(true);
+  };
 
   useEffect(() => {
 
@@ -107,14 +115,15 @@ const TruckGallery = () => {
         </div>
 
         <div className='flex gap-3 items-center text-sm'>
-          <button className='text-[#FA7436] border border-[#FA7436] p-3 rounded-md cursor-pointer hover:bg-[#FA7436] hover:text-white transition-all duration-200 font-bold'>
+          <button className='text-[#FA7436] border border-[#FA7436] p-3 rounded-md cursor-pointer hover:bg-[#FA7436] hover:text-white transition-all duration-200 font-bold' onClick={() => handleClick("onroad")}>
             Get on road price
           </button>
-          <button className='cursor-pointer text-white bg-[#FA7436] p-3 rounded-md font-semibold'>
+          <button className='cursor-pointer text-white bg-[#FA7436] p-3 rounded-md font-semibold' onClick={() => handleClick("discount")}>
             Check Discount Offer
           </button>
         </div>
       </div>
+      {showForm && <LoanForm onClose={() => setShowForm(false)} id={categoryData[0]?._id} status={status} />}
     </div>
   );
 
@@ -234,14 +243,15 @@ const TruckGallery = () => {
         </div>
 
         <div className='flex gap-3 items-center text-sm'>
-          <button className='text-[#FA7436] border border-[#FA7436] px-2 py-2 md:px-2 md:py-3 rounded-md cursor-pointer hover:bg-[#FA7436] hover:text-white transition-all duration-200 font-bold'>
+          <button onClick={() => handleClick("onroad")} className='text-[#FA7436] border border-[#FA7436] px-2 py-2 md:px-2 md:py-3 rounded-md cursor-pointer hover:bg-[#FA7436] hover:text-white transition-all duration-200 font-bold'>
             Get on road price
           </button>
-          <button className='cursor-pointer text-white bg-[#FA7436] px-2 py-2 md:px-2 md:py-3 rounded-md font-semibold'>
+          <button onClick={() => handleClick("discount")} className='cursor-pointer text-white bg-[#FA7436] px-2 py-2 md:px-2 md:py-3 rounded-md font-semibold'>
             Check Discount Offer
           </button>
         </div>
       </div>
+      {showForm && <LoanForm onClose={() => setShowForm(false)} id={categoryData[0]?._id} status={status} />}
     </div>
   );
 };
