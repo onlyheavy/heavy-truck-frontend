@@ -5,7 +5,7 @@ import Faq from '@/components/fuel-cost/faq'
 import LandingPageLayout from '@/layouts/LandingPageLayout'
 import API from '@/utils/api'
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import FuelCalculate from '@/components/fuel-cost/fuelCalculate'
 
 const FuelCost = () => {

@@ -4,7 +4,7 @@ import Faq from '@/components/brochure/faq'
 import LandingPageLayout from '@/layouts/LandingPageLayout'
 import API from '@/utils/api'
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
 import TruckByGvw from '@/components/Home-Landing-page/TruckByGvw'
 import Card from '@/components/brochure/card'
