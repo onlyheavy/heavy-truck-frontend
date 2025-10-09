@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 
 import HomeSearchBar from "@/components/Home-Landing-page/HomeSearchBar";
@@ -25,38 +25,38 @@ export default function Home() {
   const [wheelData, setWheelData] = useState([]);
   const [mileageData, setMileageData] = useState([]);
   const [emissionData, setEmissionData] = useState([]);
-
   const [loading, setLoading] = useState(false);
 
   const apiUrl = `${API.HOST}/api/category/filter/truck`;
 
-  // 🔹 Generic API fetcher
- // Generic API fetcher
-const fetchData = async (filterKey, filterValue, setter) => {
-  try {
-    setLoading(true);
-    const res = await axios.post(apiUrl, {
-      filter: { [filterKey]: filterValue },
-      sortBy: "rating",
-      limit: 6,
-    });
+  // ✅ Wrap in useCallback so it's stable and can safely go in useEffect deps
+  const fetchData = useCallback(async (filterKey, filterValue, setter) => {
+    try {
+      setLoading(true);
+      const res = await axios.post(apiUrl, {
+        filter: { [filterKey]: filterValue },
+        sortBy: "rating",
+        limit: 6,
+      });
 
-    if (res.data?.success) {
-      setter(res.data.data || []);
-    } else {
-      console.warn("API returned error:", res.data);
-      setter([]); // set empty array if API failed
+      if (res.data?.success) {
+        setter(res.data.data || []);
+      } else {
+        console.warn("API returned error:", res.data);
+        setter([]);
+      }
+    } catch (err) {
+      console.error(
+        "Error fetching trucks:",
+        err?.response?.data?.message || err.message
+      );
+      setter([]);
+    } finally {
+      setLoading(false);
     }
-  } catch (err) {
-    console.error("Error fetching trucks:", err?.response?.data?.message || err.message);
-    setter([]); // fallback
-  } finally {
-    setLoading(false);
-  }
-};
+  }, [apiUrl]);
 
-
-  // 🔹 Initial load
+  // ✅ Now include fetchData in deps safely
   useEffect(() => {
     fetchData("price_range", "under-10-lakh", setPriceData);
     fetchData("fuelType", "diesel", setFuelData);
@@ -64,7 +64,7 @@ const fetchData = async (filterKey, filterValue, setter) => {
     fetchData("wheel", 4, setWheelData);
     fetchData("mileage", "1-5-mileage", setMileageData);
     fetchData("emissionNorm", "bs-vi", setEmissionData);
-  }, []);
+  }, [fetchData]);
 
   return (
     <div className="min-h-screen bg-white">
@@ -96,7 +96,6 @@ const fetchData = async (filterKey, filterValue, setter) => {
           onFilterChange={(val) => fetchData("wheel", val, setWheelData)}
           loading={loading}
         />
-        
         <TrucksByEmissionNorm
           data={emissionData || []}
           onFilterChange={(val) =>
@@ -109,7 +108,6 @@ const fetchData = async (filterKey, filterValue, setter) => {
           onFilterChange={(val) => fetchData("mileage", val, setMileageData)}
           loading={loading}
         />
-
         <HomeCompareTruck />
         <LatestNews />
       </LandingPageLayout>

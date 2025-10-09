@@ -15,10 +15,10 @@ const Brochure = () => {
      const [gvwData, setGvwData] = useState([]);
     const [loading, setLoading] = useState(false);
 
-    const apiUrl = `${API.HOST}/api/category/filter/truck`;
+  const apiUrl = `${API.HOST}/api/category/filter/truck`;
 
-  // 🔹 Generic API fetcher
-  const fetchData = async (filterKey, filterValue, setter) => {
+  // ✅ Wrap in useCallback so it's stable and can safely go in useEffect deps
+  const fetchData = useCallback(async (filterKey, filterValue, setter) => {
     try {
       setLoading(true);
       const res = await axios.post(apiUrl, {
@@ -26,19 +26,29 @@ const Brochure = () => {
         sortBy: "rating",
         limit: 6,
       });
-      setter(res?.data?.data || []);
+
+      if (res.data?.success) {
+        setter(res.data.data || []);
+      } else {
+        console.warn("API returned error:", res.data);
+        setter([]);
+      }
     } catch (err) {
-      console.error("Error fetching trucks:", err);
+      console.error(
+        "Error fetching trucks:",
+        err?.response?.data?.message || err.message
+      );
+      setter([]);
     } finally {
       setLoading(false);
     }
-  };
+  }, [apiUrl]);
 
     // 🔹 Initial load
     useEffect(() => {
       fetchData("price_range", "20-30-lakh", setPriceData);
       fetchData("GVW", "5-10-ton", setGvwData);
-    }, []);
+    }, [fetchData]);
   
   return (
     <div className='min-h-screen bg-white'>
