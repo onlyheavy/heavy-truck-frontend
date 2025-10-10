@@ -166,7 +166,7 @@ const FuelCalculate = () => {
                                     <p className='text-red-300 font-semibold pt-3'>Electric</p>
                                 </div>
                             </div>
-                            <img src="/electric.png" alt="" className='w-12 md:w-16 h-16 md:h-20 mt-4 md:mt-0' />
+                            <img src="/ev.png" alt="" className='w-12 md:w-16 h-16 md:h-20 mt-4 md:mt-0' />
                         </div>
 
                         <div className='pt-10 pl-2 flex flex-col md:flex-row gap-4 justify-between'>
