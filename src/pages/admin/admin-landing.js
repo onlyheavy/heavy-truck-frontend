@@ -1,3 +1,4 @@
+"use client";
 import AdminLayout from '@/layouts/AdminLayout';
 import React from 'react';
 import TruckStats from '@/components/Admin-Landing-page/TruckStats';
