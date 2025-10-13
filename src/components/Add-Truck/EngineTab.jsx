@@ -17,8 +17,8 @@ const InputField = memo(({ label, name, value, onChange, placeholder, type = "te
         value={value}
         onChange={(e) => onChange(name, type === "checkbox" ? e.target.checked : e.target.value)}
         className={type === "checkbox" ?
-          "h-4 w-4 text-orange-500 focus:ring-orange-500 border-gray-300 rounded" :
-          "w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm"}
+          "h-4 w-4 text-orange-500  focus:ring-orange-500 border-gray-300 rounded" :
+          "w-full p-2 border rounded text-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm"}
         placeholder={placeholder}
         autoComplete="off"
       />
@@ -452,11 +452,11 @@ const EngineTab = ({ truckId, onComplete, onBack }) => {
       <div className=" md:p-6 p-4 bg-white rounded-lg shadow">
         <button
           type="button"
-          className="font-bold cursor-pointer border rounded-full p-3 border-black mb-4 flex items-center"
+          className="font-bold cursor-pointer border rounded-full p-3 border-black hover:bg-gray-50 mb-4 flex items-center"
           onClick={handleBack}
         >
-          <ArrowLeft strokeWidth={1.25} size={28} />
-          <span className="ml-2">Back</span>
+          <ArrowLeft strokeWidth={1.25} size={28} className='text-gray-900' />
+          <span className="ml-2 text-gray-900">Back</span>
         </button>
         <form className="space-y-8">
           <div>

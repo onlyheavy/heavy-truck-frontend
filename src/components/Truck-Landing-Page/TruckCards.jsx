@@ -45,11 +45,11 @@ export default function TruckCards() {
       <h2 className="md:text-[24px] text-lg font-bold text-gray-800 md:mb-10 mb-6 capitalize">
         Explore {categoryData[0]?.productName} Alternatives
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-8 gap-4 md:px-4 px-0 ">
+      <div className=" flex gap-4 md:gap-8 md:px-4 px-0 overflow-x-auto md:overflow-visible scrollbar-hide snap-x snap-mandatory">
         {alterNative?.slice(0, 3)?.map((truck, idx) => (
           <div
             key={idx}
-            className="bg-white rounded-md shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col p-2"
+            className="bg-white rounded-md min-w-[350px] md:w-full shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col p-2"
           >
             <div className="relative ">
               <img
@@ -69,15 +69,15 @@ export default function TruckCards() {
               <div className="grid grid-cols-2 gap-3 text-center text-sm text-gray-600">
                 <div className="bg-orange-50 p-2 lg:p-3 rounded-lg">
                   <p className="font-medium">Engine</p>
-                  <p>{truck.keyFeature[0].engineDisplacement}</p>
+                  <p>{truck.keyFeature[0].engineDisplacement} cc</p>
                 </div>
                 <div className="bg-orange-50 p-2 lg:p-3 rounded-lg">
                   <p className="font-medium">Power</p>
-                  <p>{truck.keyFeature[0].power}</p>
+                  <p>{truck.power} HP</p>
                 </div>
                 <div className="bg-gray-50 p-2 lg:p-3 rounded-lg">
                   <p className="font-medium">Mileage</p>
-                  <p>{truck.keyFeature[0].mileage}</p>
+                  <p>{truck.keyFeature[0].mileage} km/l</p>
                 </div>
                 <div className="bg-gray-50 p-2 lg:p-3 rounded-lg">
                   <p className="font-medium">Tyres</p>

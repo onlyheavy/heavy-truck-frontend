@@ -348,7 +348,7 @@ export default function TruckTable() {
   };
 
   return (
-    <div className="mt-8">
+    <div className="mt-8 bg-white">
       <div className="flex flex-wrap items-center justify-between gap-2 mt-4">
         <div className="flex gap-2">
           <button className="bg-orange-600 cursor-pointer text-white px-4 py-2 rounded-md">Live Trucks</button>
@@ -375,7 +375,7 @@ export default function TruckTable() {
 
       </div>
       <div className="overflow-x-auto ">
-        <table className="min-w-full rounded-lg border mt-4">
+        <table className="min-w-full text-black rounded-lg border mt-4">
           <thead>
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id} className="border">
@@ -413,7 +413,7 @@ export default function TruckTable() {
             )}
           </tbody>
         </table>
-        <div className="flex items-center justify-between text-sm mt-5">
+        <div className="flex items-center text-black justify-between text-sm mt-5">
           <div className="flex items-center gap-2">
             <span className="font-medium">Rows per page</span>
             <select

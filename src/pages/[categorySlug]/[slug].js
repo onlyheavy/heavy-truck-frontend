@@ -110,7 +110,7 @@ const TruckLandingPage = ({ categoryData, alterNative, error, categorySlug, slug
       </Head>
      <CategoryProvider initialData={initialData}>
       <MainLayout>
-        <div className="md:flex block gap-10">
+        <div className="md:flex text-black block gap-10">
           <div className="md:w-[80%] w-full">
             <div ref={truckGalleryRef}>
               <TruckGallery />

@@ -8,7 +8,7 @@ const LandingPageLayout = ({
 }) => {
   return (
     <>
-      <div className="container mx-auto ">
+      <div className="container bg-[#FEFCFB] mx-auto ">
         <Navbar
         
         />

@@ -33,7 +33,7 @@ const ComparisonSection = ({ vehicles }) => {
   };
 
   return (
-    <div className="border border-[#E0E8ED] rounded-lg p-2 relative w-full ">
+    <div className="border min-w-[350px] md:w-full border-[#E0E8ED] rounded-lg p-2 relative w-full ">
       <div className="flex relative gap-2">
         {vehicles?.map((vehicle, index) => (
           <ComparisonCard
@@ -89,7 +89,7 @@ const ComparisonTable = () => {
   return (
     <div className="my-10">
       <h2 className="text-lg md:text-2xl font-semibold mb-6">Compare Top Trucks</h2>
-      <div className="flex flex-col md:flex-row gap-6 w-full  ">
+      <div className="flex overflow-x-auto scrollbar-hide flex-row gap-6 w-full  ">
         {pairedVehicles?.slice(0, 2)?.map((pair, index) => (
           <ComparisonSection key={index} vehicles={pair} />
         ))}

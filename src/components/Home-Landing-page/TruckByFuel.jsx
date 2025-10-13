@@ -61,8 +61,8 @@ const TruckByFuel = ({ data, onFilterChange, loading }) => {
                                                 alt={truck.productName}
                                                 className="w-full h-40 border object-cover rounded-lg mb-4"
                                             />
-                                            <h3 className="font-semibold text-gray-900 mb-2 text-[16px]">{truck.productName}</h3>
-                                            <p className="text-orange-500 font-bold text-sm"> ₹ {truck?.minPrice} - {truck?.maxPrice} Lakhs</p>
+                                            <h3 className="font-semibold text-gray-500 mb-2 text-sm">{truck.productName}</h3>
+                                            <p className="text-black font-bold text-sm"> ₹ {truck?.minPrice} - {truck?.maxPrice} Lakhs</p>
                                             <Link
                                                 href={truck.slug ? `/trucks/${truck.slug}` : "#"}
                                                 target="_blank"

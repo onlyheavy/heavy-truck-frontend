@@ -65,8 +65,8 @@ const TruckByGvw = ({ data, onFilterChange, loading }) => {
                                                 alt={truck.productName}
                                                 className="w-full h-40 border object-cover rounded-lg mb-4"
                                             />
-                                            <h3 className="font-semibold text-gray-900 mb-1">{truck.productName}</h3>
-                                            <p className="text-orange-500 font-bold text-sm">
+                                            <h3 className="font-semibold text-gray-500 mb-1">{truck.productName}</h3>
+                                            <p className="text-black font-bold text-sm">
                                                 ₹ {truck?.minPrice} - {truck?.maxPrice} Lakhs
                                             </p>
                                             <Link

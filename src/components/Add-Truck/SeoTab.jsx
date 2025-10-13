@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import API from '@/utils/api';
 import { ArrowLeft } from 'lucide-react';
 
-const inputFieldClass = "w-full p-3 border border-gray-200 rounded focus:outline-none focus:border-orange-500 text-sm";
+const inputFieldClass = "w-full text-gray-600 p-3 border border-1.5 border-gray-300 rounded focus:outline-none focus:border-orange-500 text-sm";
 
 // Input Field Component
 const InputField = ({ label, name, type = "text", value, onChange, placeholder }) => (
@@ -139,11 +139,11 @@ const SeoTab = ({ truckId, onComplete, onBack }) => {
         {/* Back Button */}
         <button
           type="button"
-          className="font-bold cursor-pointer border rounded-full p-3 border-black mb-4 flex items-center"
+          className="font-bold cursor-pointer border hover:bg-gray-50 rounded-full p-3 border-black mb-4 flex items-center"
           onClick={handleBack}
         >
-          <ArrowLeft strokeWidth={1.25} size={28} />
-          <span className="ml-2">Back</span>
+          <ArrowLeft strokeWidth={1.25} size={28} className='text-gray-500' />
+          <span className="ml-2 text-gray-500">Back</span>
         </button>
         <div>
           <h2 className='text-2xl font-bold text-center text-orange-500 border-b-2 border-dashed border-gray-300 pb-6 mb-8'>

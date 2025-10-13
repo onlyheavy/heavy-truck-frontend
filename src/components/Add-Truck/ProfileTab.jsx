@@ -418,7 +418,7 @@ const ProfileTab = ({ onComplete }) => {
 
 
   // Common input field class
-  const inputFieldClass = "w-full text-sm p-2 border border-gray-200 rounded focus:outline-none focus:border-orange-500";
+  const inputFieldClass = "w-full text-sm text-gray-500 p-2 border border-gray-200 rounded focus:outline-none focus:border-orange-500";
 
   return (
     <div className="max-w-7xl mx-auto">

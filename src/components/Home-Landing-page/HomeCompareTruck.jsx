@@ -129,14 +129,14 @@ const HomeCompareTruck = () => {
                                                     VS
                                                 </p>
                                             </div>
-                                            <h3 className="font-semibold text-gray-900 mb-4 text-center">{title}</h3>
+                                            <h3 className="font-semibold text-gray-500 mb-4 text-center">{title}</h3>
                                             <div className="flex justify-center items-center gap-8 mb-4 text-sm">
-                                                <span className="text-orange-500 font-bold min-w-[110px] text-center">
+                                                <span className="text-black font-bold min-w-[110px] text-center">
                                                     ₹ {left?.minPrice}
                                                     {left?.maxPrice ? ` – ${left?.maxPrice}` : ''} Lakh*
                                                 </span>
                                                 <span className="text-gray-400 font-semibold">vs</span>
-                                                <span className="text-orange-500 font-bold min-w-[110px] text-center">
+                                                <span className="text-black font-bold min-w-[110px] text-center">
                                                     ₹ {right?.minPrice}
                                                     {right?.maxPrice ? ` – ${right?.maxPrice}` : ''} Lakh*
                                                 </span>

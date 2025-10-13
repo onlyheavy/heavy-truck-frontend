@@ -49,7 +49,7 @@ const FuelCost = () => {
     }, [fetchData]);
   
   return (
-    <div className='min-h-screen bg-white'>
+    <div className='min-h-screen text-black bg-white'>
          <LandingPageLayout>
             <Banner/>
             <FuelCalculate/>

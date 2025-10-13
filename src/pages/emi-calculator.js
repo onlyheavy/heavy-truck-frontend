@@ -9,13 +9,15 @@ import LandingPageLayout from "@/layouts/LandingPageLayout";
 const EmiCalculator = () => {
     return (
         <>
-            <LandingPageLayout>
-                <Banner />
-                <EmiCard />
-                <CalculateEmi />
-                <Faq />
+            <div className="min-h-screen text-black bg-white">
+                <LandingPageLayout>
+                    <Banner />
+                    <EmiCard />
+                    <CalculateEmi />
+                    <Faq />
 
-            </LandingPageLayout>
+                </LandingPageLayout>
+            </div>
 
             
         </>

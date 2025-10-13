@@ -65,8 +65,8 @@ const TruckByMileage = ({ data, onFilterChange, loading }) => {
                                             {/* <Badge variant="secondary" className="mb-2 bg-green-100 text-green-800">
                                                 {truck.mileage}
                                             </Badge> */}
-                                            <h3 className="font-semibold text-gray-900 mb-2 text-[15px]">{truck.productName}</h3>
-                                            <p className="text-orange-500 font-bold text-sm">
+                                            <h3 className="font-semibold text-gray-500 mb-2 text-sm">{truck.productName}</h3>
+                                            <p className="text-black font-bold text-sm">
                                                 ₹ {truck?.minPrice} - {truck?.maxPrice} Lakhs
                                             </p>
                                             <Link

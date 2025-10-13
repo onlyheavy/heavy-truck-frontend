@@ -69,10 +69,10 @@ const TruckByPrice = ({ data, onFilterChange, loading }) => {
                                             alt={truck?.productName}
                                             className="w-full h-40 border object-cover rounded-lg mb-4"
                                         />
-                                        <h3 className="font-semibold text-gray-900 mb-2 text-[16px]">
+                                        <h3 className="font-semibold text-gray-600 mb-2 text-sm">
                                             {truck?.productName}
                                         </h3>
-                                        <p className="text-orange-500 font-bold text-sm">
+                                        <p className="text-black font-bold text-sm">
                                             ₹ {truck?.minPrice} - {truck?.maxPrice} Lakhs
                                         </p>
 
@@ -87,7 +87,7 @@ const TruckByPrice = ({ data, onFilterChange, loading }) => {
                                                 }
                                             }}
                                         >
-                                            <div className='flex justify-center mt-2 pb-4 '>
+                                            <div className='flex justify-center mt-2 pb-2 '>
                                                 <button
                                                     className="px-6 py-1.5 rounded-sm mt-3 cursor-pointer font-bold text-sm border text-orange-500 border-orange-500 hover:text-white hover:bg-orange-500 bg-transparent "
                                                 >

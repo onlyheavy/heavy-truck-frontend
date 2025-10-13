@@ -13,7 +13,7 @@ const MainLayout = ({
 }) => {
   return (
     <>
-      <div className="container mx-auto ">
+      <div className="container bg-[#FEFCFB] mx-auto ">
         <Navbar />
         <div className="md:mx-5 mx-2 bg-[#FEFCFB]">
           <main

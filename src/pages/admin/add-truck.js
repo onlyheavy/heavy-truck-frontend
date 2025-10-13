@@ -109,8 +109,8 @@ const AddTruck = () => {
 
   return (
     <AdminLayout>
-      <div className="">
-        <h1 className="text-2xl font-bold text-gray-800 mb-6">Add New Truck</h1>
+      <div className="bg-white">
+        <h1 className="text-2xl font-bold  text-gray-800 mb-6">Add New Truck</h1>
         <div className="bg-white rounded-lg shadow">
           {/* Progress Bar */}
           <div className="border-b px-6 py-4">

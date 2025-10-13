@@ -51,7 +51,7 @@ const TruckGallery = () => {
   };
 
   const EmptyGallery = () => (
-    <div className='block md:flex gap-8'>
+    <div className='block md:flex  gap-8'>
       {/* Desktop Empty Gallery */}
       <div className="hidden sm:block">
         <div className="mb-4 rounded w-[550px] h-[320px] bg-gray-200 flex items-center justify-center">
@@ -93,16 +93,16 @@ const TruckGallery = () => {
       {/* Truck Info & Features */}
       <div className='flex flex-col gap-7'>
         <div className='flex gap-3 items-center'>
-          <h1 className='font-bold text-2xl capitalize'>{categoryData?.[0]?.productName || 'Product Name'}</h1>
+          <h1 className='font-bold text-2xl text-black capitalize'>{categoryData?.[0]?.productName || 'Product Name'}</h1>
           <div className='bg-orange-500 rounded-full w-fit px-3 py-1 text-white flex items-center gap-3'>
             <img src="/icons/star.svg" alt="star" />
-            <p className='text-sm'>{categoryData?.[0]?.starRating || '0.0'}</p>
+            <p className='text-sm '>{categoryData?.[0]?.starRating || '0.0'}</p>
           </div>
         </div>
 
         <div className='flex flex-col gap-2'>
           <p className='text-[#797979] text-sm font-semibold'>Ex-Showroom Price</p>
-          <p className='font-bold text-lg'>₹ {Number(categoryData[0]?.minPrice).toLocaleString('en-IN')} - ₹ {Number(categoryData[0]?.maxPrice).toLocaleString('en-IN')} Lakh* </p>
+          <p className='font-bold text-lg '>₹ {Number(categoryData[0]?.minPrice).toLocaleString('en-IN')} - ₹ {Number(categoryData[0]?.maxPrice).toLocaleString('en-IN')} Lakh* </p>
         </div>
 
         <div className='flex gap-2 items-center'>
