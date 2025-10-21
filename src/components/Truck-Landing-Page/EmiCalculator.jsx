@@ -3,6 +3,7 @@ import Slider from 'rc-slider';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { useCategory } from "@/hooks/useContext";
+import LoanForm from '../brochure/loanForm';
 
 // Register Chart.js components
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -28,6 +29,13 @@ const EmiCalculator = () => {
   const [downPayment, setDownPayment] = useState(0);
   const [tenure, setTenure] = useState(60);
   const [interestRate, setInterestRate] = useState(12);
+  const [showForm, setShowForm] = useState(false);
+  const [status, setStatus] = useState("");
+
+  const handleClick = (type) => {
+    setStatus(type);
+    setShowForm(true);
+  };
 
   useEffect(() => {
     if (categoryData.length > 0) {
@@ -241,13 +249,20 @@ const EmiCalculator = () => {
 
         {/* Financial Details */}
         <div className="md:grid block grid-cols-2 gap-8 mt-8">
-          <div>
+          <div className=''>
             <p className="text-xs md:mb-0 mb-4">
               <span className="font-black">Note: </span>
               The EMI amount shown is based on the ex-showroom price, with a 20% down
               payment, a 12% interest rate, and a 60-months tenure. You can adjust
               these values to calculate an EMI that fits your budget.
             </p>
+            <div className='text-center py-5'>
+              <button className='w-[70%] border text-white bg-[#FA7436] rounded-sm py-1 hover:bg-orange-600 cursor-pointer border-[#FA7436]' onClick={() => handleClick("EMI")} >
+                Apply Loan
+              </button>
+              {showForm && <LoanForm onClose={() => setShowForm(false)} id={categoryData[0]?._id} status={status} />}
+            </div>
+
           </div>
           <div className="rounded-lg">
             <table className="w-full text-left border border-gray-300 rounded-md">
@@ -277,7 +292,7 @@ const EmiCalculator = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

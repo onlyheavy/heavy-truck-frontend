@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import API from "@/utils/api"; // ✅ Ensure API.HOST is defined
 
-const LoanForm = ({ onClose, id, status }) => {
+const PriceForm = ({ onClose, id, status }) => {
     const [form, setForm] = useState({ name: "", mobileNumber: "", city: "", status: status });
     const [loading, setLoading] = useState(false);
 
@@ -15,7 +15,7 @@ const LoanForm = ({ onClose, id, status }) => {
         setLoading(true);
         try {
             const response = await axios.post(
-                `${API.HOST}/api/loan/createloan/${id}`,
+                `${API.HOST}/api/brochure/createBrochure/${id}`,
                 form
             );
 
@@ -59,7 +59,7 @@ const LoanForm = ({ onClose, id, status }) => {
 
                     <form onSubmit={handleSubmit} className="space-y-4">
                         <div>
-                            <label className="block text-sm text-start font-medium mb-1">Name</label>
+                            <label className="block text-sm font-medium mb-1">Name</label>
                             <input
                                 type="text"
                                 name="name"
@@ -72,7 +72,7 @@ const LoanForm = ({ onClose, id, status }) => {
                         </div>
 
                         <div>
-                            <label className="block text-sm text-start font-medium mb-1">
+                            <label className="block text-sm font-medium mb-1">
                                 Mobile Number
                             </label>
                             <input
@@ -87,7 +87,7 @@ const LoanForm = ({ onClose, id, status }) => {
                         </div>
 
                         <div>
-                            <label className="block text-sm text-start font-medium mb-1">City</label>
+                            <label className="block text-sm font-medium mb-1">City</label>
                             <input
                                 type="text"
                                 name="city"
@@ -115,7 +115,7 @@ const LoanForm = ({ onClose, id, status }) => {
                 {/* RIGHT SIDE - Image (hidden on mobile) */}
                 <div className="hidden md:flex flex-1 pt-2 justify-center items-center">
                     <img
-                        src="/truck-loan.png"
+                        src="/vehicle-road.png"
                         alt="Truck"
                         className="rounded-lg w-full h-100 object-cover"
                     />
@@ -125,4 +125,4 @@ const LoanForm = ({ onClose, id, status }) => {
     );
 };
 
-export default LoanForm;
+export default PriceForm;

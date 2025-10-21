@@ -44,6 +44,19 @@ const filterOptions = {
         { id: "45-50 ton", value: "45-50-ton" },
         { id: "Above 50 ton", value: "above-50-ton" },
     ],
+    payload: [
+        { id: "Under 2.5 ton", value: "under-2.5-ton-payload" },
+        { id: "2.5-5 ton", value: "2.5-5-ton-payload" },
+        { id: "5-10 ton", value: "5-10-ton-payload" },
+        { id: "10-15 ton", value: "10-15-ton-payload" },
+        { id: "15-20 ton", value: "15-20-ton-payload" },
+        { id: "25-30 ton", value: "25-30-ton-payload" },
+        { id: "30-35 ton", value: "30-35-ton-payload" },
+        { id: "35-40 ton", value: "35-40-ton-payload" },
+        { id: "40-45 ton", value: "40-45-ton-payload" },
+        { id: "45-50 ton", value: "45-50-ton-payload" },
+        { id: "Above 50 ton", value: "above-50-ton-payload" },
+    ],
     "Emission Norm": [
         { id: "BS III", value: "bs-iii" },
         { id: "BS IV", value: "bs-iv" },
@@ -71,12 +84,7 @@ const filterOptions = {
         { id: "Above 30 mileage", value: "above-30-mileage" },
     ],
 
-    Payload: [
-        { id: "under 2 Ton", value: "under-2-ton" },
-        { id: "2–5 Ton", value: "2-5-ton" },
-        { id: "5–10 Ton", value: "5-10-ton" },
-        { id: "above 10 Ton", value: "above-10-ton" },
-    ],
+
 };
 
 // Helper to get display label from filter value
@@ -208,7 +216,7 @@ export default function TruckListing() {
                                     <img
                                         src={truck.image ? `${process.env.NEXT_PUBLIC_S3_URL}${truck.image}` : "/images/img1.svg"}
                                         alt={truck.productName}
-                                        className="w-full h-40 object-cover rounded-lg mb-4"
+                                        className="w-full h-48 border object-cover rounded-lg mb-4"
                                     />
                                     <div className="my-5">
                                         <h3 className="text-sm font-semibold text-[#254154]">

@@ -18,7 +18,7 @@ const InputField = memo(({ label, name, value, onChange, placeholder, type = "te
         onChange={(e) => onChange(name, type === "checkbox" ? e.target.checked : e.target.value)}
         className={type === "checkbox" ?
           "h-4 w-4 text-orange-500  focus:ring-orange-500 border-gray-300 rounded" :
-          "w-full p-2 border rounded text-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm"}
+          "w-full p-2 border rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm"}
         placeholder={placeholder}
         autoComplete="off"
       />

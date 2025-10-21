@@ -33,7 +33,7 @@ const TruckByGvw = ({ data, onFilterChange, loading }) => {
                     <div className="flex items-center justify-center mx-10 my-6">
                         <div className="hidden md:block w-60 border-t border-gray-300"></div>
                         <span className="mx-4 text-xl md:text-3xl font-bold text-gray-900">
-                            Trucks by GVW
+                            Trucks By GVW
                         </span>
                         <div className="hidden md:block w-60 border-t border-gray-300"></div>
                     </div>
@@ -42,7 +42,7 @@ const TruckByGvw = ({ data, onFilterChange, loading }) => {
                             <button
                                 key={option.value}
                                 onClick={() => handleFilterClick(option.value)}
-                                className={`flex-shrink-0 px-3 py-2 rounded-sm border cursor-pointer transition whitespace-nowrap ${selected === option.value
+                                className={`flex-shrink-0 px-3 py-1 text-sm rounded-sm border cursor-pointer transition whitespace-nowrap ${selected === option.value
                                     ? "bg-[#FFF5F2] border-orange-400 text-gray-900 font-semibold"
                                     : "bg-white border-gray-200 text-gray-600 hover:border-orange-300"
                                     }`}

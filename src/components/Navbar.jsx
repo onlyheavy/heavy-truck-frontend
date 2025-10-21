@@ -68,14 +68,14 @@ const Navbar = () => {
         {/* Right Side */}
         <div className="flex items-center gap-6">
           {/* Language Dropdown (static for now) */}
-          <button className="flex items-center text-gray-600 hover:text-gray-800">
+          {/* <button className="flex items-center text-gray-600 hover:text-gray-800">
             English <IoMdArrowDropdown size={20} className="ml-1" />
-          </button>
+          </button> */}
 
           {/* Login Button */}
           <button
             onClick={() => router.push('/admin/admin-landing')}
-            className="bg-orange-500 text-white px-6 py-2 rounded-md font-medium hover:bg-orange-600 transition"
+            className="bg-orange-500 text-white px-6 py-2 cursor-pointer rounded-md font-medium hover:bg-orange-600 transition"
           >
             Login & Sign Up
           </button>
@@ -93,8 +93,8 @@ const Navbar = () => {
         <button className="flex items-center hover:text-orange-500">
           Used Truck <IoMdArrowDropdown size={18} className="ml-1" />
         </button>
-        <button className="hover:text-orange-500 cursor-pointer" onClick={()=>router.push(`/compare`)}>Fuel Cost Calculator</button>
-        <button className="hover:text-orange-500 cursor-pointer" onClick={()=>router.push(`/emi-calculator`)}>EMI Calculator</button>
+        <button className="hover:text-orange-500 cursor-pointer" onClick={() => router.push(`/compare`)}>Fuel Cost Calculator</button>
+        <button className="hover:text-orange-500 cursor-pointer" onClick={() => router.push(`/emi-calculator`)}>EMI Calculator</button>
         <button className="hover:text-orange-500">Electric Truck</button>
       </div>
 
@@ -110,9 +110,8 @@ const Navbar = () => {
               {truckBrands.map((brand) => (
                 <li
                   key={brand}
-                  className={`cursor-pointer p-1 rounded hover:bg-orange-100 ${
-                    selectedBrand === brand ? "font-semibold text-orange-600" : ""
-                  }`}
+                  className={`cursor-pointer p-1 rounded text-black hover:bg-orange-100 ${selectedBrand === brand ? "font-semibold text-orange-600" : ""
+                    }`}
                   onMouseEnter={() => setSelectedBrand(brand)}
                   onClick={() => setSelectedBrand(brand)}
                 >
@@ -131,7 +130,7 @@ const Navbar = () => {
                 {popularTrucks[selectedBrand]?.map((truck, index) => (
                   <li
                     key={index}
-                    className="cursor-pointer p-1 hover:bg-orange-100 rounded"
+                    className="cursor-pointer p-1 text-black hover:bg-orange-100 rounded"
                   >
                     {truck}
                   </li>
@@ -160,9 +159,8 @@ const Navbar = () => {
 
       {/* Mobile Sidebar */}
       <div
-        className={`fixed top-0 left-0 h-full w-72 bg-white z-50 shadow-lg transform transition-transform duration-500 ease-in-out ${
-          showMobileMenu ? "translate-x-0" : "-translate-x-full"
-        }`}
+        className={`fixed top-0 left-0 h-full w-72 bg-white z-50 shadow-lg transform transition-transform duration-500 ease-in-out ${showMobileMenu ? "translate-x-0" : "-translate-x-full"
+          }`}
       >
         <div className="p-4 flex justify-between items-center border-b">
           <span className="font-semibold text-lg">Menu</span>

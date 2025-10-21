@@ -3,17 +3,20 @@ import Link from 'next/link'
 import React, { useState } from 'react'
 import { useRouter } from "next/router"
 
-const TruckByWheels = ({ data, onFilterChange, loading }) => {
+const TruckByPayload = ({ data, onFilterChange, loading }) => {
     const router = useRouter();
     const options = [
-        { id: "4 wheels", value: "4" },
-        { id: "6 wheels", value: "6" },
-        { id: "10 wheels", value: "10" },
-        { id: "12 wheels", value: "12" },
-        { id: "14 wheels", value: "14" },
-        { id: "16 wheels", value: "16" },
-        { id: "18 wheels", value: "18" },
-        { id: "22 wheels", value: "22" },
+        { id: "Under 2.5 ton", value: "under-2.5-ton-payload" },
+        { id: "2.5-5 ton", value: "2.5-5-ton-payload" },
+        { id: "5-10 ton", value: "5-10-ton-payload" },
+        { id: "10-15 ton", value: "10-15-ton-payload" },
+        { id: "15-20 ton", value: "15-20-ton-payload" },
+        { id: "25-30 ton", value: "25-30-ton-payload" },
+        { id: "30-35 ton", value: "30-35-ton-payload" },
+        { id: "35-40 ton", value: "35-40-ton-payload" },
+        { id: "40-45 ton", value: "40-45-ton-payload" },
+        { id: "45-50 ton", value: "45-50-ton-payload" },
+        { id: "Above 50 ton", value: "above-50-ton-payload" },
     ];
 
     const [selected, setSelected] = useState(options[0].value);
@@ -29,7 +32,7 @@ const TruckByWheels = ({ data, onFilterChange, loading }) => {
                 <div className="flex items-center justify-center mx-10 my-6">
                     <div className="hidden md:block w-60 border-t border-gray-300"></div>
                     <span className="mx-4 text-xl md:text-3xl font-bold text-gray-900">
-                        Truck By Wheels
+                        Truck By Payloads
                     </span>
                     <div className="hidden md:block w-60 border-t border-gray-300"></div>
                 </div>
@@ -105,4 +108,4 @@ const TruckByWheels = ({ data, onFilterChange, loading }) => {
     )
 }
 
-export default TruckByWheels
+export default TruckByPayload

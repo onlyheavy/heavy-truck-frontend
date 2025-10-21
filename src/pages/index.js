@@ -17,11 +17,13 @@ import HomeCompareTruck from "@/components/Home-Landing-page/HomeCompareTruck";
 import LandingPageLayout from "@/layouts/LandingPageLayout";
 import API from "@/utils/api";
 import LatestNews from "@/components/Home-Landing-page/LatestNews";
+import TruckByPayload from "@/components/Home-Landing-page/TruckByPayload";
 
 export default function Home() {
   const [priceData, setPriceData] = useState([]);
   const [fuelData, setFuelData] = useState([]);
   const [gvwData, setGvwData] = useState([]);
+  const [payload, setPayload] = useState([]);
   const [wheelData, setWheelData] = useState([]);
   const [mileageData, setMileageData] = useState([]);
   const [emissionData, setEmissionData] = useState([]);
@@ -61,6 +63,7 @@ export default function Home() {
     fetchData("price_range", "under-10-lakh", setPriceData);
     fetchData("fuelType", "diesel", setFuelData);
     fetchData("GVW", "under-2.5-ton", setGvwData);
+    fetchData("payload", "under-2.5-ton-payload", setPayload);
     fetchData("wheel", 4, setWheelData);
     fetchData("mileage", "1-5-mileage", setMileageData);
     fetchData("emissionNorm", "bs-vi", setEmissionData);
@@ -89,6 +92,11 @@ export default function Home() {
         <TruckByGvw
           data={gvwData || []}
           onFilterChange={(val) => fetchData("GVW", val, setGvwData)}
+          loading={loading}
+        />
+        <TruckByPayload
+          data={payload || []}
+          onFilterChange={(val) => fetchData("payload", val, setPayload)}
           loading={loading}
         />
         <TruckByWheels

@@ -59,8 +59,8 @@ const Fuel = () => {
                             <p ><span className="text-sm md:text-xl font-bold">₹{fuelCost.toFixed(0)}</span> Per Month</p>
                         </div>
                     </div>
-                    <div>
-                        <img src="/fuel.png" alt="" className="w-36" />
+                    <div className="flex items-center">
+                        <img src="/fuel.png" alt="" className=" w-20 md:w-36" />
                     </div>
                 </div>
             </div>

@@ -42,7 +42,7 @@ const TruckByPrice = ({ data, onFilterChange, loading }) => {
                             <button
                                 key={option.value}
                                 onClick={() => handleFilterClick(option.value)}
-                                className={` flex-shrink-0 px-5 py-2 rounded-sm capitalize border transition cursor-pointer ${selected === option.value
+                                className={` flex-shrink-0 px-3 py-1 text-sm rounded-sm capitalize border transition cursor-pointer ${selected === option.value
                                     ? "bg-[#FFF5F2] border-orange-400 text-gray-900 font-semibold"
                                     : "bg-white border-gray-200 text-gray-600 hover:border-orange-300"
                                     }`}

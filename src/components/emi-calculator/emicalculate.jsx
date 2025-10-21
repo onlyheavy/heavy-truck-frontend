@@ -8,18 +8,18 @@ import API from "@/utils/api";
 // ------------- Brand Gallery Component ----------------
 const BrandGallery = () => {
   const brands = [
-    { name: "Mahindra", logo: "/trucks/mahindra.svg" },
-    { name: "Tata", logo: "/trucks/tata.svg" },
-    { name: "Bajaj", logo: "/trucks/bajaj.svg" },
-    { name: "Ashok Leyland", logo: "/trucks/ashok-leyland.svg" },
-    { name: "Force", logo: "/trucks/force.svg" },
-    { name: "TVS", logo: "/trucks/tvs.svg" },
-    { name: "Saarthi", logo: "/trucks/saarthi.svg" },
-    { name: "Piaggio", logo: "/trucks/piaggio.svg" },
-    { name: "Piaggio", logo: "/trucks/piaggio.svg" },
-    { name: "Piaggio", logo: "/trucks/piaggio.svg" },
-    { name: "Piaggio", logo: "/trucks/piaggio.svg" },
-    { name: "Euler", logo: "/trucks/euler.svg" },
+    { name: "Mahindra", logo: "/trucks/mahindra.jpg" },
+    { name: "Jupiter Electric M..", logo: "/trucks/jupiter-electric-mobility.jpg" },
+    { name: "Premier Motors", logo: "/trucks/premier.jpg" },
+    { name: "Euler EV", logo: "/trucks/euler.svg" },
+    { name: "Force Motors", logo: "/trucks/force.svg" },
+    { name: "IPL Tech Electric", logo: "/trucks/ipl-tech-electric.jpg" },
+    { name: "E-Trio", logo: "/trucks/e-trio.png" },
+    { name: "Omega", logo: "/trucks/omega.jpg" },
+    { name: "Toyota", logo: "/trucks/toyota.jpg" },
+    { name: "I-Board Mobility", logo: "/trucks/iboard.jpg" },
+    { name: "Scania", logo: "/trucks/scania.jpg" },
+    { name: "Volvo", logo: "/trucks/volvo.jpg" },
   ];
 
   return (
@@ -172,7 +172,7 @@ const EmiCalculator = ({ showResults, onCalculateEmi, onBack }) => {
 
             <button
               onClick={fetchTruckData}
-              className="bg-orange-500 text-white rounded-md px-6 py-2 mt-4 w-80 hover:bg-orange-600 transition"
+              className="bg-orange-500 text-white rounded-md px-6 py-2 mt-4 w-80 hover:bg-orange-600 transition cursor-pointer"
             >
               Calculate EMI
             </button>

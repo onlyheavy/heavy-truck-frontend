@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Zoom from 'react-medium-image-zoom';
 import Modal from 'react-modal';
 import { useCategory } from '@/hooks/useContext';
-import LoanForm from '../brochure/loanForm';
+import PriceForm from '../brochure/PriceForm';
 
 Modal.setAppElement('#__next');
 
@@ -123,7 +123,7 @@ const TruckGallery = () => {
           </button>
         </div>
       </div>
-      {showForm && <LoanForm onClose={() => setShowForm(false)} id={categoryData[0]?._id} status={status} />}
+      {showForm && <PriceForm onClose={() => setShowForm(false)} id={categoryData[0]?._id} status={status} />}
     </div>
   );
 
@@ -251,7 +251,7 @@ const TruckGallery = () => {
           </button>
         </div>
       </div>
-      {showForm && <LoanForm onClose={() => setShowForm(false)} id={categoryData[0]?._id} status={status} />}
+      {showForm && <PriceForm onClose={() => setShowForm(false)} id={categoryData[0]?._id} status={status} />}
     </div>
   );
 };

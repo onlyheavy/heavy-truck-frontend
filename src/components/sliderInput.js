@@ -15,12 +15,12 @@ const SliderInput = ({ label, value, min, max, step, onChange, color }) => {
         values={[value]}
         onChange={(values) => onChange(values[0])}
         renderTrack={({ props, children }) => (
-          <div {...props} className="w-full h-1 bg-gray-300 rounded" style={{ ...props.style }}>
+          <div {...props} className="w-full h-1 bg-gray-300 rounded " style={{ ...props.style }}>
             {children}
           </div>
         )}
         renderThumb={({ props }) => (
-          <div {...props} className={`h-5 w-5 rounded-full shadow ${color}`} />
+          <div {...props} className={`h-4 w-4 border-red-300 rounded-full shadow ${color}`} />
         )}
       />
     </div>
