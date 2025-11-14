@@ -3,9 +3,12 @@ import { useCategory } from "@/hooks/useContext";
 import { useState } from "react";
 import { FiChevronDown, FiPhoneCall } from "react-icons/fi";
 import { FiUser } from "react-icons/fi";
+import BrochureForm from "../brochure/brochureForm";
+import DealerForm from "../brochure/dealer";
 
 export default function Faq() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [showForm, setShowForm] = useState(false);
   const { categoryData } = useCategory()
 
   const toggle = (index) => {
@@ -30,10 +33,11 @@ export default function Faq() {
           <p className="font-mona font-normal text-sm lg:text-[16px] leading-[31px] text-center mb-6">
             End-to-end payments and financial management in a single solution. Meet the right platform to help realize.
           </p>
-          <button className="flex items-center gap-2 bg-white  font-bold md:text-[20px] text-[18px] leading-[20px] text-[#F16737] py-2 md:py-3 md:px-14 px-6 rounded-md hover:bg-orange-100 transition">
+          <button onClick={() => setShowForm(true)} className="flex items-center gap-2 cursor-pointer bg-white font-bold md:text-[20px] text-[18px] leading-[20px] text-[#F16737] py-2 md:py-3 md:px-14 px-6 rounded-md hover:bg-orange-100 transition">
             <FiPhoneCall className="text-lg" />
             <span>Connect Now</span>
           </button>
+
         </div>
 
 
@@ -65,6 +69,7 @@ export default function Faq() {
 
         </div>
       </div>
+      {showForm && <DealerForm onClose={() => setShowForm(false)} id={categoryData[0]._id} status="faq" />}
     </div>
   );
 }

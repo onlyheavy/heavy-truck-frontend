@@ -43,7 +43,38 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
     Eicher: ["Eicher Pro 2049", "Eicher Pro 2059XP", "Eicher Pro 3015"],
   });
 
-  const brands = ["Tata Motors", "Mahindra", "Ashok Leyland", "BharatBenz", "Eicher", "Force Motors"];
+  const brands = [
+    "Ashok Leyland",
+    "BharatBenz",
+    "Blue Energy Motors",
+    "E-Trio",
+    "Eicher",
+    "EKA",
+    "Erisha E Mobility",
+    "Euler EV",
+    "Evage Motors",
+    "Force Motors",
+    "I-Board Mobility",
+    "IPL Tech Electric",
+    "ISUZU",
+    "Jupiter Electric Mobility",
+    "Kamaz",
+    "Mahindra",
+    "Man",
+    "Maruti Suzuki",
+    "Montra Electric",
+    "Omega",
+    "Premier Motors",
+    "Propal",
+    "Sany",
+    "Scania",
+    "SML ISUZU",
+    "Switch Mobility",
+    "Tata Motors",
+    "Toyota",
+    "Triton EV",
+    "Volvo"
+  ];
   const [availableTrucks, setAvailableTrucks] = useState([]);
 
   useEffect(() => {
@@ -53,20 +84,30 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
     const t2 = selectedTruckData2 || truck2Data;
     const truck3 = selectedTruckData;
 
+    // Helper function to format values with fallback to "-"
+    const formatValue = (value, unit = '') => {
+      if (value === null || value === undefined || value === '' || value === 'undefined') {
+        return '-';
+      }
+      return unit ? `${value} ${unit}`.trim() : `${value}`.trim();
+    };
+
     setPerformanceSpecs([
-      { label: "Engine Type", truck1: `${t1?.spec?.engine[0]?.engineType} `, truck2: `${t2?.spec?.engine[0]?.engineType} `, truck3: truck3 ? truck3?.spec?.engine[0]?.engineType : "-" },
-      { label: "Engine Cylinders", truck1: t1?.spec?.engine[0]?.engineCylinders, truck2: t2?.spec?.engine[0]?.engineCylinders, truck3: truck3 ? truck3?.spec?.engine[0]?.engineCylinders : "-" },
-      { label: "Engine Displacement", truck1: `${t1?.spec?.engine[0]?.engineDisplacement} cc`, truck2: `${t2?.spec?.engine[0]?.engineDisplacement} cc`, truck3: truck3 ? `${truck3?.spec?.engine[0]?.engineDisplacement} cc` : "-" },
-      { label: "Engine Power", truck1: `${t1?.spec?.engine[0]?.enginePower} HP`, truck2: `${t2?.spec?.engine[0]?.enginePower} HP`, truck3: truck3 ? `${truck3?.spec?.engine[0]?.enginePower} HP` : "-" },
-      { label: "Engine RPM", truck1: `${t1?.spec?.engine[0]?.engineRPM} RPM`, truck2: `${t2?.spec?.engine[0]?.engineRPM} RPM`, truck3: truck3 ? `${truck3?.spec?.engine[0]?.engineRPM} RPM` : "-" },
-      { label: "Torque", truck1: `${t1?.spec?.engine[0]?.torque} Nm`, truck2: `${t2?.spec?.engine[0]?.torque} Nm`, truck3: truck3 ? `${truck3?.spec?.engine[0]?.torque} Nm` : "-" },
-      { label: "Fuel Type", truck1: `${t1?.spec?.engine[0]?.fuelType}`, truck2: `${t2?.spec?.engine[0]?.fuelType}`, truck3: truck3 ? `${truck3?.spec?.engine[0]?.fuelType}` : "-" },
-      { label: "Fuel Tank Capacity", truck1: `${t1?.spec?.engine[0]?.fuelTankCapacity} litres`, truck2: `${t2?.spec?.engine[0]?.fuelTankCapacity} litres`, truck3: truck3 ? `${truck3?.spec?.engine[0]?.fuelTankCapacity} litres` : "" },
-      { label: "Mileage", truck1: `${t1?.spec?.engine[0]?.mileage} km/l`, truck2: `${t2?.spec?.engine[0]?.mileage} km/l`, truck3: truck3 ? `${truck3?.spec?.engine[0]?.mileage} km/l` : "-" },
-      { label: "Gradeability", truck1: `${t1?.spec?.engine[0]?.gradeability} %`, truck2: `${t2?.spec?.engine[0]?.gradeability} %`, truck3: truck3 ? `${truck3?.spec?.engine[0]?.gradeability} %` : "-" },
-      { label: "Emission Norm", truck1: `${t1?.spec?.engine[0]?.emissionNorm} `, truck2: `${t2?.spec?.engine[0]?.emissionNorm} `, truck3: truck3 ? `${truck3?.spec?.engine[0]?.emissionNorm} ` : "-" },
-      { label: "Max Speed", truck1: `${t1?.spec?.engine[0]?.maxSpeed} km/h`, truck2: `${t2?.spec?.engine[0]?.maxSpeed} km/h`, truck3: truck3 ? `${truck3?.spec?.engine[0]?.maxSpeed} km/h` : "-" },
-      { label: "Battery", truck1: `${t1?.spec?.engine[0]?.battery} `, truck2: `${t2?.spec?.engine[0]?.battery} `, truck3: truck3 ? `${truck3?.spec?.engine[0]?.battery} ` : "-" },
+      { label: "Engine Type", truck1: `${t1?.spec?.engine[0]?.engineType} `, truck2: `${t2?.spec?.engine[0]?.engineType} `, truck3: truck3 ? truck3?.spec?.engine[0]?.engineType : null },
+      { label: "Engine Cylinders", truck1: t1?.spec?.engine[0]?.engineCylinders, truck2: t2?.spec?.engine[0]?.engineCylinders, truck3: truck3 ? truck3?.spec?.engine[0]?.engineCylinders : null },
+      { label: "Engine Displacement", truck1: `${t1?.spec?.engine[0]?.engineDisplacement} cc`, truck2: `${t2?.spec?.engine[0]?.engineDisplacement} cc`, truck3: truck3 ? `${truck3?.spec?.engine[0]?.engineDisplacement} cc` : null },
+      { label: "Engine Power", truck1: `${t1?.spec?.engine[0]?.enginePower} HP`, truck2: `${t2?.spec?.engine[0]?.enginePower} HP`, truck3: truck3 ? `${truck3?.spec?.engine[0]?.enginePower} HP` : null },
+      { label: "Engine RPM", truck1: `${t1?.spec?.engine[0]?.engineRPM} RPM`, truck2: `${t2?.spec?.engine[0]?.engineRPM} RPM`, truck3: truck3 ? `${truck3?.spec?.engine[0]?.engineRPM} RPM` : null },
+      { label: "Torque", truck1: `${t1?.spec?.engine[0]?.torque} Nm`, truck2: `${t2?.spec?.engine[0]?.torque} Nm`, truck3: truck3 ? `${truck3?.spec?.engine[0]?.torque} Nm` : null },
+      { label: "Fuel Type", truck1: `${t1?.spec?.engine[0]?.fuelType}`, truck2: `${t2?.spec?.engine[0]?.fuelType}`, truck3: truck3 ? `${truck3?.spec?.engine[0]?.fuelType}` : null },
+      { label: "Fuel Tank Capacity", truck1: `${t1?.spec?.engine[0]?.fuelTankCapacity} litres`, truck2: `${t2?.spec?.engine[0]?.fuelTankCapacity} litres`, truck3: truck3 ? `${truck3?.spec?.engine[0]?.fuelTankCapacity} litres` : null },
+      { label: "Mileage", truck1: `${t1?.spec?.engine[0]?.mileage} km/l`, truck2: `${t2?.spec?.engine[0]?.mileage} km/l`, truck3: truck3 ? `${truck3?.spec?.engine[0]?.mileage} km/l` : null },
+      { label: "Gradeability", truck1: `${t1?.spec?.engine[0]?.gradeability} %`, truck2: `${t2?.spec?.engine[0]?.gradeability} %`, truck3: truck3 ? `${truck3?.spec?.engine[0]?.gradeability} %` : null },
+      { label: "Emission Norm", truck1: `${t1?.spec?.engine[0]?.emissionNorm} `, truck2: `${t2?.spec?.engine[0]?.emissionNorm} `, truck3: truck3 ? `${truck3?.spec?.engine[0]?.emissionNorm} ` : null },
+      { label: "Max Speed", truck1: `${t1?.spec?.engine[0]?.maxSpeed} km/h`, truck2: `${t2?.spec?.engine[0]?.maxSpeed} km/h`, truck3: truck3 ? `${truck3?.spec?.engine[0]?.maxSpeed} km/h` : null },
+      { label: "Battery", truck1: `${t1?.spec?.engine[0]?.battery} `, truck2: `${t2?.spec?.engine[0]?.battery} `, truck3: truck3 ? `${truck3?.spec?.engine[0]?.battery} ` : null },
+      { label: "Charging Time", truck1: formatValue(t1?.spec?.engine[0]?.chargingTime, 'Hrs'), truck2: formatValue(t2?.spec?.engine[0]?.chargingTime, 'Hrs'), truck3: truck3 ? formatValue(truck3?.spec?.engine[0]?.chargingTime, 'Hrs') : null },
+      { label: "Range", truck1: formatValue(t1?.spec?.engine[0]?.range, 'km'), truck2: formatValue(t2?.spec?.engine[0]?.range, 'km'), truck3: truck3 ? formatValue(truck3?.spec?.engine[0]?.range, 'km') : null },
     ]);
 
     setDimensionSpecs([
@@ -172,9 +213,9 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
         } else {
           console.error("Unexpected error:", error);
         }
-      
+
         setTrucksByBrand(prev => ({ ...prev, [selectedBrand]: [] }));
-            
+
 
       }
     };
@@ -316,15 +357,15 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
   return (
     <>
       <Head>
-        {/* <title>{rankData?.metaTitle}</title> */}
-        {/* {rankData?.metaDescription && (
+        <title>{rankData?.metaTitle}</title>
+        {rankData?.metaDescription && (
           <meta name="description" content={rankData?.metaDescription} />
-        )} */}
-        {/* <meta
+        )}
+        <meta
           name="robots"
           content={`${rankData?.searchIndex ? 'index, follow' : 'noindex, nofollow'}, ${rankData?.imageIndex ? 'max-image-preview:large' : 'noimageindex'}`}
-        /> */}
-        {/* <meta name="viewport" content="width=device-width, initial-scale=1" />
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         {rankData?.canonicalUrl ? (
           <link rel="canonical" href={`https://onlyheavy.com/compare/${rankData.canonicalUrl}`} />
         ) : (
@@ -332,32 +373,32 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
             rel="canonical"
             href={`https://onlyheavy.com/compare${rankData.slug}`}
           />
-        )} */}
-        {/* {rankData?.metaTitle && (
+        )}
+        {rankData?.metaTitle && (
           <meta property="og:title" content={rankData?.metaTitle} />
         )}
         {rankData?.metaDescription && (
           <meta property="og:description" content={rankData?.metaDescription} />
-        )} */}
-        {/* <meta property="og:image" content="https://only-heavy.s3.eu-north-1.amazonaws.com/favicons.png" />
+        )}
+        <meta property="og:image" content="https://only-heavy.s3.eu-north-1.amazonaws.com/favicons.png" />
         <meta
           property="og:url"
           content={
             rankData?.canonicalUrl || `https://onlyheavy.com/compare/${rankData?.slug}`
           }
-        /> */}
+        />
         {/* Twitter Meta Tag */}
-        {/* <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"
           content={rankData?.metaTitle}
-        /> */}
-        {/* <meta
+        />
+        <meta
           name="twitter:description"
           content={
             rankData?.metaDescription}
-        /> */}
-        {/* <meta name="twitter:image" content="https://only-heavy.s3.eu-north-1.amazonaws.com/favicons.png" /> */}
+        />
+        <meta name="twitter:image" content="https://only-heavy.s3.eu-north-1.amazonaws.com/favicons.png" />
       </Head>
       <div className="">
         <div className="">
@@ -657,7 +698,7 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
 
           {/* Mobile Sticky Header */}
           <div className="md:hidden sticky top-0 z-50 bg-gray-50 w-full border border-gray-200 rounded-md p-3 shadow-sm mb-4">
-            <div className="grid grid-cols-3 gap-2">
+            <div className={`grid gap-2 ${selectedTruckData ? 'grid-cols-3' : 'grid-cols-2'}`}>
               {/* Truck 1 */}
               {truck1Data && (
                 <div className="flex flex-col items-center bg-white border rounded-lg shadow p-2">
@@ -713,7 +754,7 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
 
           {/* Desktop Sticky Header */}
           <div className="hidden md:block sticky top-0 z-50 bg-gray-50 w-full border border-gray-200 rounded-md p-4 shadow-sm">
-            <div className="grid grid-cols-4 gap-5">
+            <div className={`grid gap-5 ${selectedTruckData ? 'grid-cols-4' : 'grid-cols-3'}`}>
               {/* Left Description */}
               <div className="">
                 <p className="font-semibold text-sm md:text-base text-gray-800">
@@ -796,19 +837,19 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
                       {spec?.label}
                     </div>
                     {/* Truck Values Row */}
-                    <div className="grid grid-cols-3 gap-2 md:gap-4 p-3 md:p-4">
+                    <div className={`grid gap-2 md:gap-4 p-3 md:p-4 ${selectedTruckData ? 'grid-cols-3' : 'grid-cols-2'}`}>
                       <div className="text-start text-sm md:text-base break-words">{spec?.truck1}</div>
                       <div className="text-start text-sm md:text-base break-words">{spec?.truck2}</div>
-                      <div className="text-start text-sm md:text-base break-words">{spec?.truck3}</div>
+                      {selectedTruckData && <div className="text-start text-sm md:text-base break-words">{spec?.truck3}</div>}
                     </div>
                   </div>
 
                   {/* Desktop Layout: Side-by-side structure */}
-                  <div className="hidden lg:grid lg:grid-cols-4 gap-4 items-center p-4">
+                  <div className={`hidden lg:grid gap-4 items-center p-4 ${selectedTruckData ? 'lg:grid-cols-4' : 'lg:grid-cols-3'}`}>
                     <div className="font-semibold text-base break-words">{spec?.label}</div>
                     <div className="text-start text-base break-words">{spec?.truck1}</div>
                     <div className="text-start text-base break-words">{spec?.truck2}</div>
-                    <div className="text-start text-base break-words">{spec?.truck3}</div>
+                    {selectedTruckData && <div className="text-start text-base break-words">{spec?.truck3}</div>}
                   </div>
                 </div>
               ))}
@@ -829,19 +870,19 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
                       {spec?.label}
                     </div>
                     {/* Truck Values Row */}
-                    <div className="grid grid-cols-3 gap-2 md:gap-4 p-3 md:p-4">
+                    <div className={`grid gap-2 md:gap-4 p-3 md:p-4 ${selectedTruckData ? 'grid-cols-3' : 'grid-cols-2'}`}>
                       <div className="text-start text-sm md:text-base break-words">{spec?.truck1}</div>
                       <div className="text-start text-sm md:text-base break-words">{spec?.truck2}</div>
-                      <div className="text-start text-sm md:text-base break-words">{spec?.truck3}</div>
+                      {selectedTruckData && <div className="text-start text-sm md:text-base break-words">{spec?.truck3}</div>}
                     </div>
                   </div>
 
                   {/* Desktop Layout: Side-by-side structure */}
-                  <div className="hidden lg:grid lg:grid-cols-4 gap-4 items-center p-4">
+                  <div className={`hidden lg:grid gap-4 items-center p-4 ${selectedTruckData ? 'lg:grid-cols-4' : 'lg:grid-cols-3'}`}>
                     <div className="font-semibold text-base break-words">{spec?.label}</div>
                     <div className="text-start text-base break-words">{spec?.truck1}</div>
                     <div className="text-start text-base break-words">{spec?.truck2}</div>
-                    <div className="text-start text-base break-words">{spec?.truck3}</div>
+                    {selectedTruckData && <div className="text-start text-base break-words">{spec?.truck3}</div>}
                   </div>
                 </div>
               ))}
@@ -862,19 +903,19 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
                       {spec?.label}
                     </div>
                     {/* Truck Values Row */}
-                    <div className="grid grid-cols-3 gap-2 md:gap-4 p-3 md:p-4">
+                    <div className={`grid gap-2 md:gap-4 p-3 md:p-4 ${selectedTruckData ? 'grid-cols-3' : 'grid-cols-2'}`}>
                       <div className="text-start text-sm md:text-base break-words">{spec?.truck1}</div>
                       <div className="text-start text-sm md:text-base break-words">{spec?.truck2}</div>
-                      <div className="text-start text-sm md:text-base break-words">{spec?.truck3}</div>
+                      {selectedTruckData && <div className="text-start text-sm md:text-base break-words">{spec?.truck3}</div>}
                     </div>
                   </div>
 
                   {/* Desktop Layout: Side-by-side structure */}
-                  <div className="hidden lg:grid lg:grid-cols-4 gap-4 items-center p-4">
+                  <div className={`hidden lg:grid gap-4 items-center p-4 ${selectedTruckData ? 'lg:grid-cols-4' : 'lg:grid-cols-3'}`}>
                     <div className="font-semibold text-base break-words">{spec?.label}</div>
                     <div className="text-start text-base break-words">{spec?.truck1}</div>
                     <div className="text-start text-base break-words">{spec?.truck2}</div>
-                    <div className="text-start text-base break-words">{spec?.truck3}</div>
+                    {selectedTruckData && <div className="text-start text-base break-words">{spec?.truck3}</div>}
                   </div>
                 </div>
               ))}
@@ -895,19 +936,19 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
                       {spec?.label}
                     </div>
                     {/* Truck Values Row */}
-                    <div className="grid grid-cols-3 gap-2 md:gap-4 p-3 md:p-4">
+                    <div className={`grid gap-2 md:gap-4 p-3 md:p-4 ${selectedTruckData ? 'grid-cols-3' : 'grid-cols-2'}`}>
                       <div className="text-start text-sm md:text-base break-words">{spec?.truck1}</div>
                       <div className="text-start text-sm md:text-base break-words">{spec?.truck2}</div>
-                      <div className="text-start text-sm md:text-base break-words">{spec?.truck3}</div>
+                      {selectedTruckData && <div className="text-start text-sm md:text-base break-words">{spec?.truck3}</div>}
                     </div>
                   </div>
 
                   {/* Desktop Layout: Side-by-side structure */}
-                  <div className="hidden lg:grid lg:grid-cols-4 gap-4 items-center p-4">
+                  <div className={`hidden lg:grid gap-4 items-center p-4 ${selectedTruckData ? 'lg:grid-cols-4' : 'lg:grid-cols-3'}`}>
                     <div className="font-semibold text-base break-words">{spec?.label}</div>
                     <div className="text-start text-base break-words">{spec?.truck1}</div>
                     <div className="text-start text-base break-words">{spec?.truck2}</div>
-                    <div className="text-start text-base break-words">{spec?.truck3}</div>
+                    {selectedTruckData && <div className="text-start text-base break-words">{spec?.truck3}</div>}
                   </div>
                 </div>
               ))}
@@ -928,19 +969,19 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
                       {spec?.label}
                     </div>
                     {/* Truck Values Row */}
-                    <div className="grid grid-cols-3 gap-2 md:gap-4 p-3 md:p-4">
+                    <div className={`grid gap-2 md:gap-4 p-3 md:p-4 ${selectedTruckData ? 'grid-cols-3' : 'grid-cols-2'}`}>
                       <div className="text-start text-sm md:text-base break-words">{spec?.truck1}</div>
                       <div className="text-start text-sm md:text-base break-words">{spec?.truck2}</div>
-                      <div className="text-start text-sm md:text-base break-words">{spec?.truck3}</div>
+                      {selectedTruckData && <div className="text-start text-sm md:text-base break-words">{spec?.truck3}</div>}
                     </div>
                   </div>
 
                   {/* Desktop Layout: Side-by-side structure */}
-                  <div className="hidden lg:grid lg:grid-cols-4 gap-4 items-center p-4">
+                  <div className={`hidden lg:grid gap-4 items-center p-4 ${selectedTruckData ? 'lg:grid-cols-4' : 'lg:grid-cols-3'}`}>
                     <div className="font-semibold text-base break-words">{spec?.label}</div>
                     <div className="text-start text-base break-words">{spec?.truck1}</div>
                     <div className="text-start text-base break-words">{spec?.truck2}</div>
-                    <div className="text-start text-base break-words">{spec?.truck3}</div>
+                    {selectedTruckData && <div className="text-start text-base break-words">{spec?.truck3}</div>}
                   </div>
                 </div>
               ))}
@@ -961,19 +1002,19 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
                       {spec?.label}
                     </div>
                     {/* Truck Values Row */}
-                    <div className="grid grid-cols-3 gap-2 md:gap-4 p-3 md:p-4">
+                    <div className={`grid gap-2 md:gap-4 p-3 md:p-4 ${selectedTruckData ? 'grid-cols-3' : 'grid-cols-2'}`}>
                       <div className="text-start text-sm md:text-base break-words">{spec?.truck1}</div>
                       <div className="text-start text-sm md:text-base break-words">{spec?.truck2}</div>
-                      <div className="text-start text-sm md:text-base break-words">{spec?.truck3}</div>
+                      {selectedTruckData && <div className="text-start text-sm md:text-base break-words">{spec?.truck3}</div>}
                     </div>
                   </div>
 
                   {/* Desktop Layout: Side-by-side structure */}
-                  <div className="hidden lg:grid lg:grid-cols-4 gap-4 items-center p-4">
+                  <div className={`hidden lg:grid gap-4 items-center p-4 ${selectedTruckData ? 'lg:grid-cols-4' : 'lg:grid-cols-3'}`}>
                     <div className="font-semibold text-base break-words">{spec?.label}</div>
                     <div className="text-start text-base break-words">{spec?.truck1}</div>
                     <div className="text-start text-base break-words">{spec?.truck2}</div>
-                    <div className="text-start text-base break-words">{spec?.truck3}</div>
+                    {selectedTruckData && <div className="text-start text-base break-words">{spec?.truck3}</div>}
                   </div>
                 </div>
               ))}
@@ -994,19 +1035,19 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
                       {spec?.label}
                     </div>
                     {/* Truck Values Row */}
-                    <div className="grid grid-cols-3 gap-2 md:gap-4 p-3 md:p-4">
+                    <div className={`grid gap-2 md:gap-4 p-3 md:p-4 ${selectedTruckData ? 'grid-cols-3' : 'grid-cols-2'}`}>
                       <div className="text-start text-sm md:text-base break-words">{spec?.truck1}</div>
                       <div className="text-start text-sm md:text-base break-words">{spec?.truck2}</div>
-                      <div className="text-start text-sm md:text-base break-words">{spec?.truck3}</div>
+                      {selectedTruckData && <div className="text-start text-sm md:text-base break-words">{spec?.truck3}</div>}
                     </div>
                   </div>
 
                   {/* Desktop Layout: Side-by-side structure */}
-                  <div className="hidden lg:grid lg:grid-cols-4 gap-4 items-center p-4">
+                  <div className={`hidden lg:grid gap-4 items-center p-4 ${selectedTruckData ? 'lg:grid-cols-4' : 'lg:grid-cols-3'}`}>
                     <div className="font-semibold text-base break-words">{spec?.label}</div>
                     <div className="text-start text-base break-words">{spec?.truck1}</div>
                     <div className="text-start text-base break-words">{spec?.truck2}</div>
-                    <div className="text-start text-base break-words">{spec?.truck3}</div>
+                    {selectedTruckData && <div className="text-start text-base break-words">{spec?.truck3}</div>}
                   </div>
                 </div>
               ))}
@@ -1027,19 +1068,19 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
                       {spec?.label}
                     </div>
                     {/* Truck Values Row */}
-                    <div className="grid grid-cols-3 gap-2 md:gap-4 p-3 md:p-4">
+                    <div className={`grid gap-2 md:gap-4 p-3 md:p-4 ${selectedTruckData ? 'grid-cols-3' : 'grid-cols-2'}`}>
                       <div className="text-start text-sm md:text-base break-words">{spec?.truck1}</div>
                       <div className="text-start text-sm md:text-base break-words">{spec?.truck2}</div>
-                      <div className="text-start text-sm md:text-base break-words">{spec?.truck3}</div>
+                      {selectedTruckData && <div className="text-start text-sm md:text-base break-words">{spec?.truck3}</div>}
                     </div>
                   </div>
 
                   {/* Desktop Layout: Side-by-side structure */}
-                  <div className="hidden lg:grid lg:grid-cols-4 gap-4 items-center p-4">
+                  <div className={`hidden lg:grid gap-4 items-center p-4 ${selectedTruckData ? 'lg:grid-cols-4' : 'lg:grid-cols-3'}`}>
                     <div className="font-semibold text-base break-words">{spec?.label}</div>
                     <div className="text-start text-base break-words">{spec?.truck1}</div>
                     <div className="text-start text-base break-words">{spec?.truck2}</div>
-                    <div className="text-start text-base break-words">{spec?.truck3}</div>
+                    {selectedTruckData && <div className="text-start text-base break-words">{spec?.truck3}</div>}
                   </div>
                 </div>
               ))}
@@ -1060,19 +1101,19 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
                       {spec?.label}
                     </div>
                     {/* Truck Values Row */}
-                    <div className="grid grid-cols-3 gap-2 md:gap-4 p-3 md:p-4">
+                    <div className={`grid gap-2 md:gap-4 p-3 md:p-4 ${selectedTruckData ? 'grid-cols-3' : 'grid-cols-2'}`}>
                       <div className="text-start text-sm md:text-base break-words">{spec?.truck1}</div>
                       <div className="text-start text-sm md:text-base break-words">{spec?.truck2}</div>
-                      <div className="text-start text-sm md:text-base break-words">{spec?.truck3}</div>
+                      {selectedTruckData && <div className="text-start text-sm md:text-base break-words">{spec?.truck3}</div>}
                     </div>
                   </div>
 
                   {/* Desktop Layout: Side-by-side structure */}
-                  <div className="hidden lg:grid lg:grid-cols-4 gap-4 items-center p-4">
+                  <div className={`hidden lg:grid gap-4 items-center p-4 ${selectedTruckData ? 'lg:grid-cols-4' : 'lg:grid-cols-3'}`}>
                     <div className="font-semibold text-base break-words">{spec?.label}</div>
                     <div className="text-start text-base break-words">{spec?.truck1}</div>
                     <div className="text-start text-base break-words">{spec?.truck2}</div>
-                    <div className="text-start text-base break-words">{spec?.truck3}</div>
+                    {selectedTruckData && <div className="text-start text-base break-words">{spec?.truck3}</div>}
                   </div>
                 </div>
               ))}

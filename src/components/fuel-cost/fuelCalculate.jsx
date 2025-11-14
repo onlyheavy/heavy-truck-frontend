@@ -173,7 +173,7 @@ const FuelCalculate = () => {
                             <div className="md:w-[60%] w-full">
                                 <SliderInput
                                     label="Electricity Price in your city per unit"
-                                    value={electricPrice}
+                                    value={'electricPrice'}
                                     min={2}
                                     max={50}
                                     step={1}
@@ -212,7 +212,7 @@ const FuelCalculate = () => {
                                 <div className="pb-6 md:pb-8">
                                     <p className="pb-1">EV Running Cost</p>
                                     <p>
-                                        <span className="text-base md:text-lg font-bold">{costPerKm}</span>
+                                        <span className="text-base md:text-lg font-bold">₹{costPerKm}</span>
                                         <span className='pl-3 md:pl-5 text-sm text-blue-700'>Per KM</span>
                                     </p>
                                 </div>

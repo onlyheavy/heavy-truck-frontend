@@ -10,10 +10,11 @@ const AddTruck = () => {
   const router = useRouter();
   const [currentStep, setCurrentStep] = useState(1);
   const [truckId, setTruckId] = useState(null);
+  const [truckMeta, setTruckMeta] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
   // Handle successful completion of each step
-  const handleStepComplete = async (id) => {
+  const handleStepComplete = async (id, metadata = {}) => {
     if (!id) {
       toast.error('No valid ID received');
       return;
@@ -22,6 +23,25 @@ const AddTruck = () => {
     try {
       setIsLoading(true);
       setTruckId(id);
+      const updatedMeta = {
+        categoryName: metadata?.categoryName || truckMeta.categoryName,
+        fuelType: metadata?.fuelType || truckMeta.fuelType
+      };
+      setTruckMeta(updatedMeta);
+
+      const queryParams = { id };
+      if (updatedMeta.categoryName) {
+        queryParams.category = updatedMeta.categoryName;
+      }
+      if (updatedMeta.fuelType) {
+        queryParams.fuel = updatedMeta.fuelType;
+      }
+
+      router.replace({
+        pathname: router.pathname,
+        query: queryParams
+      }, undefined, { shallow: true });
+
       setCurrentStep((prev) => prev + 1);
     } catch (error) {
       console.error('Error in step transition:', error);
@@ -36,9 +56,17 @@ const AddTruck = () => {
       setCurrentStep((prev) => prev - 1);
       // Ensure the URL always has the id as a query param
       if (truckId) {
+        const queryParams = { id: truckId };
+        if (truckMeta.categoryName) {
+          queryParams.category = truckMeta.categoryName;
+        }
+        if (truckMeta.fuelType) {
+          queryParams.fuel = truckMeta.fuelType;
+        }
+
         router.replace({
           pathname: router.pathname,
-          query: { id: truckId }
+          query: queryParams
         }, undefined, { shallow: true });
       }
     }
@@ -106,6 +134,23 @@ const AddTruck = () => {
       toast.error('No valid truck ID found. Starting over.');
     }
   }, [truckId, currentStep]);
+
+  // Scroll to top on step change
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [currentStep]);
+
+  useEffect(() => {
+    const { category, fuel } = router.query;
+    if (category || fuel) {
+      setTruckMeta(prev => ({
+        categoryName: category || prev.categoryName,
+        fuelType: fuel || prev.fuelType
+      }));
+    }
+  }, [router.query, router.query.category, router.query.fuel]);
 
   return (
     <AdminLayout>

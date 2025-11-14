@@ -192,12 +192,37 @@ export default function TruckTable() {
           onChange={(e) => setSelectedOption(e.target.value)}
         >
           <option value="">Brand</option>
-          <option value="Tata Motors">Tata Motors</option>
-          <option value="Mahindra">Mahindra</option>
           <option value="Ashok Leyland">Ashok Leyland</option>
           <option value="BharatBenz">BharatBenz</option>
+          <option value="Blue Energy Motors">Blue Energy Motors</option>
+          <option value="E-Trio">E-Trio</option>
           <option value="Eicher">Eicher</option>
+          <option value="EKA">EKA</option>
+          <option value="Erisha E Mobility">Erisha E Mobility</option>
+          <option value="Euler EV">Euler EV</option>
+          <option value="Evage Motors">Evage Motors</option>
           <option value="Force Motors">Force Motors</option>
+          <option value="I-Board Mobility">I-Board Mobility</option>
+          <option value="IPL Tech Electric">IPL Tech Electric</option>
+          <option value="ISUZU">ISUZU</option>
+          <option value="Jupiter Electric Mobility">Jupiter Electric Mobility</option>
+          <option value="Kamaz">Kamaz</option>
+          <option value="Mahindra">Mahindra</option>
+          <option value="Man">Man</option>
+          <option value="Maruti Suzuki">Maruti Suzuki</option>
+          <option value="Montra Electric">Montra Electric</option>
+          <option value="Omega">Omega</option>
+          <option value="Premier Motors">Premier Motors</option>
+          <option value="Propal">Propal</option>
+          <option value="Sany">Sany</option>
+          <option value="Scania">Scania</option>
+          <option value="SML ISUZU">SML ISUZU</option>
+          <option value="Switch Mobility">Switch Mobility</option>
+          <option value="Tata Motors">Tata Motors</option>
+          <option value="Toyota">Toyota</option>
+          <option value="Triton EV">Triton EV</option>
+          <option value="Volvo">Volvo</option>
+
         </select>
       </div>,
       cell: (info) => info.getValue(),

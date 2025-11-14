@@ -5,13 +5,38 @@ import API from '@/utils/api';
 
 
 const brandOptions = [
-  { id: "Tata Motors", value: "Tata Motors" },
-  { id: "Mahindra", value: "Mahindra" },
   { id: "Ashok Leyland", value: "Ashok Leyland" },
   { id: "BharatBenz", value: "BharatBenz" },
+  { id: "Blue Energy Motors", value: "Blue Energy Motors" },
+  { id: "E-Trio", value: "E-Trio" },
   { id: "Eicher", value: "Eicher" },
+  { id: "EKA", value: "EKA" },
+  { id: "Erisha E Mobility", value: "Erisha E Mobility" },
+  { id: "Euler EV", value: "Euler EV" },
+  { id: "Evage Motors", value: "Evage Motors" },
   { id: "Force Motors", value: "Force Motors" },
+  { id: "I-Board Mobility", value: "I-Board Mobility" },
+  { id: "IPL Tech Electric", value: "IPL Tech Electric" },
+  { id: "ISUZU", value: "ISUZU" },
+  { id: "Jupiter Electric Mobility", value: "Jupiter Electric Mobility" },
+  { id: "Kamaz", value: "Kamaz" },
+  { id: "Mahindra", value: "Mahindra" },
+  { id: "Man", value: "Man" },
+  { id: "Maruti Suzuki", value: "Maruti Suzuki" },
+  { id: "Montra Electric", value: "Montra Electric" },
+  { id: "Omega", value: "Omega" },
+  { id: "Premier Motors", value: "Premier Motors" },
+  { id: "Propal", value: "Propal" },
+  { id: "Sany", value: "Sany" },
+  { id: "Scania", value: "Scania" },
+  { id: "SML ISUZU", value: "SML ISUZU" },
+  { id: "Switch Mobility", value: "Switch Mobility" },
+  { id: "Tata Motors", value: "Tata Motors" },
+  { id: "Toyota", value: "Toyota" },
+  { id: "Triton EV", value: "Triton EV" },
+  { id: "Volvo", value: "Volvo" },
 ];
+
 
 const HomeSearchBar = () => {
   const [selectedBrand, setSelectedBrand] = useState("");
@@ -80,13 +105,13 @@ const HomeSearchBar = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-0">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 items-center">
             <div>
-              <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-balance bg-gradient-to-b from-[#E9C3A2] to-[#2F2717] bg-clip-text text-transparent">
+              <h1 className="text-4xl lg:text-5xl font-bold mb-6 text-balance bg-gradient-to-b from-[#E9C3A2] to-[#2F2717] bg-clip-text text-transparent">
                 Find the Perfect Truck
                 <br />
                 <span>for Your Business &</span>
                 <br />
                 Lifestyle
-              </h2>
+              </h1>
               <p className="text-lg text-[#566479] mb-8 text-pretty">
                 Easily estimate how much you’ll spend on fuel each month based on mileage, fuel price, and efficiency.
               </p>

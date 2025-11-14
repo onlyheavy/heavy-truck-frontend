@@ -13,7 +13,7 @@ const TruckCompareSlug = ({ rankData }) => {
     const [availableTrucks, setAvailableTrucks] = useState([[], [], []]);
     const [isEditing, setIsEditing] = useState([false, false, false]);
     const brands = ["Tata Motors", "Mahindra", "Ashok Leyland", "BharatBenz", "Eicher", "Force Motors"];
-
+    console.log("Rank Data in Slug Component:", rankData);
     // Fetch trucks for each brand dropdown
     useEffect(() => {
         selectedTrucks.forEach((sel, idx) => {
@@ -98,7 +98,9 @@ const TruckCompareSlug = ({ rankData }) => {
         gradeability: "Gradeability",
         emissionNorm: "Emission Norm",
         maxSpeed: "Max Speed",
-        battery: "Battery"
+        battery: "Battery",
+        chargingTime: "Charging Time",
+        range: "Range"
     };
 
     const dimensionsLabels = {
@@ -219,48 +221,48 @@ const TruckCompareSlug = ({ rankData }) => {
     return (
         <>
             <Head>
-                {/* <title>{rankData?.metaTitle}</title> */}
-                {/* {rankData?.metaDescription && (
-          <meta name="description" content={rankData?.metaDescription} />
-        )} */}
-                {/* <meta
-          name="robots"
-          content={`${rankData?.searchIndex ? 'index, follow' : 'noindex, nofollow'}, ${rankData?.imageIndex ? 'max-image-preview:large' : 'noimageindex'}`}
-        /> */}
-                {/* <meta name="viewport" content="width=device-width, initial-scale=1" />
-        {rankData?.canonicalUrl ? (
-          <link rel="canonical" href={`https://onlyheavy.com/compare/${rankData.canonicalUrl}`} />
-        ) : (
-          <link
-            rel="canonical"
-            href={`https://onlyheavy.com/compare${rankData.slug}`}
-          />
-        )} */}
-                {/* {rankData?.metaTitle && (
-          <meta property="og:title" content={rankData?.metaTitle} />
-        )}
-        {rankData?.metaDescription && (
-          <meta property="og:description" content={rankData?.metaDescription} />
-        )} */}
-                {/* <meta property="og:image" content="https://only-heavy.s3.eu-north-1.amazonaws.com/favicons.png" />
-        <meta
-          property="og:url"
-          content={
-            rankData?.canonicalUrl || `https://onlyheavy.com/compare/${rankData?.slug}`
-          }
-        /> */}
+                {/* <title>{rankData?.metaTitle}</title>
+                {rankData?.metaDescription && (
+                    <meta name="description" content={rankData?.metaDescription} />
+                )}
+                <meta
+                    name="robots"
+                    content={`${rankData?.searchIndex ? 'index, follow' : 'noindex, nofollow'}, ${rankData?.imageIndex ? 'max-image-preview:large' : 'noimageindex'}`}
+                />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                {rankData?.canonicalUrl ? (
+                    <link rel="canonical" href={`https://onlyheavy.com/compare/${rankData.canonicalUrl}`} />
+                ) : (
+                    <link
+                        rel="canonical"
+                        href={`https://onlyheavy.com/compare${rankData.slug}`}
+                    />
+                )}
+                {rankData?.metaTitle && (
+                    <meta property="og:title" content={rankData?.metaTitle} />
+                )}
+                {rankData?.metaDescription && (
+                    <meta property="og:description" content={rankData?.metaDescription} />
+                )}
+                <meta property="og:image" content="https://only-heavy.s3.eu-north-1.amazonaws.com/favicons.png" />
+                <meta
+                    property="og:url"
+                    content={
+                        rankData?.canonicalUrl || `https://onlyheavy.com/compare/${rankData?.slug}`
+                    }
+                />
                 {/* Twitter Meta Tag */}
-                {/* <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="twitter:title"
-          content={rankData?.metaTitle}
-        /> */}
-                {/* <meta
-          name="twitter:description"
-          content={
-            rankData?.metaDescription}
-        /> */}
-                {/* <meta name="twitter:image" content="https://only-heavy.s3.eu-north-1.amazonaws.com/favicons.png" /> */}
+                {/*<meta name="twitter:card" content="summary_large_image" />
+                <meta
+                    name="twitter:title"
+                    content={rankData?.metaTitle}
+                />
+                <meta
+                    name="twitter:description"
+                    content={
+                        rankData?.metaDescription}
+                />
+                <meta name="twitter:image" content="https://only-heavy.s3.eu-north-1.amazonaws.com/favicons.png" /> */}
             </Head>
             <div className="">
                 <div className="">

@@ -1,53 +1,93 @@
 import { useCategory } from '@/hooks/useContext'
 import React from 'react'
 
+const getFormattedValue = (value, unit = '') => {
+    const hasValue = value !== null && value !== undefined && value !== ''
+    if (!hasValue) return 'N/A'
+
+    if (typeof value === 'number' && unit) {
+        return `${value} ${unit}`.trim()
+    }
+
+    if (unit) {
+        return `${value} ${unit}`.trim()
+    }
+
+    return `${value}`
+}
+
 const KeySpecs = () => {
     const { categoryData } = useCategory()
     const product = categoryData?.[0] || {}
+    const keyFeature = product?.keyFeature?.[0] || {}
 
-    console.log(categoryData, 'product')
+    const fuelType =
+        keyFeature?.fuelType ||
+        product?.fuelType ||
+        product?.specInfo?.engine?.[0]?.fuelType ||
+        ''
 
-    const specs = [
-        // {
-        //     title: 'Power',
-        //     value: `${product?.keyFeature?.[0]?.power} RPM` || 'N/A',
-        //     icon: '/icons/power.svg',
-        // },
+    const isElectric = fuelType?.toLowerCase?.().includes('electric')
+
+    const generalSpecs = [
+
         {
             title: 'GVW',
-            value: `${product?.keyFeature?.[0]?.GVW} kg` || 'N/A',
+            value: getFormattedValue(keyFeature?.GVW, 'kg'),
             icon: '/icons/gvw.svg',
         },
-        // {
-        //     title: 'Wheelbase',
-        //     value: `${product?.keyFeature?.[0]?.wheelBase} mm` || 'N/A',
-        //     icon: '/icons/Wheelbase.svg',
-        // },
         {
             title: 'Payload',
-            value: `${product?.keyFeature?.[0]?.payload} kg` || 'N/A',
+            value: getFormattedValue(keyFeature?.payload, 'kg'),
             icon: '/icons/payload.svg',
         },
         {
-            title: 'Engine',
-            value: `${product?.keyFeature?.[0]?.engineDisplacement} cc` || 'N/A',
+            title: 'No. of Tyres',
+            value: getFormattedValue(keyFeature?.noOfTyres),
+            icon: '/icons/tyres.svg',
+        },
+    ]
+
+    const combustionSpecs = [
+        {
+            title: 'Engine Displacement',
+            value: getFormattedValue(keyFeature?.engineDisplacement, 'cc'),
             icon: '/icons/cc.svg',
         },
         {
             title: 'Fuel Tank',
-            value: `${product?.keyFeature?.[0]?.fuelTankCapacity} L` || 'N/A',
+            value: getFormattedValue(keyFeature?.fuelTankCapacity, 'L'),
             icon: '/icons/petrol.svg',
         },
         {
-            title: 'No. of Tyres',
-            value: product?.keyFeature?.[0]?.noOfTyres || 'N/A',
-            icon: '/icons/tyres.svg',
-        },
-        {
             title: 'Mileage',
-            value: `${product?.keyFeature?.[0]?.mileage} km/l` || 'N/A',
+            value: getFormattedValue(keyFeature?.mileage, 'km/l'),
             icon: '/icons/mileage.svg',
         },
+
+    ]
+
+    const electricSpecs = [
+        {
+            title: 'Motor Power',
+            value: getFormattedValue(product?.specInfo?.engine?.[0]?.enginePower),
+            icon: '/icons/power.svg',
+        },
+        {
+            title: 'Charging Time',
+            value: getFormattedValue(keyFeature?.chargingTime, 'Hrs'),
+            icon: '/icons/charging.svg',
+        },
+        {
+            title: 'Range',
+            value: getFormattedValue(keyFeature?.range, 'km'),
+            icon: '/icons/mileage.svg',
+        },
+    ]
+
+    const specs = [
+        ...generalSpecs,
+        ...(isElectric ? electricSpecs : combustionSpecs),
     ]
 
 

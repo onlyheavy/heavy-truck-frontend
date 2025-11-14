@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import API from "@/utils/api"; // ✅ Ensure API.HOST is defined
 
-const PriceForm = ({ onClose, id, status, brand }) => {
+const DealerForm = ({ onClose, id, status, brand }) => {
     const [form, setForm] = useState({ name: "", mobileNumber: "", city: "", status: status });
     const [loading, setLoading] = useState(false);
 
@@ -54,7 +54,7 @@ const PriceForm = ({ onClose, id, status, brand }) => {
                         <div className="text-orange-500 text-2xl">⚡</div>
                     </div>
                     <h2 className="text-lg md:text-xl font-semibold mb-4">
-                        {status === 'discount' ? `Get the best price on ${brand} trucks! Fill the form below.` : `Submit the form below to connect with authorised ${brand} dealers in your area.`}
+                        {status === 'dealer' ? `Talk to our nearest dealer for expert guidance.` : `Get solutions to your common queries in our FAQ section.`}
                     </h2>
 
                     <form onSubmit={handleSubmit} className="space-y-4">
@@ -113,9 +113,9 @@ const PriceForm = ({ onClose, id, status, brand }) => {
                 </div>
 
                 {/* RIGHT SIDE - Image (hidden on mobile) */}
-                <div className="hidden md:flex flex-1 pt-2 justify-center items-center">
+                <div className="hidden md:flex flex-1 pt-2 justify-center border-2 rounded-xl items-center">
                     <img
-                        src="/vehicle-road.png"
+                        src="/faq.jpg"
                         alt="Truck"
                         className="rounded-lg w-full h-100 object-cover"
                     />
@@ -125,4 +125,4 @@ const PriceForm = ({ onClose, id, status, brand }) => {
     );
 };
 
-export default PriceForm;
+export default DealerForm;

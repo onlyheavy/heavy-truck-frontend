@@ -1,9 +1,23 @@
-import { useState } from 'react';
 import { useCategory } from "@/hooks/useContext";
 
 
 export default function TruckCards() {
   const { categoryData, alterNative } = useCategory();
+
+  const formatValue = (value, unit = '') => {
+    const hasValue = value !== null && value !== undefined && value !== '';
+    if (!hasValue) return 'N/A';
+    if (unit) {
+      return `${value} ${unit}`.trim();
+    }
+    return `${value}`;
+  };
+
+  const getFuelType = (truck) => {
+    const keyFeatureFuel = truck?.keyFeature?.[0]?.fuelType;
+    const specFuel = truck?.specInfo?.engine?.[0]?.fuelType;
+    return keyFeatureFuel || truck?.fuelType || specFuel || '';
+  };
   // const trucks = [
   //   {
   //     title: "Ashok Leyland Bada Dost i2",
@@ -46,61 +60,79 @@ export default function TruckCards() {
         Explore {categoryData[0]?.productName} Alternatives
       </h2>
       <div className=" flex gap-4 md:gap-8 md:px-4 px-0 overflow-x-auto md:overflow-visible scrollbar-hide snap-x snap-mandatory">
-        {alterNative?.slice(0, 3)?.map((truck, idx) => (
-          <div
-            key={idx}
-            className="bg-white rounded-md min-w-[350px] md:w-full shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col p-2"
-          >
-            <div className="relative ">
-              <img
-                src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${truck.image}`}
-                alt={truck.productName}
-                className="w-full h-52 object-cover transition-transform duration-300 rounded-md hover:scale-95"
-              />
-              <span className="absolute top-3 right-3 bg-orange-100 text-orange-600 text-xs font-semibold px-3 py-1 rounded-full shadow">
-                New
-              </span>
-            </div>
+        {alterNative?.slice(0, 3)?.map((truck, idx) => {
+          const fuelType = getFuelType(truck);
+          const isElectric = fuelType?.toLowerCase?.().includes('electric');
+          const engineLabel = isElectric ? 'Charging Time' : 'Engine';
+          const engineValue = isElectric
+            ? formatValue(truck?.keyFeature?.[0]?.chargingTime, 'Hrs')
+            : formatValue(truck?.keyFeature?.[0]?.engineDisplacement, 'cc');
+          const powerValue = formatValue(
+            truck?.keyFeature?.[0]?.enginePower ?? truck?.power,
+            'HP'
+          );
+          const mileageLabel = isElectric ? 'Range' : 'Mileage';
+          const mileageValue = isElectric
+            ? formatValue(truck?.keyFeature?.[0]?.range, 'km')
+            : formatValue(truck?.keyFeature?.[0]?.mileage, 'km/l');
+          const tyreValue = formatValue(truck?.keyFeature?.[0]?.noOfTyres);
 
-            <div className="md:p-5 p-2 flex-1 flex flex-col ">
-              <h3 className="text-sm lg:text-lg font-semibold text-gray-800 mb-1">{truck.productName}</h3>
-              <p className="text-orange-600 font-bold text-sm mb-4">{truck.minPrice} - {truck.maxPrice} Lakhs</p>
-
-              <div className="grid grid-cols-2 gap-3 text-center text-sm text-gray-600">
-                <div className="bg-orange-50 p-2 lg:p-3 rounded-lg">
-                  <p className="font-medium">Engine</p>
-                  <p>{truck.keyFeature[0].engineDisplacement} cc</p>
-                </div>
-                <div className="bg-orange-50 p-2 lg:p-3 rounded-lg">
-                  <p className="font-medium">Power</p>
-                  <p>{truck.power} HP</p>
-                </div>
-                <div className="bg-gray-50 p-2 lg:p-3 rounded-lg">
-                  <p className="font-medium">Mileage</p>
-                  <p>{truck.keyFeature[0].mileage} km/l</p>
-                </div>
-                <div className="bg-gray-50 p-2 lg:p-3 rounded-lg">
-                  <p className="font-medium">Tyres</p>
-                  <p>{truck.keyFeature[0].noOfTyres}</p>
-                </div>
+          return (
+            <div
+              key={idx}
+              className="bg-white rounded-md min-w-[350px] md:w-full shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col p-2"
+            >
+              <div className="relative ">
+                <img
+                  src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${truck.image}`}
+                  alt={truck.productName}
+                  className="w-full h-52 object-cover border transition-transform duration-300 rounded-md hover:scale-95"
+                />
+                <span className="absolute top-3 right-3 bg-orange-100 text-orange-600 text-xs font-semibold px-3 py-1 rounded-full shadow">
+                  New
+                </span>
               </div>
 
-              <div className="mt-auto pt-5">
-                <a
-                  href={`https://www.onlyheavy.com/${truck.categorySlug}/${truck.slug}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <button className="w-full border border-orange-500 text-orange-500 hover:text-white py-1 md:py-3 rounded-md font-semibold hover:bg-orange-500 transition-all">
+              <div className="md:p-5 p-2 flex-1 flex flex-col ">
+                <h3 className="text-sm lg:text-lg font-semibold text-gray-800 mb-1">{truck.productName}</h3>
+                <p className="text-orange-600 font-bold text-sm mb-4">{truck.minPrice} - {truck.maxPrice} Lakhs</p>
 
-                    View Details
+                <div className="grid grid-cols-2 gap-3 text-center text-sm text-gray-600">
+                  <div className="bg-orange-50 p-2 lg:p-3 rounded-lg">
+                    <p className="font-medium">{engineLabel}</p>
+                    <p>{engineValue}</p>
+                  </div>
+                  <div className="bg-orange-50 p-2 lg:p-3 rounded-lg">
+                    <p className="font-medium">Power</p>
+                    <p>{powerValue}</p>
+                  </div>
+                  <div className="bg-gray-50 p-2 lg:p-3 rounded-lg">
+                    <p className="font-medium">{mileageLabel}</p>
+                    <p>{mileageValue}</p>
+                  </div>
+                  <div className="bg-gray-50 p-2 lg:p-3 rounded-lg">
+                    <p className="font-medium">Tyres</p>
+                    <p>{tyreValue}</p>
+                  </div>
+                </div>
 
-                  </button>
-                </a>
+                <div className="mt-auto pt-5">
+                  <a
+                    href={`https://www.onlyheavy.com/${truck.categorySlug}/${truck.slug}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <button className="w-full border border-orange-500 text-orange-500 hover:text-white py-1 md:py-3 rounded-md font-semibold hover:bg-orange-500 transition-all">
+
+                      View Details
+
+                    </button>
+                  </a>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );

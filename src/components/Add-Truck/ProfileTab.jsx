@@ -24,7 +24,9 @@ const ProfileTab = ({ onComplete }) => {
       mileage: '',
       noOfTyres: '',
       fuelTankCapacity: '',
-      engineDisplacement: ''
+      engineDisplacement: '',
+      chargingTime: '',
+      range: ''
     }],
     country: '',
     pros: [],
@@ -49,13 +51,38 @@ const ProfileTab = ({ onComplete }) => {
 
   // Brand options
   const brandOptions = [
-    { value: 'Tata Motors', label: 'Tata Motors' },
-    { value: 'Mahindra', label: 'Mahindra' },
     { value: 'Ashok Leyland', label: 'Ashok Leyland' },
     { value: 'BharatBenz', label: 'BharatBenz' },
+    { value: 'Blue Energy Motors', label: 'Blue Energy Motors' },
+    { value: 'E-Trio', label: 'E-Trio' },
     { value: 'Eicher', label: 'Eicher' },
-    { value: 'Force Motors', label: 'Force Motors' }
+    { value: 'EKA', label: 'EKA' },
+    { value: 'Erisha E Mobility', label: 'Erisha E Mobility' },
+    { value: 'Euler EV', label: 'Euler EV' },
+    { value: 'Evage Motors', label: 'Evage Motors' },
+    { value: 'Force Motors', label: 'Force Motors' },
+    { value: 'I-Board Mobility', label: 'I-Board Mobility' },
+    { value: 'IPL Tech Electric', label: 'IPL Tech Electric' },
+    { value: 'ISUZU', label: 'ISUZU' },
+    { value: 'Jupiter Electric Mobility', label: 'Jupiter Electric Mobility' },
+    { value: 'Kamaz', label: 'Kamaz' },
+    { value: 'Mahindra', label: 'Mahindra' },
+    { value: 'Man', label: 'Man' },
+    { value: 'Maruti Suzuki', label: 'Maruti Suzuki' },
+    { value: 'Montra Electric', label: 'Montra Electric' },
+    { value: 'Omega', label: 'Omega' },
+    { value: 'Premier Motors', label: 'Premier Motors' },
+    { value: 'Propal', label: 'Propal' },
+    { value: 'Sany', label: 'Sany' },
+    { value: 'Scania', label: 'Scania' },
+    { value: 'SML ISUZU', label: 'SML ISUZU' },
+    { value: 'Switch Mobility', label: 'Switch Mobility' },
+    { value: 'Tata Motors', label: 'Tata Motors' },
+    { value: 'Toyota', label: 'Toyota' },
+    { value: 'Triton EV', label: 'Triton EV' },
+    { value: 'Volvo', label: 'Volvo' },
   ];
+
 
   // SubCategory options
   const subCategoryOptions = [
@@ -88,6 +115,13 @@ const ProfileTab = ({ onComplete }) => {
     { value: 'Diesel', label: 'Diesel' },
     { value: 'Cng', label: 'CNG' },
     { value: 'Electric', label: 'Electric' }
+  ];
+
+  const categoryOptions = [
+    { value: 'trucks', label: 'Trucks' },
+    { value: 'jcb', label: 'JCB' },
+    { value: 'bus', label: 'Bus' },
+
   ];
 
   // Handle input changes
@@ -256,7 +290,9 @@ const ProfileTab = ({ onComplete }) => {
             mileage: '',
             noOfTyres: '',
             fuelTankCapacity: '',
-            engineDisplacement: ''
+            engineDisplacement: '',
+            chargingTime: '',
+            range: ''
           }],
           pros: response.data.data.pros || [],
           cons: response.data.data.cons || [],
@@ -386,7 +422,10 @@ const ProfileTab = ({ onComplete }) => {
         );
       }
 
-      onComplete(response?.data?.data?._id);
+      onComplete(response?.data?.data?._id, {
+        categoryName: formData.categoryName,
+        fuelType: formData.fuelType
+      });
 
       if (response.data && response?.data?.data?._id) {
         // If we have images to upload, do it after category creation/update
@@ -428,15 +467,38 @@ const ProfileTab = ({ onComplete }) => {
         <form className="space-y-6">
           {/* Basic Information */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+
             <div>
-              <label className="block text-gray-700 mb-2">Category</label>
-              <input
-                type="text"
-                name="categoryName"
-                value={formData.categoryName}
-                onChange={handleChange}
-                placeholder="Category Name - Ex: Commercial Trucks"
-                className={inputFieldClass}
+              <label className="block text-gray-700 mb-2">Category Name</label>
+              <Select
+                options={categoryOptions}
+                value={categoryOptions.find(option => option.value === formData.categoryName)}
+                onChange={(selectedOption) => {
+                  setFormData(prev => ({
+                    ...prev,
+                    categoryName: selectedOption ? selectedOption.value : ''
+                  }));
+                }}
+                placeholder="Select Category Name"
+                className="react-select-container"
+                classNamePrefix="react-select"
+              />
+            </div>
+
+            <div>
+              <label className="block text-gray-700 mb-2">Fuel Type</label>
+              <Select
+                options={fuelTypeOptions}
+                value={fuelTypeOptions.find(option => option.value === formData.fuelType)}
+                onChange={(selectedOption) => {
+                  setFormData(prev => ({
+                    ...prev,
+                    fuelType: selectedOption ? selectedOption.value : ''
+                  }));
+                }}
+                placeholder="Select Fuel Type"
+                className="react-select-container"
+                classNamePrefix="react-select"
               />
             </div>
 
@@ -562,23 +624,6 @@ const ProfileTab = ({ onComplete }) => {
               />
             </div>
 
-            <div>
-              <label className="block text-gray-700 mb-2">Fuel Type</label>
-              <Select
-                options={fuelTypeOptions}
-                value={fuelTypeOptions.find(option => option.value === formData.fuelType)}
-                onChange={(selectedOption) => {
-                  setFormData(prev => ({
-                    ...prev,
-                    fuelType: selectedOption ? selectedOption.value : ''
-                  }));
-                }}
-                placeholder="Select Fuel Type"
-                className="react-select-container"
-                classNamePrefix="react-select"
-              />
-            </div>
-
             <div className="mb-2">
               <label className="block text-gray-700 mb-2">Star Rating</label>
               <input
@@ -615,7 +660,6 @@ const ProfileTab = ({ onComplete }) => {
               />
             </div>
           </div>
-
 
 
           <div className="mb-2 w-full">
@@ -701,17 +745,47 @@ const ProfileTab = ({ onComplete }) => {
               />
             </div>
 
-            <div>
-              <label className="block text-gray-700 mb-2">Mileage (km/l)</label>
-              <input
-                type="text"
-                name="mileage"
-                value={formData.keyFeature[0].mileage}
-                onChange={handleKeyFeatureChange}
-                placeholder="Mileage - Ex: 12.5 km/l"
-                className={inputFieldClass}
-              />
-            </div>
+            {formData.fuelType !== 'Electric' && (
+              <div>
+                <label className="block text-gray-700 mb-2">Mileage (km/l)</label>
+                <input
+                  type="text"
+                  name="mileage"
+                  value={formData.keyFeature[0].mileage}
+                  onChange={handleKeyFeatureChange}
+                  placeholder="Mileage - Ex: 12.5 km/l"
+                  className={inputFieldClass}
+                />
+              </div>
+            )}
+
+            {formData.fuelType === 'Electric' && (
+              <div>
+                <label className="block text-gray-700 mb-2">Charging Time (Hrs)</label>
+                <input
+                  type="text"
+                  name="chargingTime"
+                  value={formData.keyFeature[0].chargingTime}
+                  onChange={handleKeyFeatureChange}
+                  placeholder="Charging Time - Ex: 5-6"
+                  className={inputFieldClass}
+                />
+              </div>
+            )}
+
+            {formData.fuelType === 'Electric' && (
+              <div>
+                <label className="block text-gray-700 mb-2">Range (km)</label>
+                <input
+                  type="text"
+                  name="range"
+                  value={formData.keyFeature[0].range}
+                  onChange={handleKeyFeatureChange}
+                  placeholder="Range - Ex: 200"
+                  className={inputFieldClass}
+                />
+              </div>
+            )}
 
             <div>
               <label className="block text-gray-700 mb-2">No. of Tyres</label>
@@ -725,29 +799,33 @@ const ProfileTab = ({ onComplete }) => {
               />
             </div>
 
-            <div>
-              <label className="block text-gray-700 mb-2">Fuel Tank Capacity</label>
-              <input
-                type="text"
-                name="fuelTankCapacity"
-                value={formData.keyFeature[0].fuelTankCapacity}
-                onChange={handleKeyFeatureChange}
-                placeholder="Fuel - Ex: 120 L"
-                className={inputFieldClass}
-              />
-            </div>
+            {formData.fuelType !== 'Electric' && (
+              <div>
+                <label className="block text-gray-700 mb-2">Fuel Tank Capacity</label>
+                <input
+                  type="text"
+                  name="fuelTankCapacity"
+                  value={formData.keyFeature[0].fuelTankCapacity}
+                  onChange={handleKeyFeatureChange}
+                  placeholder="Fuel - Ex: 120 L"
+                  className={inputFieldClass}
+                />
+              </div>
+            )}
 
-            <div>
-              <label className="block text-gray-700 mb-2">Engine Displacement (cc)</label>
-              <input
-                type="text"
-                name="engineDisplacement"
-                value={formData.keyFeature[0].engineDisplacement}
-                onChange={handleKeyFeatureChange}
-                placeholder="engine - Ex: 3900 cc"
-                className={inputFieldClass}
-              />
-            </div>
+            {formData.fuelType !== 'Electric' && (
+              <div>
+                <label className="block text-gray-700 mb-2">Engine Displacement (cc)</label>
+                <input
+                  type="text"
+                  name="engineDisplacement"
+                  value={formData.keyFeature[0].engineDisplacement}
+                  onChange={handleKeyFeatureChange}
+                  placeholder="engine - Ex: 3900 cc"
+                  className={inputFieldClass}
+                />
+              </div>
+            )}
           </div>
 
           {/* Pros and Cons */}
@@ -904,8 +982,7 @@ const ProfileTab = ({ onComplete }) => {
 
       </div >
       <div className='flex justify-center my-5'>
-        <button onClick={handleSubmit} className='bg-orange-500 text-lg font-medium text-white px-8 py-2 rounded cursor-pointer'>save</button>
-
+        <button onClick={handleSubmit} className='bg-orange-500 text-lg font-medium text-white px-8 py-2 rounded cursor-pointer'>Next</button>
       </div>
 
     </div >

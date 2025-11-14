@@ -63,7 +63,7 @@ const TruckLandingPage = ({ categoryData, alterNative, error, categorySlug, slug
   return (
    <>
    <Head>
-        {/* <title>{categoryData[0]?.metaTitle || `${categoryData[0]?.productName}`}</title>
+        <title>{categoryData[0]?.metaTitle || `${categoryData[0]?.productName}`}</title>
         {categoryData[0]?.metaDescriptions && (
           <meta name="description" content={categoryData[0]?.metaDescriptions} />
         )}
@@ -93,20 +93,20 @@ const TruckLandingPage = ({ categoryData, alterNative, error, categorySlug, slug
             categoryData[0]?.canonicalUrl || `https://onlyheavy.com/${categoryData[0]?.categorySlug}/${categoryData[0]?.slug}`
           }
         />
-        {/* Twitter Meta Tag */}
-        {/* <meta name="twitter:card" content="summary_large_image" />
+         {/* Twitter Meta Tag */}
+        <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"
           content={categoryData[0]?.metaTitle || `${categoryData[0]?.productName}`}
-        /> */}
-        {/* <meta
+        />
+        <meta
           name="twitter:description"
           content={
             categoryData[0]?.metaDescriptions ||
             `${categoryData[0]?.productName} by ${categoryData[0]?.brandName} – Explore top features, price, and specifications in the [Category] segment. Discover why it's a popular choice for buyers in India.`
           }
-        />  */}
-        {/* <meta name="twitter:image" content="https://only-heavy.s3.eu-north-1.amazonaws.com/favicons.png" /> */}
+        /> 
+        <meta name="twitter:image" content="https://only-heavy.s3.eu-north-1.amazonaws.com/favicons.png" />
       </Head>
      <CategoryProvider initialData={initialData}>
       <MainLayout>

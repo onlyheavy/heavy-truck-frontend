@@ -256,7 +256,7 @@ const EmiCalculator = () => {
               payment, a 12% interest rate, and a 60-months tenure. You can adjust
               these values to calculate an EMI that fits your budget.
             </p>
-            <div className='text-center py-5'>
+            <div className='text-center py-5 hidden md:block'>
               <button className='w-[70%] border text-white bg-[#FA7436] rounded-sm py-1 hover:bg-orange-600 cursor-pointer border-[#FA7436]' onClick={() => handleClick("EMI")} >
                 Apply Loan
               </button>
@@ -266,7 +266,7 @@ const EmiCalculator = () => {
           </div>
           <div className="rounded-lg">
             <table className="w-full text-left border border-gray-300 rounded-md">
-              <tbody className="text-sm">
+              <tbody className="text-sm ">
                 <tr className="border-b border-gray-300">
                   <td className="p-2 text-gray-700">Principal Amount</td>
                   <td className="p-2 text-gray-700 text-right">
@@ -289,6 +289,12 @@ const EmiCalculator = () => {
                 </tr>
               </tbody>
             </table>
+            <div className='text-center pt-5 block md:hidden'>
+              <button className='w-[70%] border text-white bg-[#FA7436] rounded-sm py-1 hover:bg-orange-600 cursor-pointer border-[#FA7436]' onClick={() => handleClick("EMI")} >
+                Apply Loan
+              </button>
+              {showForm && <LoanForm onClose={() => setShowForm(false)} id={categoryData[0]?._id} status={status} />}
+            </div>
           </div>
         </div>
       </div>

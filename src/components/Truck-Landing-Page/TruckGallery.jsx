@@ -123,7 +123,7 @@ const TruckGallery = () => {
           </button>
         </div>
       </div>
-      {showForm && <PriceForm onClose={() => setShowForm(false)} id={categoryData[0]?._id} status={status} />}
+      {showForm && <PriceForm onClose={() => setShowForm(false)} id={categoryData[0]?._id} status={status} brand={categoryData[0]?.brandName} />}
     </div>
   );
 
@@ -251,7 +251,7 @@ const TruckGallery = () => {
           </button>
         </div>
       </div>
-      {showForm && <PriceForm onClose={() => setShowForm(false)} id={categoryData[0]?._id} status={status} />}
+      {showForm && <PriceForm onClose={() => setShowForm(false)} id={categoryData[0]?._id} status={status} brand={categoryData[0]?.brandName} />}
     </div>
   );
 };

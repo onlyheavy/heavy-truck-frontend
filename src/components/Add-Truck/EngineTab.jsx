@@ -89,6 +89,7 @@ const EngineTab = ({ truckId, onComplete, onBack }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const searchParams = useSearchParams();
   const id = searchParams.get('id');
+  const fuelParam = searchParams.get('fuel') || '';
   const specId = localStorage.getItem('currentSpecId');
   const [formData, setFormData] = useState({
     // Engine Details
@@ -98,13 +99,15 @@ const EngineTab = ({ truckId, onComplete, onBack }) => {
     enginePower: '',
     engineRPM: '',
     torque: '',
-    fuelType: '',
+    fuelType: fuelParam,
     fuelTankCapacity: '',
     mileage: '',
     gradeability: '',
     emissionNorm: '',
     maxSpeed: '',
     battery: '',
+    chargingTime: '',
+    range: '',
 
     // Transmission Details
     gearBox: '',
@@ -184,6 +187,15 @@ const EngineTab = ({ truckId, onComplete, onBack }) => {
   })
 
   useEffect(() => {
+    if (fuelParam) {
+      setFormData(prev => ({
+        ...prev,
+        fuelType: fuelParam
+      }));
+    }
+  }, [fuelParam]);
+
+  useEffect(() => {
     if (specId && id) {  // Only fetch if we have both specId and id (editing mode)
       setDataFn();
     }
@@ -213,6 +225,8 @@ const EngineTab = ({ truckId, onComplete, onBack }) => {
         emissionNorm: data.engine[0]?.emissionNorm || '',
         maxSpeed: data.engine[0]?.maxSpeed || '',
         battery: data.engine[0]?.battery || '',
+        chargingTime: data.engine[0]?.chargingTime || '',
+        range: data.engine[0]?.range || '',
         gearBox: data.transmissionLoad[0]?.gearBox || '',
         transmissionType: data.transmissionLoad[0]?.transmissionType || '',
         axleConfiguration: data.transmissionLoad[0]?.axleConfiguration || '',
@@ -309,7 +323,9 @@ const EngineTab = ({ truckId, onComplete, onBack }) => {
           gradeability: formData.gradeability,
           emissionNorm: formData.emissionNorm,
           maxSpeed: formData.maxSpeed,
-          battery: formData.battery
+          battery: formData.battery,
+          chargingTime: formData.chargingTime,
+          range: formData.range
         }],
         transmissionLoad: [{
           gearBox: formData.gearBox,
@@ -469,20 +485,24 @@ const EngineTab = ({ truckId, onComplete, onBack }) => {
                 onChange={handleInputChange}
                 placeholder="Engine Type - Ex: 4 Stroke Diesel Engine"
               />
-              <InputField
-                label="Engine Cylinders"
-                name="engineCylinders"
-                value={formData.engineCylinders}
-                onChange={handleInputChange}
-                placeholder="Engine Cylinders - Ex: 4 Cylinders"
-              />
-              <InputField
-                label="Engine Displacement (cc)"
-                name="engineDisplacement"
-                value={formData.engineDisplacement}
-                onChange={handleInputChange}
-                placeholder="Engine Displacement - Ex: 2956 cc"
-              />
+              {formData.fuelType !== 'Electric' && (
+                <InputField
+                  label="Engine Cylinders"
+                  name="engineCylinders"
+                  value={formData.engineCylinders}
+                  onChange={handleInputChange}
+                  placeholder="Engine Cylinders - Ex: 4 Cylinders"
+                />
+              )}
+              {formData.fuelType !== 'Electric' && (
+                <InputField
+                  label="Engine Displacement (cc)"
+                  name="engineDisplacement"
+                  value={formData.engineDisplacement}
+                  onChange={handleInputChange}
+                  placeholder="Engine Displacement - Ex: 2956 cc"
+                />
+              )}
               <InputField
                 label="Engine Power (HP)"
                 name="enginePower"
@@ -490,13 +510,15 @@ const EngineTab = ({ truckId, onComplete, onBack }) => {
                 onChange={handleInputChange}
                 placeholder="Engine Power - Ex: 150 HP @ 2600 rpm"
               />
-              <InputField
-                label="Engine (rpm)"
-                name="engineRPM"
-                value={formData.engineRPM}
-                onChange={handleInputChange}
-                placeholder="Engine RPM - Ex: 2600 rpm"
-              />
+              {formData.fuelType !== 'Electric' && (
+                <InputField
+                  label="Engine (rpm)"
+                  name="engineRPM"
+                  value={formData.engineRPM}
+                  onChange={handleInputChange}
+                  placeholder="Engine RPM - Ex: 2600 rpm"
+                />
+              )}
               <InputField
                 label="Torque (Nm)"
                 name="torque"
@@ -511,20 +533,42 @@ const EngineTab = ({ truckId, onComplete, onBack }) => {
                 onChange={handleInputChange}
                 options={['Petrol', 'Diesel', 'CNG', 'Electric']}
               />
-              <InputField
-                label="Fuel Tank Capacity (Liters)"
-                name="fuelTankCapacity"
-                value={formData.fuelTankCapacity}
-                onChange={handleInputChange}
-                placeholder="Fuel Tank Capacity - Ex: 200 Liters"
-              />
-              <InputField
-                label="Mileage (Ex: km/l)"
-                name="mileage"
-                value={formData.mileage}
-                onChange={handleInputChange}
-                placeholder="Mileage - Ex: 10 km/l"
-              />
+              {formData.fuelType !== 'Electric' && (
+                <InputField
+                  label="Fuel Tank Capacity (Liters)"
+                  name="fuelTankCapacity"
+                  value={formData.fuelTankCapacity}
+                  onChange={handleInputChange}
+                  placeholder="Fuel Tank Capacity - Ex: 200 Liters"
+                />
+              )}
+              {formData.fuelType !== 'Electric' && (
+                <InputField
+                  label="Mileage (Ex: km/l)"
+                  name="mileage"
+                  value={formData.mileage}
+                  onChange={handleInputChange}
+                  placeholder="Mileage - Ex: 10 km/l"
+                />
+              )}
+              {formData.fuelType === 'Electric' && (
+                <InputField
+                  label="Charging Time (Hrs)"
+                  name="chargingTime"
+                  value={formData.chargingTime}
+                  onChange={handleInputChange}
+                  placeholder="Charging Time - Ex: 5-6 Hrs"
+                />
+              )}
+              {formData.fuelType === 'Electric' && (
+                <InputField
+                  label="Range (km)"
+                  name="range"
+                  value={formData.range}
+                  onChange={handleInputChange}
+                  placeholder="Range - Ex: 200 km"
+                />
+              )}
               <InputField
                 label="Gradeability (%)"
                 name="gradeability"

@@ -7,6 +7,12 @@ export default function TruckFeatures() {
   const { categoryData } = useCategory();
 
   const specifications = categoryData[0]?.specInfo
+  const fuelType =
+    specifications?.engine?.[0]?.fuelType ||
+    categoryData[0]?.keyFeature?.[0]?.fuelType ||
+    categoryData[0]?.fuelType ||
+    ''
+  const isElectric = fuelType?.toLowerCase?.().includes('electric')
 
 
   if (!specifications) return <div>No specifications found.</div>;
@@ -18,25 +24,43 @@ export default function TruckFeatures() {
       <h2 className="text-lg md:text-2xl font-semibold mb-4 p-5 capitalize">{categoryData[0]?.productName} Specs & Features</h2>
 
       {/* Performance */}
-      {
-        specifications.engine?.map((item, index) => (
-          <Section title="Performance">
-            <SpecItem label="Engine Type" value={item?.engineType} />
-            <SpecItem label="Engine Cylinders" value={item?.engineCylinders} />
-            <SpecItem label="Engine Displacement" value={item?.engineDisplacement} />
-            <SpecItem label="Engine Power" value={item?.enginePower} />
-            <SpecItem label="Engine RPM" value={item?.engineRPM} />
-            <SpecItem label="Torque" value={item?.torque} />
-            <SpecItem label="Fuel Type" value={item?.fuelType} />
-            <SpecItem label="Fuel Tank Capacity" value={item?.fuelTankCapacity} />
-            <SpecItem label="Mileage" value={item?.mileage} />
-            <SpecItem label="Gradeability" value={item?.gradeability} />
-            <SpecItem label="Emission Norm" value={item?.emissionNorm} />
-            <SpecItem label="Max Speed" value={item?.maxSpeed} />
-            <SpecItem label="Battery" value={item?.battery} />
+      {specifications.engine?.map((item, index) => {
+        const engineSpecs = isElectric
+          ? [
+            { label: 'Engine Type', value: item?.engineType },
+            { label: 'Fuel Type', value: item?.fuelType },
+            { label: 'Range', value: item?.range },
+            { label: 'Emission Norm', value: item?.emissionNorm },
+            { label: 'Torque', value: item?.torque },
+            { label: 'Max Speed', value: item?.maxSpeed },
+            { label: 'Charging Time', value: item?.chargingTime },
+            { label: 'Battery', value: item?.battery },
+            { label: 'Engine Power', value: item?.enginePower },
+          ]
+          : [
+            { label: 'Engine Type', value: item?.engineType },
+            { label: 'Engine Cylinders', value: item?.engineCylinders },
+            { label: 'Engine Displacement', value: item?.engineDisplacement },
+            { label: 'Engine Power', value: item?.enginePower },
+            { label: 'Engine RPM', value: item?.engineRPM },
+            { label: 'Torque', value: item?.torque },
+            { label: 'Fuel Type', value: item?.fuelType },
+            { label: 'Fuel Tank Capacity', value: item?.fuelTankCapacity },
+            { label: 'Mileage', value: item?.mileage },
+            { label: 'Gradeability', value: item?.gradeability },
+            { label: 'Emission Norm', value: item?.emissionNorm },
+            { label: 'Max Speed', value: item?.maxSpeed },
+            { label: 'Battery', value: item?.battery },
+          ]
+
+        return (
+          <Section key={index} title="Performance">
+            {engineSpecs.map((spec) => (
+              <SpecItem key={spec.label} label={spec.label} value={spec.value} />
+            ))}
           </Section>
-        ))
-      }
+        )
+      })}
       {/* Dimensions */}
       {
         specifications.dimensions?.map((item, index) => (
