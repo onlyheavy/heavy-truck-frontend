@@ -267,7 +267,7 @@ const ProfileTab = ({ onComplete }) => {
         // Add debug logging for image URLs
         if (response.data.data.productImage && response.data.data.productImage.length > 0) {
           console.log('Complete image URLs:', response.data.data.productImage.map(img =>
-            `https://only-heavy.s3.eu-north-1.amazonaws.com/${img}`
+            `${process.env.NEXT_PUBLIC_S3_URL}${img}`
           ));
         }
 
@@ -686,7 +686,7 @@ const ProfileTab = ({ onComplete }) => {
                     <img
                       src={img instanceof File ?
                         URL.createObjectURL(img) :
-                        `https://only-heavy.s3.eu-north-1.amazonaws.com/${img}`
+                        `${process.env.NEXT_PUBLIC_S3_URL}${img}`
                       }
                       alt={`preview-${index}`}
                       className="w-20 h-20 object-cover rounded border"

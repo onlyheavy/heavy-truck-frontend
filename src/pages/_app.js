@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }) {
   return getLayout(
    <>
      <Head>
-        <link rel="icon" href="https://only-heavy.s3.eu-north-1.amazonaws.com/favicons.png" type="image/x-icon" />
+        <link rel="icon" href={`${process.env.NEXT_PUBLIC_S3_URL}favicons.png`} type="image/x-icon" />
         {/* Or if using PNG: */}
         {/* <link rel="icon" href="/favicons.png" type="image/png" /> */}
       </Head>

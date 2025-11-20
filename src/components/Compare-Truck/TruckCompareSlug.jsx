@@ -244,7 +244,7 @@ const TruckCompareSlug = ({ rankData }) => {
                 {rankData?.metaDescription && (
                     <meta property="og:description" content={rankData?.metaDescription} />
                 )}
-                <meta property="og:image" content="https://only-heavy.s3.eu-north-1.amazonaws.com/favicons.png" />
+                <meta property="og:image" content={`${process.env.NEXT_PUBLIC_S3_URL}favicons.png`} />
                 <meta
                     property="og:url"
                     content={
@@ -262,7 +262,7 @@ const TruckCompareSlug = ({ rankData }) => {
                     content={
                         rankData?.metaDescription}
                 />
-                <meta name="twitter:image" content="https://only-heavy.s3.eu-north-1.amazonaws.com/favicons.png" /> */}
+                <meta name="twitter:image" content={`${process.env.NEXT_PUBLIC_S3_URL}favicons.png`} /> */}
             </Head>
             <div className="">
                 <div className="">
@@ -294,7 +294,7 @@ const TruckCompareSlug = ({ rankData }) => {
                                     <>
                                         <div className="relative">
                                             <img
-                                                src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${selectedTrucks[idx].truckData?.productImage}`}
+                                                src={`${process.env.NEXT_PUBLIC_S3_URL}${selectedTrucks[idx].truckData?.productImage}`}
                                                 alt={selectedTrucks[idx].truckData?.productName || `Truck ${idx + 1}`}
                                                 width={350}
                                                 height={250}
@@ -384,7 +384,7 @@ const TruckCompareSlug = ({ rankData }) => {
                             {selectedTrucks[0].truckData && (
                                 <div className="flex flex-col items-center bg-white border rounded-lg shadow p-2">
                                     <img
-                                        src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${selectedTrucks[0].truckData?.productImage}`}
+                                        src={`${process.env.NEXT_PUBLIC_S3_URL}${selectedTrucks[0].truckData?.productImage}`}
                                         alt={selectedTrucks[0].truckData?.productName}
                                         className="w-12 h-8 object-contain mb-1"
                                     />
@@ -401,7 +401,7 @@ const TruckCompareSlug = ({ rankData }) => {
                             {selectedTrucks[1].truckData && (
                                 <div className="flex flex-col items-center bg-white border rounded-lg shadow p-2">
                                     <img
-                                        src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${selectedTrucks[1].truckData?.productImage}`}
+                                        src={`${process.env.NEXT_PUBLIC_S3_URL}${selectedTrucks[1].truckData?.productImage}`}
                                         alt={selectedTrucks[1].truckData?.productName}
                                         className="w-12 h-8 object-contain mb-1"
                                     />
@@ -418,7 +418,7 @@ const TruckCompareSlug = ({ rankData }) => {
                             {selectedTrucks[2].truckData && (
                                 <div className="flex flex-col items-center bg-white border rounded-lg shadow p-2">
                                     <img
-                                        src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${selectedTrucks[2].truckData?.productImage}`}
+                                        src={`${process.env.NEXT_PUBLIC_S3_URL}${selectedTrucks[2].truckData?.productImage}`}
                                         alt={selectedTrucks[2].truckData?.productName}
                                         className="w-12 h-8 object-contain mb-1"
                                     />
@@ -447,7 +447,7 @@ const TruckCompareSlug = ({ rankData }) => {
                             {selectedTrucks[0].truckData && (
                                 <div className="flex items-center bg-white border rounded-lg shadow p-3 w-full ">
                                     <img
-                                        src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${selectedTrucks[0].truckData?.productImage}`}
+                                        src={`${process.env.NEXT_PUBLIC_S3_URL}${selectedTrucks[0].truckData?.productImage}`}
                                         alt={selectedTrucks[0].truckData?.productName}
                                         className="w-16 h-12 object-contain mr-3"
                                     />
@@ -466,7 +466,7 @@ const TruckCompareSlug = ({ rankData }) => {
                             {selectedTrucks[1].truckData && (
                                 <div className="flex items-center bg-white border rounded-lg shadow p-3 w-full ">
                                     <img
-                                        src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${selectedTrucks[1].truckData?.productImage}`}
+                                        src={`${process.env.NEXT_PUBLIC_S3_URL}${selectedTrucks[1].truckData?.productImage}`}
                                         alt={selectedTrucks[1].truckData?.productName}
                                         className="w-16 h-12 object-contain mr-3"
                                     />
@@ -485,7 +485,7 @@ const TruckCompareSlug = ({ rankData }) => {
                             {selectedTrucks[2].truckData && (
                                 <div className="flex items-center bg-white border rounded-lg shadow p-3 w-full ">
                                     <img
-                                        src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${selectedTrucks[2].truckData?.productImage}`}
+                                        src={`${process.env.NEXT_PUBLIC_S3_URL}${selectedTrucks[2].truckData?.productImage}`}
                                         alt={selectedTrucks[2].truckData?.productName}
                                         className="w-16 h-12 object-contain mr-3"
                                     />

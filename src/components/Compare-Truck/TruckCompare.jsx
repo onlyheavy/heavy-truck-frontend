@@ -367,7 +367,7 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {rankData?.canonicalUrl ? (
-          <link rel="canonical" href={`https://onlyheavy.com/compare/${rankData.canonicalUrl}`} />
+          <link rel="canonical" href={`https://www.onlyheavy.com/${rankData.canonicalUrl}`} />
         ) : (
           <link
             rel="canonical"
@@ -380,7 +380,7 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
         {rankData?.metaDescription && (
           <meta property="og:description" content={rankData?.metaDescription} />
         )}
-        <meta property="og:image" content="https://only-heavy.s3.eu-north-1.amazonaws.com/favicons.png" />
+        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_S3_URL}favicons.png`} />
         <meta
           property="og:url"
           content={
@@ -398,7 +398,7 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
           content={
             rankData?.metaDescription}
         />
-        <meta name="twitter:image" content="https://only-heavy.s3.eu-north-1.amazonaws.com/favicons.png" />
+        <meta name="twitter:image" content={`${process.env.NEXT_PUBLIC_S3_URL}favicons.png`} />
       </Head>
       <div className="">
         <div className="">
@@ -422,7 +422,7 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
             <div className="w-full md:w-auto md:flex-1 md:max-w-sm bg-white border border-gray-200 rounded-lg shadow-md text-center flex flex-col">
               <div className="relative">
                 <img
-                  src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${(selectedTruckData1 || truck1Data)?.productImage}`}
+                  src={`${process.env.NEXT_PUBLIC_S3_URL}${(selectedTruckData1 || truck1Data)?.productImage}`}
                   alt={(selectedTruckData1 || truck1Data)?.productName || "Truck 1"}
                   width={350}
                   height={250}
@@ -502,7 +502,7 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
             <div className="w-full md:w-auto md:flex-1 md:max-w-sm bg-white border border-gray-200 rounded-lg shadow-md text-center flex flex-col">
               <div className="relative">
                 <img
-                  src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${(selectedTruckData2 || truck2Data)?.productImage}`}
+                  src={`${process.env.NEXT_PUBLIC_S3_URL}${(selectedTruckData2 || truck2Data)?.productImage}`}
                   alt={(selectedTruckData2 || truck2Data)?.productName || "Truck 2"}
                   width={350}
                   height={250}
@@ -585,7 +585,7 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
               <div className="w-full md:w-auto md:flex-1 md:max-w-sm bg-white border border-gray-200 rounded-lg shadow-md text-center flex flex-col">
                 <div className="relative">
                   <img
-                    src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${selectedTruckData?.productImage}`}
+                    src={`${process.env.NEXT_PUBLIC_S3_URL}${selectedTruckData?.productImage}`}
                     alt={selectedTruckData?.productName || "Truck 3"}
                     width={350}
                     height={250}
@@ -703,7 +703,7 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
               {truck1Data && (
                 <div className="flex flex-col items-center bg-white border rounded-lg shadow p-2">
                   <img
-                    src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${truck1Data?.productImage}`}
+                    src={`${process.env.NEXT_PUBLIC_S3_URL}${truck1Data?.productImage}`}
                     alt={truck1Data?.productName}
                     className="w-12 h-8 object-contain mb-1"
                   />
@@ -720,7 +720,7 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
               {truck2Data && (
                 <div className="flex flex-col items-center bg-white border rounded-lg shadow p-2">
                   <img
-                    src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${truck2Data?.productImage}`}
+                    src={`${process.env.NEXT_PUBLIC_S3_URL}${truck2Data?.productImage}`}
                     alt={truck2Data?.productName}
                     className="w-12 h-8 object-contain mb-1"
                   />
@@ -737,7 +737,7 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
               {selectedTruckData && (
                 <div className="flex flex-col items-center bg-white border rounded-lg shadow p-2">
                   <img
-                    src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${selectedTruckData?.productImage}`}
+                    src={`${process.env.NEXT_PUBLIC_S3_URL}${selectedTruckData?.productImage}`}
                     alt={selectedTruckData?.productName}
                     className="w-12 h-8 object-contain mb-1"
                   />
@@ -766,7 +766,7 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
               {truck1Data && (
                 <div className="flex items-center bg-white border rounded-lg shadow p-3 w-full ">
                   <img
-                    src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${truck1Data?.productImage}`}
+                    src={`${process.env.NEXT_PUBLIC_S3_URL}${truck1Data?.productImage}`}
                     alt={truck1Data?.productName}
                     className="w-16 h-12 object-contain mr-3"
                   />
@@ -785,7 +785,7 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
               {truck2Data && (
                 <div className="flex items-center bg-white border rounded-lg shadow p-3 w-full ">
                   <img
-                    src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${truck2Data?.productImage}`}
+                    src={`${process.env.NEXT_PUBLIC_S3_URL}${truck2Data?.productImage}`}
                     alt={truck2Data?.productName}
                     className="w-16 h-12 object-contain mr-3"
                   />
@@ -804,7 +804,7 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
               {selectedTruckData && (
                 <div className="flex items-center bg-white border rounded-lg shadow p-3 w-full ">
                   <img
-                    src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${selectedTruckData?.productImage}`}
+                    src={`${process.env.NEXT_PUBLIC_S3_URL}${selectedTruckData?.productImage}`}
                     alt={selectedTruckData?.productName}
                     className="w-16 h-12 object-contain mr-3"
                   />

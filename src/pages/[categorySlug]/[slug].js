@@ -62,52 +62,66 @@ const TruckLandingPage = ({ categoryData, alterNative, error, categorySlug, slug
 
   return (
    <>
-   <Head>
-        <title>{categoryData[0]?.metaTitle || `${categoryData[0]?.productName}`}</title>
-        {categoryData[0]?.metaDescriptions && (
-          <meta name="description" content={categoryData[0]?.metaDescriptions} />
-        )}
-        <meta
-          name="robots"
-          content={`${categoryData[0]?.searchIndex ? 'index, follow' : 'noindex, nofollow'}, ${categoryData[0]?.imageIndex ? 'max-image-preview:large' : 'noimageindex'}`}
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        {categoryData[0]?.canonicalUrl ? (
-          <link rel="canonical" href={categoryData[0].canonicalUrl} />
-        ) : (
-          <link
-            rel="canonical"
-            href={`https://onlyheavy.com/${categoryData[0].categorySlug}/${categoryData[0]?.slug}`}
-          />
-        )}
-        {categoryData[0]?.metaTitle && (
-          <meta property="og:title" content={categoryData[0]?.metaTitle} />
-        )}
-        {categoryData[0]?.metaDescriptions && (
-          <meta property="og:description" content={categoryData[0]?.metaDescriptions} />
-        )}
-        <meta property="og:image" content="https://only-heavy.s3.eu-north-1.amazonaws.com/favicons.png" />
-        <meta
-          property="og:url"
-          content={
-            categoryData[0]?.canonicalUrl || `https://onlyheavy.com/${categoryData[0]?.categorySlug}/${categoryData[0]?.slug}`
-          }
-        />
-         {/* Twitter Meta Tag */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="twitter:title"
-          content={categoryData[0]?.metaTitle || `${categoryData[0]?.productName}`}
-        />
-        <meta
-          name="twitter:description"
-          content={
-            categoryData[0]?.metaDescriptions ||
-            `${categoryData[0]?.productName} by ${categoryData[0]?.brandName} – Explore top features, price, and specifications in the [Category] segment. Discover why it's a popular choice for buyers in India.`
-          }
-        /> 
-        <meta name="twitter:image" content="https://only-heavy.s3.eu-north-1.amazonaws.com/favicons.png" />
-      </Head>
+  <Head>
+  <title>{categoryData[0]?.metaTitle || categoryData[0]?.productName}</title>
+
+  {categoryData[0]?.metaDescriptions && (
+    <meta name="description" content={categoryData[0].metaDescriptions} />
+  )}
+
+  <meta
+    name="robots"
+    content={`${categoryData[0]?.searchIndex ? 'index, follow' : 'noindex, nofollow'}, ${
+      categoryData[0]?.imageIndex ? 'max-image-preview:large' : 'noimageindex'
+    }`}
+  />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  {/* Canonical */}
+  <link
+    rel="canonical"
+    href={
+      categoryData[0]?.canonicalUrl ||
+      `https://onlyheavy.com/${categoryData[0]?.categorySlug}/${categoryData[0]?.slug}`
+    }
+  />
+
+  {/* Open Graph */}
+  <meta property="og:title" content={categoryData[0]?.metaTitle || categoryData[0]?.productName} />
+  <meta
+    property="og:description"
+    content={categoryData[0]?.metaDescriptions}
+  />
+  <meta
+    property="og:image"
+    content={
+      categoryData[0]?.imageUrl ||
+      `${process.env.NEXT_PUBLIC_S3_URL}default-product.webp`
+    }
+  />
+  <meta
+    property="og:url"
+    content={
+      categoryData[0]?.canonicalUrl ||
+      `https://www.onlyheavy.com/${categoryData[0]?.categorySlug}/${categoryData[0]?.slug}`
+    }
+  />
+  <meta property="og:type" content="article" />
+
+  {/* Twitter */}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={categoryData[0]?.metaTitle} />
+  <meta name="twitter:description" content={categoryData[0]?.metaDescriptions} />
+  <meta
+    name="twitter:image"
+    content={
+      categoryData[0]?.imageUrl ||
+      `${process.env.NEXT_PUBLIC_S3_URL}default-product.webp`
+    }
+  />
+</Head>
+
      <CategoryProvider initialData={initialData}>
       <MainLayout>
         <div className="md:flex text-black block gap-10">

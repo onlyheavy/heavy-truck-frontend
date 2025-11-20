@@ -84,7 +84,7 @@ export default function TruckCards() {
             >
               <div className="relative ">
                 <img
-                  src={`https://only-heavy.s3.eu-north-1.amazonaws.com/${truck.image}`}
+                  src={`${process.env.NEXT_PUBLIC_S3_URL}${truck.image}`}
                   alt={truck.productName}
                   className="w-full h-52 object-cover border transition-transform duration-300 rounded-md hover:scale-95"
                 />

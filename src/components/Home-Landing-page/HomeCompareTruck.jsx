@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-const S3_BASE = 'https://only-heavy.s3.eu-north-1.amazonaws.com/'
+const S3_BASE = `${process.env.NEXT_PUBLIC_S3_URL}`
 
 const HomeCompareTruck = () => {
     const [compareTruck, setCompareTruck] = useState([])

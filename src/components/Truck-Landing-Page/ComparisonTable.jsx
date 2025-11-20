@@ -70,7 +70,7 @@ const ComparisonTable = () => {
 
   const group1 = baseGroup1
     ? Array(3).fill(baseGroup1).map((item) => ({
-      image: `https://only-heavy.s3.eu-north-1.amazonaws.com/${item?.productImage[0]}`,
+      image: `${process.env.NEXT_PUBLIC_S3_URL}${item?.productImage[0]}`,
       name: item?.productName,
       price: `₹ ${item?.minPrice} - ₹ ${item?.maxPrice} Lakh*`,
     }))
@@ -78,7 +78,7 @@ const ComparisonTable = () => {
 
 
   const group2 = alterNative.slice(0, 3).map((item) => ({
-    image: `https://only-heavy.s3.eu-north-1.amazonaws.com/${item?.image}`,
+    image: `${process.env.NEXT_PUBLIC_S3_URL}${item?.image}`,
     name: item?.productName,
     price: `₹ ${item?.minPrice} - ₹ ${item?.maxPrice} Lakh*`,
   }));

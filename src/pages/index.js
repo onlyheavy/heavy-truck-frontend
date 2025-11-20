@@ -18,6 +18,7 @@ import LandingPageLayout from "@/layouts/LandingPageLayout";
 import API from "@/utils/api";
 import LatestNews from "@/components/Home-Landing-page/LatestNews";
 import TruckByPayload from "@/components/Home-Landing-page/TruckByPayload";
+import Head from "next/head";
 
 export default function Home() {
   const [priceData, setPriceData] = useState([]);
@@ -70,7 +71,54 @@ export default function Home() {
   }, [fetchData]);
 
   return (
-    <div className="min-h-screen bg-white">
+    <>
+     <Head>
+        <title>Compare Trucks in India | New Truck Price, Mileage & Payload – OnlyHeavy</title>
+
+        <meta 
+          name="description" 
+          content="OnlyHeavy helps you compare truck prices, mileage, and payload across leading brands in India. Get detailed specs, images, and reviews of the latest heavy trucks and commercial vehicles." 
+        />
+
+        <meta name="robots" content="index, follow" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <link rel="canonical" href="https://www.onlyheavy.com/" />
+
+        {/* Open Graph Meta Tags */}
+        <meta 
+          property="og:title" 
+          content="Compare Trucks in India | New Truck Price, Mileage & Payload – OnlyHeavy" 
+        />
+        <meta 
+          property="og:description" 
+          content="OnlyHeavy helps you compare truck prices, mileage, and payload across leading brands in India. Get detailed specs, images, and reviews of the latest heavy trucks and commercial vehicles." 
+        />
+        <meta 
+          property="og:image" 
+          content={`${process.env.NEXT_PUBLIC_S3_URL}favicons.png`} 
+        />
+        <meta property="og:url" content="https://onlyheavy.com/" />
+        <meta property="og:type" content="website" />
+
+        {/* Twitter Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta 
+          name="twitter:title" 
+          content="Compare Trucks in India | New Truck Price, Mileage & Payload – OnlyHeavy" 
+        />
+        <meta 
+          name="twitter:description" 
+          content="OnlyHeavy helps you compare truck prices, mileage, and payload across leading brands in India. Get detailed specs, images, and reviews of the latest heavy trucks and commercial vehicles." 
+        />
+        <meta 
+          name="twitter:image" 
+          content={`${process.env.NEXT_PUBLIC_S3_URL}favicons.png`} 
+        />
+      </Head>
+
+      
+      <div className="min-h-screen bg-white">
       <LandingPageLayout>
         <HomeSearchBar />
         <GetInTouch />
@@ -120,5 +168,7 @@ export default function Home() {
         <LatestNews />
       </LandingPageLayout>
     </div>
+    </>
+
   );
 }

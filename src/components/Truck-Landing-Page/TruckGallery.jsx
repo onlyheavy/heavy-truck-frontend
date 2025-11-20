@@ -24,7 +24,7 @@ const TruckGallery = () => {
 
     if (categoryData?.[0]?.productImage?.length) {
       const formattedImages = categoryData[0].productImage.map((data) => (
-        `https://only-heavy.s3.eu-north-1.amazonaws.com/${data}`
+        `${process.env.NEXT_PUBLIC_S3_URL}${data}`
       ));
       setImageList(formattedImages);
       setSelectedImage(formattedImages[0]);
