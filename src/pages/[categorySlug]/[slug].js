@@ -59,7 +59,7 @@ const TruckLandingPage = ({ categoryData, alterNative, error, categorySlug, slug
     categorySlug,
     slug
   };
-
+  console.log('wfgg', categoryData[0])
   return (
    <>
   <Head>
@@ -97,7 +97,7 @@ const TruckLandingPage = ({ categoryData, alterNative, error, categorySlug, slug
     property="og:image"
     content={
       categoryData[0]?.imageUrl ||
-      `${process.env.NEXT_PUBLIC_S3_URL}default-product.webp`
+      `${process.env.NEXT_PUBLIC_S3_URL}favicons.png`
     }
   />
   <meta
@@ -116,8 +116,7 @@ const TruckLandingPage = ({ categoryData, alterNative, error, categorySlug, slug
   <meta
     name="twitter:image"
     content={
-      categoryData[0]?.imageUrl ||
-      `${process.env.NEXT_PUBLIC_S3_URL}default-product.webp`
+      `${process.env.NEXT_PUBLIC_S3_URL}${categoryData[0]?.productImage[0]}`
     }
   />
 </Head>
