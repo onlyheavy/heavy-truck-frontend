@@ -28,7 +28,7 @@ const TruckByGvw = ({ data, onFilterChange, loading }) => {
 
     return (
         <div>
-            <section className="py-10 bg-[#FDF8F4]">
+            <section className="py-10 bg-white">
                 <div className="max-w-7xl mx-auto ">
                     <div className="flex items-center justify-center mx-10 my-6">
                         <div className="hidden md:block w-60 border-t border-gray-300"></div>

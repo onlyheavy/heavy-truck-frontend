@@ -42,7 +42,7 @@ const KeySpecs = () => {
             icon: '/icons/payload.svg',
         },
         {
-            title: 'No. of Tyres',
+            title: 'Tyres',
             value: getFormattedValue(keyFeature?.noOfTyres),
             icon: '/icons/tyres.svg',
         },
@@ -50,7 +50,7 @@ const KeySpecs = () => {
 
     const combustionSpecs = [
         {
-            title: 'Engine Displacement',
+            title: ' Displacement',
             value: getFormattedValue(keyFeature?.engineDisplacement, 'cc'),
             icon: '/icons/cc.svg',
         },
@@ -97,17 +97,17 @@ const KeySpecs = () => {
             <h2 className="font-bold md:text-[24px] text-lg">
                 Key Specs of {product?.productName || 'the Truck'}
             </h2>
-            <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-3 md:gap-5 md:mt-8 mt-4">
+            <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-5 md:mt-8 mt-4">
                 {specs.map((item, index) => (
                     <div
                         key={index}
-                        className="flex flex-col items-center justify-between gap-3 w-full bg-white p-4 rounded-md border border-amber-500 cursor-pointer hover:shadow-orange-700 hover:shadow-md transition-all duration-300"
+                        className="flex flex-col items-center justify-between gap-3 w-full bg-white p-4 rounded-md border border-amber-500 hover:shadow-orange-700 hover:shadow-md transition-all duration-300"
                     >
                         <div className="w-12 h-12 flex items-center justify-center">
                             <img
                                 src={item?.icon}
                                 alt={item?.title}
-                                className="w-10 h-10 object-contain transition-transform duration-300 hover:scale-110"
+                                className="w-10 h-12 object-contain transition-transform duration-300 hover:scale-110"
                             />
                         </div>
                         <div className="text-center space-y-1">

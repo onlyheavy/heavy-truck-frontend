@@ -429,6 +429,8 @@ const ProfileTab = ({ onComplete }) => {
 
       if (response.data && response?.data?.data?._id) {
         // If we have images to upload, do it after category creation/update
+        await axios.get(`${API.HOST}/api/compare/checkAndCreate/${response.data.data._id}`);
+
         if (formData.productImage.length > 0) {
           try {
             await uploadImage(formData.productImage, response.data.data._id);

@@ -14,7 +14,7 @@ const ComparisonCard = ({ vehicleImage, vehicleName, price }) => (
       <img
         src={vehicleImage}
         alt={vehicleName}
-        className="w-full h-40 object-cover mb-4 rounded"
+        className="w-full h-40 object-cover border mb-4 rounded"
       />
       <h3 className="font-semibold text-sm text-[#254154] mb-2 capitalize">{vehicleName}</h3>
       <p className="text-sm font-bold text-[#254154] mb-4">{price}</p>

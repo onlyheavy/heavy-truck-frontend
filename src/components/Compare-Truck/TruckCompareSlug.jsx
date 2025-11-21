@@ -264,7 +264,7 @@ const TruckCompareSlug = ({ rankData }) => {
                 />
                 <meta name="twitter:image" content={`${process.env.NEXT_PUBLIC_S3_URL}favicons.png`} /> */}
             </Head>
-            <div className="">
+            <div className="text-black">
                 <div className="">
                     <div className="">
                         <Image
@@ -277,7 +277,7 @@ const TruckCompareSlug = ({ rankData }) => {
                     </div>
 
                     {selectedTrucks.some(t => t.truckData) && (
-                        <h1 className="text-lg md:text-xl font-bold my-8 text-center capitalize">
+                        <h1 className="text-lg md:text-xl text-black font-bold my-8 text-center capitalize">
                             {selectedTrucks
                                 .filter(t => t.truckData)
                                 .map(t => t.truckData.productName)
@@ -287,7 +287,7 @@ const TruckCompareSlug = ({ rankData }) => {
                         </h1>
                     )}
 
-                    <div className="flex flex-col md:flex-row flex-wrap justify-center items-stretch gap-4 my-8">
+                    <div className="flex flex-col md:flex-row  flex-wrap justify-center items-stretch gap-4 my-8">
                         {[0, 1, 2].map(idx => (
                             <div key={idx} className="w-full md:w-auto md:flex-1 md:max-w-sm bg-white border border-gray-200 rounded-lg shadow-md text-center flex flex-col">
                                 {selectedTrucks[idx].truckData ? (

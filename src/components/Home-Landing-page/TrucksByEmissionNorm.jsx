@@ -22,7 +22,7 @@ const TrucksByEmissionNorm = ({ data, onFilterChange, loading }) => {
 
     return (
         <div>
-            <section className="pb-10 pt-3 bg-white">
+            <section className="pb-10 pt-3 bg-[#FDF8F4]">
                 <div className="max-w-7xl mx-auto ">
                     <div className="flex items-center justify-center mx-10 my-6">
                         <div className="hidden md:block w-60 border-t border-gray-300"></div>
@@ -53,7 +53,7 @@ const TrucksByEmissionNorm = ({ data, onFilterChange, loading }) => {
                         <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide p-3">
                             {Array.isArray(data) && data.length > 0 ? (
                                 data.map((truck, index) => (
-                                    <div key={index} className="min-w-[255px] rounded-md border border-gray-300 hover:shadow-lg">
+                                    <div key={index} className="min-w-[255px] bg-white rounded-md border border-gray-300 hover:shadow-lg">
                                         <div className="p-2">
                                             <img
                                                 src={`${process.env.NEXT_PUBLIC_S3_URL}${truck?.image}`}

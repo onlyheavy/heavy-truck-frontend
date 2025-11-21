@@ -9,7 +9,7 @@ import API from "@/utils/api";
 const BrandGallery = () => {
   const brands = [
     { name: "Mahindra", logo: "/trucks/mahindra.jpg" },
-    { name: "Jupiter Electric M..", logo: "/trucks/jupiter-electric-mobility.jpg" },
+    { name: "Jupiter Electric M..", logo: "/trucks/jem.jpeg" },
     { name: "Premier Motors", logo: "/trucks/premier.jpg" },
     { name: "Euler EV", logo: "/trucks/euler.svg" },
     { name: "Force Motors", logo: "/trucks/force.svg" },
@@ -369,12 +369,11 @@ const EmiCalculator = ({ showResults, onCalculateEmi, onBack }) => {
 };
 
 
-// ------------- Parent Wrapper ----------------
 const CalculateEmi = () => {
   const [showResults, setShowResults] = useState(false);
 
   return (
-    <div className="bg-white m-4 md:py-10 py-4 md:px-16 px-0 flex flex-col md:flex-row gap-6">
+    <div className="bg-white m-4 md:py-10 py-4 md:px-20 px-0 flex flex-col md:flex-row gap-6">
       <div className="flex-1  w-full md:max-w-[70%]">
         <EmiCalculator
           showResults={showResults}
@@ -382,7 +381,7 @@ const CalculateEmi = () => {
           onBack={() => setShowResults(false)}
         />
       </div>
-      <div className="flex-1 w-full md:max-w-[30%]">
+      <div className="flex-1 w-full md:max-w-[28%]">
         <BrandGallery />
       </div>
 

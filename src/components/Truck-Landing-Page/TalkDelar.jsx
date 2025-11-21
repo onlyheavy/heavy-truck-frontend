@@ -1,13 +1,12 @@
 import React from 'react'
 import { FiPhoneCall } from "react-icons/fi";
-import BrochurePopup from './BrochurePopup';
 import { useState } from 'react';
 import DealerForm from '../brochure/dealer';
 import { useCategory } from '@/hooks/useContext';
 
 function TalkDelar() {
     const [showForm, setShowForm] = useState(false);
-      const { categoryData } = useCategory()
+    const { categoryData } = useCategory()
     return (
         <div className='flex gap-3 bg-[#FFE8DE] p-8 pb-6 rounded-md '>
             <div className='flex flex-col gap-3'>

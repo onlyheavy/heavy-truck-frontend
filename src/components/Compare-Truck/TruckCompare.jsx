@@ -400,7 +400,7 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
         />
         <meta name="twitter:image" content={`${process.env.NEXT_PUBLIC_S3_URL}favicons.png`} />
       </Head>
-      <div className="">
+      <div className="text-black">
         <div className="">
           <div className="">
             <Image

@@ -54,7 +54,7 @@ const TruckByWheels = ({ data, onFilterChange, loading }) => {
                     <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide p-3">
                         {Array.isArray(data) && data.length > 0 ? (
                             data.map((truck, index) => (
-                                <div key={index} className="min-w-[255px] rounded-md border border-gray-300 hover:shadow-lg ">
+                                <div key={index} className="min-w-[255px] bg-white rounded-md border border-gray-300 hover:shadow-lg ">
                                     <div className="p-2 ">
                                         <img
                                             src={`${process.env.NEXT_PUBLIC_S3_URL}${truck?.image}`}
@@ -76,7 +76,7 @@ const TruckByWheels = ({ data, onFilterChange, loading }) => {
                                                 }
                                             }}
                                         >
-                                            <div className='flex justify-center mt-2 pb-2'>
+                                            <div className='flex justify-center mt-2 pb-4'>
                                                 <button
                                                     className="px-6 py-1.5 rounded-sm mt-3 cursor-pointer font-bold text-sm border text-orange-500 border-orange-500 hover:text-white hover:bg-orange-500 bg-transparent "
                                                 >

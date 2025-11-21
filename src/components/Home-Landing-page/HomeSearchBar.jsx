@@ -115,7 +115,7 @@ const HomeSearchBar = () => {
               <p className="text-lg text-[#566479] mb-8 text-pretty">
                 Easily estimate how much you’ll spend on fuel each month based on mileage, fuel price, and efficiency.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 bg-white p-5 rounded-md border border-orange-400">
+              <div className=" flex-col sm:flex-row gap-4 bg-white p-5 rounded-md border border-orange-400 hidden md:flex">
                 <select
                   value={selectedBrand}
                   onChange={(e) => {
@@ -149,7 +149,7 @@ const HomeSearchBar = () => {
                   className="bg-orange-500 hover:bg-orange-600 text-white cursor-pointer"
                   onClick={handleQuote}
                 >
-                  Get Quote
+                  Search
                 </Button>
               </div>
             </div>
@@ -164,6 +164,43 @@ const HomeSearchBar = () => {
                 alt="Commercial Truck"
                 className="relative w-full h-auto -right-5 z-10"
               />
+            </div>
+            <div className="flex flex-col sm:flex-row gap-4 bg-white p-5 mt-5 md:hidden rounded-md border border-orange-400">
+              <select
+                value={selectedBrand}
+                onChange={(e) => {
+                  setSelectedBrand(e.target.value);
+                  setSelectedModel(""); // reset model when brand changes
+                }}
+                className="border border-gray-300 rounded-md px-4 py-2 text-gray-700 w-full md:w-60 cursor-pointer"
+              >
+                <option value="">Select Truck Brand</option>
+                {brandOptions.map((brand) => (
+                  <option key={brand.value} value={brand.value}>
+                    {brand.id}
+                  </option>
+                ))}
+              </select>
+              <select
+                value={selectedModel}
+                onChange={(e) => setSelectedModel(e.target.value)}
+                disabled={!selectedBrand}
+                className="border border-gray-300 rounded-md px-4 py-2 text-gray-700 w-full md:w-60 disabled:opacity-50 cursor-pointer"
+              >
+                <option value="">Select Truck Model</option>
+                {models.map((model) => (
+                  <option key={model._id} value={model._id}>
+                    {model.productName}
+                  </option>
+                ))}
+              </select>
+              <Button
+                size="lg"
+                className="bg-orange-500 hover:bg-orange-600 text-white cursor-pointer"
+                onClick={handleQuote}
+              >
+                Search
+              </Button>
             </div>
           </div>
         </div>
