@@ -11,6 +11,8 @@ export const getServerSideProps = async ({ res }) => {
     <sitemap><loc>https://onlyheavy.com/sitemap-compare-bus.xml</loc></sitemap>
     <sitemap><loc>https://onlyheavy.com/sitemap-brands.xml</loc></sitemap>
     <sitemap><loc>https://onlyheavy.com/sitemap-blogs.xml</loc></sitemap>
+    <sitemap><loc>https://onlyheavy.com/privacy-policy</loc></sitemap>
+    <sitemap><loc>https://onlyheavy.com/terms-conditions</loc></sitemap>
   </sitemapindex>`;
 
   res.setHeader("Content-Type", "text/xml");
