@@ -367,7 +367,7 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {rankData?.canonicalUrl ? (
-          <link rel="canonical" href={`https://www.onlyheavy.com/${rankData.canonicalUrl}`} />
+          <link rel="canonical" href={`https://www.onlyheavy.com${rankData.canonicalUrl}`} />
         ) : (
           <link
             rel="canonical"
@@ -384,7 +384,7 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
         <meta
           property="og:url"
           content={
-            rankData?.canonicalUrl || `https://onlyheavy.com/compare/${rankData?.slug}`
+            rankData?.canonicalUrl || `https://onlyheavy.com/compare${rankData?.slug}`
           }
         />
         {/* Twitter Meta Tag */}

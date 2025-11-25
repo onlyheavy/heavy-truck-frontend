@@ -8,7 +8,7 @@ export default function CompareTruckNoSlug() {
     <MainLayout>
       <TruckCompareSlug truck1Data={null} truck2Data={null} rankData={null} />
       <HomeCompareTruck />
-      <Faq />
+      {/* <Faq /> */}
     </MainLayout>
   )
 }

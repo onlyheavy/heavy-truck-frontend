@@ -14,7 +14,7 @@ const EmiCalculator = () => {
                     <Banner />
                     <EmiCard />
                     <CalculateEmi />
-                    <Faq />
+                    {/* <Faq /> */}
 
                 </LandingPageLayout>
             </div>

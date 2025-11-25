@@ -128,7 +128,7 @@ const Footer = () => {
 
           {/* Bottom Section */}
           <div className="border-t border-gray-500 mt-8 pt-6 text-center text-sm text-gray-300">
-            <p>© Copyright 2024 TruckMarket. All rights reserved.</p>
+            <p>© Copyright 2025 TruckMarket. All rights reserved.</p>
           </div>
         </div>
       </footer>

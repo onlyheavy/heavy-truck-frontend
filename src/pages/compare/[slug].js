@@ -16,7 +16,7 @@ const CompareTruck = ({ truck1Data, truck2Data, rankData, slug }) => {
           slug={slug}
         />
         <HomeCompareTruck />
-        <Faq />
+        {/* <Faq /> */}
     </MainLayout>
   )
 }

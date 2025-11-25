@@ -63,7 +63,7 @@ const FuelCost = () => {
               onFilterChange={(val) => fetchData("mileage", val, setMileageData)}
               loading={loading}
             />
-            <Faq/>
+            {/* <Faq/> */}
         </LandingPageLayout>
     </div>
    

@@ -66,7 +66,7 @@ const Brochure = () => {
                 onFilterChange={(val) => fetchData("GVW", val, setGvwData)}
                 loading={loading}
             />
-            <Faq/>
+            {/* <Faq/> */}
         </LandingPageLayout>
     </div>
    
