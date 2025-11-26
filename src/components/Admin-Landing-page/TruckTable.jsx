@@ -27,6 +27,7 @@ export default function TruckTable() {
   const [pageIndex, setPageIndex] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedOption, setSelectedOption] = useState('');
+  const [subCategoryOption, setSubCategoryOption] = useState('');
   const [productData, setProductData] = useState([])
   const [selectedProduct, setSelectedProduct] = useState("")
   const router = useRouter();
@@ -84,7 +85,7 @@ export default function TruckTable() {
 
   const productNameFilter = async () => {
     try {
-      const response = await axios.get(`${API.HOST}/api/category/getProductNamesByAdmin/${selectedOption}`);
+      const response = await axios.get(`${API.HOST}/api/category/getProductNamesByAdmin?brandSlug=${selectedOption}&subCategorySlug=${subCategoryOption}`);
       setProductData(response?.data?.success ? response?.data?.data : []);
 
       setError(null);
@@ -101,10 +102,9 @@ export default function TruckTable() {
     }
   };
 
-
   const brancdFilter = async () => {
     try {
-      const response = await axios.get(`${API.HOST}/api/category/getBrandFilterData/${selectedOption}`);
+      const response = await axios.get(`${API.HOST}/api/category/getBrandFilterData?brandSlug=${selectedOption}&subCategorySlug=${subCategoryOption}`);
       setTrucks(response?.data?.success ? response?.data?.data : []);
       setError(null);
     } catch (err) {
@@ -141,12 +141,16 @@ export default function TruckTable() {
   };
 
   useEffect(() => {
-    if (selectedOption) {
-      brancdFilter();
-      productNameFilter();
-    }
+    // If neither selectedOption nor subCategoryOption is selected, do nothing
+    if (!selectedOption && !subCategoryOption) return;
 
-  }, [selectedOption]);
+    // If selectedOption is selected → run both
+
+    brancdFilter();
+    productNameFilter();
+
+  }, [selectedOption, subCategoryOption]);
+
 
   useEffect(() => {
     if (selectedProduct) {
@@ -181,7 +185,24 @@ export default function TruckTable() {
       cell: (info) => <span className='capitalize'>{info.getValue()}</span>,
     }),
     columnHelper.accessor('subCategory', {
-      header: 'Sub Category',
+      header: <div className="">
+        <select
+          className="rounded px-1 py-0.5 text-sm outline-none"
+          value={subCategoryOption}
+          onChange={(e) => setSubCategoryOption(e.target.value)}
+        >
+          <option value="">Sub Category</option>
+          <option value="mini-trucks">Mini Trucks</option>
+          <option value="medium-trucks">Medium Trucks</option>
+          <option value="medium-tipper">Medium Tipper</option>
+          <option value="heavy-trucks">Heavy Trucks</option>
+          <option value="heavy-tipper">Heavy Tipper</option>
+          <option value="trailers">Trailers</option>
+          <option value="mixers">Mixers</option>
+          <option value="bulkers">Bulkers</option>
+
+        </select>
+      </div>,
       cell: (info) => <span className='capitalize'>{info.getValue()}</span>,
     }),
     columnHelper.accessor('brandName', {
@@ -192,36 +213,36 @@ export default function TruckTable() {
           onChange={(e) => setSelectedOption(e.target.value)}
         >
           <option value="">Brand</option>
-          <option value="Ashok Leyland">Ashok Leyland</option>
-          <option value="BharatBenz">BharatBenz</option>
-          <option value="Blue Energy Motors">Blue Energy Motors</option>
-          <option value="E-Trio">E-Trio</option>
-          <option value="Eicher">Eicher</option>
-          <option value="EKA">EKA</option>
-          <option value="Erisha E Mobility">Erisha E Mobility</option>
-          <option value="Euler EV">Euler EV</option>
-          <option value="Evage Motors">Evage Motors</option>
-          <option value="Force Motors">Force Motors</option>
-          <option value="I-Board Mobility">I-Board Mobility</option>
-          <option value="IPL Tech Electric">IPL Tech Electric</option>
-          <option value="ISUZU">ISUZU</option>
-          <option value="Jupiter Electric Mobility">Jupiter Electric Mobility</option>
-          <option value="Kamaz">Kamaz</option>
-          <option value="Mahindra">Mahindra</option>
-          <option value="Man">Man</option>
-          <option value="Maruti Suzuki">Maruti Suzuki</option>
-          <option value="Montra Electric">Montra Electric</option>
-          <option value="Omega">Omega</option>
-          <option value="Premier Motors">Premier Motors</option>
-          <option value="Propal">Propal</option>
-          <option value="Sany">Sany</option>
-          <option value="Scania">Scania</option>
-          <option value="SML ISUZU">SML ISUZU</option>
-          <option value="Switch Mobility">Switch Mobility</option>
-          <option value="Tata Motors">Tata Motors</option>
-          <option value="Toyota">Toyota</option>
-          <option value="Triton EV">Triton EV</option>
-          <option value="Volvo">Volvo</option>
+          <option value="ashok-leyland">Ashok Leyland</option>
+          <option value="bharatbenz">BharatBenz</option>
+          <option value="blue-energy-motors">Blue Energy Motors</option>
+          <option value="e-trio">E-Trio</option>
+          <option value="eicher">Eicher</option>
+          <option value="eka">EKA</option>
+          <option value="erisha-e-mobility">Erisha E Mobility</option>
+          <option value="euler-ev">Euler EV</option>
+          <option value="evage-motors">Evage Motors</option>
+          <option value="force-motors">Force Motors</option>
+          <option value="i-board-mobility">I-Board Mobility</option>
+          <option value="ipl-tech-electric">IPL Tech Electric</option>
+          <option value="isuzu">ISUZU</option>
+          <option value="jupiter-electric-mobility">Jupiter Electric Mobility</option>
+          <option value="kamaz">Kamaz</option>
+          <option value="mahindra">Mahindra</option>
+          <option value="man">Man</option>
+          <option value="maruti-suzuki">Maruti Suzuki</option>
+          <option value="montra-electric">Montra Electric</option>
+          <option value="omega">Omega</option>
+          <option value="premier-motors">Premier Motors</option>
+          <option value="propal">Propal</option>
+          <option value="sany">Sany</option>
+          <option value="scania">Scania</option>
+          <option value="sml-isuzu">SML ISUZU</option>
+          <option value="switch-mobility">Switch Mobility</option>
+          <option value="tata-motors">Tata Motors</option>
+          <option value="toyota">Toyota</option>
+          <option value="triton-ev">Triton EV</option>
+          <option value="volvo">Volvo</option>
 
         </select>
       </div>,

@@ -10,11 +10,37 @@ import Link from 'next/link'
 const filterOptions = {
     Brands: [
         { id: "Ashok Leyland", value: "ashok-leyland" },
-        { id: "Tata", value: "tata" },
+        { id: "BharatBenz", value: "bharatbenz" },
+        { id: "Blue Energy Motors", value: "blue-energy-motors" },
+        { id: "E-Trio", value: "e-trio" },
         { id: "Eicher", value: "eicher" },
+        { id: "EKA", value: "eka" },
+        { id: "Erisha E Mobility", value: "erisha-e-mobility" },
+        { id: "Euler EV", value: "euler-ev" },
+        { id: "Evage Motors", value: "evage-motors" },
+        { id: "Force Motors", value: "force-motors" },
+        { id: "I-Board Mobility", value: "i-board-mobility" },
+        { id: "IPL Tech Electric", value: "ipl-tech-electric" },
+        { id: "ISUZU", value: "isuzu" },
+        { id: "Jupiter Electric Mobility", value: "jupiter-electric-mobility" },
+        { id: "Kamaz", value: "kamaz" },
         { id: "Mahindra", value: "mahindra" },
-        { id: "Volvo", value: "volvo" },
+        { id: "Man", value: "man" },
+        { id: "Maruti Suzuki", value: "maruti-suzuki" },
+        { id: "Montra Electric", value: "montra-electric" },
+        { id: "Omega", value: "omega" },
+        { id: "Premier Motors", value: "premier-motors" },
+        { id: "Propal", value: "propal" },
+        { id: "Sany", value: "sany" },
+        { id: "Scania", value: "scania" },
+        { id: "SML ISUZU", value: "sml-isuzu" },
+        { id: "Switch Mobility", value: "switch-mobility" },
+        { id: "Tata Motors", value: "tata-motors" },
+        { id: "Toyota", value: "toyota" },
+        { id: "Triton EV", value: "triton-ev" },
+        { id: "Volvo", value: "volvo" }
     ],
+
     "Price Range": [
         { id: "Under 10 Lakh", value: "under-10-lakh" },
         { id: "10–20 Lakh", value: "10-20-lakh" },
@@ -284,7 +310,7 @@ export default function TruckListing() {
             </div>
             <PopularTruck />
             <HomeCompareTruck />
-            <Faq />
+            {/* <Faq /> */}
         </section>
     );
 }

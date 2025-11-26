@@ -12,19 +12,19 @@ const services = [
         icon: "/icons/brochure.svg",
         title: "Download Brochure",
         desc: "Download the brochure to explore specifications and benefits before you decide.",
-        path: "/brochure",
+        path: "/truck/brochure",
     },
     {
         icon: "/icons/fuelcost.svg",
         title: "Fuel Cost Calculator",
         desc: "Smart tool to estimate fuel expenses and optimize your budget.",
-        path: "/fuel-calculator",
+        path: "/truck/fuel-calculator",
     },
     {
         icon: "/icons/emicalc.svg",
         title: "EMI Calculator",
         desc: "Get instant insights into your monthly installments and manage your finances with confidence.",
-        path: "/emi-calculator",
+        path: "/truck/emi-calculator",
     },
 ];
 
