@@ -59,8 +59,8 @@ export default function TruckCards() {
       <h2 className="md:text-[24px] text-lg font-bold text-gray-800 md:mb-10 mb-6 capitalize">
         Explore {categoryData[0]?.productName} Alternatives
       </h2>
-      <div className=" flex gap-4 md:gap-8 md:px-4 px-0 overflow-x-auto md:overflow-visible scrollbar-hide snap-x snap-mandatory">
-        {alterNative?.slice(0, 3)?.map((truck, idx) => {
+      <div className=" flex gap-4 md:gap-5 md:px-2 px-0 overflow-x-auto overflow-visible scrollbar-hide snap-x snap-mandatory">
+        {alterNative?.slice(0, 8)?.map((truck, idx) => {
           const fuelType = getFuelType(truck);
           const isElectric = fuelType?.toLowerCase?.().includes('electric');
           const engineLabel = isElectric ? 'Charging Time' : 'Engine';
@@ -80,7 +80,7 @@ export default function TruckCards() {
           return (
             <div
               key={idx}
-              className="bg-white rounded-md min-w-[350px] md:w-full shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col p-2"
+              className="bg-white rounded-md border min-w-[350px] md:w-full shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col p-2"
             >
               <div className="relative ">
                 <img

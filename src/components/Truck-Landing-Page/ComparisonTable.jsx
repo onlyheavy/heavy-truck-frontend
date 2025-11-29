@@ -33,7 +33,7 @@ const ComparisonSection = ({ vehicles }) => {
   };
 
   return (
-    <div className="border min-w-[350px] md:w-full border-[#E0E8ED] rounded-lg p-2 relative w-full ">
+    <div className="border min-w-[390px] md:w-full border-[#E0E8ED] rounded-lg p-2 relative w-full ">
       <div className="flex relative gap-2">
         {vehicles?.map((vehicle, index) => (
           <ComparisonCard
@@ -69,7 +69,7 @@ const ComparisonTable = () => {
   const baseGroup1 = categoryData?.length > 0 ? categoryData[0] : null;
 
   const group1 = baseGroup1
-    ? Array(3).fill(baseGroup1).map((item) => ({
+    ? Array(8).fill(baseGroup1).map((item) => ({
       image: `${process.env.NEXT_PUBLIC_S3_URL}${item?.productImage[0]}`,
       name: item?.productName,
       price: `₹ ${item?.minPrice} - ₹ ${item?.maxPrice} Lakh*`,
@@ -77,7 +77,7 @@ const ComparisonTable = () => {
     : [];
 
 
-  const group2 = alterNative.slice(0, 3).map((item) => ({
+  const group2 = alterNative.slice(0, 8).map((item) => ({
     image: `${process.env.NEXT_PUBLIC_S3_URL}${item?.image}`,
     name: item?.productName,
     price: `₹ ${item?.minPrice} - ₹ ${item?.maxPrice} Lakh*`,
@@ -85,12 +85,12 @@ const ComparisonTable = () => {
 
 
   const pairedVehicles = group1.map((vehicle, index) => [vehicle, group2[index]]);
-
+  console.log('Paired Vehicles:', pairedVehicles);
   return (
     <div className="my-10">
       <h2 className="text-lg md:text-2xl font-semibold mb-6">Compare Top Trucks</h2>
       <div className="flex overflow-x-auto scrollbar-hide flex-row gap-6 w-full  ">
-        {pairedVehicles?.slice(0, 2)?.map((pair, index) => (
+        {pairedVehicles?.slice(0, 8)?.map((pair, index) => (
           <ComparisonSection key={index} vehicles={pair} />
         ))}
       </div>
