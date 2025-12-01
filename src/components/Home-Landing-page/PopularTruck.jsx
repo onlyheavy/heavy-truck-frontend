@@ -5,12 +5,12 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 
 
-const PopularTruck = () => {
+const PopularTruck = ({ brandSlug }) => {
     const [popularTrucks, setPopularTrucks] = useState([])
 
     const getPopularTrucks = async () => {
         try {
-            const response = await axios.get(`${API.HOST}/api/category/popular`)
+            const response = await axios.get(`${API.HOST}/api/category/popular?brandSlug=${brandSlug}`)
             console.log('truck', response?.data?.data)
             setPopularTrucks(response?.data?.data)
         } catch (error) {

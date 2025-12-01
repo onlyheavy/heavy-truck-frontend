@@ -60,11 +60,13 @@ const Brochure = () => {
               data={priceData}
               onFilterChange={(val) => fetchData("price_range", val, setPriceData)}
               loading={loading}
+              style={'bg-white'}
             />
             <TruckByGvw
                 data={gvwData || []}
                 onFilterChange={(val) => fetchData("GVW", val, setGvwData)}
                 loading={loading}
+                style={'bg-white'}
             />
             {/* <Faq/> */}
         </LandingPageLayout>

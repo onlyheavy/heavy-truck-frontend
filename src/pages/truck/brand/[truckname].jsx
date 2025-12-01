@@ -10,11 +10,9 @@ import TruckByWheels from "@/components/Home-Landing-page/TruckByWheels";
 import TrucksByEmissionNorm from "@/components/Home-Landing-page/TrucksByEmissionNorm";
 import TruckByMileage from "@/components/Home-Landing-page/TruckByMileage";
 import LandingPageLayout from "@/layouts/LandingPageLayout";
-import Faq  from "@/components/Truck-Landing-Page/FAQ";
+import Faq from "@/components/Truck-Landing-Page/FAQ";
 import { brands } from "@/components/Brand/brand";
 import BrandFaq from "@/components/Brand/brandfaq";
-
-
 
 
 
@@ -41,7 +39,7 @@ export default function BrandPage() {
       try {
         setLoading(true);
         const res = await axios.post(apiUrl, {
-          filter: { [filterKey]: filterValue },
+          filter: { [filterKey]: `${filterValue}+${brand.slug}` },
           sortBy: "rating",
           limit: 6,
         });
@@ -108,27 +106,33 @@ export default function BrandPage() {
           {brand.description}
         </p>
       </div>
-      <PopularTruck />
+      <PopularTruck brandSlug={brand.slug} />
       <TruckByPrice
         data={priceData || []}
         onFilterChange={(val) => fetchData("price_range", val, setPriceData)}
         loading={loading}
+        style={'bg-[#FDF8F4]'}
       />
+
       <TruckByFuel
         data={fuelData || []}
         onFilterChange={(val) => fetchData("fuelType", val, setFuelData)}
         loading={loading}
+        style={'bg-white'}
       />
+
       <TruckByGvw
         data={gvwData || []}
         onFilterChange={(val) => fetchData("GVW", val, setGvwData)}
         loading={loading}
+        style={'bg-[#FDF8F4]'}
       />
 
       <TruckByWheels
         data={wheelData || []}
         onFilterChange={(val) => fetchData("wheel", val, setWheelData)}
         loading={loading}
+        style={'bg-white'}
       />
       <TrucksByEmissionNorm
         data={emissionData || []}
@@ -136,11 +140,13 @@ export default function BrandPage() {
           fetchData("emissionNorm", val, setEmissionData)
         }
         loading={loading}
+        style={'bg-[#FDF8F4]'}
       />
       <TruckByMileage
         data={mileageData || []}
         onFilterChange={(val) => fetchData("mileage", val, setMileageData)}
         loading={loading}
+        style={'bg-white'}
       />
       <BrandFaq />
     </LandingPageLayout>

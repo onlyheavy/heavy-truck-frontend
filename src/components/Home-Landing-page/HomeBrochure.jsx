@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 const HomeBrochure = () => {
   return (
-    <div className='p-3'>
+    <div className='p-3 bg-white'>
       <section className="py-12 bg-[#FFE4D7] max-w-7xl mx-auto rounded-xl ">
         <div className="flex flex-col md:flex-row gap-6 md:gap-10 items-center justify-between px-6 md:px-10 text-center md:text-left">
           {/* Text Section */}

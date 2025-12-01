@@ -57,11 +57,13 @@ const FuelCost = () => {
               data={priceData}
               onFilterChange={(val) => fetchData("price_range", val, setPriceData)}
               loading={loading}
+               style={'bg-white'}
             />
             <TruckByMileage
               data={mileageData}
               onFilterChange={(val) => fetchData("mileage", val, setMileageData)}
               loading={loading}
+              style={'bg-white'}
             />
             {/* <Faq/> */}
         </LandingPageLayout>

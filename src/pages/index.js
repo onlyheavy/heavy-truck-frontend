@@ -131,26 +131,31 @@ export default function Home() {
           data={priceData || []}
           onFilterChange={(val) => fetchData("price_range", val, setPriceData)}
           loading={loading}
+          style={'bg-white'}
         />
         <TruckByFuel
           data={fuelData || []}
           onFilterChange={(val) => fetchData("fuelType", val, setFuelData)}
           loading={loading}
+          style={'bg-[#FDF8F4]'}
         />
         <TruckByGvw
           data={gvwData || []}
           onFilterChange={(val) => fetchData("GVW", val, setGvwData)}
           loading={loading}
+          style={'bg-white'}
         />
         <TruckByPayload
           data={payload || []}
           onFilterChange={(val) => fetchData("payload", val, setPayload)}
           loading={loading}
+          style={'bg-[#FDF8F4]'}
         />
         <TruckByWheels
           data={wheelData || []}
           onFilterChange={(val) => fetchData("wheel", val, setWheelData)}
           loading={loading}
+          style={'bg-white'}
         />
         <TrucksByEmissionNorm
           data={emissionData || []}
@@ -158,11 +163,13 @@ export default function Home() {
             fetchData("emissionNorm", val, setEmissionData)
           }
           loading={loading}
+          style={'bg-[#FDF8F4]'}
         />
         <TruckByMileage
           data={mileageData || []}
           onFilterChange={(val) => fetchData("mileage", val, setMileageData)}
           loading={loading}
+          style={'bg-white'}
         />
         <HomeCompareTruck />
         <LatestNews />

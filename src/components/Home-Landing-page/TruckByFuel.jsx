@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button'
 import { useRouter } from "next/router"
 import Link from 'next/link'
 
-const TruckByFuel = ({ data, onFilterChange, loading }) => {
+const TruckByFuel = ({ data, onFilterChange, loading, style }) => {
     const router = useRouter();
     const options = [
         { id: "Diesel", value: "diesel" },
@@ -23,7 +23,7 @@ const TruckByFuel = ({ data, onFilterChange, loading }) => {
 
     return (
         <div>
-            <section className="pb-10 pt-5 bg-[#FDF8F4]">
+            <section className={`pb-10 pt-5 ${style}`}>
                 <div className="max-w-7xl mx-auto ">
                     <div className="flex items-center justify-center mx-10 my-6">
                         <div className="hidden md:block w-60 border-t border-gray-300"></div>

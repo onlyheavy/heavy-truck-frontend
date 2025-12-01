@@ -74,7 +74,7 @@ const Navbar = () => {
 
           {/* Login Button */}
           <button
-            onClick={() => router.push('/admin/admin-landing')}
+            onClick={() => router.push('https://admin.onlyheavy.com/')}
             className="bg-orange-500 text-white px-6 py-2 cursor-pointer rounded-md font-medium hover:bg-orange-600 transition"
           >
             Login & Sign Up

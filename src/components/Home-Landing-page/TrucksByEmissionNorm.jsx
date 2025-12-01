@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useRouter } from "next/router"
 import Link from 'next/link'
 
-const TrucksByEmissionNorm = ({ data, onFilterChange, loading }) => {
+const TrucksByEmissionNorm = ({ data, onFilterChange, loading, style }) => {
     const router = useRouter();
     const options = [
         { id: "BS III", value: "bs-iii" },
@@ -22,7 +22,7 @@ const TrucksByEmissionNorm = ({ data, onFilterChange, loading }) => {
 
     return (
         <div>
-            <section className="pb-10 pt-3 bg-[#FDF8F4]">
+            <section className={`pb-10 pt-3 ${style}`}>
                 <div className="max-w-7xl mx-auto ">
                     <div className="flex items-center justify-center mx-10 my-6">
                         <div className="hidden md:block w-60 border-t border-gray-300"></div>

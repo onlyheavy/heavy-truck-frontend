@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 
-const TruckByPrice = ({ data, onFilterChange, loading }) => {
+const TruckByPrice = ({ data, onFilterChange, loading, style }) => {
     const router = useRouter()
 
     const options = [
@@ -23,7 +23,7 @@ const TruckByPrice = ({ data, onFilterChange, loading }) => {
     };
 
     return (
-        <section className="py-10 bg-white">
+        <section className={`py-10 ${style}`}>
             <div className="max-w-7xl mx-auto ">
 
                 <div className="flex items-center justify-center mx-10 my-6">
