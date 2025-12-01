@@ -35,11 +35,13 @@ export default function BrandPage() {
 
   // ✅ Wrap in useCallback so it's stable and can safely go in useEffect deps
   const fetchData = useCallback(
-    async (filterKey, filterValue, setter) => {
+    async (filterKey, filterValue, setter,) => {
       try {
         setLoading(true);
+        const filter = `${filterValue}+${brand.slug}`;
+        console.log('filter', filter);
         const res = await axios.post(apiUrl, {
-          filter: { [filterKey]: `${filterValue}+${brand.slug}` },
+          filter: { [filterKey]: filter },
           sortBy: "rating",
           limit: 6,
         });
@@ -60,7 +62,7 @@ export default function BrandPage() {
         setLoading(false);
       }
     },
-    [apiUrl]
+    [apiUrl, brand?.slug]
   );
 
   // ✅ Now include fetchData in deps safely
