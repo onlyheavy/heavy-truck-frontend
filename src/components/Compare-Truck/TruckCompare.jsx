@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import API from "@/utils/api";
@@ -6,15 +6,6 @@ import axios from "axios";
 import Head from "next/head";
 
 const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
-  const [performanceSpecs, setPerformanceSpecs] = useState([]);
-  const [dimensionSpecs, setDimensionSpecs] = useState([]);
-  const [brakesSuspensionSpec, setBrakesSuspensionSpec] = useState([]);
-  const [transmissionLoadSpec, setTransmissionLoadSpec] = useState([]);
-  const [cabinAndBodySpec, setCabinAndBodySpec] = useState([]);
-  const [interiorFeaturesSpec, setInteriorFeaturesSpec] = useState([]);
-  const [tyreSpec, setTyreSpec] = useState([]);
-  const [safetyFeaturesSpec, setSafetyFeaturesSpec] = useState([]);
-  const [othersSpec, setOthersSpec] = useState([]);
   const [selectedBrand, setSelectedBrand] = useState("");
   const [selectedTruck, setSelectedTruck] = useState("");
   const [selectedTruckId, setSelectedTruckId] = useState("");
@@ -77,22 +68,24 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
   ];
   const [availableTrucks, setAvailableTrucks] = useState([]);
 
-  useEffect(() => {
-    if (!truck1Data || !truck2Data) return;
+  // Helper function to format values with fallback to "-"
+  const formatValue = (value, unit = '') => {
+    if (value === null || value === undefined || value === '' || value === 'undefined') {
+      return '-';
+    }
+    return unit ? `${value} ${unit}`.trim() : `${value}`.trim();
+  };
 
-    const t1 = selectedTruckData1 || truck1Data;
-    const t2 = selectedTruckData2 || truck2Data;
-    const truck3 = selectedTruckData;
+  // Get current truck data (with overrides)
+  const t1 = selectedTruckData1 || truck1Data;
+  const t2 = selectedTruckData2 || truck2Data;
+  const truck3 = selectedTruckData;
 
-    // Helper function to format values with fallback to "-"
-    const formatValue = (value, unit = '') => {
-      if (value === null || value === undefined || value === '' || value === 'undefined') {
-        return '-';
-      }
-      return unit ? `${value} ${unit}`.trim() : `${value}`.trim();
-    };
+  // Use useMemo to compute specs synchronously for SSR compatibility
+  const performanceSpecs = useMemo(() => {
+    if (!truck1Data || !truck2Data) return [];
 
-    setPerformanceSpecs([
+    return [
       { label: "Engine Type", truck1: `${t1?.spec?.engine[0]?.engineType} `, truck2: `${t2?.spec?.engine[0]?.engineType} `, truck3: truck3 ? truck3?.spec?.engine[0]?.engineType : null },
       { label: "Engine Cylinders", truck1: t1?.spec?.engine[0]?.engineCylinders, truck2: t2?.spec?.engine[0]?.engineCylinders, truck3: truck3 ? truck3?.spec?.engine[0]?.engineCylinders : null },
       { label: "Engine Displacement", truck1: `${t1?.spec?.engine[0]?.engineDisplacement} cc`, truck2: `${t2?.spec?.engine[0]?.engineDisplacement} cc`, truck3: truck3 ? `${truck3?.spec?.engine[0]?.engineDisplacement} cc` : null },
@@ -108,18 +101,26 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
       { label: "Battery", truck1: `${t1?.spec?.engine[0]?.battery} `, truck2: `${t2?.spec?.engine[0]?.battery} `, truck3: truck3 ? `${truck3?.spec?.engine[0]?.battery} ` : null },
       { label: "Charging Time", truck1: formatValue(t1?.spec?.engine[0]?.chargingTime, 'Hrs'), truck2: formatValue(t2?.spec?.engine[0]?.chargingTime, 'Hrs'), truck3: truck3 ? formatValue(truck3?.spec?.engine[0]?.chargingTime, 'Hrs') : null },
       { label: "Range", truck1: formatValue(t1?.spec?.engine[0]?.range, 'km'), truck2: formatValue(t2?.spec?.engine[0]?.range, 'km'), truck3: truck3 ? formatValue(truck3?.spec?.engine[0]?.range, 'km') : null },
-    ]);
+    ];
+  }, [truck1Data, truck2Data, selectedTruckData, selectedTruckData1, selectedTruckData2, t1, t2, truck3]);
 
-    setDimensionSpecs([
+  const dimensionSpecs = useMemo(() => {
+    if (!truck1Data || !truck2Data) return [];
+
+    return [
       { label: "Over All Length", truck1: `${t1?.spec?.dimensions[0]?.overallLength} mm `, truck2: `${t2?.spec?.dimensions[0]?.overallLength} mm`, truck3: truck3 ? `${truck3?.spec?.dimensions[0]?.overallLength} mm` : "-" },
       { label: "Over All Width", truck1: `${t1?.spec?.dimensions[0]?.overallWidthh} mm`, truck2: `${t2?.spec?.dimensions[0]?.overallWidthh} mm`, truck3: truck3 ? `${truck3?.spec?.dimensions[0]?.overallWidthh} mm` : "-" },
       { label: "Over All Height", truck1: `${t1?.spec?.dimensions[0]?.overallHeight} mm`, truck2: `${t2?.spec?.dimensions[0]?.overallHeight} mm`, truck3: truck3 ? `${truck3?.spec?.dimensions[0]?.overallHeight} mm` : "-" },
       { label: "Wheelbase", truck1: `${t1?.spec?.dimensions[0]?.wheelBase} mm`, truck2: `${t2?.spec?.dimensions[0]?.wheelBase} mm`, truck3: truck3 ? `${truck3?.spec?.dimensions[0]?.wheelBase} mm` : "-" },
       { label: "Ground Clearance", truck1: `${t1?.spec?.dimensions[0]?.groundClearance} mm`, truck2: `${t2?.spec?.dimensions[0]?.groundClearance} mm`, truck3: truck3 ? `${truck3?.spec?.dimensions[0]?.groundClearance} mm` : "-" },
       { label: "Minimum Turning Radius", truck1: `${t1?.spec?.dimensions[0]?.turningRadius} m`, truck2: `${t2?.spec?.dimensions[0]?.turningRadius} m`, truck3: truck3 ? `${truck3?.spec?.dimensions[0]?.turningRadius} m` : "-" },
-    ]);
+    ];
+  }, [truck1Data, truck2Data, selectedTruckData, selectedTruckData1, selectedTruckData2, t1, t2, truck3]);
 
-    setBrakesSuspensionSpec([
+  const brakesSuspensionSpec = useMemo(() => {
+    if (!truck1Data || !truck2Data) return [];
+
+    return [
       { label: "Front Suspension", truck1: `${t1?.spec?.brakesAndSuspension[0]?.frontSuspension} `, truck2: `${t2?.spec?.brakesAndSuspension[0]?.frontSuspension} `, truck3: truck3 ? `${truck3?.spec?.brakesAndSuspension[0]?.frontSuspension} ` : "-" },
       { label: "Rear Suspension", truck1: `${t1?.spec?.brakesAndSuspension[0]?.rearSuspension} `, truck2: `${t2?.spec?.brakesAndSuspension[0]?.rearSuspension} `, truck3: truck3 ? `${truck3?.spec?.brakesAndSuspension[0]?.rearSuspension} ` : "-" },
       { label: "Brakes Type", truck1: `${t1?.spec?.brakesAndSuspension[0]?.brakeType} `, truck2: `${t2?.spec?.brakesAndSuspension[0]?.brakeType} `, truck3: truck3 ? `${truck3?.spec?.brakesAndSuspension[0]?.brakeType} ` : "-" },
@@ -128,9 +129,13 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
       {
         label: "Anti Roll Bar", truck1: t1?.spec?.brakesAndSuspension[0]?.antiRollBar === 'true' ? 'Yes' : 'No', truck2: t2?.spec?.brakesAndSuspension[0]?.antiRollBar === 'true' ? 'Yes' : 'No', truck3: truck3 ? truck3?.spec?.brakesAndSuspension[0]?.antiRollBar === 'true' ? 'Yes' : 'No' : "-"
       },
-    ]);
+    ];
+  }, [truck1Data, truck2Data, selectedTruckData, selectedTruckData1, selectedTruckData2, t1, t2, truck3]);
 
-    setTransmissionLoadSpec([
+  const transmissionLoadSpec = useMemo(() => {
+    if (!truck1Data || !truck2Data) return [];
+
+    return [
       { label: "Gear box", truck1: `${t1?.spec?.transmissionLoad[0]?.gearBox}  `, truck2: `${t2?.spec?.transmissionLoad[0]?.gearBox} `, truck3: truck3 ? `${truck3?.spec?.transmissionLoad[0]?.gearBox} ` : "-" },
       { label: "Transmission Type", truck1: `${t1?.spec?.transmissionLoad[0]?.transmissionType} `, truck2: `${t2?.spec?.transmissionLoad[0]?.transmissionType} `, truck3: truck3 ? `${truck3?.spec?.transmissionLoad[0]?.transmissionType} ` : "-" },
       { label: "Axle Configuration", truck1: `${t1?.spec?.transmissionLoad[0]?.axleConfiguration} `, truck2: `${t2?.spec?.transmissionLoad[0]?.axleConfiguration} `, truck3: truck3 ? `${truck3?.spec?.transmissionLoad[0]?.axleConfiguration} ` : "-" },
@@ -138,18 +143,26 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
       { label: "Gross Vehicle Weight", truck1: `${t1?.spec?.transmissionLoad[0]?.GrossVehicleWeight} kg `, truck2: `${t2?.spec?.transmissionLoad[0]?.GrossVehicleWeight} kg `, truck3: truck3 ? `${truck3?.spec?.transmissionLoad[0]?.GrossVehicleWeight} kg ` : "-" },
       { label: "Kerb Weight", truck1: `${t1?.spec?.transmissionLoad[0]?.kerbWeight} kg `, truck2: `${t2?.spec?.transmissionLoad[0]?.kerbWeight} kg `, truck3: truck3 ? `${truck3?.spec?.transmissionLoad[0]?.kerbWeight} kg ` : "-" },
       { label: "Payload", truck1: `${t1?.spec?.transmissionLoad[0]?.payload} kg `, truck2: `${t2?.spec?.transmissionLoad[0]?.payload} kg `, truck3: truck3 ? `${truck3?.spec?.transmissionLoad[0]?.payload} kg ` : "-" },
-    ]);
+    ];
+  }, [truck1Data, truck2Data, selectedTruckData, selectedTruckData1, selectedTruckData2, t1, t2, truck3]);
 
-    setCabinAndBodySpec([
+  const cabinAndBodySpec = useMemo(() => {
+    if (!truck1Data || !truck2Data) return [];
+
+    return [
       { label: "Chassis Type", truck1: `${t1?.spec?.cabinAndBody[0]?.chassisType || "-"}`, truck2: `${t2?.spec?.cabinAndBody[0]?.chassisType || "-"}`, truck3: truck3 ? `${truck3?.spec?.cabinAndBody[0]?.chassisType || "-"}` : "-" },
       { label: "Cabin Type", truck1: `${t1?.spec?.cabinAndBody[0]?.cabinType || "-"}`, truck2: `${t2?.spec?.cabinAndBody[0]?.cabinType || "-"}`, truck3: truck3 ? `${truck3?.spec?.cabinAndBody[0]?.cabinType || "-"}` : "-" },
       { label: "Tiltable Cabin", truck1: t1?.spec?.cabinAndBody[0]?.tiltableCabin === 'true' ? 'Yes' : 'No', truck2: t2?.spec?.cabinAndBody[0]?.tiltableCabin === 'true' ? 'Yes' : 'No', truck3: truck3 ? truck3?.spec?.cabinAndBody[0]?.tiltableCabin === 'true' ? 'Yes' : 'No' : "-" },
       { label: "Body Option", truck1: `${t1?.spec?.cabinAndBody[0]?.bodyOption || "-"}`, truck2: `${t2?.spec?.cabinAndBody[0]?.bodyOption || "-"}`, truck3: truck3 ? `${truck3?.spec?.cabinAndBody[0]?.bodyOption || "-"}` : "-" },
       { label: "Application Type", truck1: `${t1?.spec?.cabinAndBody[0]?.applicationType || "-"}`, truck2: `${t2?.spec?.cabinAndBody[0]?.applicationType || "-"}`, truck3: truck3 ? `${truck3?.spec?.cabinAndBody[0]?.applicationType || "-"}` : "-" },
       { label: "Seating Capacity", truck1: `${t1?.spec?.cabinAndBody[0]?.seatingCapacity || "-"}`, truck2: `${t2?.spec?.cabinAndBody[0]?.seatingCapacity || "-"}`, truck3: truck3 ? `${truck3?.spec?.cabinAndBody[0]?.seatingCapacity || "-"}` : "-" }
-    ]);
+    ];
+  }, [truck1Data, truck2Data, selectedTruckData, selectedTruckData1, selectedTruckData2, t1, t2, truck3]);
 
-    setInteriorFeaturesSpec([
+  const interiorFeaturesSpec = useMemo(() => {
+    if (!truck1Data || !truck2Data) return [];
+
+    return [
       { label: "AC", truck1: t1?.spec?.interiorFeatures[0]?.ac ? 'Yes' : 'No', truck2: t2?.spec?.interiorFeatures[0]?.ac ? 'Yes' : 'No', truck3: truck3 ? truck3?.spec?.interiorFeatures[0]?.ac ? 'Yes' : 'No' : "-" },
       { label: "Adjustable Driver Seat", truck1: t1?.spec?.interiorFeatures[0]?.adjustableDriverSeat ? 'Yes' : 'No', truck2: t2?.spec?.interiorFeatures[0]?.adjustableDriverSeat ? 'Yes' : 'No', truck3: truck3 ? truck3?.spec?.interiorFeatures[0]?.adjustableDriverSeat ? 'Yes' : 'No' : "-" },
       { label: "Seat Types", truck1: `${t1?.spec?.interiorFeatures[0]?.seatTypes} `, truck2: `${t2?.spec?.interiorFeatures[0]?.seatTypes} `, truck3: truck3 ? `${truck3?.spec?.interiorFeatures[0]?.seatTypes} ` : "-" },
@@ -166,29 +179,41 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
       { label: "Steering Type", truck1: `${t1?.spec?.interiorFeatures[0]?.steeringType} `, truck2: `${t2?.spec?.interiorFeatures[0]?.steeringType} `, truck3: truck3 ? `${truck3?.spec?.interiorFeatures[0]?.steeringType} ` : "-" },
       { label: "Entertainment Pack", truck1: t1?.spec?.interiorFeatures[0]?.entertainPack ? 'Yes' : 'No', truck2: t2?.spec?.interiorFeatures[0]?.entertainPack ? 'Yes' : 'No', truck3: truck3 ? truck3?.spec?.interiorFeatures[0]?.entertainPack ? 'Yes' : 'No' : "-" },
       { label: "Emergency Start", truck1: t1?.spec?.interiorFeatures[0]?.emergencyStart ? 'Yes' : 'No', truck2: t2?.spec?.interiorFeatures[0]?.emergencyStart ? 'Yes' : 'No', truck3: truck3 ? truck3?.spec?.interiorFeatures[0]?.emergencyStart ? 'Yes' : 'No' : "-" }
-    ]);
+    ];
+  }, [truck1Data, truck2Data, selectedTruckData, selectedTruckData1, selectedTruckData2, t1, t2, truck3]);
 
-    setTyreSpec([
+  const tyreSpec = useMemo(() => {
+    if (!truck1Data || !truck2Data) return [];
+
+    return [
       { label: "Front Tyre", truck1: `${t1?.spec?.tyre[0]?.frontTyre}  `, truck2: `${t2?.spec?.tyre[0]?.frontTyre} `, truck3: truck3 ? `${truck3?.spec?.tyre[0]?.frontTyre} ` : "-" },
       { label: "Rear Tyre", truck1: `${t1?.spec?.tyre[0]?.rearTyre} `, truck2: `${t2?.spec?.tyre[0]?.rearTyre} `, truck3: truck3 ? `${truck3?.spec?.tyre[0]?.rearTyre} ` : "-" },
       { label: "Number of Tyres", truck1: `${t1?.spec?.tyre[0]?.numberOfTyres} `, truck2: `${t2?.spec?.tyre[0]?.numberOfTyres} `, truck3: truck3 ? `${truck3?.spec?.tyre[0]?.numberOfTyres} ` : "-" },
       { label: "Tubeless Tyre", truck1: t1?.spec?.tyre[0]?.tubelessTyres ? 'Yes' : 'No', truck2: t2?.spec?.tyre[0]?.tubelessTyres ? 'Yes' : 'No', truck3: truck3 ? truck3?.spec?.tyre[0]?.tubelessTyres ? 'Yes' : 'No' : "-" }
-    ]);
+    ];
+  }, [truck1Data, truck2Data, selectedTruckData, selectedTruckData1, selectedTruckData2, t1, t2, truck3]);
 
-    setSafetyFeaturesSpec([
+  const safetyFeaturesSpec = useMemo(() => {
+    if (!truck1Data || !truck2Data) return [];
+
+    return [
       { label: "Fog Light", truck1: t1?.spec?.safety[0]?.fogLights ? 'Yes' : 'No', truck2: t2?.spec?.safety[0]?.fogLights ? 'Yes' : 'No', truck3: truck3 ? truck3?.spec?.safety[0]?.fogLights ? 'Yes' : 'No' : "-" },
       { label: "Emergency Exit", truck1: t1?.spec?.safety[0]?.emergencyExit ? 'Yes' : 'No', truck2: t2?.spec?.safety[0]?.emergencyExit ? 'Yes' : 'No', truck3: truck3 ? truck3?.spec?.safety[0]?.emergencyExit ? 'Yes' : 'No' : "-" },
       { label: "Side Window", truck1: t1?.spec?.safety[0]?.sideWindow ? 'Yes' : 'No', truck2: t2?.spec?.safety[0]?.sideWindow ? 'Yes' : 'No', truck3: truck3 ? truck3?.spec?.safety[0]?.sideWindow ? 'Yes' : 'No' : "-" },
       { label: "Luggage Boot", truck1: t1?.spec?.safety[0]?.luggageBoot ? 'Yes' : 'No', truck2: t2?.spec?.safety[0]?.luggageBoot ? 'Yes' : 'No', truck3: truck3 ? truck3?.spec?.safety[0]?.luggageBoot ? 'Yes' : 'No' : "-" },
       { label: "Hat Rack", truck1: t1?.spec?.safety[0]?.hornack ? 'Yes' : 'No', truck2: t2?.spec?.safety[0]?.hornack ? 'Yes' : 'No', truck3: truck3 ? truck3?.spec?.safety[0]?.hornack ? 'Yes' : 'No' : "-" },
       { label: "First Aid Kit", truck1: t1?.spec?.safety[0]?.firstAidKit ? 'Yes' : 'No', truck2: t2?.spec?.safety[0]?.firstAidKit ? 'Yes' : 'No', truck3: truck3 ? truck3?.spec?.safety[0]?.firstAidKit ? 'Yes' : 'No' : "-" }
-    ]);
+    ];
+  }, [truck1Data, truck2Data, selectedTruckData, selectedTruckData1, selectedTruckData2, t1, t2, truck3]);
 
-    setOthersSpec([
+  const othersSpec = useMemo(() => {
+    if (!truck1Data || !truck2Data) return [];
+
+    return [
       { label: "Accessories", truck1: t1?.spec?.others[0]?.accessories ? 'Yes' : 'No', truck2: t2?.spec?.others[0]?.accessories ? 'Yes' : 'No', truck3: truck3 ? truck3?.spec?.others[0]?.accessories ? 'Yes' : 'No' : "-" },
       { label: "Warranty", truck1: t1?.spec?.others[0]?.warranty ? 'Yes' : 'No', truck2: t2?.spec?.others[0]?.warranty ? 'Yes' : 'No', truck3: truck3 ? truck3?.spec?.others[0]?.warranty ? 'Yes' : 'No' : "-" },
-    ]);
-  }, [truck1Data, truck2Data, selectedTruckData, selectedTruckData1, selectedTruckData2]);
+    ];
+  }, [truck1Data, truck2Data, selectedTruckData, selectedTruckData1, selectedTruckData2, t1, t2, truck3]);
 
   useEffect(() => {
     const fetchTrucksByBrand = async () => {

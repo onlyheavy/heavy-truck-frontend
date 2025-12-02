@@ -20,7 +20,7 @@ import LatestNews from "@/components/Home-Landing-page/LatestNews";
 import TruckByPayload from "@/components/Home-Landing-page/TruckByPayload";
 import Head from "next/head";
 
-export default function Home() {
+export default function Home({ compareTruckData = [] }) {
   const [priceData, setPriceData] = useState([]);
   const [fuelData, setFuelData] = useState([]);
   const [gvwData, setGvwData] = useState([]);
@@ -171,11 +171,36 @@ export default function Home() {
           loading={loading}
           style={'bg-white'}
         />
-        <HomeCompareTruck />
+        <HomeCompareTruck compareTruck={compareTruckData} />
         <LatestNews />
       </LandingPageLayout>
     </div>
     </>
 
   );
+}
+
+export async function getServerSideProps() {
+  try {
+    const response = await axios.get(`${API.HOST}/api/compare/mostPopularCompare`);
+    if (response?.data?.success) {
+      return {
+        props: {
+          compareTruckData: response.data.data || []
+        }
+      };
+    }
+    return {
+      props: {
+        compareTruckData: []
+      }
+    };
+  } catch (error) {
+    console.error('Error fetching compare truck data:', error);
+    return {
+      props: {
+        compareTruckData: []
+      }
+    };
+  }
 }

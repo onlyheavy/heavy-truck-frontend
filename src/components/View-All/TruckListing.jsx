@@ -122,7 +122,7 @@ const getFilterLabel = (value) => {
     return value;
 };
 
-export default function TruckListing() {
+export default function TruckListing({ compareTruckData = [] }) {
     const router = useRouter();
     const { slug } = router.query;
 
@@ -309,7 +309,7 @@ export default function TruckListing() {
                 </div>
             </div>
             <PopularTruck />
-            <HomeCompareTruck />
+            <HomeCompareTruck compareTruck={compareTruckData} />
             {/* <Faq /> */}
         </section>
     );
