@@ -1,30 +1,10 @@
 import { Button } from '@/components/ui/button'
-import API from '@/utils/api'
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 
 const S3_BASE = `${process.env.NEXT_PUBLIC_S3_URL}`
 
-const HomeCompareTruck = () => {
-    const [compareTruck, setCompareTruck] = useState([])
-    const router = useRouter()
-
-    const getCompareTruckDetails = async () => {
-        try {
-            const response = await axios.get(`${API.HOST}/api/compare/mostPopularCompare`)
-            if (response?.data?.success) {
-                setCompareTruck(response?.data?.data || [])
-            }
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    useEffect(() => {
-        getCompareTruckDetails()
-    }, [])
+const HomeCompareTruck = ({ compareTruck = [] }) => {
 
     return (
         <div>
