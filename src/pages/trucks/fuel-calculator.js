@@ -1,12 +1,12 @@
-import Banner from '@/components/trucks/fuel-cost/banner'
+import Banner from '@/components/fuel-cost/banner'
 import TruckByMileage from '@/components/Trucks-Home-Landing-page/TruckByMileage'
 import TruckByPrice from '@/components/Trucks-Home-Landing-page/TruckByPrice'
-import Faq from '@/components/trucks/fuel-cost/faq'
+// import Faq from '@/components/trucks/fuel-cost/faq'
 import LandingPageLayout from '@/layouts/LandingPageLayout'
 import API from '@/utils/api'
 import axios from 'axios'
 import React, { useCallback, useEffect, useState } from 'react'
-import FuelCalculate from '@/components/trucks/fuel-cost/fuelCalculate'
+import FuelCalculate from '@/components/fuel-cost/fuelCalculate'
 
 const FuelCost = () => {
     const [priceData, setPriceData] = useState([]);
