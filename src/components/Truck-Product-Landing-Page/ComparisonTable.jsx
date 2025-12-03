@@ -29,7 +29,7 @@ const ComparisonSection = ({ vehicles }) => {
     const slug1 = slugify(vehicles[0]?.name);
     const slug2 = slugify(vehicles[1]?.name);
 
-    router.push(`/compare/${slug1}-vs-${slug2}`);
+    router.push(`/compare/trucks/${slug1}-vs-${slug2}`);
   };
 
   return (

@@ -1,12 +1,12 @@
 import Banner from '@/components/brochure/banner'
-import TruckByPrice from '@/components/Home-Landing-page/TruckByPrice'
+import TruckByPrice from '@/components/Trucks-Home-Landing-page/TruckByPrice'
 import Faq from '@/components/brochure/faq'
 import LandingPageLayout from '@/layouts/LandingPageLayout'
 import API from '@/utils/api'
 import axios from 'axios'
 import React, { useCallback, useEffect, useState } from 'react'
 
-import TruckByGvw from '@/components/Home-Landing-page/TruckByGvw'
+import TruckByGvw from '@/components/Trucks-Home-Landing-page/TruckByGvw'
 import Card from '@/components/brochure/card'
 import BrochureData from '@/components/brochure/brochureData'
 

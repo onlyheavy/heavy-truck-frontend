@@ -213,7 +213,12 @@ export const brands = [
     image: "/trucks/man.jpg",
     description:
       "MAN is a global commercial vehicle manufacturer known for advanced engineering. Its trucks deliver powerful performance for long-haul and heavy-duty operations. The brand emphasizes safety, technology and efficiency. MAN trucks support logistics, mining and industrial transport. The company remains a strong player in the premium truck segment.",
-    faq: []
+    faq: [
+      { question: "What types of trucks does MAN offer?", answer: "MAN offers long-haul trucks, construction vehicles and heavy-duty commercial trucks." },
+      { question: "Are MAN trucks suitable for long routes?", answer: "Yes, MAN trucks are designed for long-haul efficiency and driver comfort." },
+      { question: "Is MAN service available in India?", answer: "Authorized service centers are available in major regions across India." },
+      { question: "What is MAN known for?", answer: "MAN is known for advanced engineering, safety and powerful performance." },
+    ]
   },
   {
     title: "Maruti Suzuki",
@@ -221,7 +226,13 @@ export const brands = [
     image: "/trucks/maruti-suzuki.jpg",
     description:
       "Maruti Suzuki offers lightweight commercial vehicles aimed at small businesses and last-mile delivery. Its models focus on high mileage and low maintenance. The brand is trusted for reliability and service network support. Maruti’s commercial lineup is popular among urban and semi-urban businesses. It continues expanding into compact and efficient cargo solutions.",
-    faq: []
+    faq: [
+    { question: "What commercial vehicles does Maruti Suzuki offer?", answer: "Maruti offers lightweight commercial vehicles ideal for small businesses and delivery." },
+    { question: "Are Maruti commercial vehicles fuel efficient?", answer: "Yes, Maruti vehicles are known for excellent mileage." },
+    { question: "Is service support easily available?", answer: "Maruti has one of India’s largest service networks." },
+    { question: "Are Maruti vehicles reliable?", answer: "Maruti Suzuki is known for durability and low maintenance." },
+    
+  ]
   },
   {
     title: "Montra Electric",
@@ -229,7 +240,13 @@ export const brands = [
     image: "/trucks/montra-electric.jpg",
     description:
       "Montra Electric produces modern electric commercial vehicles suitable for urban mobility. Its lineup focuses on sustainability and high operating efficiency. Montra EVs are built for delivery, cargo and passenger transport. The brand emphasizes technology-driven solutions and innovative design. It is a growing player in India's EV commercial sector.",
-    faq: []
+   
+  faq: [
+      { question: "What does Montra Electric manufacture?", answer: "Montra produces electric cargo, delivery and passenger transport EVs." },
+      { question: "Are Montra EVs good for city transport?", answer: "Yes, they are designed for urban mobility and last-mile delivery." },
+      { question: "Are Montra EVs cost efficient?", answer: "Their low charging cost makes them highly economical." },
+      { question: "Do Montra vehicles support fast charging?", answer: "Some models offer fast-charging options." },
+    ]
   },
   {
     title: "Omega Seiki Mobility",
@@ -237,7 +254,12 @@ export const brands = [
     image: "/trucks/omega.jpg",
     description:
       "Omega Seiki Mobility specializes in electric cargo vehicles for last-mile logistics. The brand is known for durable EVs with high payload capacity. OSM vehicles are popular among e-commerce and delivery fleets. The company focuses on efficiency, sustainability and low operating cost. Omega continues expanding its EV lineup across India.",
-    faq: []
+    faq: [
+      { question: "What is OSM known for?", answer: "Omega Seiki Mobility is known for electric cargo vehicles used in last-mile logistics." },
+      { question: "Are OSM vehicles durable?", answer: "Yes, they are built for heavy commercial usage." },
+      { question: "Do logistics companies use OSM?", answer: "Yes, many e-commerce and delivery fleets use OSM EVs." },
+      { question: "Is the running cost low?", answer: "Electric operation makes OSM vehicles very cost effective." },
+    ]
   },
   {
     title: "Premier Motors",
@@ -245,7 +267,12 @@ export const brands = [
     image: "/trucks/premier.jpg",
     description:
       "Premier Motors has a legacy of manufacturing reliable commercial and utility vehicles. The brand offers practical and affordable solutions for small businesses. Its products support cargo, rural transport and industrial applications. Premier focuses on robust construction and long-term durability. It remains a recognized name in the Indian automotive space.",
-    faq: []
+        faq: [
+      { question: "What vehicles does Premier Motors produce?", answer: "Premier manufactures affordable commercial and utility vehicles." },
+      { question: "Are they suitable for rural use?", answer: "Yes, Premier vehicles are widely used in rural transport and cargo movement." },
+      { question: "Is maintenance easy?", answer: "Premier vehicles are simple to maintain and cost effective." },
+      { question: "Are Premier vehicles durable?", answer: "Yes, they are known for sturdy construction." },
+    ]
   },
   {
     title: "Propal",
@@ -253,7 +280,13 @@ export const brands = [
     image: "/trucks/propel.jpg",
     description:
       "Propal develops innovative commercial vehicles tailored for cargo and transport needs. The brand focuses on durability and efficient performance. Its vehicles are suitable for small and medium businesses. Propal aims to deliver cost-effective transportation options. The company is gradually expanding its presence in India.",
-    faq: []
+    faq: [
+      { question: "What does Propal manufacture?", answer: "Propal makes durable commercial vehicles designed for transport and cargo." },
+      { question: "Are Propal vehicles affordable?", answer: "Yes, the brand focuses on budget-friendly commercial solutions." },
+      { question: "Who uses Propal vehicles?", answer: "Small and medium businesses commonly use Propal vehicles." },
+      { question: "Are they reliable?", answer: "Propal vehicles are built for everyday reliable performance." },
+    
+    ]
   },
   {
     title: "SANY",
@@ -261,7 +294,12 @@ export const brands = [
     image: "/trucks/sany.jpg",
     description:
       "SANY is a global leader in heavy machinery and construction vehicles. The brand offers high-performance equipment for mining, construction and infrastructure projects. Its trucks and machinery are known for power and reliability. SANY focuses on innovation and advanced engineering. It continues to grow rapidly in India's heavy equipment market.",
-    faq: []
+    faq: [
+      { question: "What products does SANY offer?", answer: "SANY offers heavy machinery, construction vehicles and mining equipment." },
+      { question: "Is SANY used for mining?", answer: "Yes, SANY is widely used in mining and large construction projects." },
+      { question: "Are SANY trucks durable?", answer: "Yes, SANY is known for rugged, powerful heavy-duty vehicles." },
+      { question: "Does SANY operate in India?", answer: "Yes, it has a strong and growing presence in India." },
+    ]
   },
   {
     title: "Scania",
@@ -269,7 +307,12 @@ export const brands = [
     image: "/trucks/scania.jpg",
     description:
       "Scania is a premium commercial vehicle manufacturer known for high-performance trucks. Its products focus on power, fuel efficiency and longevity. Scania trucks support heavy-duty, long-haul and specialized transport operations. The brand offers advanced safety and telematics features. It remains a strong name in global commercial trucking.",
-    faq: []
+    faq: [
+      { question: "What is Scania known for?", answer: "Scania is known for premium heavy-duty and long-haul trucks." },
+      { question: "Are Scania trucks fuel efficient?", answer: "Yes, Scania engines are designed for high efficiency." },
+      { question: "Are Scania trucks good for heavy-duty work?", answer: "Yes, they excel in mining, construction and long-haul operations." },
+      { question: "Do they include safety features?", answer: "Scania trucks come with advanced safety and telematics systems." },
+    ]
   },
   {
     title: "SML ISUZU",
@@ -277,7 +320,13 @@ export const brands = [
     image: "/trucks/sml-isuzu.jpg",
     description:
       "SML ISUZU manufactures light and medium commercial vehicles for cargo and passenger transport. The brand focuses on durability and low operating cost. Its vehicles are used in urban, rural and industrial applications. SML ISUZU is known for strong build quality and stable performance. It remains a trusted name in the Indian commercial vehicle market.",
-    faq: []
+    faq: [
+    { question: "What does SML ISUZU manufacture?", answer: "SML ISUZU makes light and medium-duty trucks and passenger vehicles." },
+    { question: "Are the vehicles fuel efficient?", answer: "Yes, they offer good mileage and consistent performance." },
+    { question: "Are they suitable for city use?", answer: "Yes, they are popular in urban and rural commercial segments." },
+    { question: "Is maintenance affordable?", answer: "SML ISUZU vehicles are known for low running and maintenance costs." },
+    { question: "Do they also make buses?", answer: "Yes, they produce school buses, staff buses and passenger carriers." }
+  ]
   },
   {
     title: "Switch Mobility",
@@ -285,7 +334,13 @@ export const brands = [
     image: "/trucks/switch-mobility-1.jpg",
     description:
       "Switch Mobility is an electric vehicle company creating advanced electric buses and commercial EVs. The brand is focused on sustainability and zero-emission transport. Its vehicles offer smart technology and efficient performance. Switch serves public transport and commercial fleet operators. The company is expanding its EV footprint globally.",
-    faq: []
+    faq: [
+    { question: "What vehicles does Switch Mobility produce?", answer: "Switch manufactures electric buses and commercial EVs." },
+    { question: "Are Switch vehicles eco-friendly?", answer: "Yes, they focus on zero-emission mobility solutions." },
+    { question: "Who uses Switch EVs?", answer: "Public transport operators and commercial fleet owners." },
+    { question: "Are Switch EVs efficient?", answer: "Switch vehicles deliver high efficiency with low running costs." },
+   
+  ]
   },
   {
     title: "Tata Motors",
@@ -293,7 +348,12 @@ export const brands = [
     image: "/trucks/tata.svg",
     description:
       "Tata Motors is India's leading commercial vehicle manufacturer with a vast portfolio of trucks. Its lineup includes SCVs, LCVs, ICVs and M&HCVs across multiple applications. Tata trucks are known for reliability, strong engines and wide fuel options including diesel, CNG and EV. Popular series include ACE, Yodha, Intra, Prima and Ultra. Tata continues innovating with electric trucks like the Tata Ace EV.",
-    faq: []
+    faq: [
+    { question: "What types of trucks does Tata offer?", answer: "Tata offers SCVs, LCVs, ICVs, M&HCVs and electric trucks." },
+    { question: "Are Tata trucks reliable?", answer: "Yes, Tata trucks are known for strong engines and durability." },
+    { question: "Do they offer EV trucks?", answer: "Yes, Tata Ace EV and more EVs are part of their lineup." },
+    { question: "Where are Tata trucks used?", answer: "They are used in logistics, mining, construction and delivery operations." },
+  ]
   },
   {
     title: "Toyota",
@@ -301,7 +361,12 @@ export const brands = [
     image: "/trucks/toyota.jpg",
     description:
       "Toyota manufactures dependable pickups and commercial vehicles used globally. The brand is known for reliability, durability and low maintenance. Toyota commercial models support industrial, utility and cargo applications. Its vehicles offer strong performance with advanced safety features. Toyota remains a trusted global name in commercial mobility.",
-    faq: []
+    faq: [
+    { question: "Which commercial vehicles does Toyota offer?", answer: "Toyota offers pickups and utility vehicles used for cargo and industrial work." },
+    { question: "Are Toyota vehicles reliable?", answer: "Toyota is globally known for durability and long life." },
+    { question: "Is maintenance costly?", answer: "Toyota vehicles offer low maintenance compared to competitors." },
+    { question: "Are Toyota pickups durable?", answer: "Yes, they are widely used in tough industrial environments." },
+  ]
   },
   {
     title: "Triton EV",
@@ -309,7 +374,12 @@ export const brands = [
     image: "/trucks/triton-ev.jpg",
     description:
       "Triton EV manufactures electric commercial vehicles with high battery capacity and strong performance. The brand focuses on clean mobility and modern design. Triton EVs are engineered for long-range operations and heavy-duty use. The company aims to offer sustainable alternatives to diesel trucks. It continues building a strong presence in the EV segment.",
-    faq: []
+    faq: [
+    { question: "What vehicles does Triton EV make?", answer: "Triton EV manufactures electric commercial trucks with high battery capacity." },
+    { question: "Are Triton EVs long-range?", answer: "Yes, they are designed for long-distance and heavy-duty usage." },
+    { question: "Is Triton good for fleets?", answer: "Yes, Triton EVs are suitable for logistics and commercial fleets." },
+    { question: "Are Triton vehicles eco-friendly?", answer: "Yes, they are fully electric and zero-emission." },
+  ],
   },
   {
     title: "Volvo",
@@ -317,6 +387,24 @@ export const brands = [
     image: "/trucks/volvo.jpg",
     description:
       "Volvo Trucks is a global manufacturer of premium heavy-duty commercial vehicles. Its trucks are known for advanced technology, comfort and high safety standards. Volvo supports long-haul, mining and construction industries. The brand emphasizes fuel efficiency and driver comfort. It is recognized worldwide for engineering excellence.",
-    faq: []
+    faq: [
+    { question: "What is Volvo known for?", answer: "Volvo is a global leader in premium heavy-duty trucks." },
+    { question: "Are Volvo trucks fuel efficient?", answer: "Yes, Volvo trucks offer excellent fuel efficiency." },
+    { question: "Are Volvo trucks safe?", answer: "Volvo provides world-class safety and driver assistance systems." },
+    { question: "Where are Volvo trucks used?", answer: "They are used in long-haul, mining and construction industries." },
+  ]
+  },
+  {
+  title: "Olectra",
+  slug: "olectra",
+  image: "/trucks/olectra.jpg",
+  description: "Olectra Greentech is a leading Indian manufacturer of electric commercial vehicles, primarily known for its electric buses and emerging electric truck technology. The brand focuses on zero-emission transportation, advanced battery systems, and sustainable mobility solutions. Olectra is recognized for innovation in the EV segment and partnerships to develop next-generation electric commercial vehicles.",
+  faq: [
+    { question: "What is Olectra known for?", answer: "Olectra is known for electric buses and developing electric truck technology." },
+    { question: "Are Olectra vehicles fully electric?", answer: "Yes, Olectra manufactures only electric commercial vehicles." },
+    { question: "Who uses Olectra buses?", answer: "Government transport corporations and EV fleet operators." },
+    { question: "What technology does Olectra use?", answer: "Advanced battery systems and zero-emission EV platforms." },
+
+  ]
   }
 ];

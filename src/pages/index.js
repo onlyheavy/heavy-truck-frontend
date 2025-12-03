@@ -1,23 +1,23 @@
 import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 
-import HomeSearchBar from "@/components/Home-Landing-page/HomeSearchBar";
-import GetInTouch from "@/components/Home-Landing-page/GetInTouch";
-import Services from "@/components/Home-Landing-page/Services";
-import TruckBrands from "@/components/Home-Landing-page/TruckBrands";
-import PopularTruck from "@/components/Home-Landing-page/PopularTruck";
-import HomeBrochure from "@/components/Home-Landing-page/HomeBrochure";
-import TruckByPrice from "@/components/Home-Landing-page/TruckByPrice";
-import TruckByFuel from "@/components/Home-Landing-page/TruckByFuel";
-import TruckByGvw from "@/components/Home-Landing-page/TruckByGvw";
-import TruckByWheels from "@/components/Home-Landing-page/TruckByWheels";
-import TruckByMileage from "@/components/Home-Landing-page/TruckByMileage";
-import TrucksByEmissionNorm from "@/components/Home-Landing-page/TrucksByEmissionNorm";
-import HomeCompareTruck from "@/components/Home-Landing-page/HomeCompareTruck";
+import HomeSearchBar from "@/components/Trucks-Home-Landing-page/HomeSearchBar";
+import GetInTouch from "@/components/Trucks-Home-Landing-page/GetInTouch";
+import Services from "@/components/Trucks-Home-Landing-page/Services";
+import TruckBrands from "@/components/Trucks-Home-Landing-page/TruckBrands";
+import PopularTruck from "@/components/Trucks-Home-Landing-page/PopularTruck";
+import HomeBrochure from "@/components/Trucks-Home-Landing-page/HomeBrochure";
+import TruckByPrice from "@/components/Trucks-Home-Landing-page/TruckByPrice";
+import TruckByFuel from "@/components/Trucks-Home-Landing-page/TruckByFuel";
+import TruckByGvw from "@/components/Trucks-Home-Landing-page/TruckByGvw";
+import TruckByWheels from "@/components/Trucks-Home-Landing-page/TruckByWheels";
+import TruckByMileage from "@/components/Trucks-Home-Landing-page/TruckByMileage";
+import TrucksByEmissionNorm from "@/components/Trucks-Home-Landing-page/TrucksByEmissionNorm";
+import HomeCompareTruck from "@/components/Trucks-Home-Landing-page/HomeCompareTruck";
 import LandingPageLayout from "@/layouts/LandingPageLayout";
 import API from "@/utils/api";
-import LatestNews from "@/components/Home-Landing-page/LatestNews";
-import TruckByPayload from "@/components/Home-Landing-page/TruckByPayload";
+import LatestNews from "@/components/Trucks-Home-Landing-page/LatestNews";
+import TruckByPayload from "@/components/Trucks-Home-Landing-page/TruckByPayload";
 import Head from "next/head";
 
 export default function Home({ compareTruckData = [] }) {

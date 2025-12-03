@@ -63,7 +63,7 @@ const HomeCompareTruck = ({ compareTruck = [] }) => {
                                                         {right?.maxPrice ? ` – ${right?.maxPrice}` : ''} Lakh*
                                                     </span>
                                                 </div>
-                                                <Link href={`/compare/${item?.slug || ''}`} target="_blank">
+                                                <Link href={`/compare/trucks/${item?.slug || ''}`} target="_blank">
                                                     <div className="flex justify-center items-center">
                                                         <button className="px-6 py-2 mt-3 cursor-pointer rounded-sm font-bold text-sm border text-orange-500 border-orange-500 hover:text-white hover:bg-orange-500 bg-transparent">
                                                             Compare Now
@@ -121,7 +121,7 @@ const HomeCompareTruck = ({ compareTruck = [] }) => {
                                                     {right?.maxPrice ? ` – ${right?.maxPrice}` : ''} Lakh*
                                                 </span>
                                             </div>
-                                            <Link href={`/compare/${item?.slug || ''}`} target="_blank">
+                                            <Link href={`/compare/trucks/${item?.slug || ''}`} target="_blank">
                                                 <div className="flex justify-center items-center">
                                                     <button className="px-6 py-2 mt-3 cursor-pointer rounded-sm font-bold text-sm border text-orange-500 border-orange-500 hover:text-white hover:bg-orange-500 bg-transparent">
                                                         Compare Now

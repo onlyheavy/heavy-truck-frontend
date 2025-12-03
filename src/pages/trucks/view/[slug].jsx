@@ -1,17 +1,14 @@
-import MainLayout from '@/layouts/MainLayout'
-import HomeCompareTruck from '@/components/Home-Landing-page/HomeCompareTruck'
-import Faq from '@/components/Truck-Landing-Page/FAQ'
-import TruckCompareSlug from '@/components/Compare-Truck/TruckCompareSlug'
+import TruckListing from '@/components/View-All/TruckListing'
+import LandingPageLayout from '@/layouts/LandingPageLayout'
+import React from 'react'
 import API from "@/utils/api";
 import axios from "axios";
 
-export default function CompareTruckNoSlug({ compareTruckData = [] }) {
+const View = ({ compareTruckData = [] }) => {
   return (
-    <MainLayout>
-      <TruckCompareSlug truck1Data={null} truck2Data={null} rankData={null} />
-      <HomeCompareTruck compareTruck={compareTruckData} />
-      {/* <Faq /> */}
-    </MainLayout>
+    <LandingPageLayout>
+      <TruckListing compareTruckData={compareTruckData} />
+    </LandingPageLayout>
   )
 }
 
@@ -39,3 +36,5 @@ export async function getServerSideProps() {
     };
   }
 }
+
+export default View

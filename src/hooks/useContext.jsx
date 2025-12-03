@@ -8,7 +8,6 @@ export const CategoryProvider = ({ children, initialData }) => {
     alterNative: initialData?.alterNative || [],
     loading: false,
     error: initialData?.error || null,
-    categorySlug: initialData?.categorySlug,
     slug: initialData?.slug
   }), [initialData]);
 

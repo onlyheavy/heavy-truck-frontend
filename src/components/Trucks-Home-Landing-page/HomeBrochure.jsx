@@ -20,7 +20,7 @@ const HomeBrochure = () => {
 
           {/* Button Section */}
           <div className="w-full md:w-auto">
-            <Link href="/brochure" target="_blank" rel="noopener noreferrer">
+            <Link href="/trucks/brochure" target="_blank" rel="noopener noreferrer">
               <Button
                 size="lg"
                 className="w-full sm:w-auto bg-orange-500 hover:bg-orange-600 text-white cursor-pointer"

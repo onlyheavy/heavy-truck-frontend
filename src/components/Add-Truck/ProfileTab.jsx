@@ -81,6 +81,7 @@ const ProfileTab = ({ onComplete }) => {
     { value: 'Toyota', label: 'Toyota' },
     { value: 'Triton EV', label: 'Triton EV' },
     { value: 'Volvo', label: 'Volvo' },
+    { value: 'Olectra', label: 'Olectra' },
   ];
 
 

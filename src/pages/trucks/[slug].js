@@ -1,15 +1,15 @@
-import EmiCalculator from '@/components/Truck-Landing-Page/EmiCalculator';
-import Faq from '@/components/Truck-Landing-Page/FAQ';
-import Fuel from '@/components/Truck-Landing-Page/fuel';
-import KeySpecs from '@/components/Truck-Landing-Page/KeySpecs';
-import Loan from '@/components/Truck-Landing-Page/loan';
-import TruckCards from '@/components/Truck-Landing-Page/TruckCards';
-import TruckFeatures from '@/components/Truck-Landing-Page/TruckFeatures';
-import TruckGallery from '@/components/Truck-Landing-Page/TruckGallery';
-import TruckProsAndCons from '@/components/Truck-Landing-Page/TruckProsAndCons';
-import ComparisonTable from '@/components/Truck-Landing-Page/ComparisonTable';
+import EmiCalculator from '@/components/Truck-Product-Landing-Page/EmiCalculator';
+import Faq from '@/components/Truck-Product-Landing-Page/FAQ';
+import Fuel from '@/components/Truck-Product-Landing-Page/fuel';
+import KeySpecs from '@/components/Truck-Product-Landing-Page/KeySpecs';
+import Loan from '@/components/Truck-Product-Landing-Page/loan';
+import TruckCards from '@/components/Truck-Product-Landing-Page/TruckCards';
+import TruckFeatures from '@/components/Truck-Product-Landing-Page/TruckFeatures';
+import TruckGallery from '@/components/Truck-Product-Landing-Page/TruckGallery';
+import TruckProsAndCons from '@/components/Truck-Product-Landing-Page/TruckProsAndCons';
+import ComparisonTable from '@/components/Truck-Product-Landing-Page/ComparisonTable';
 import MainLayout from '@/layouts/MainLayout';
-import TalkDelar from '@/components/Truck-Landing-Page/TalkDelar';
+import TalkDelar from '@/components/Truck-Product-Landing-Page/TalkDelar';
 import React, { useRef } from 'react';
 import SpecsBar from '@/components/SpecsBar';
 import Image from 'next/image';
@@ -40,7 +40,7 @@ const features = [
   },
 ];
 
-const TruckLandingPage = ({ categoryData, alterNative, error, categorySlug, slug }) => {
+const TruckLandingPage = ({ categoryData, alterNative, error, slug }) => {
   const truckGalleryRef = useRef(null);
   const truckFeaturesRef = useRef(null);
   const truckFuelRef = useRef(null);
@@ -56,7 +56,6 @@ const TruckLandingPage = ({ categoryData, alterNative, error, categorySlug, slug
     categoryData,
     alterNative,
     error,
-    categorySlug,
     slug
   };
   console.log('wfgg', categoryData[0])
@@ -216,23 +215,22 @@ const TruckLandingPage = ({ categoryData, alterNative, error, categorySlug, slug
 };
 
 export async function getServerSideProps(context) {
-  const { categorySlug, slug } = context.params; // Changed from context.query to context.params
+  const { slug } = context.params; // Changed from context.query to context.params
 
-  if (!categorySlug || !slug) {
+  if (!slug) {
     return {
       props: {
         categoryData: null,
         alterNative: [],
         error: 'Missing required parameters',
-        categorySlug: null,
         slug: null
       }
     };
   }
 
   try {
-    console.log('Fetching data for:', { categorySlug, slug }); // Debug log
-    const response = await axios.get(`${API.HOST}/api/category/${categorySlug}/${slug}`);
+    console.log('Fetching data for:', { slug }); // Debug log
+    const response = await axios.get(`${API.HOST}/api/category/trucks/${slug}`);
 
     if (response.data && response.data.data) {
       console.log('Received data:', response.data.data); // Debug log
@@ -241,7 +239,6 @@ export async function getServerSideProps(context) {
           categoryData: response.data.data.existData,
           alterNative: response.data.data.alternatives,
           error: null,
-          categorySlug,
           slug
         }
       };
@@ -262,7 +259,6 @@ export async function getServerSideProps(context) {
         categoryData: null,
         alterNative: [],
         error: error.message || 'Failed to fetch data',
-        categorySlug,
         slug
       }
     };

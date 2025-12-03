@@ -35,6 +35,7 @@ const brandOptions = [
   { id: "Toyota", value: "Toyota" },
   { id: "Triton EV", value: "Triton EV" },
   { id: "Volvo", value: "Volvo" },
+  { id: "Olectra", value: "Olectra" },
 ];
 
 

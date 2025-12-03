@@ -1,16 +1,16 @@
 import { useRouter } from "next/router";
-import PopularTruck from "@/components/Home-Landing-page/PopularTruck";
+import PopularTruck from "@/components/Trucks-Home-Landing-page/PopularTruck";
 import { useEffect, useState, useCallback } from "react";
-import TruckByPrice from "@/components/Home-Landing-page/TruckByPrice";
+import TruckByPrice from "@/components/Trucks-Home-Landing-page/TruckByPrice";
 import axios from "axios";
 import API from "@/utils/api";
-import TruckByFuel from "@/components/Home-Landing-page/TruckByFuel";
-import TruckByGvw from "@/components/Home-Landing-page/TruckByGvw";
-import TruckByWheels from "@/components/Home-Landing-page/TruckByWheels";
-import TrucksByEmissionNorm from "@/components/Home-Landing-page/TrucksByEmissionNorm";
-import TruckByMileage from "@/components/Home-Landing-page/TruckByMileage";
+import TruckByFuel from "@/components/Trucks-Home-Landing-page/TruckByFuel";
+import TruckByGvw from "@/components/Trucks-Home-Landing-page/TruckByGvw";
+import TruckByWheels from "@/components/Trucks-Home-Landing-page/TruckByWheels";
+import TrucksByEmissionNorm from "@/components/Trucks-Home-Landing-page/TrucksByEmissionNorm";
+import TruckByMileage from "@/components/Trucks-Home-Landing-page/TruckByMileage";
 import LandingPageLayout from "@/layouts/LandingPageLayout";
-import Faq from "@/components/Truck-Landing-Page/FAQ";
+import Faq from "@/components/Truck-Product-Landing-Page/FAQ";
 import { brands } from "@/components/Brand/brand";
 import BrandFaq from "@/components/Brand/brandfaq";
 

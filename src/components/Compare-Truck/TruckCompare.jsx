@@ -64,7 +64,8 @@ const TruckCompare = ({ truck1Data, truck2Data, rankData }) => {
     "Tata Motors",
     "Toyota",
     "Triton EV",
-    "Volvo"
+    "Volvo",
+    "Olectra",
   ];
   const [availableTrucks, setAvailableTrucks] = useState([]);
 

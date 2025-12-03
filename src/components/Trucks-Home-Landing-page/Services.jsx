@@ -6,25 +6,25 @@ const services = [
         icon: "/icons/truck1.svg",
         title: "Compare Trucks",
         desc: "Easily compare truck models by payload, mileage, price, and features.",
-        path: "/compare",
+        path: "/compare/trucks",
     },
     {
         icon: "/icons/brochure.svg",
         title: "Download Brochure",
         desc: "Download the brochure to explore specifications and benefits before you decide.",
-        path: "/truck/brochure",
+        path: "/trucks/brochure",
     },
     {
         icon: "/icons/fuelcost.svg",
         title: "Fuel Cost Calculator",
         desc: "Smart tool to estimate fuel expenses and optimize your budget.",
-        path: "/truck/fuel-calculator",
+        path: "/trucks/fuel-calculator",
     },
     {
         icon: "/icons/emicalc.svg",
         title: "EMI Calculator",
         desc: "Get instant insights into your monthly installments and manage your finances with confidence.",
-        path: "/truck/emi-calculator",
+        path: "/trucks/emi-calculator",
     },
 ];
 

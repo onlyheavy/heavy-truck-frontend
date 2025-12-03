@@ -95,7 +95,7 @@ const TruckByWheels = ({ data, onFilterChange, loading, style }) => {
                 <div className='flex justify-center items-center my-5'>
                     <Button
                         className='cursor-pointer bg-[#FA7436] hover:bg-[#FA7436]/90'
-                        onClick={() => router.push(`/truck/${selected}`)}
+                        onClick={() => router.push(`/trucks/view/${selected}`)}
                     >
                         View All
                     </Button>
