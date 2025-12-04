@@ -21,6 +21,7 @@ import BackHoeLayout from '@/layouts/BackHoeLayout';
 import BackHoeFeatures from '@/components/CE/BackHoe-Product-Landing/BackHoeFeatures';
 import BackHoeKeySpecs from '@/components/CE/BackHoe-Product-Landing/BackHoeKeySpecs';
 import BackHoeGallery from '@/components/CE/BackHoe-Product-Landing/BackHoeGallery';
+import BackHoeProsAndCons from '@/components/CE/BackHoe-Product-Landing/BackHoeProsAndCons';
 
 
 const features = [
@@ -149,7 +150,7 @@ const BackHoeLandingPage = ({ categoryData, alterNative, error, slug }) => {
             </div>
             <BackHoeFeatures />
             <div ref={truckBrochure}>
-              <TruckProsAndCons />
+              <BackHoeProsAndCons />
             </div>
             <div ref={truckLoan}>
               <Loan />

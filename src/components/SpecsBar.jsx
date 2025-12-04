@@ -38,7 +38,7 @@ const SpecsBar = ({ truckGalleryRef, truckFeaturesRef, truckFuelRef, truckEmiCal
                         <li>
                             <button
                                 data-tab="truckGalleryRef"
-                                className={`cursor-pointer transition-all duration-300 whitespace-nowrap ${activeTab === 'truckGalleryRef' ? 'px-3 py-1 rounded-md border border-orange-500 text-orange-500' : 'bg-transparent px-3 py-1'}`}
+                                className={`cursor-pointer transition-all duration-300 whitespace-nowrap capitalize ${activeTab === 'truckGalleryRef' ? 'px-3 py-1 rounded-md border border-orange-500 text-orange-500' : 'bg-transparent px-3 py-1'}`}
                                 onClick={() => {
                                     scrollToComponent(truckGalleryRef)
                                     setActiveTab('truckGalleryRef')

@@ -123,6 +123,46 @@ const BackHoeGallery = () => {
             Check Discount Offer
           </button>
         </div>
+        <div className="bg-white rounded-lg border border-gray-200 p-5 relative shadow-sm">
+          <div className="flex items-start justify-between gap-4">
+            <div className="flex-1">
+              <h3 className="font-bold text-lg mb-2">
+                Download {categoryData?.[0]?.productName || 'Product'} Brochure
+              </h3>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                Download {categoryData?.[0]?.productName || 'Product'} brochure online. Check out the PDF brochure at Only Heavy with all features and specifications.
+              </p>
+            </div>
+            <button
+              onClick={() => {
+                if (categoryData?.[0]?.brochureUrl) {
+                  window.open(categoryData[0].brochureUrl, '_blank');
+                } else {
+                  handleClick('brochure');
+                }
+              }}
+              className="bg-[#FA7436] hover:bg-[#e8652a] rounded-full p-3 flex items-center justify-center transition-colors duration-200 flex-shrink-0"
+              aria-label="Download Brochure"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="text-white"
+              >
+                <path
+                  d="M12 15V3M12 15L8 11M12 15L16 11M2 17L2 19C2 20.1046 2.89543 21 4 21L20 21C21.1046 21 22 20.1046 22 19V17"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
       </div>
       {showForm && <PriceForm onClose={() => setShowForm(false)} id={categoryData[0]?._id} status={status} brand={categoryData[0]?.brandName} />}
     </div>
@@ -250,6 +290,47 @@ const BackHoeGallery = () => {
           <button onClick={() => handleClick("discount")} className='cursor-pointer text-white bg-[#FA7436] px-2 py-2 md:px-2 md:py-3 rounded-md font-semibold'>
             Check Discount Offer
           </button>
+        </div>
+
+        <div className="bg-white rounded-lg border border-gray-200 p-5 relative shadow-sm">
+          <div className="flex items-start justify-between gap-4">
+            <div className="flex-1">
+              <h3 className="font-bold text-lg mb-2">
+                Download {categoryData?.[0]?.productName || 'Product'} Brochure
+              </h3>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                Download {categoryData?.[0]?.productName || 'Product'} brochure online. Check out the PDF brochure at Only Heavy with all features and specifications.
+              </p>
+            </div>
+            <button
+              onClick={() => {
+                if (categoryData?.[0]?.brochureUrl) {
+                  window.open(categoryData[0].brochureUrl, '_blank');
+                } else {
+                  handleClick('brochure');
+                }
+              }}
+              className="bg-[#FA7436] hover:bg-[#e8652a] rounded-full p-3 flex items-center justify-center transition-colors duration-200 flex-shrink-0"
+              aria-label="Download Brochure"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="text-white"
+              >
+                <path
+                  d="M12 15V3M12 15L8 11M12 15L16 11M2 17L2 19C2 20.1046 2.89543 21 4 21L20 21C21.1046 21 22 20.1046 22 19V17"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
       {showForm && <PriceForm onClose={() => setShowForm(false)} id={categoryData[0]?._id} status={status} brand={categoryData[0]?.brandName} />}

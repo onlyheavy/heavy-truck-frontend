@@ -37,7 +37,6 @@ export default function BackHoeFeatures() {
           <SpecItem label="Max Reach Full Height" value={item?.maxReachFullHeight || 'N/A'} />
           <SpecItem label="Bucket Capacity" value={item?.bucketCapacity || 'N/A'} />
           <SpecItem label="Bucket Breakout Force" value={item?.bucktBreakoutForce || 'N/A'} />
-          <SpecItem label="Turning Radius" value={item?.turningRadius || 'N/A'} />
           <SpecItem label="Max Payload" value={item?.maxPayload || 'N/A'} />
           <SpecItem label="Dump Angle" value={item?.dumpAngle || 'N/A'} />
           <SpecItem label="Loader Arm Breakout Force" value={item?.loaderArmBreakoutForce || 'N/A'} />
@@ -45,7 +44,7 @@ export default function BackHoeFeatures() {
       ))}
 
       {/* Backhoe */}
-      {specifications.backHoe?.map((item, index) => (
+      {specifications.backhoe?.map((item, index) => (
         <Section key={index} title="Backhoe">
           <SpecItem label="Max Digging Depth" value={item?.maxDiggingDepth || 'N/A'} />
           <SpecItem label="Max Working Height" value={item?.maxWorkingHeight || 'N/A'} />
@@ -57,13 +56,13 @@ export default function BackHoeFeatures() {
         </Section>
       ))}
 
-      {/* Dimensions and Weight */}
-      {specifications.dimensionsAndWeight?.map((item, index) => (
-        <Section key={index} title="Dimensions and Weight">
+      {/* Overall Dimension & Weight */}
+      {specifications.overallDimensionWeight?.map((item, index) => (
+        <Section key={index} title="Overall Dimension & Weight">
           <SpecItem label="Max Operating Weight" value={item?.maxOperatingWeight || 'N/A'} />
           <SpecItem label="Transport Length" value={item?.transportLength || 'N/A'} />
           <SpecItem label="Width Over Stabilizers" value={item?.widthOverStabilizers || 'N/A'} />
-          <SpecItem label="Wheel Base" value={item?.wheelBase || 'N/A'} />
+          <SpecItem label="Wheelbase" value={item?.wheelbase || 'N/A'} />
           <SpecItem label="Minimum Ground Clearance" value={item?.minimumGroundClearance || 'N/A'} />
           <SpecItem label="Height To Top Of Cab" value={item?.heightToTopOfCab || 'N/A'} />
         </Section>
@@ -77,49 +76,49 @@ export default function BackHoeFeatures() {
               <SpecItem label="Pump Type" value={item?.pumpType || 'N/A'} />
               <SpecItem label="Pump Flow Rate" value={item?.pumpFlowRate || 'N/A'} />
               <SpecItem label="System Pressure" value={item?.systemPressure || 'N/A'} />
-              <SpecItem label="Hydraulic Oil Capacity" value={item?.hydraulicOilCapacity ? 'Yes' : 'No'} />
+              <SpecItem label="Hydraulic Oil Capacity" value={item?.hydraulicOilCapacity || 'N/A'} />
             </Section>
           ))}
 
           {/* Service Capacities */}
           {specifications.serviceCapacities?.map((item, index) => (
             <Section key={index} title="Service Capacities">
-              <SpecItem label="Engine Oil" value={item?.engineOil ? 'Yes' : 'No'} />
-              <SpecItem label="Rear Axle Oil" value={item?.rearAxleOil ? 'Yes' : 'No'} />
-              <SpecItem label="Transmission Oil" value={item?.transmissionOil ? 'Yes' : 'No'} />
+              <SpecItem label="Engine Oil" value={item?.engineOil || 'N/A'} />
+              <SpecItem label="Rear Axle Oil" value={item?.rearAxleOil || 'N/A'} />
+              <SpecItem label="Transmission Oil" value={item?.transmissionOil || 'N/A'} />
               <SpecItem label="Hydraulic Oil" value={item?.hydraulicOil || 'N/A'} />
-              <SpecItem label="Fuel Tank" value={item?.fuelTank ? 'Yes' : 'No'} />
-              <SpecItem label="Coolant" value={item?.coolant ? 'Yes' : 'No'} />
+              <SpecItem label="Fuel Tank" value={item?.fuelTank || 'N/A'} />
+              <SpecItem label="Coolant" value={item?.coolant || 'N/A'} />
             </Section>
           ))}
 
-          {/* Steering and Brakes */}
-          {specifications.steeringAndBrakes?.map((item, index) => (
-            <Section key={index} title="Steering and Brakes">
+          {/* Steering & Brakes */}
+          {specifications.steeringBrakes?.map((item, index) => (
+            <Section key={index} title="Steering & Brakes">
               <SpecItem label="Steering Type" value={item?.steeringType || 'N/A'} />
               <SpecItem label="Turning Circle Diameter" value={item?.turningCircleDiameter || 'N/A'} />
               <SpecItem label="System Pressure" value={item?.systemPressure || 'N/A'} />
-              <SpecItem label="Service Brake Type" value={item?.serviceBrakeType ? 'Yes' : 'No'} />
-              <SpecItem label="Parking Brakes" value={item?.ParkingBrakes ? 'Yes' : 'No'} />
+              <SpecItem label="Service Brake Type" value={item?.serviceBrakeType || 'N/A'} />
+              <SpecItem label="Parking Brakes" value={item?.ParkingBrakes || 'N/A'} />
             </Section>
           ))}
 
-          {/* Tyres and Axles */}
-          {specifications.tyresAndAxles?.map((item, index) => (
-            <Section key={index} title="Tyres and Axles">
-              <SpecItem label="Standard Front Type" value={item?.standardFrontType ? 'Yes' : 'No'} />
-              <SpecItem label="Standard Rear Type" value={item?.standardRearType ? 'Yes' : 'No'} />
-              <SpecItem label="Rear Axle Description" value={item?.rearAxleDescription ? 'Yes' : 'No'} />
-              <SpecItem label="Front Axle Description" value={item?.frontAxleDescription ? 'Yes' : 'No'} />
+          {/* Tyres & Axle */}
+          {specifications.tyresAxle?.map((item, index) => (
+            <Section key={index} title="Tyres & Axle">
+              <SpecItem label="Standard Front Type" value={item?.standardFrontType || 'N/A'} />
+              <SpecItem label="Standard Rear Type" value={item?.standardRearType || 'N/A'} />
+              <SpecItem label="Rear Axle Description" value={item?.rearAxleDescription || 'N/A'} />
+              <SpecItem label="Front Axle Description" value={item?.frontAxleDescription || 'N/A'} />
             </Section>
           ))}
 
-          {/* Electrical and General */}
-          {specifications.electricalAndGeneral?.map((item, index) => (
-            <Section key={index} title="Electrical and General">
-              <SpecItem label="Battery Voltage" value={item?.batteryVoltage ? 'Yes' : 'No'} />
-              <SpecItem label="Max Forward Speed" value={item?.maxForwordSpeed ? 'Yes' : 'No'} />
-              <SpecItem label="Max Reverse Speed" value={item?.maxReverseSpeed ? 'Yes' : 'No'} />
+          {/* Electrical & General */}
+          {specifications.electricalGeneral?.map((item, index) => (
+            <Section key={index} title="Electrical & General">
+              <SpecItem label="Battery Voltage" value={item?.batteryVoltage || 'N/A'} />
+              <SpecItem label="Max Forward Speed" value={item?.maxForwardSpeed || 'N/A'} />
+              <SpecItem label="Max Reverse Speed" value={item?.maxReverseSpeed || 'N/A'} />
             </Section>
           ))}
         </>

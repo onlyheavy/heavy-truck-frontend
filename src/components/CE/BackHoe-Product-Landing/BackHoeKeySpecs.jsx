@@ -21,88 +21,37 @@ const BackHoeKeySpecs = () => {
     const product = categoryData?.[0] || {}
     const keyFeature = product?.keyFeature?.[0] || {}
 
-    const fuelType =
-        keyFeature?.fuelType ||
-        product?.fuelType ||
-        product?.specInfo?.engine?.[0]?.fuelType ||
-        ''
-
-    const isElectric = fuelType?.toLowerCase?.().includes('electric')
-
-    const generalSpecs = [
-        
-        {
-            title: 'Hydraulic oil',
-            value: getFormattedValue(keyFeature?.GVW, 'kg'),
-            icon: '/icons/backhoe/hydralic.svg',
-        },
-        {
-            title: 'Max. lift capacity',
-            value: getFormattedValue(keyFeature?.payload, 'kg'),
-            icon: '/icons/backhoe/max-lift-capacity.svg',
-        },
-        {
-            title: 'Loader Bucket capacity',
-            value: getFormattedValue(keyFeature?.noOfTyres),
-            icon: '/icons/backhoe/loader-bucket-capacity.svg',
-        },
+    const specs = [
         {
             title: 'Max. reach at full height',
-            value: getFormattedValue(keyFeature?.noOfTyres),
+            value: getFormattedValue(keyFeature?.maxReachFullHeight, 'm'),
             icon: '/icons/backhoe/fullheight.svg',
         },
         {
             title: 'Max Operating Weight',
-            value: getFormattedValue(keyFeature?.noOfTyres),
+            value: getFormattedValue(keyFeature?.maxOperatingWeight, 'kg'),
             icon: '/icons/backhoe/operation-weight.svg',
         },
         {
+            title: 'Loader Bucket capacity',
+            value: getFormattedValue(keyFeature?.loaderBucketCapacity, 'Cum'),
+            icon: '/icons/backhoe/loader-bucket-capacity.svg',
+        },
+        {
             title: 'Backhoe Bucket capacity',
-            value: getFormattedValue(keyFeature?.noOfTyres),
+            value: getFormattedValue(keyFeature?.backhoeBucketCapacity, 'Cum'),
             icon: '/icons/backhoe/backhoe-bucket.svg',
         },
-    ]
-
-    const combustionSpecs = [
         {
-            title: ' Displacement',
-            value: getFormattedValue(keyFeature?.engineDisplacement, 'cc'),
-            icon: '/icons/cc.svg',
+            title: 'Max Dig Depth',
+            value: getFormattedValue(keyFeature?.maxDiggingDepth, 'mm'),
+            icon: '/icons/backhoe/max-lift-capacity.svg',
         },
         {
-            title: 'Fuel Tank',
-            value: getFormattedValue(keyFeature?.fuelTankCapacity, 'L'),
-            icon: '/icons/petrol.svg',
+            title: 'Max. lift capacity',
+            value: getFormattedValue(keyFeature?.maxLiftCapacity, 'kg'),
+            icon: '/icons/backhoe/max-lift-capacity.svg',
         },
-        {
-            title: 'Mileage',
-            value: getFormattedValue(keyFeature?.mileage, 'km/l'),
-            icon: '/icons/mileage.svg',
-        },
-
-    ]
-
-    const electricSpecs = [
-        {
-            title: 'Motor Power',
-            value: getFormattedValue(product?.specInfo?.engine?.[0]?.enginePower),
-            icon: '/icons/power.svg',
-        },
-        {
-            title: 'Charging Time',
-            value: getFormattedValue(keyFeature?.chargingTime, 'Hrs'),
-            icon: '/icons/charging.svg',
-        },
-        {
-            title: 'Range',
-            value: getFormattedValue(keyFeature?.range, 'km'),
-            icon: '/icons/mileage.svg',
-        },
-    ]
-
-    const specs = [
-        ...generalSpecs,
-        ...(isElectric ? electricSpecs : combustionSpecs),
     ]
 
 
