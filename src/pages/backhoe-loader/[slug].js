@@ -234,7 +234,7 @@ export async function getServerSideProps(context) {
 
   try {
     console.log('Fetching data for:', { slug }); // Debug log
-    const response = await axios.get(`${API.HOST}/api/ceCategory/jcb/${slug}`);
+    const response = await axios.get(`${API.HOST}/api/ceCategory/construction-equipment/${slug}`);
 
     if (response.data && response.data.data) {
       console.log('Received data:', response.data.data); // Debug log
