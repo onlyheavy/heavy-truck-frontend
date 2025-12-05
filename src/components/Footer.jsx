@@ -89,7 +89,7 @@ const Footer = () => {
                       Terms of Service
                     </a>
                   </li>
-                  <li>
+                  {/* <li>
                     <a href="#" className="hover:text-white">
                       Cookie Policy
                     </a>
@@ -103,7 +103,7 @@ const Footer = () => {
                     <a href="#" className="hover:text-white">
                       Sitemap
                     </a>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
 
@@ -128,7 +128,7 @@ const Footer = () => {
 
           {/* Bottom Section */}
           <div className="border-t border-gray-500 mt-8 pt-6 text-center text-sm text-gray-300">
-            <p>© Copyright 2025 TruckMarket. All rights reserved.</p>
+            <p>© 2025 Only Heavy. All rights reserved.</p>
           </div>
         </div>
       </footer>

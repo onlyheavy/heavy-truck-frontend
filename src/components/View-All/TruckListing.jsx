@@ -1,6 +1,6 @@
-import HomeCompareTruck from "@/components/Home-Landing-page/HomeCompareTruck";
-import PopularTruck from "@/components/Home-Landing-page/PopularTruck";
-import Faq from "@/components/Truck-Landing-Page/FAQ";
+import HomeCompareTruck from "@/components/Trucks-Home-Landing-page/HomeCompareTruck";
+import PopularTruck from "@/components/Trucks-Home-Landing-page/PopularTruck";
+import Faq from "@/components/Truck-Product-Landing-Page/FAQ";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";

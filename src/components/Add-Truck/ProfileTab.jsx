@@ -81,6 +81,7 @@ const ProfileTab = ({ onComplete }) => {
     { value: 'Toyota', label: 'Toyota' },
     { value: 'Triton EV', label: 'Triton EV' },
     { value: 'Volvo', label: 'Volvo' },
+    { value: 'Olectra', label: 'Olectra' },
   ];
 
 
@@ -96,6 +97,8 @@ const ProfileTab = ({ onComplete }) => {
     { value: 'Bulkers', label: 'Bulkers' },
 
   ];
+
+
 
   // Uses options for trucks
   const useOptions = [

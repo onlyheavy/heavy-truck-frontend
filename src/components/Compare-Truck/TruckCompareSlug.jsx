@@ -12,7 +12,39 @@ const TruckCompareSlug = ({ rankData }) => {
     ]);
     const [availableTrucks, setAvailableTrucks] = useState([[], [], []]);
     const [isEditing, setIsEditing] = useState([false, false, false]);
-    const brands = ["Tata Motors", "Mahindra", "Ashok Leyland", "BharatBenz", "Eicher", "Force Motors"];
+    const brands = [
+        "Ashok Leyland",
+        "BharatBenz",
+        "Blue Energy Motors",
+        "E-Trio",
+        "Eicher",
+        "EKA",
+        "Erisha E Mobility",
+        "Euler EV",
+        "Evage Motors",
+        "Force Motors",
+        "I-Board Mobility",
+        "IPL Tech Electric",
+        "ISUZU",
+        "Jupiter Electric Mobility",
+        "Kamaz",
+        "Mahindra",
+        "Man",
+        "Maruti Suzuki",
+        "Montra Electric",
+        "Omega",
+        "Premier Motors",
+        "Propal",
+        "Sany",
+        "Scania",
+        "SML ISUZU",
+        "Switch Mobility",
+        "Tata Motors",
+        "Toyota",
+        "Triton EV",
+        "Volvo",
+        "Olectra",
+    ];
     console.log("Rank Data in Slug Component:", rankData);
     // Fetch trucks for each brand dropdown
     useEffect(() => {

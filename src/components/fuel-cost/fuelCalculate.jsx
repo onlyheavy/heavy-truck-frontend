@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import SliderInput from '../sliderInput'
+import SliderInput from '@/components/sliderInput'
 import { calculateMonthlyFuelUsage } from '@/utils/fuelCalculator'
 import { calculateMonthlyElectricUsage } from '@/utils/electricCalculator'
 
