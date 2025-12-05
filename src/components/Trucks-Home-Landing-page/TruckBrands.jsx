@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
-import React, { useState } from 'react'
-
+import React, { useState, useEffect, useRef } from 'react'
+import { useRouter } from "next/router";
 const truckBrands = [
     { name: "Mahindra", logo: "/trucks/mahindra.jpg", slug: "mahindra" },
     { name: "Jupiter Electric M..", logo: "/trucks/jem.jpeg", slug: "jupiter-electric-mobility" },
@@ -37,6 +37,8 @@ const truckBrands = [
 
 const TruckBrands = () => {
     const [showAll, setShowAll] = useState(false);
+    const router = useRouter();
+    const listRef = useRef(null);
 
     const displayedBrands = showAll ? truckBrands : truckBrands.slice(0, 9);
 
@@ -45,9 +47,18 @@ const TruckBrands = () => {
         window.open(`/trucks/brand/${slug}`, "_blank");
     };
 
+    useEffect(() => {
+        if (router.asPath.includes("#brand-list")) {
+            setShowAll(true);
+            setTimeout(() => {
+                listRef.current?.scrollIntoView({ behavior: "smooth" });
+            }, 200);
+        }
+    }, [router.asPath]);
+
     return (
         <div>
-            <section className="py-10 bg-[#FFF8F4]">
+            <section className="py-10 bg-[#FFF8F4]" ref={listRef} id="brand-list">
                 <div className="max-w-7xl mx-auto">
                     <div className="flex items-center justify-center mx-4 md:mx-10 my-6">
                         <div className="hidden md:block w-16 md:w-60 border-t border-gray-300"></div>
@@ -69,6 +80,7 @@ const TruckBrands = () => {
                                 key={index}
                                 className="flex-shrink-0 w-32 md:w-auto text-center cursor-pointer"
                                 onClick={() => openBrand(brand.slug)}
+
                             >
                                 <div
                                     className="

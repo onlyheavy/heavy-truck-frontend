@@ -98,6 +98,8 @@ const ProfileTab = ({ onComplete }) => {
 
   ];
 
+
+
   // Uses options for trucks
   const useOptions = [
     { value: 'construction-material', label: 'Construction Material Transport' },
